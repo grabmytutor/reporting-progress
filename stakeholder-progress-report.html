@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feature Progress — GrabMyTutor Mobile App</title>
+  <style>
+    :root {
+      --navy:        #09244B;
+      --navy-mid:    #1a3a6b;
+      --navy-pale:   #EEF3FA;
+      --orange:      #FF8000;
+      --orange-pale: #FFF3E0;
+      --green:       #1D9E75;
+      --green-pale:  #E8F7F3;
+      --green-mid:   #0f7a5a;
+      --amber:       #D97706;
+      --amber-pale:  #FFFBEB;
+      --amber-mid:   #b45309;
+      --red:         #DC2626;
+      --red-pale:    #FEF2F2;
+      --gray-100:    #F9FAFB;
+      --gray-200:    #F3F4F6;
+      --gray-300:    #E5E7EB;
+      --gray-500:    #6B7280;
+      --gray-700:    #374151;
+      --text:        #111827;
+      --surface:     #FFFFFF;
+      --bg:          #F1F5F9;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: var(--navy);
+      padding: 36px 48px 32px;
+      color: #fff;
+    }
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .header-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: #FFD38A;
+      margin-bottom: 8px;
+    }
+    .header h1 {
+      font-size: 26px;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+    .header-sub {
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+    }
+    .header-date {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 10px;
+      padding: 10px 18px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .header-date .date-label { font-size: 11px; color: rgba(255,255,255,0.5); font-weight: 600; }
+    .header-date .date-val   { font-size: 16px; font-weight: 800; color: #fff; margin-top: 2px; }
+
+    /* ── MAIN ── */
+    main { max-width: 1120px; margin: 0 auto; padding: 32px 24px 80px; }
+
+    /* ── SUMMARY BAR ── */
+    .summary-bar {
+      background: var(--surface);
+      border-radius: 20px;
+      border: 1px solid var(--gray-300);
+      padding: 26px 28px 22px;
+      margin-bottom: 28px;
+    }
+    .summary-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+    .summary-title { font-size: 16px; font-weight: 800; color: var(--navy); }
+    .summary-pct-block { display: flex; align-items: baseline; gap: 6px; }
+    .summary-pct { font-size: 42px; font-weight: 900; color: var(--navy); line-height: 1; }
+    .summary-pct-label { font-size: 14px; font-weight: 600; color: var(--gray-500); }
+
+    /* stacked bar */
+    .bar-track {
+      width: 100%; height: 16px;
+      background: var(--gray-200);
+      border-radius: 999px;
+      overflow: hidden;
+      display: flex;
+      border: 1px solid var(--gray-300);
+    }
+    .bar-seg { height: 100%; transition: width .5s ease; }
+    .bar-green  { background: var(--green); }
+    .bar-amber  { background: #f59e0b; }
+    .bar-gray   { background: var(--gray-300); }
+
+    .bar-legend {
+      display: flex;
+      gap: 24px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 13px;
+      color: var(--gray-500);
+      font-weight: 600;
+    }
+    .legend-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* stat pills row */
+    .stat-pills {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+    @media (max-width: 640px) { .stat-pills { grid-template-columns: repeat(2,1fr); } }
+
+    .stat-pill {
+      border-radius: 16px;
+      padding: 18px 20px;
+      border: 1px solid transparent;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .stat-pill-green  { background: var(--green-pale);  border-color: #a7f3d0; }
+    .stat-pill-amber  { background: var(--amber-pale);  border-color: #fde68a; }
+    .stat-pill-red    { background: var(--red-pale);    border-color: #fecaca; }
+    .stat-pill-navy   { background: var(--navy-pale);   border-color: #bfdbfe; }
+
+    .pill-value { font-size: 36px; font-weight: 900; line-height: 1; }
+    .pill-label { font-size: 12px; font-weight: 700; color: var(--gray-500); }
+    .pill-sub   { font-size: 11px; font-weight: 600; margin-top: 2px; }
+
+    .pill-green .pill-value { color: var(--green-mid); }
+    .pill-green .pill-sub   { color: var(--green); }
+    .pill-amber .pill-value { color: var(--amber-mid); }
+    .pill-amber .pill-sub   { color: var(--amber); }
+    .pill-red .pill-value   { color: var(--red); }
+    .pill-navy .pill-value  { color: var(--navy); }
+
+    /* ── SECTION HEADER ── */
+    .section-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 36px 0 16px;
+    }
+    .section-dot {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .section-row h2 {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--navy);
+    }
+    .section-count {
+      font-size: 12px;
+      font-weight: 800;
+      padding: 3px 11px;
+      border-radius: 999px;
+      color: #fff;
+    }
+    .count-green { background: var(--green); }
+    .count-amber { background: #f59e0b; }
+    .count-red   { background: var(--red); }
+
+    /* ── CARD GRID ── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 900px) { .card-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .card-grid { grid-template-columns: 1fr; } }
+
+    /* ── FEATURE CARD ── */
+    .card {
+      background: var(--surface);
+      border-radius: 18px;
+      border: 1px solid var(--gray-300);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: box-shadow .15s ease;
+    }
+    .card:hover { box-shadow: 0 4px 20px rgba(9,36,75,0.08); }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .card-icon {
+      width: 40px; height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .icon-green { background: var(--green-pale); }
+    .icon-amber { background: var(--amber-pale); }
+    .icon-red   { background: var(--red-pale); }
+
+    .card-status-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .chip-green { background: var(--green-pale); color: var(--green-mid); }
+    .chip-amber { background: var(--amber-pale); color: var(--amber-mid); }
+    .chip-red   { background: var(--red-pale);   color: var(--red); }
+    .chip-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.3;
+    }
+    .card-path {
+      font-size: 11px;
+      color: var(--gray-500);
+      font-family: monospace;
+      line-height: 1.6;
+      margin-top: 2px;
+    }
+
+    /* mini endpoint pills */
+    .endpoint-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .endpoint-pill {
+      background: var(--navy-pale);
+      color: var(--navy-mid);
+      font-size: 11px;
+      font-family: monospace;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 6px;
+      border: 1px solid #bfdbfe;
+    }
+    .endpoint-pill.pending {
+      background: var(--amber-pale);
+      color: var(--amber-mid);
+      border-color: #fde68a;
+    }
+
+    /* card note */
+    .card-note {
+      font-size: 12px;
+      color: var(--gray-500);
+      line-height: 1.55;
+      border-top: 1px solid var(--gray-200);
+      padding-top: 10px;
+    }
+    .card-note strong { color: var(--gray-700); }
+
+    /* new badge */
+    .new-badge {
+      display: inline-block;
+      background: var(--green-pale);
+      color: var(--green-mid);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      padding: 2px 6px;
+      border-radius: 5px;
+      vertical-align: middle;
+      margin-left: 5px;
+    }
+
+    /* effort tag */
+    .effort {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 5px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+    .effort-low    { background: #dcfce7; color: #166534; }
+    .effort-medium { background: #fef3c7; color: #92400e; }
+    .effort-high   { background: #fee2e2; color: #991b1b; }
+
+    /* divider */
+    hr { border: none; border-top: 1px solid var(--gray-300); margin: 32px 0; }
+
+    /* footer */
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: var(--gray-500);
+      padding-top: 20px;
+      border-top: 1px solid var(--gray-300);
+    }
+    code {
+      background: var(--gray-200);
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-size: 11px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-top">
+    <div>
+      <div class="header-eyebrow">GrabMyTutor · Mobile App v2 · Stakeholder View</div>
+      <h1>Feature Integration Progress</h1>
+      <div class="header-sub">Branch: develop/api-integration &nbsp;·&nbsp; React Native · Expo · Tamagui · Axios</div>
+    </div>
+    <div class="header-date">
+      <div class="date-label">GENERATED</div>
+      <div class="date-val">Apr 14, 2026</div>
+    </div>
+  </div>
+</div>
+
+<main>
+
+  <!-- SUMMARY BAR -->
+  <div class="summary-bar">
+    <div class="summary-top">
+      <div>
+        <div class="summary-title">Overall Integration Progress</div>
+        <div style="font-size:13px;color:var(--gray-500);margin-top:3px;">
+          15 fully integrated &nbsp;·&nbsp; 4 in progress &nbsp;·&nbsp; 10 not started &nbsp;·&nbsp; 29 features total
+        </div>
+      </div>
+      <div class="summary-pct-block">
+        <div class="summary-pct">52%</div>
+        <div class="summary-pct-label">complete</div>
+      </div>
+    </div>
+    <div class="bar-track">
+      <!-- 15/29 = 51.7% green -->
+      <div class="bar-seg bar-green"  style="width: 51.7%;"></div>
+      <!-- 4/29  = 13.8% amber -->
+      <div class="bar-seg bar-amber"  style="width: 13.8%;"></div>
+      <!-- rest gray -->
+      <div class="bar-seg bar-gray"   style="width: 34.5%;"></div>
+    </div>
+    <div class="bar-legend">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--green);"></div> Completed — 15 (52%)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#f59e0b;"></div> In Progress — 4 (14%)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--gray-300);border:1px solid #d1d5db;"></div> Not Started — 10 (34%)</div>
+    </div>
+  </div>
+
+  <!-- STAT PILLS -->
+  <div class="stat-pills">
+    <div class="stat-pill stat-pill-green pill-green">
+      <div class="pill-value">15</div>
+      <div class="pill-label">Features Completed</div>
+      <div class="pill-sub">+2 this sprint</div>
+    </div>
+    <div class="stat-pill stat-pill-amber pill-amber">
+      <div class="pill-value">4</div>
+      <div class="pill-label">In Progress</div>
+      <div class="pill-sub">Partially integrated</div>
+    </div>
+    <div class="stat-pill stat-pill-red pill-red">
+      <div class="pill-value">10</div>
+      <div class="pill-label">Not Started</div>
+      <div class="pill-sub">Awaiting API / backend</div>
+    </div>
+    <div class="stat-pill stat-pill-navy pill-navy">
+      <div class="pill-value">29</div>
+      <div class="pill-label">Total Features</div>
+      <div class="pill-sub">Across all modules</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════ COMPLETED ══════════════════════════════ -->
+  <div class="section-row">
+    <div class="section-dot" style="background:var(--green);"></div>
+    <h2>Completed</h2>
+    <span class="section-count count-green">15</span>
+  </div>
+
+  <div class="card-grid">
+
+    <!-- Auth -->
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon icon-green">🔐</div>
+        <span class="card-status-chip chip-green"><span class="chip-dot"></span>Complete</span>
+      </div>
+      <div>
+        <div class="card-title">Authentication</div>
+        <div class="card-path">app/(auth)/login/ · forgot-password/ · first-time/</div>
+      </div>
+      <div class="endpoint-list">
+        <span class="endpoint-pill">auth/login</span>
+        <span class="endpoint-pill">auth/verify-otp</span>
+        <span class="endpoint-pill">auth/register</span>
+        <span class="endpoint-pill">auth/refresh-token</span>
+      </div>
+      <div class="card-note">Login, phone OTP, SSO, forgot password, first-time setup. Tokens managed via Axios interceptors.</div>
+    </div>
+
+    <!-- Home Dashboard -->
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon icon-green">🏠</div>
+        <span class="card-status-chip chip-green"><span class="chip-dot"></span>Complete</span>
+      </div>
+      <div>
+        <div class="card-title">Home Dashboard</div>
+        <div class="card-path">app/(tabs)/home/index.tsx</div>
+      </div>
+      <div class="endpoint-list">
+        <span class="endpoint-pill">school/statistic/:id</span>
+        <span class="endpoint-pill">schedule/list-by-schools</span>
+        <span class="endpoint-pill">invoice/list-by-school-ids</span>
+      </div>
+      <div class="card-note">Stats tiles, schedule summary, and recent invoices all fetched from live API.</div>
+    </div>
+
+    <!-- Students List -->
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon icon-green">👨‍🎓</div>
+        <span class="card-status-chip chip-green"><span class="chip-dot"></span>Complete</span>
+      </div>
+      <div>
+        <div class="card-title">Students List</div>
+        <div class="card-path">app/(tabs)/students/</div>
+      </div>
+      <div class="endpoint-list">
+        <span class="endpoint-pill">school/list-student-by-school-ids</span>
+      </div>
+      <div class="card-note">Paginated student list with real-time search, filter, and sort. Abort-signal safe pagination.</div>
+    </div>
+
+    <!-- Invoice List -->
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon icon-green">🧾</div>
+        <span class="card-status-chip chip-green"><span class="chip-dot"></span>Complete</span>
+      </div>
+      <div>
+        <div class="card-title">Invoice List</div>
+        <div class="card-path">app/(tabs)/invoice/</div>
+      </div>
+      <div class="endpoint-list">
+        <span class="endpoint-pill">invoice/list-by-school-ids</span>
+        <span class="endpoint-pill">invoice/get-invoice-statistic</span>
+      </div>
+      <div class="card-note">Paginated invoice list with Unpaid/Paid tabs, date range and school filters — all live.</div>
+    </div>
+
+    <!-- Invoice Create & Preview -->
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon icon-green">📄</div>
+        <span class="card-status-chip chip-green"><span class="chip-dot"></span>Complete</span>
+      </div>
+      <div>
+        <div class="card-title">Invoice Create &amp; Preview <span class="new-badge">New</span></div>
+        <div class="card-path">app/(screens)/invoice/create/ · preview/ · preview-multiple/</div>
+      </div>
+      <div class="endpoint-list">
+        <span class="endpoint-pill">invoice/create</span>
+        <span class="endpoint-pill">invoice/edit/:id</span>
+        <span class="endpoint-pill">invoice/create-multiple</span>
+      </div>
+      <div class="card-note">Create form fetches lessons and students live. Preview calls <code>createInvoice</code> / <code>createMultipleInvoice</code> on confirm.</div>
+    </div>
+
+    <!-- Class / Schedule Tab -->
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon icon-green">📅</div>
+        <span class="card-status-chip chip-green"><span class="chip-dot"></span>Complete</span>
+      </div>
+      <div>
+        <div class="card-title">Class &amp; Schedule View</div>
+        <div class="card-path">app/(tabs)/class/</div>
+      </div>
+      <div class="endpoint-list">
+        <span class="endpoint-pill">schedule/list-all-by-schools</span>
+        <span class="endpoint-pill">schedule/list-all-by-teacher</span>
+        <span class="endpoint-pill">school/list-users-by-schools</span>
+      </div>
+      <div class="card-note">Day/Week/Month calendar views. Teacher filter dropdown now live-populated. Main teacher info + avatar from backend.</div>
+    </div>
+
+    <!-- Class Create -->
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon icon-green">➕</div>
+        <span class="card-status-chip chip-green"><span class="chip-dot"></span>Complete</span>
+      </div>
+      <div>
+        <div class="card-title">Class Create <span class="new-badge">New</span></div>
+        <div class="card-path">app/(screens)/class/create-class/</div>
+      </div>
+      <div class="endpoint-list">
+        <span class="endpoint-pill">lesson/create-with-schedule</span>
+        <span class="endpoint-pill">schedule/create</span>
+        <span class="endpoint-pill">school/list-venue/:id</span>
+      </div>
+      <div class="card-note">Full lesson + schedule creation wired. Students, teacher pre-fill, and venue picker all use live API.</div>
+    </div>
+
+    <!-- Announcements List -->
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon icon-green">📢</div>
+        <span class="card-status-chip chip-green"><span class="chip-dot"></span>Complete</span>
+      </div>
+      <div>
+        <div class="card-title">Announcements List &amp; Detail</div>
+        <div class="card-path">app/(screens)/announcements/</div>
+      </div>
+      <div class="endpoint-list">
+        <span class="endpoint-pill">announcement/list</span>
+        <span class="endpoint-pill">announcement/list-by-user</span>
+      </div>
+      <div class="card-note">Announcement list and detail view fetched from the notification service.</div>
+    </div>
+
+    <!-- Centre Management -->
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon icon-green">🏫</div>
+        <span class="card-status-chip chip-green"><span class="chip-dot"></span>Complete</span>
+      </div>
+      <div>
+        <div class="card-title">Centre Management</div>
+        <div class="card-path">app/(screens)/centre/[id]/</div>
+      </div>
+      <div class="endpoint-list">
+        <span class="endpoint-pill">school/:id</span>
+        <span class="endpoint-pill">school/update/:id</span>
+        <span class="endpoint-pill">school/image/upload/:id</span>
+      </div>
+      <div class="card-note">View, edit, settings, preset items, and venues — all wired. Includes multipart image upload.</div>
+    </div>
+
+    <!-- Manage Centres -->
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon icon-green">🏢</div>
+        <span class="card-status-chip chip-green"><span class="chip-dot"></span>Complete</span>
+      </div>
+      <div>
+        <div class="card-title">Manage Centres (Super Admin)</div>
+        <div class="card-path">app/(screens)/manage-centres/</div>
+      </div>
+      <div class="endpoint-list">
+        <span class="endpoint-pill">school/list</span>
+        <span class="endpoint-pill">school/create</span>
+        <span class="endpoint-pill">school/delete/:id</span>
+      </div>
+      <div class="card-note">Super admin view — list, add, and delete centres. Fully wired.</div>
+    </div>
+
+    <!-- Manage Companies -->
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon icon-green">🏗️</div>
+        <span class="card-status-chip chip-green"><span class="chip-dot"></span>Complete</span>
+      </div>
+      <div>
+        <div class="card-title">Manage Companies</div>
+        <div class="card-path">app/(screens)/manage-companies/</div>
+      </div>
+      <div class="endpoint-list">
+        <span class="endpoint-pill">company/list</span>
+        <span class="endpoint-pill">company/create</span>
+        <span class="endpoint-pill">company/update/:id</span>
+      </div>
+      <div class="card-note">Company CRUD for super admin including per-company centre sub-list.</div>
+    </div>
+
+    <!-- Notifications -->
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon icon-green">🔔</div>
+        <span class="card-status-chip chip-green"><span class="chip-dot"></span>Complete</span>
+      </div>
+      <div>
+        <div class="card-title">Notifications</div>
+        <div class="card-path">app/(screens)/notification/</div>
+      </div>
+      <div class="endpoint-list">
+        <span class="endpoint-pill">notification/list</span>
+        <span class="endpoint-pill">notification/mark-read</span>
+      </div>
+      <div class="card-note">Push notification list and read state managed via live API.</div>
+    </div>
+
+    <!-- User Profile -->
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon icon-green">👤</div>
+        <span class="card-status-chip chip-green"><span class="chip-dot"></span>Complete</span>
+      </div>
+      <div>
+        <div class="card-title">User Profile</div>
+        <div class="card-path">app/(screens)/profile/</div>
+      </div>
+      <div class="endpoint-list">
+        <span class="endpoint-pill">users/update-profile</span>
+        <span class="endpoint-pill">users/change-password</span>
+        <span class="endpoint-pill">users/upload-avatar</span>
+      </div>
+      <div class="card-note">Profile details, photo upload, and password change all use live APIs.</div>
+    </div>
+
+    <!-- Users Management -->
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon icon-green">👥</div>
+        <span class="card-status-chip chip-green"><span class="chip-dot"></span>Complete</span>
+      </div>
+      <div>
+        <div class="card-title">Users Management</div>
+        <div class="card-path">app/(screens)/users/</div>
+      </div>
+      <div class="endpoint-list">
+        <span class="endpoint-pill">school/list-users-by-schools</span>
+        <span class="endpoint-pill">users/invite</span>
+        <span class="endpoint-pill">users/update-permission</span>
+      </div>
+      <div class="card-note">Add user (invite flow), manage permissions, and view user profiles — all wired.</div>
+    </div>
+
+    <!-- Holiday Closures -->
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon icon-green">🗓️</div>
+        <span class="card-status-chip chip-green"><span class="chip-dot"></span>Complete</span>
+      </div>
+      <div>
+        <div class="card-title">Holiday Closures</div>
+        <div class="card-path">app/(screens)/holiday-closures/</div>
+      </div>
+      <div class="endpoint-list">
+        <span class="endpoint-pill">holiday/list</span>
+        <span class="endpoint-pill">holiday/create</span>
+        <span class="endpoint-pill">holiday/update/:id</span>
+        <span class="endpoint-pill">holiday/delete/:id</span>
+      </div>
+      <div class="card-note">Full CRUD for holiday closures. Keyboard behavior improvements applied this sprint.</div>
+    </div>
+
+  </div><!-- /card-grid completed -->
+
+
+  <!-- ══════════════════════════════ IN PROGRESS ══════════════════════════════ -->
+  <div class="section-row">
+    <div class="section-dot" style="background:#f59e0b;"></div>
+    <h2>In Progress</h2>
+    <span class="section-count count-amber">4</span>
+  </div>
+
+  <div class="card-grid">
+
+    <!-- Recurring Invoices -->
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon icon-amber">🔄</div>
+        <span class="card-status-chip chip-amber"><span class="chip-dot"></span>In Progress</span>
+      </div>
+      <div>
+        <div class="card-title">Recurring Invoice CRUD</div>
+        <div class="card-path">app/(screens)/recurring-invoices/</div>
+      </div>
+      <div class="endpoint-list">
+        <span class="endpoint-pill">invoice/get-recurring-invoices</span>
+        <span class="endpoint-pill">invoice/get-recurring-by-id</span>
+        <span class="endpoint-pill pending">create — pending</span>
+        <span class="endpoint-pill pending">update — pending</span>
+        <span class="endpoint-pill pending">delete — pending</span>
+      </div>
+      <div class="card-note">
+        <strong>Done:</strong> List + edit pre-fill wired.<br/>
+        <strong>Remaining:</strong> Submit handlers for create, update, delete. <span class="effort effort-low">Low effort</span>
+      </div>
+    </div>
+
+    <!-- Announcements Create -->
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon icon-amber">✏️</div>
+        <span class="card-status-chip chip-amber"><span class="chip-dot"></span>In Progress</span>
+      </div>
+      <div>
+        <div class="card-title">Announcements Create / Edit</div>
+        <div class="card-path">app/(screens)/announcements/create/</div>
+      </div>
+      <div class="endpoint-list">
+        <span class="endpoint-pill">announcement/list</span>
+        <span class="endpoint-pill pending">create-public-broadcast — pending</span>
+        <span class="endpoint-pill pending">manage-attachments — pending</span>
+      </div>
+      <div class="card-note">
+        <strong>Done:</strong> List and detail screens live.<br/>
+        <strong>Remaining:</strong> Wire create/edit form submit and attachment upload. <span class="effort effort-low">Low effort</span>
+      </div>
+    </div>
+
+    <!-- Student Create -->
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon icon-amber">📝</div>
+        <span class="card-status-chip chip-amber"><span class="chip-dot"></span>In Progress</span>
+      </div>
+      <div>
+        <div class="card-title">Student Create / Edit</div>
+        <div class="card-path">app/(screens)/students/create/ · edit-student/</div>
+      </div>
+      <div class="endpoint-list">
+        <span class="endpoint-pill">lesson/list-by-school</span>
+        <span class="endpoint-pill">school/list-student</span>
+        <span class="endpoint-pill pending">student/create — pending</span>
+        <span class="endpoint-pill pending">student/update — pending</span>
+      </div>
+      <div class="card-note">
+        <strong>Done:</strong> Centre enrollment and section card pickers use live API.<br/>
+        <strong>Remaining:</strong> Final form submit + parent details API. <span class="effort effort-medium">Medium effort</span>
+      </div>
+    </div>
+
+    <!-- Class Clone -->
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon icon-amber">📋</div>
+        <span class="card-status-chip chip-amber"><span class="chip-dot"></span>In Progress</span>
+      </div>
+      <div>
+        <div class="card-title">Class Clone</div>
+        <div class="card-path">app/(tabs)/class/clone/[id].tsx</div>
+      </div>
+      <div class="endpoint-list">
+        <span class="endpoint-pill">lesson/view/:id</span>
+        <span class="endpoint-pill pending">lesson/clone-lesson-with-details — pending</span>
+      </div>
+      <div class="card-note">
+        <strong>Done:</strong> Pre-fill reads from existing lesson data.<br/>
+        <strong>Remaining:</strong> Submit handler calling <code>cloneLessonWithDetails</code>. <span class="effort effort-low">Low effort</span>
+      </div>
+    </div>
+
+  </div><!-- /card-grid in-progress -->
+
+
+  <!-- ══════════════════════════════ NOT STARTED ══════════════════════════════ -->
+  <div class="section-row">
+    <div class="section-dot" style="background:var(--red);"></div>
+    <h2>Not Started</h2>
+    <span class="section-count count-red">10</span>
+  </div>
+
+  <div class="card-grid">
+
+    <!-- Rewards -->
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon icon-red">🎁</div>
+        <span class="card-status-chip chip-red"><span class="chip-dot"></span>Not Started</span>
+      </div>
+      <div>
+        <div class="card-title">Rewards System</div>
+        <div class="card-path">app/(screens)/rewards/ (8 screens)</div>
+      </div>
+      <div class="card-note">
+        Stamps, reward catalog, student collection, redemption history, and assignment flow — all on hardcoded mock data.<br/><br/>
+        <strong>Blocker:</strong> No backend API exists yet. Requires new service design. <span class="effort effort-high">High effort</span>
+      </div>
+    </div>
+
+    <!-- Exam Dashboard -->
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon icon-red">📝</div>
+        <span class="card-status-chip chip-red"><span class="chip-dot"></span>Not Started</span>
+      </div>
+      <div>
+        <div class="card-title">Exam Dashboard &amp; Paper Attempt</div>
+        <div class="card-path">app/(tabs)/class/exam/ (5 screens)</div>
+      </div>
+      <div class="card-note">
+        Full student exam flow (dashboard, attempt, paper, finish, results) on static mock data.<br/><br/>
+        <strong>Blocker:</strong> No exam API on backend. <span class="effort effort-high">High effort</span>
+      </div>
+    </div>
+
+    <!-- Centre Papers -->
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon icon-red">📚</div>
+        <span class="card-status-chip chip-red"><span class="chip-dot"></span>Not Started</span>
+      </div>
+      <div>
+        <div class="card-title">Centre Papers (Teacher View)</div>
+        <div class="card-path">app/(screens)/centre-papers/ (7 screens)</div>
+      </div>
+      <div class="card-note">
+        Paper builder, AI question generation, PDF preview, student tracker — all on local stores.<br/><br/>
+        <strong>Blocker:</strong> Depends on exam service API. <span class="effort effort-high">High effort</span>
+      </div>
+    </div>
+
+    <!-- Revenue Reports -->
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon icon-red">💰</div>
+        <span class="card-status-chip chip-red"><span class="chip-dot"></span>Not Started</span>
+      </div>
+      <div>
+        <div class="card-title">Centre Revenue Reports</div>
+        <div class="card-path">app/(screens)/centre-revenue/ (7 screens)</div>
+      </div>
+      <div class="card-note">
+        Year → Month → Day drill-down revenue report on mock figures.<br/><br/>
+        <strong>Blocker:</strong> Aggregation endpoints needed from backend. <span class="effort effort-high">High effort</span>
+      </div>
+    </div>
+
+    <!-- New Course Reports -->
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon icon-red">📈</div>
+        <span class="card-status-chip chip-red"><span class="chip-dot"></span>Not Started</span>
+      </div>
+      <div>
+        <div class="card-title">New Course Reports</div>
+        <div class="card-path">app/(screens)/centre-new-course/ (7 screens)</div>
+      </div>
+      <div class="card-note">
+        Drill-down report for new lessons created per period. On mock data.<br/><br/>
+        <strong>Blocker:</strong> Lesson aggregation endpoint needed. <span class="effort effort-high">High effort</span>
+      </div>
+    </div>
+
+    <!-- New Enrollment Reports -->
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon icon-red">📊</div>
+        <span class="card-status-chip chip-red"><span class="chip-dot"></span>Not Started</span>
+      </div>
+      <div>
+        <div class="card-title">New Enrollment Reports</div>
+        <div class="card-path">app/(screens)/centre-new-enrollment/ (7 screens)</div>
+      </div>
+      <div class="card-note">
+        Drill-down report for new student enrollments per period. On mock data.<br/><br/>
+        <strong>Blocker:</strong> Enrollment aggregation endpoint needed. <span class="effort effort-high">High effort</span>
+      </div>
+    </div>
+
+    <!-- Attendance Summary -->
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon icon-red">✅</div>
+        <span class="card-status-chip chip-red"><span class="chip-dot"></span>Not Started</span>
+      </div>
+      <div>
+        <div class="card-title">Attendance Summary Report</div>
+        <div class="card-path">app/(screens)/attendance-summary-report/</div>
+      </div>
+      <div class="card-note">
+        School-wide attendance overview on mock data.<br/><br/>
+        Attendance API exists on lessons service but requires aggregation view. <span class="effort effort-medium">Medium effort</span>
+      </div>
+    </div>
+
+    <!-- Attendance Centre -->
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon icon-red">🗒️</div>
+        <span class="card-status-chip chip-red"><span class="chip-dot"></span>Not Started</span>
+      </div>
+      <div>
+        <div class="card-title">Attendance Centre Detail</div>
+        <div class="card-path">app/(screens)/attendance-centre/[id]/</div>
+      </div>
+      <div class="card-note">
+        Per-class attendance marking on mock data.<br/><br/>
+        <code>lessons/attendance</code> API is defined — needs UI wiring. <span class="effort effort-medium">Medium effort</span>
+      </div>
+    </div>
+
+    <!-- Lesson Material / Quiz / Papers -->
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon icon-red">🗂️</div>
+        <span class="card-status-chip chip-red"><span class="chip-dot"></span>Not Started</span>
+      </div>
+      <div>
+        <div class="card-title">Lesson Detail — Material, Quiz &amp; Papers</div>
+        <div class="card-path">app/(tabs)/class/lesson/sections/<br/>MaterialSection · QuizSection · PapersSection</div>
+      </div>
+      <div class="card-note">
+        Three lesson detail sections show static content. Attendance and Invoice sections are partially wired.<br/><br/>
+        Depends on exam API for quiz/papers. <span class="effort effort-medium">Medium effort</span>
+      </div>
+    </div>
+
+    <!-- Teaching Leave -->
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon icon-red">🏖️</div>
+        <span class="card-status-chip chip-red"><span class="chip-dot"></span>Not Started</span>
+      </div>
+      <div>
+        <div class="card-title">Teaching Leave Reports</div>
+        <div class="card-path">app/(screens)/teaching-leave-report/<br/>app/(screens)/teaching-leave-report-activity/</div>
+      </div>
+      <div class="card-note">
+        Export store scaffolded but no API call for leave/absence data.<br/><br/>
+        Needs a leave endpoint from backend. <span class="effort effort-medium">Medium effort</span>
+      </div>
+    </div>
+
+  </div><!-- /card-grid not-started -->
+
+  <hr />
+
+  <div class="footer">
+    Generated by Claude Code &nbsp;·&nbsp; Branch: <code>develop/api-integration</code> &nbsp;·&nbsp; April 14, 2026
+  </div>
+
+</main>
+</body>
+</html>
