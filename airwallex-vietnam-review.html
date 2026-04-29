@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Airwallex — Vietnam Market Review</title>
+<style>
+/* ── RESET ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── TOKENS ── */
+:root {
+  --primary:    #1a56db;
+  --primary-dk: #1341b0;
+  --success:    #16a34a;
+  --warning:    #d97706;
+  --danger:     #dc2626;
+  --bg:         #f1f5f9;
+  --surface:    #ffffff;
+  --border:     #e2e8f0;
+  --text:       #0f172a;
+  --muted:      #64748b;
+  --radius:     12px;
+}
+
+/* ── BASE ── */
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ══════════════════════════════════
+   HEADER
+══════════════════════════════════ */
+.site-header {
+  background: linear-gradient(135deg, #0c1a2e 0%, #132f52 55%, #1a56db 100%);
+  color: #fff;
+  padding: 36px 24px 32px;
+}
+.header-inner { max-width: 1080px; margin: 0 auto; }
+.header-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+.hbadge {
+  background: rgba(255,255,255,.14);
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 5px;
+  padding: 3px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.site-header h1 { font-size: clamp(22px, 4vw, 30px); font-weight: 800; margin-bottom: 6px; }
+.site-header .sub { font-size: 14px; color: rgba(255,255,255,.72); max-width: 560px; }
+.header-meta { display: flex; gap: 28px; flex-wrap: wrap; margin-top: 20px; }
+.hm-item { display: flex; flex-direction: column; gap: 2px; }
+.hm-label { font-size: 10px; text-transform: uppercase; letter-spacing: .08em; color: rgba(255,255,255,.5); }
+.hm-val   { font-size: 13px; font-weight: 700; }
+
+/* ══════════════════════════════════
+   VERDICT STRIP
+══════════════════════════════════ */
+.verdict-strip {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+}
+.verdict-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 20px 0;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.verdict-score {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  flex-shrink: 0;
+}
+.verdict-score .num {
+  font-size: 44px;
+  font-weight: 900;
+  color: var(--warning);
+  line-height: 1;
+}
+.verdict-score .denom { font-size: 18px; color: var(--muted); font-weight: 600; }
+.verdict-tag {
+  background: #fef3c7;
+  color: #92400e;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  margin-left: 6px;
+}
+.verdict-divider { width: 1px; height: 44px; background: var(--border); flex-shrink: 0; }
+.verdict-text h2 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+.verdict-text p  { font-size: 13px; color: var(--muted); max-width: 680px; line-height: 1.5; }
+
+/* ══════════════════════════════════
+   TABS
+══════════════════════════════════ */
+.tabs-bar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 1px 6px rgba(0,0,0,.06);
+}
+.tabs-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.tabs-inner::-webkit-scrollbar { display: none; }
+.tab-btn {
+  white-space: nowrap;
+  padding: 14px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  transition: color .18s, border-color .18s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.tab-btn:hover { color: var(--primary); }
+.tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
+.tab-icon { font-size: 15px; }
+
+/* ══════════════════════════════════
+   TAB PANELS
+══════════════════════════════════ */
+.page-body { max-width: 1080px; margin: 0 auto; padding: 32px 24px 80px; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ══════════════════════════════════
+   SHARED COMPONENTS
+══════════════════════════════════ */
+
+/* Section heading */
+.sec-title {
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.sec-sub { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+
+/* Stat cards */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; }
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+}
+.stat-card .slabel { font-size: 10px; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); font-weight: 700; margin-bottom: 6px; }
+.stat-card .sval   { font-size: 26px; font-weight: 900; color: var(--primary); line-height: 1; }
+.stat-card .ssub   { font-size: 11px; color: var(--muted); margin-top: 5px; line-height: 1.4; }
+
+/* Two-col */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+/* Table */
+.tbl-wrap {
+  overflow-x: auto;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+table { width: 100%; border-collapse: collapse; background: var(--surface); font-size: 13px; }
+thead tr { background: #f8fafc; }
+th {
+  text-align: left;
+  padding: 11px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+td { padding: 11px 14px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: #f8fafc; }
+.td-bold { font-weight: 700; }
+.td-hi { background: #eff6ff !important; font-weight: 700; }
+
+/* Pills */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 99px;
+  white-space: nowrap;
+}
+.pill::before { content: '●'; font-size: 7px; }
+.pill-green  { background: #dcfce7; color: #15803d; }
+.pill-yellow { background: #fef9c3; color: #a16207; }
+.pill-red    { background: #fee2e2; color: #b91c1c; }
+.pill-blue   { background: #dbeafe; color: #1d4ed8; }
+.pill-grey   { background: #f1f5f9; color: #475569; }
+
+/* Callout boxes */
+.box {
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  font-size: 13px;
+  line-height: 1.55;
+}
+.box strong { font-weight: 700; }
+.box-info    { background: #eff6ff; border: 1px solid #bfdbfe; color: #1e40af; }
+.box-warn    { background: #fffbeb; border: 1px solid #fcd34d; color: #92400e; }
+.box-danger  { background: #fef2f2; border: 1px solid #fca5a5; color: #991b1b; }
+.box-success { background: #f0fdf4; border: 1px solid #86efac; color: #166534; }
+
+/* Spacers */
+.mt8  { margin-top: 8px; }
+.mt12 { margin-top: 12px; }
+.mt16 { margin-top: 16px; }
+.mt20 { margin-top: 20px; }
+.mt28 { margin-top: 28px; }
+.mb16 { margin-bottom: 16px; }
+.mb20 { margin-bottom: 20px; }
+
+/* Section divider */
+.sdiv { height: 1px; background: var(--border); margin: 28px 0; }
+
+/* ══════════════════════════════════
+   RISK CARDS
+══════════════════════════════════ */
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+.risk-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  position: relative;
+  overflow: hidden;
+}
+.risk-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; }
+.risk-card.crit::before   { background: var(--danger); }
+.risk-card.high::before   { background: var(--warning); }
+.risk-card.med::before    { background: #eab308; }
+.risk-card.low::before    { background: var(--success); }
+.risk-hdr { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
+.risk-title { font-size: 14px; font-weight: 700; line-height: 1.3; }
+.risk-body  { font-size: 13px; color: var(--muted); line-height: 1.5; }
+.risk-lv {
+  font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .07em; padding: 2px 7px; border-radius: 4px; white-space: nowrap; flex-shrink: 0;
+}
+.risk-card.crit .risk-lv { background: #fee2e2; color: #991b1b; }
+.risk-card.high .risk-lv { background: #fef3c7; color: #92400e; }
+.risk-card.med  .risk-lv { background: #fefce8; color: #713f12; }
+.risk-card.low  .risk-lv { background: #dcfce7; color: #166534; }
+
+/* ══════════════════════════════════
+   STRENGTH / FEATURE CARDS
+══════════════════════════════════ */
+.feat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+.feat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.feat-icon {
+  width: 36px; height: 36px; border-radius: 9px;
+  background: #eff6ff; color: var(--primary);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; flex-shrink: 0;
+}
+.feat-card h4 { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+.feat-card p  { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+/* ══════════════════════════════════
+   DASHBOARD FEATURE TILES
+══════════════════════════════════ */
+.dash-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+.dash-tile {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.dash-tile-hdr {
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid var(--border);
+  background: #f8fafc;
+}
+.dash-tile-icon {
+  width: 34px; height: 34px; border-radius: 8px;
+  background: var(--primary); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0;
+}
+.dash-tile-hdr h3 { font-size: 14px; font-weight: 700; }
+.dash-tile-hdr span { font-size: 11px; color: var(--muted); margin-top: 1px; display: block; }
+.dash-tile-body { padding: 14px 16px; }
+.dash-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  padding: 7px 0;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 13px;
+}
+.dash-item:last-child { border-bottom: none; padding-bottom: 0; }
+.dash-item::before { content: '✓'; color: var(--success); font-weight: 800; font-size: 12px; margin-top: 2px; flex-shrink: 0; }
+.dash-item strong { font-weight: 700; }
+.dash-item span   { color: var(--muted); font-size: 12px; display: block; margin-top: 1px; }
+
+/* ══════════════════════════════════
+   ACTION STEPS
+══════════════════════════════════ */
+.action-list { display: flex; flex-direction: column; gap: 10px; }
+.action-item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+}
+.action-num {
+  width: 28px; height: 28px; background: var(--primary); color: #fff;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 800; flex-shrink: 0;
+}
+.action-item h4 { font-size: 14px; font-weight: 700; margin-bottom: 3px; }
+.action-item p  { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+/* ══════════════════════════════════
+   FOOTER
+══════════════════════════════════ */
+footer {
+  background: #0c1a2e;
+  color: rgba(255,255,255,.45);
+  text-align: center;
+  padding: 22px 24px;
+  font-size: 11px;
+  line-height: 1.6;
+}
+footer strong { color: rgba(255,255,255,.75); }
+
+/* ══════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════ */
+@media (max-width: 640px) {
+  .site-header { padding: 24px 16px; }
+  .page-body { padding: 20px 16px 60px; }
+  .two-col { grid-template-columns: 1fr; }
+  .verdict-inner { gap: 12px; }
+  .verdict-divider { display: none; }
+  .tab-btn { padding: 13px 13px; font-size: 12px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-badges">
+      <span class="hbadge">Stakeholder Review</span>
+      <span class="hbadge">Confidential</span>
+      <span class="hbadge">Pre-Integration</span>
+    </div>
+    <h1>Airwallex Payment Gateway</h1>
+    <p class="sub">Business assessment for Vietnam market integration — for stakeholder review before technical work begins.</p>
+    <div class="header-meta">
+      <div class="hm-item"><span class="hm-label">Prepared</span><span class="hm-val">April 2026</span></div>
+      <div class="hm-item"><span class="hm-label">Market</span><span class="hm-val">Vietnam (VN)</span></div>
+      <div class="hm-item"><span class="hm-label">Stage</span><span class="hm-val">Due Diligence</span></div>
+      <div class="hm-item"><span class="hm-label">Focus</span><span class="hm-val">Business &amp; Compliance</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- ══ VERDICT STRIP ══ -->
+<div class="verdict-strip">
+  <div class="verdict-inner">
+    <div class="verdict-score">
+      <span class="num">7.1</span>
+      <span class="denom">/10</span>
+      <span class="verdict-tag">Conditional Proceed</span>
+    </div>
+    <div class="verdict-divider"></div>
+    <div class="verdict-text">
+      <h2>Recommended with conditions</h2>
+      <p>Airwallex is a well-funded, globally licensed payment platform and the <strong>strongest cross-border option available for Vietnam</strong>. Two items must be resolved before signing: confirm Vietnam licence transfer from the regulator, and verify which local payment methods are actually live.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ TABS BAR ══ -->
+<div class="tabs-bar">
+  <div class="tabs-inner" role="tablist">
+    <button class="tab-btn active" data-tab="overview"    role="tab"><span class="tab-icon">🏢</span> Overview</button>
+    <button class="tab-btn"        data-tab="vietnam"     role="tab"><span class="tab-icon">🇻🇳</span> Vietnam</button>
+    <button class="tab-btn"        data-tab="dashboard"   role="tab"><span class="tab-icon">🖥️</span> Dashboard</button>
+    <button class="tab-btn"        data-tab="pricing"     role="tab"><span class="tab-icon">💰</span> Pricing</button>
+    <button class="tab-btn"        data-tab="competitors" role="tab"><span class="tab-icon">⚖️</span> Competitors</button>
+    <button class="tab-btn"        data-tab="risks"       role="tab"><span class="tab-icon">⚠️</span> Risks</button>
+    <button class="tab-btn"        data-tab="strengths"   role="tab"><span class="tab-icon">✅</span> Strengths</button>
+    <button class="tab-btn"        data-tab="nextsteps"   role="tab"><span class="tab-icon">📌</span> Next Steps</button>
+  </div>
+</div>
+
+<!-- ══ PANELS ══ -->
+<div class="page-body">
+
+  <!-- ─── OVERVIEW ─── -->
+  <div class="tab-panel active" id="tab-overview" role="tabpanel">
+    <p class="sec-title">🏢 Who is Airwallex?</p>
+    <p class="sec-sub">A quick snapshot of the company's scale, financial health, and who's backing it.</p>
+
+    <div class="card-grid mb20">
+      <div class="stat-card"><div class="slabel">Founded</div><div class="sval">2015</div><div class="ssub">Melbourne, Australia · HQ in Singapore &amp; San Francisco</div></div>
+      <div class="stat-card"><div class="slabel">Valuation</div><div class="sval">$8B</div><div class="ssub">Series G raise, December 2025</div></div>
+      <div class="stat-card"><div class="slabel">Total Funding</div><div class="sval">$1.57B</div><div class="ssub">Across 7 rounds of investment</div></div>
+      <div class="stat-card"><div class="slabel">Revenue</div><div class="sval">$1.2B+</div><div class="ssub">85% year-on-year growth · Profitable since Q4 2025</div></div>
+      <div class="stat-card"><div class="slabel">Transactions Processed</div><div class="sval">$266B+</div><div class="ssub">Per year (annualised 2025)</div></div>
+      <div class="stat-card"><div class="slabel">Business Customers</div><div class="sval">200K+</div><div class="ssub">Across 50+ countries</div></div>
+    </div>
+
+    <div class="two-col mt20">
+      <div>
+        <p style="font-size:13px;font-weight:700;margin-bottom:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;">Notable Investors</p>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Investor</th><th>Why it matters</th></tr></thead>
+            <tbody>
+              <tr><td class="td-bold">Tencent</td><td>Deep Asia tech &amp; payments network</td></tr>
+              <tr><td class="td-bold">Visa Ventures</td><td>Payments industry endorsement</td></tr>
+              <tr><td class="td-bold">Salesforce Ventures</td><td>Enterprise SaaS credibility</td></tr>
+              <tr><td class="td-bold">Sequoia Capital China</td><td>Top-tier global VC</td></tr>
+              <tr><td class="td-bold">T. Rowe Price</td><td>Large institutional investor</td></tr>
+              <tr><td class="td-bold">DST Global</td><td>Backed Spotify, Facebook, Airbnb</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <p style="font-size:13px;font-weight:700;margin-bottom:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;">Licence Coverage</p>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Region</th><th>Licence</th></tr></thead>
+            <tbody>
+              <tr><td>Australia, Singapore, HK</td><td><span class="pill pill-green">Licensed</span></td></tr>
+              <tr><td>UK / EU</td><td><span class="pill pill-green">Licensed</span></td></tr>
+              <tr><td>United States</td><td><span class="pill pill-green">Licensed</span></td></tr>
+              <tr><td>Japan, Malaysia, NZ</td><td><span class="pill pill-green">Licensed</span></td></tr>
+              <tr><td><strong>Vietnam</strong></td><td><span class="pill pill-yellow">Via CTIN Pay — confirm transfer</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="box box-info mt16">
+      <strong>Stability check:</strong> Airwallex is profitable, well-funded, and backed by major financial institutions. The risk of it shutting down unexpectedly is low — unlike smaller regional providers. It is also planning a US IPO, which would add further accountability and transparency.
+    </div>
+  </div>
+
+  <!-- ─── VIETNAM ─── -->
+  <div class="tab-panel" id="tab-vietnam" role="tabpanel">
+    <p class="sec-title">🇻🇳 Vietnam Market Status</p>
+    <p class="sec-sub">What Airwallex can and cannot do in Vietnam today — and what still needs to be confirmed.</p>
+
+    <div class="box box-warn mb20">
+      <strong>Big news in 2025:</strong> Airwallex agreed to buy <strong>CTIN Pay</strong> — a Vietnamese company licensed by the State Bank of Vietnam (SBV) to operate as a payment intermediary. This is the licence Airwallex needs to legally process payments in Vietnam. <strong>However:</strong> the SBV must formally approve the ownership transfer — this is not automatic. We need written confirmation this has been approved before committing.
+    </div>
+
+    <p style="font-size:14px;font-weight:700;margin-bottom:12px;">Which local payment methods are supported?</p>
+    <div class="tbl-wrap mb20">
+      <table>
+        <thead><tr><th>Payment Method</th><th>Status</th><th>What this means for us</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="td-bold">VND Bank Transfer</td>
+            <td><span class="pill pill-green">Live</span></td>
+            <td>Customers can pay via local bank — fast and confirmed</td>
+          </tr>
+          <tr>
+            <td class="td-bold">MoMo Wallet</td>
+            <td><span class="pill pill-green">Live</span></td>
+            <td>Vietnam's largest e-wallet — officially supported</td>
+          </tr>
+          <tr>
+            <td class="td-bold">Visa / Mastercard</td>
+            <td><span class="pill pill-green">Live</span></td>
+            <td>International cards work globally on all Airwallex accounts</td>
+          </tr>
+          <tr>
+            <td class="td-bold">VNPay (QR / checkout)</td>
+            <td><span class="pill pill-yellow">Unconfirmed</span></td>
+            <td>Must ask Airwallex directly and get it in writing</td>
+          </tr>
+          <tr>
+            <td class="td-bold">ZaloPay</td>
+            <td><span class="pill pill-yellow">Unconfirmed</span></td>
+            <td>Must ask Airwallex directly and get it in writing</td>
+          </tr>
+          <tr>
+            <td class="td-bold">ATM / Napas Cards</td>
+            <td><span class="pill pill-yellow">Likely, not confirmed</span></td>
+            <td>Expected via CTIN Pay infrastructure — confirm before launch</td>
+          </tr>
+          <tr>
+            <td class="td-bold">VietQR</td>
+            <td><span class="pill pill-yellow">Likely, not confirmed</span></td>
+            <td>Standard QR for Vietnamese banks — confirm before launch</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box box-danger mb16">
+      <strong>Why this matters:</strong> Vietnamese users heavily rely on ZaloPay, VNPay, and ATM cards. If these are not available at launch, customers will drop off at checkout. We need to confirm these are live — not just "coming soon" — before going live.
+    </div>
+
+    <div class="sdiv"></div>
+
+    <p style="font-size:14px;font-weight:700;margin-bottom:12px;">Regulatory context</p>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-icon">📜</div>
+        <div>
+          <h4>SBV (State Bank of Vietnam) Licence</h4>
+          <p>Airwallex holds a licence through CTIN Pay — acquired in March 2025. This is the legal right to handle payments in Vietnam. Unlike Stripe, which has no Vietnam licence at all, this gives Airwallex a legitimate legal presence.</p>
+        </div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">⚖️</div>
+        <div>
+          <h4>New SBV Rules (2025)</h4>
+          <p>Vietnam tightened payment regulations in late 2025 — requiring stricter identity checks for e-wallets (effective January 2026). Airwallex's local entity must comply with these. Confirm they are up to date before integration.</p>
+        </div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">💱</div>
+        <div>
+          <h4>Daily Transaction Limit</h4>
+          <p>Vietnam regulations cap large transfers at 2.4 billion VND (~$95,000 USD) per day per recipient before additional documents are needed. This is a regulatory rule — not an Airwallex restriction.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── DASHBOARD ─── -->
+  <div class="tab-panel" id="tab-dashboard" role="tabpanel">
+    <p class="sec-title">🖥️ What Can We Actually Do in the Dashboard?</p>
+    <p class="sec-sub">Airwallex is more than a payment gateway — it's a full financial operations platform. Here's what our finance and operations teams can manage day-to-day, without needing technical help.</p>
+
+    <div class="dash-grid">
+
+      <!-- Payments -->
+      <div class="dash-tile">
+        <div class="dash-tile-hdr">
+          <div class="dash-tile-icon">💳</div>
+          <div><h3>Payment Management</h3><span>Track every customer payment in one place</span></div>
+        </div>
+        <div class="dash-tile-body">
+          <div class="dash-item"><div><strong>View all transactions</strong><span>Filter by date, currency, method, or status — click any payment to see full details</span></div></div>
+          <div class="dash-item"><div><strong>Issue refunds instantly</strong><span>Click a transaction → click Refund. No need to contact support for standard refunds</span></div></div>
+          <div class="dash-item"><div><strong>Manage disputes</strong><span>When a customer disputes a charge, the dashboard alerts us and we can upload evidence to challenge it — with a clear deadline shown</span></div></div>
+          <div class="dash-item"><div><strong>Export reports</strong><span>Download any date range as Excel, CSV, or PDF for reconciliation or auditing</span></div></div>
+        </div>
+      </div>
+
+      <!-- Multi-currency wallet -->
+      <div class="dash-tile">
+        <div class="dash-tile-hdr">
+          <div class="dash-tile-icon">🌐</div>
+          <div><h3>Multi-Currency Wallet</h3><span>Hold &amp; move money in 11+ currencies</span></div>
+        </div>
+        <div class="dash-tile-body">
+          <div class="dash-item"><div><strong>Hold multiple currencies</strong><span>USD, EUR, GBP, SGD, HKD, AUD, VND and more — all visible on one screen, no forced conversion</span></div></div>
+          <div class="dash-item"><div><strong>Local receiving accounts</strong><span>Get a local bank account number in 70+ countries — overseas buyers pay us as if we're a local business, avoiding wire fees</span></div></div>
+          <div class="dash-item"><div><strong>Convert currencies yourself</strong><span>Wallet → Conversions: enter amount, see live rate, confirm. No phone calls needed</span></div></div>
+          <div class="dash-item"><div><strong>Set FX rate alerts</strong><span>Tell the system "alert me when USD/VND hits X" — convert at the right moment instead of guessing</span></div></div>
+        </div>
+      </div>
+
+      <!-- FX & Hedging -->
+      <div class="dash-tile">
+        <div class="dash-tile-hdr">
+          <div class="dash-tile-icon">💱</div>
+          <div><h3>FX &amp; Currency Tools</h3><span>Protect against exchange rate risk</span></div>
+        </div>
+        <div class="dash-tile-body">
+          <div class="dash-item"><div><strong>Live mid-market rates 24/7</strong><span>See real-time rates before converting — no surprises on the final amount</span></div></div>
+          <div class="dash-item"><div><strong>Lock in a future rate (Forward Contract)</strong><span>Know you'll need to pay a supplier in 60 days in USD? Lock today's rate now so a bad exchange rate won't hurt you later. Valid up to 180 days ahead</span></div></div>
+          <div class="dash-item"><div><strong>Rate alerts</strong><span>Set a target rate for any currency pair and get notified when the market hits it</span></div></div>
+          <div class="dash-item"><div><strong>FX cost: 0.5–1% over mid-market</strong><span>Much cheaper than PayPal (3–5%) and most banks — the savings are real for any business with USD/EUR income and VND costs</span></div></div>
+        </div>
+      </div>
+
+      <!-- Payouts & Transfers -->
+      <div class="dash-tile">
+        <div class="dash-tile-hdr">
+          <div class="dash-tile-icon">📤</div>
+          <div><h3>Paying Suppliers &amp; Partners</h3><span>Send money anywhere, single or in bulk</span></div>
+        </div>
+        <div class="dash-tile-body">
+          <div class="dash-item"><div><strong>Single transfers</strong><span>Enter recipient bank details, amount, currency → see delivery time and total cost → confirm. Covers 121 countries via local rails, 207 via SWIFT</span></div></div>
+          <div class="dash-item"><div><strong>Batch payments (up to 1,000 at once)</strong><span>Download a template, fill in recipient details, upload it back. Useful for payroll, commissions, or vendor runs</span></div></div>
+          <div class="dash-item"><div><strong>Approval rules</strong><span>Set thresholds — e.g., transfers over $5,000 need one approver; over $50,000 need two. Protects against unauthorised payments</span></div></div>
+          <div class="dash-item"><div><strong>Settlement speed</strong><span>94% of transfers arrive same day via local rails — much faster than traditional bank wires</span></div></div>
+        </div>
+      </div>
+
+      <!-- Reporting & Accounting -->
+      <div class="dash-tile">
+        <div class="dash-tile-hdr">
+          <div class="dash-tile-icon">📊</div>
+          <div><h3>Reporting &amp; Accounting</h3><span>Syncs directly with your accounting software</span></div>
+        </div>
+        <div class="dash-tile-body">
+          <div class="dash-item"><div><strong>Xero integration</strong><span>Connect once — all transactions flow into Xero automatically as a bank feed. No manual imports</span></div></div>
+          <div class="dash-item"><div><strong>QuickBooks Online</strong><span>Same automatic bank-feed sync, with proper multi-currency support built in</span></div></div>
+          <div class="dash-item"><div><strong>NetSuite &amp; Sage</strong><span>For businesses with multiple entities — consolidated reporting across all offices from one login</span></div></div>
+          <div class="dash-item"><div><strong>Statements &amp; reconciliation reports</strong><span>Download formal account statements or reconciliation breakdowns (gross, fees, net) for any period. Audit-ready</span></div></div>
+        </div>
+      </div>
+
+      <!-- Cards & Expenses -->
+      <div class="dash-tile">
+        <div class="dash-tile-hdr">
+          <div class="dash-tile-icon">💼</div>
+          <div><h3>Cards &amp; Expense Management</h3><span>Corporate cards with full spending control</span></div>
+        </div>
+        <div class="dash-tile-body">
+          <div class="dash-item"><div><strong>Virtual cards — instant</strong><span>Create unlimited virtual Visa cards in seconds. Assign to a person, project, or vendor with its own spending limit and expiry date</span></div></div>
+          <div class="dash-item"><div><strong>Physical cards</strong><span>Issue Visa debit cards for employees — works worldwide, including contactless and ATM</span></div></div>
+          <div class="dash-item"><div><strong>Freeze any card instantly</strong><span>One click from the dashboard or mobile app. No waiting on a phone call to support</span></div></div>
+          <div class="dash-item"><div><strong>Receipt capture &amp; reimbursements</strong><span>Staff photograph receipts on the mobile app — AI reads the details automatically. Approved claims are reimbursed same-day to the employee's bank account</span></div></div>
+        </div>
+      </div>
+
+      <!-- Team Management -->
+      <div class="dash-tile">
+        <div class="dash-tile-hdr">
+          <div class="dash-tile-icon">👥</div>
+          <div><h3>Team &amp; Access Control</h3><span>Decide exactly who can see and do what</span></div>
+        </div>
+        <div class="dash-tile-body">
+          <div class="dash-item"><div><strong>Built-in roles</strong><span>Owner, Finance Manager, Analyst (read-only), Developer, Bookkeeper — assign by job function, not technical knowledge</span></div></div>
+          <div class="dash-item"><div><strong>Custom roles</strong><span>Create a role with exactly the right mix of permissions — e.g., "can initiate transfers but not approve them"</span></div></div>
+          <div class="dash-item"><div><strong>Multi-entity management</strong><span>If we have subsidiaries or regional offices, one finance manager can oversee all balances and approve transfers across every entity from a single login</span></div></div>
+          <div class="dash-item"><div><strong>Approval chains</strong><span>Multi-level approval workflows for payments, expenses, and bills based on amount thresholds</span></div></div>
+        </div>
+      </div>
+
+      <!-- Mobile App -->
+      <div class="dash-tile">
+        <div class="dash-tile-hdr">
+          <div class="dash-tile-icon">📱</div>
+          <div><h3>Mobile App</h3><span>Manage finances on the go (iOS &amp; Android)</span></div>
+        </div>
+        <div class="dash-tile-body">
+          <div class="dash-item"><div><strong>View all balances &amp; transactions</strong><span>Real-time visibility across all currencies from your phone</span></div></div>
+          <div class="dash-item"><div><strong>Approve payments &amp; expenses</strong><span>Managers can approve or reject pending items without needing a laptop</span></div></div>
+          <div class="dash-item"><div><strong>Freeze / unfreeze cards</strong><span>Instant card controls — no need to call the bank</span></div></div>
+          <div class="dash-item"><div><strong>Act on FX rate alerts</strong><span>Convert currency the moment your target rate is hit, from wherever you are</span></div></div>
+          <div class="dash-item"><div><strong>Submit expense receipts</strong><span>Photo → AI auto-fills the details → submit for approval. Takes under 30 seconds</span></div></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="box box-info mt20">
+      <strong>Bottom line for our team:</strong> Airwallex replaces what would normally require 3–4 separate tools — a payment gateway, a multi-currency bank account, an expense management system, and an FX conversion service. Everything is in one login, with a clean interface that doesn't require technical knowledge to use day-to-day.
+    </div>
+  </div>
+
+  <!-- ─── PRICING ─── -->
+  <div class="tab-panel" id="tab-pricing" role="tabpanel">
+    <p class="sec-title">💰 What Does It Cost?</p>
+    <p class="sec-sub">All fees in plain language — no hidden charges if you know what to look for.</p>
+
+    <div class="two-col mb20">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>What We Pay For</th><th>Cost</th></tr></thead>
+          <tbody>
+            <tr><td>Monthly platform fee (base plan)</td><td style="font-weight:800;color:var(--success)">Free</td></tr>
+            <tr><td>Setup fee</td><td style="font-weight:800;color:var(--success)">None</td></tr>
+            <tr><td>Customer pays with local card (e.g. Vietnamese Visa)</td><td>~2.8% + $0.30 per transaction</td></tr>
+            <tr><td>Customer pays with international card (e.g. US Mastercard)</td><td>~4.3% + $0.30 per transaction</td></tr>
+            <tr><td>Converting VND ↔ USD/EUR</td><td>1.0% above the mid-market rate</td></tr>
+            <tr><td>Converting major currencies (USD ↔ EUR etc.)</td><td>0.5% above the mid-market rate</td></tr>
+            <tr><td>Sending a local VND transfer (e.g. via MoMo)</td><td>~0.1% — very low</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Settlement — How Fast Do We Get Paid?</th><th></th></tr></thead>
+          <tbody>
+            <tr><td>How often does money land in our account?</td><td>Once daily by default (23:00 local time)</td></tr>
+            <tr><td>Faster option available?</td><td>Yes — every ~20 min with fast settlement</td></tr>
+            <tr><td>Vietnam bank transfer arrival</td><td>Same day or next business day</td></tr>
+            <tr><td>% of transactions that settle same day</td><td>94% globally via local rails</td></tr>
+            <tr><td>How many currencies can we receive?</td><td>180+</td></tr>
+            <tr><td>How many currencies can we hold without converting?</td><td>20+ — including VND and USD</td></tr>
+            <tr><td>Large transfer threshold in Vietnam</td><td>2.4B VND/day (~$95K USD) — regulatory limit</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="box box-info mb16">
+      <strong>FX savings in practice:</strong> If we collect $100,000 USD from international customers and need VND, Airwallex charges 1% — costing $1,000. PayPal would charge 3–5%, costing $3,000–$5,000 for the same conversion. The difference adds up fast at scale.
+    </div>
+
+    <div class="box box-warn">
+      <strong>Watch out for pricing changes:</strong> Airwallex restructured their plans in July 2025 with limited notice to existing customers. Any commercial agreement should include a clause requiring advance notice (minimum 30 days) before fee increases, and a rate lock for the initial contract period.
+    </div>
+  </div>
+
+  <!-- ─── COMPETITORS ─── -->
+  <div class="tab-panel" id="tab-competitors" role="tabpanel">
+    <p class="sec-title">⚖️ How Does Airwallex Compare?</p>
+    <p class="sec-sub">Side-by-side comparison of the most relevant payment providers for the Vietnam market.</p>
+
+    <div class="tbl-wrap mb20">
+      <table>
+        <thead>
+          <tr>
+            <th>Provider</th>
+            <th>Vietnam businesses can register?</th>
+            <th>Local VN payment methods</th>
+            <th>Cross-border / FX</th>
+            <th>Best for</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="td-hi td-bold">Airwallex</td>
+            <td class="td-hi"><span class="pill pill-green">Yes</span></td>
+            <td class="td-hi">VND transfer ✓, MoMo ✓ — VNPay &amp; ZaloPay TBC</td>
+            <td class="td-hi">0.5–1% FX · Excellent global coverage</td>
+            <td class="td-hi">Cross-border + Vietnam combined</td>
+          </tr>
+          <tr>
+            <td class="td-bold">Stripe</td>
+            <td><span class="pill pill-red">No</span></td>
+            <td style="color:var(--muted)">Not available for Vietnamese businesses</td>
+            <td>Excellent — but irrelevant for local entities</td>
+            <td>Not viable for Vietnam-registered companies</td>
+          </tr>
+          <tr>
+            <td class="td-bold">VNPay</td>
+            <td><span class="pill pill-green">Yes</span></td>
+            <td>Full suite — VNPay QR, MoMo, ZaloPay, ATM, Napas</td>
+            <td style="color:var(--muted)">VND domestic only — no cross-border</td>
+            <td>Domestic-only Vietnam checkout</td>
+          </tr>
+          <tr>
+            <td class="td-bold">PayOS</td>
+            <td><span class="pill pill-green">Yes</span></td>
+            <td>Bank transfer, ATM, QR</td>
+            <td style="color:var(--muted)">VND domestic only</td>
+            <td>Vietnamese SMEs and small e-commerce</td>
+          </tr>
+          <tr>
+            <td class="td-bold">2C2P</td>
+            <td><span class="pill pill-green">Yes</span></td>
+            <td>Full VN local methods + broader SEA coverage</td>
+            <td>Competitive · Strong SEA cross-border</td>
+            <td>Regional SEA with both local + international</td>
+          </tr>
+          <tr>
+            <td class="td-bold">PayPal</td>
+            <td><span class="pill pill-yellow">Limited</span></td>
+            <td style="color:var(--muted)">No local wallets — USD receive only</td>
+            <td>3–5%+ FX · Very expensive</td>
+            <td>Receiving USD from overseas only</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-icon">🥇</div>
+        <div>
+          <h4>For cross-border + Vietnam: Airwallex wins</h4>
+          <p>No other provider combines a Vietnam licence, competitive FX rates, and global payment infrastructure in one platform. Stripe doesn't even operate in Vietnam for local businesses.</p>
+        </div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🏆</div>
+        <div>
+          <h4>For domestic-only checkout: VNPay or PayOS is better today</h4>
+          <p>If we only need Vietnamese customers to pay in VND with local apps, VNPay and PayOS have deeper, proven local coverage right now. Airwallex's local method support is still being confirmed.</p>
+        </div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🤝</div>
+        <div>
+          <h4>Closest real competitor: 2C2P</h4>
+          <p>Backed by Ant Group (Alibaba). Offers both deep Vietnam local payment support and solid cross-border capability across Southeast Asia. Worth evaluating in parallel.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="box box-info mt16">
+      <strong>Our recommendation:</strong> Use Airwallex as the primary gateway for cross-border and international card payments. Consider a parallel integration with VNPay or PayOS as a fallback for domestic-only local wallet methods (ZaloPay, VNPay checkout) until Airwallex confirms these are live.
+    </div>
+  </div>
+
+  <!-- ─── RISKS ─── -->
+  <div class="tab-panel" id="tab-risks" role="tabpanel">
+    <p class="sec-title">⚠️ Key Business Risks</p>
+    <p class="sec-sub">Risks that stakeholders need to be aware of — ranked by severity. Two are critical and must be resolved before signing.</p>
+
+    <div class="risk-grid">
+
+      <div class="risk-card crit">
+        <div class="risk-hdr">
+          <div class="risk-title">🚨 Financial Crime Investigation (AUSTRAC)</div>
+          <div class="risk-lv">Critical</div>
+        </div>
+        <p class="risk-body">On 22 January 2026, Australian authorities (AUSTRAC) ordered a formal investigation into Airwallex for failing to properly monitor suspicious transactions and verify high-risk customers. Reports indicate the platform was used by money mules linked to serious crimes. The investigation must complete within 180 days. This could result in large fines, stricter operating conditions, or — in extreme cases — licence suspension. <strong>This is the single biggest risk and must be tracked closely before committing.</strong></p>
+      </div>
+
+      <div class="risk-card crit">
+        <div class="risk-hdr">
+          <div class="risk-title">🚨 Vietnam Licence Not Yet Confirmed</div>
+          <div class="risk-lv">Critical</div>
+        </div>
+        <p class="risk-body">Airwallex agreed to buy CTIN Pay in March 2025, but Vietnam's central bank (SBV) must formally approve the change of ownership. Until that approval is confirmed in writing, Airwallex may not legally be authorised to operate in Vietnam. <strong>We must receive written proof of SBV approval before signing any contract.</strong></p>
+      </div>
+
+      <div class="risk-card high">
+        <div class="risk-hdr">
+          <div class="risk-title">Account Freezes Without Warning</div>
+          <div class="risk-lv">High</div>
+        </div>
+        <p class="risk-body">Hundreds of verified customer complaints describe accounts being frozen suddenly during "compliance reviews" with no advance notice, and funds being held for up to 180 days. For our platform — which pays out to tutors and partners regularly — a sudden account freeze would be operationally catastrophic. <strong>This must be contractually protected against.</strong></p>
+      </div>
+
+      <div class="risk-card high">
+        <div class="risk-hdr">
+          <div class="risk-title">Local Payment Methods Not Yet Confirmed</div>
+          <div class="risk-lv">High</div>
+        </div>
+        <p class="risk-body">Vietnamese customers rely heavily on ZaloPay, VNPay, and ATM cards. Airwallex has not publicly confirmed these are live in their Vietnam checkout. If we launch and these methods aren't available, customers won't be able to pay, and conversion rates will suffer. We need written confirmation — not promises — of which methods are live today.</p>
+      </div>
+
+      <div class="risk-card med">
+        <div class="risk-hdr">
+          <div class="risk-title">Vietnam Product Is Still New</div>
+          <div class="risk-lv">Medium</div>
+        </div>
+        <p class="risk-body">Airwallex only entered Vietnam in 2025. Local customer support, Vietnamese-language documentation, and VND settlement tooling are likely less mature than competitors who have operated here for years. Budget for higher initial setup effort and plan for gaps in local support.</p>
+      </div>
+
+      <div class="risk-card med">
+        <div class="risk-hdr">
+          <div class="risk-title">No Guaranteed Support Response Time</div>
+          <div class="risk-lv">Medium</div>
+        </div>
+        <p class="risk-body">Airwallex publishes no official SLA (service level agreement) for response times. Customer reviews report 48–72+ hours for non-urgent email support. For a live payment platform, this is a real operational risk. We should negotiate a dedicated account manager and written escalation SLA as part of any commercial deal.</p>
+      </div>
+
+      <div class="risk-card low">
+        <div class="risk-hdr">
+          <div class="risk-title">Pricing Can Change Without Much Notice</div>
+          <div class="risk-lv">Low</div>
+        </div>
+        <p class="risk-body">Airwallex changed its pricing structure in July 2025 with minimal advance notice to existing customers. Protect against this by negotiating a fee change notice period (minimum 30 days) and a rate lock for at least the first 12 months of the contract.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ─── STRENGTHS ─── -->
+  <div class="tab-panel" id="tab-strengths" role="tabpanel">
+    <p class="sec-title">✅ Why Airwallex Makes Sense For Us</p>
+    <p class="sec-sub">The genuine business advantages — why this platform outperforms the alternatives for our use case.</p>
+
+    <div class="feat-grid">
+
+      <div class="feat-card">
+        <div class="feat-icon">🌐</div>
+        <div>
+          <h4>Collect money like a local in 70+ countries</h4>
+          <p>Airwallex gives us a local bank account number in 70+ countries. When an international customer pays us, they pay into a "local" account — no expensive wire fees, faster settlement. This is a major cost saving vs traditional cross-border payments.</p>
+        </div>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon">📜</div>
+        <div>
+          <h4>Legally licensed in Vietnam</h4>
+          <p>Via the CTIN Pay acquisition, Airwallex has the regulatory licence to process payments in Vietnam — something Stripe doesn't have at all. This is the legal foundation we need to operate here compliantly.</p>
+        </div>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon">💱</div>
+        <div>
+          <h4>Save significantly on currency conversion</h4>
+          <p>When converting USD to VND, Airwallex charges 1% — versus PayPal's 3–5%. On $500,000 of revenue, that's a $10,000–$20,000 saving every year. The more revenue we process internationally, the bigger this advantage gets.</p>
+        </div>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon">🏪</div>
+        <div>
+          <h4>Built for marketplaces that pay out to others</h4>
+          <p>Airwallex has native tools for platforms that collect money from customers and pay it out to service providers (e.g., tutors). Sub-accounts, batch payouts, and approval workflows make this easy to manage at scale.</p>
+        </div>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon">⚡</div>
+        <div>
+          <h4>Money arrives fast — no waiting days for bank wires</h4>
+          <p>94% of transactions settle the same day via local payment rails. Tutors and partners receive payouts quickly, which improves our platform's reputation and retention.</p>
+        </div>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon">🔌</div>
+        <div>
+          <h4>Connects to tools we already use</h4>
+          <p>Native integrations with Shopify, Xero, QuickBooks, NetSuite, and more. Transactions sync automatically — no manual imports or data re-entry for the finance team.</p>
+        </div>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon">📈</div>
+        <div>
+          <h4>Financially stable — low risk of provider failure</h4>
+          <p>$8B valuation, $1.57B raised, backed by Tencent and Visa, EBITDA profitable. Unlike smaller regional providers, the risk of Airwallex suddenly shutting down is low. Planning a US IPO adds further accountability.</p>
+        </div>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon">🎯</div>
+        <div>
+          <h4>Serious investment in Southeast Asia</h4>
+          <p>Airwallex hired a new Head of SEA from Grab Financial Group and reported 94% growth in SEA transaction volume in Q3 2025. Vietnam is clearly a strategic priority — meaning product improvements will follow.</p>
+        </div>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon">🛡️</div>
+        <div>
+          <h4>One platform instead of many</h4>
+          <p>Payment gateway + multi-currency wallet + corporate cards + expense management + FX + accounting integration — all in one login. Reduces cost, admin burden, and the number of vendor relationships to manage.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ─── NEXT STEPS ─── -->
+  <div class="tab-panel" id="tab-nextsteps" role="tabpanel">
+    <p class="sec-title">📌 What Do We Need to Do Before We Commit?</p>
+    <p class="sec-sub">Five concrete actions that must be completed — or negotiated — before signing any commercial agreement with Airwallex.</p>
+
+    <div class="action-list mb20">
+
+      <div class="action-item">
+        <div class="action-num">1</div>
+        <div>
+          <h4>Get written proof of Vietnam licence approval</h4>
+          <p>Ask Airwallex to provide written confirmation from the State Bank of Vietnam (SBV) that the CTIN Pay ownership transfer has been formally approved. This is non-negotiable — without it, Airwallex may not be legally authorised to process payments in Vietnam.</p>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="action-num">2</div>
+        <div>
+          <h4>Confirm exactly which local Vietnamese payment methods are live</h4>
+          <p>Ask Airwallex's Vietnam team for a written list of payment methods available in merchant checkout right now — not "coming soon." We need MoMo, ZaloPay, VNPay, VietQR, and Napas ATM cards confirmed live before our integration is designed around them.</p>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="action-num">3</div>
+        <div>
+          <h4>Monitor the AUSTRAC investigation outcome</h4>
+          <p>Ask Airwallex for their official statement on the financial crime investigation. Confirm whether Vietnam's SBV has been notified or taken any action. Include a contract exit clause — if Airwallex receives significant sanctions or its licences are restricted, we must be able to leave without penalty.</p>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="action-num">4</div>
+        <div>
+          <h4>Negotiate account protection and support SLA into the contract</h4>
+          <p>Before signing, negotiate: (a) minimum 5 business days advance notice before any account restriction, (b) maximum 30-day fund hold limit, (c) a named dedicated account manager, and (d) a written SLA committing to resolve critical issues within 24 hours. These protections are especially important given the account freeze history.</p>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="action-num">5</div>
+        <div>
+          <h4>Run a 90-day pilot before full commitment</h4>
+          <p>Before investing in full technical integration, run a low-volume 90-day pilot. This lets us validate that local payment methods actually convert well, settlement speed matches the promises, and support is responsive — with minimal risk. Only scale up after the pilot passes.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="sdiv"></div>
+
+    <p class="sec-title" style="font-size:16px;">📋 Getting Onboarded — What Documents Do We Need?</p>
+    <p class="sec-sub">Documents Airwallex will ask for when we apply — standard business KYC requirements.</p>
+
+    <div class="two-col">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Document</th><th>Required?</th></tr></thead>
+          <tbody>
+            <tr><td>Business registration certificate</td><td><span class="pill pill-green">Yes</span></td></tr>
+            <tr><td>Proof of registered business address</td><td><span class="pill pill-green">Yes</span></td></tr>
+            <tr><td>Passport / ID of directors and major shareholders (&gt;25%)</td><td><span class="pill pill-green">Yes</span></td></tr>
+            <tr><td>Company bank account details</td><td><span class="pill pill-green">Yes</span></td></tr>
+            <tr><td>Website or app description</td><td><span class="pill pill-green">Yes</span></td></tr>
+            <tr><td>Virtual office address</td><td><span class="pill pill-red">Not accepted</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="stat-card mb16">
+          <div class="slabel">Normal approval time</div>
+          <div class="sval">1–3 days</div>
+          <div class="ssub">For standard businesses with clean documentation</div>
+        </div>
+        <div class="stat-card mb16">
+          <div class="slabel">If they ask for more info</div>
+          <div class="sval">2–4 weeks</div>
+          <div class="ssub">For complex structures or extra due diligence</div>
+        </div>
+        <div class="box box-warn">
+          <strong>Note:</strong> Given the AUSTRAC investigation, Airwallex may be tightening its onboarding checks in 2026. Budget for a longer review period than usual.
+        </div>
+      </div>
+    </div>
+
+    <div class="sdiv"></div>
+
+    <p class="sec-title" style="font-size:16px;">🎧 Support — What to Expect</p>
+    <div class="two-col">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Review Platform</th><th>Rating</th></tr></thead>
+          <tbody>
+            <tr><td>G2 (verified business reviews)</td><td>⭐ 4.2 / 5</td></tr>
+            <tr><td>Capterra</td><td>⭐ 4.0 / 5</td></tr>
+            <tr><td>Trustpilot</td><td>⭐ 3.4 / 5 (2,300+ reviews)</td></tr>
+            <tr><td>PissedConsumer (complaints-focused)</td><td>⭐ 1.4 / 5</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="box box-success mb16" style="font-size:13px;">
+          <strong>What customers praise:</strong> Easy to sign up · Multi-currency accounts work well · FX rates are genuinely competitive · Good for day-to-day routine operations · Shopify integration is seamless
+        </div>
+        <div class="box box-danger" style="font-size:13px;">
+          <strong>What customers complain about:</strong> Accounts frozen with no warning · 2–3 day email response times · Poor communication during compliance issues · Funds held for months after account closure · No dedicated manager for SME accounts
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /nextsteps -->
+
+</div><!-- /page-body -->
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <strong>Airwallex Vietnam Market Review</strong> · Prepared April 2026 · For internal stakeholder use only<br/>
+  Based on publicly available sources as of April 2026. This document does not constitute legal or financial advice. All fees should be verified directly with Airwallex before signing any agreement.
+</footer>
+
+<!-- ══ TAB SCRIPT ══ -->
+<script>
+(function () {
+  const btns   = document.querySelectorAll('.tab-btn');
+  const panels = document.querySelectorAll('.tab-panel');
+
+  function activate(tabId) {
+    btns.forEach(b => b.classList.toggle('active', b.dataset.tab === tabId));
+    panels.forEach(p => p.classList.toggle('active', p.id === 'tab-' + tabId));
+    // Scroll tabs into view on mobile
+    const activeBtn = document.querySelector('.tab-btn[data-tab="' + tabId + '"]');
+    if (activeBtn) activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  }
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => activate(btn.dataset.tab));
+  });
+
+  // Keyboard navigation
+  const tabList = document.querySelector('.tabs-inner');
+  tabList.addEventListener('keydown', (e) => {
+    const current = document.querySelector('.tab-btn.active');
+    const all = [...btns];
+    const idx = all.indexOf(current);
+    if (e.key === 'ArrowRight' && idx < all.length - 1) { all[idx + 1].click(); all[idx + 1].focus(); }
+    if (e.key === 'ArrowLeft'  && idx > 0)              { all[idx - 1].click(); all[idx - 1].focus(); }
+  });
+})();
+</script>
+</body>
+</html>
