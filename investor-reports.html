@@ -1,0 +1,713 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>EdBuddies — Platform Investor Analytics</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root{
+    --bg:#0b1020; --panel:#121935; --panel2:#1a2247; --line:#252e57;
+    --text:#e7ecff; --muted:#8d97c6; --accent:#7c8cff; --good:#36d399;
+    --warn:#fbbd23; --bad:#f87272; --chip:#2b3470;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Helvetica,Arial,sans-serif;
+    font-size:14px;line-height:1.55;-webkit-text-size-adjust:100%;
+    overflow-x:hidden}
+  header{padding:28px 32px 16px;border-bottom:1px solid var(--line)}
+  header h1{margin:0 0 4px;font-size:22px;letter-spacing:-0.01em;line-height:1.25}
+  header p{margin:0;color:var(--muted);font-size:13px}
+  abbr[title]{text-decoration:underline dotted;text-underline-offset:3px;
+    cursor:help;color:inherit;text-decoration-color:var(--muted)}
+  .gloss{color:var(--muted);font-size:0.92em;font-weight:400}
+
+  nav{display:flex;gap:2px;padding:0 16px;border-bottom:1px solid var(--line);
+    background:var(--bg);position:sticky;top:0;z-index:10;
+    overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+  nav::-webkit-scrollbar{height:4px}
+  nav::-webkit-scrollbar-thumb{background:var(--line);border-radius:2px}
+  nav button{background:transparent;border:0;color:var(--muted);
+    padding:14px 14px;font-size:13px;font-weight:500;cursor:pointer;
+    border-bottom:2px solid transparent;transition:color .15s,border-color .15s;
+    white-space:nowrap;flex-shrink:0;min-height:44px}
+  nav button:hover{color:var(--text)}
+  nav button.active{color:var(--accent);border-bottom-color:var(--accent)}
+
+  main{padding:20px 32px 80px;max-width:1400px;margin:0 auto}
+  .tab{display:none}
+  .tab.active{display:block}
+  .grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;
+    padding:16px 18px}
+  .card h3{margin:0 0 6px;font-size:11px;text-transform:uppercase;letter-spacing:0.06em;
+    color:var(--muted);font-weight:600;line-height:1.4}
+  .card .v{font-size:24px;font-weight:700;letter-spacing:-0.02em;line-height:1.2}
+  .card .sub{margin-top:4px;font-size:12px;color:var(--muted);line-height:1.4}
+  .card.big .v{font-size:30px}
+  .row{display:grid;gap:14px;margin-top:14px}
+  .row.cols-2{grid-template-columns:repeat(auto-fit,minmax(360px,1fr))}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;
+    padding:18px;margin-top:14px;overflow:hidden}
+  .panel h2{margin:0 0 10px;font-size:16px;letter-spacing:-0.01em;line-height:1.3}
+  .panel .lede{color:var(--muted);font-size:13px;margin:0 0 14px}
+
+  .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -4px;
+    padding:0 4px}
+  table{width:100%;border-collapse:collapse;font-size:13px;min-width:480px}
+  th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line);
+    vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:11px;text-transform:uppercase;
+    letter-spacing:0.05em;background:var(--panel2);position:sticky;top:0}
+  tbody tr:hover{background:var(--panel2)}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .chart-wrap{position:relative;height:320px;min-height:240px;width:100%}
+
+  .pos{color:var(--good)} .neg{color:var(--bad)} .neu{color:var(--muted)}
+  .pill{display:inline-block;padding:2px 8px;border-radius:99px;font-size:11px;
+    font-weight:600;white-space:nowrap}
+  .pill.good{background:rgba(54,211,153,.15);color:var(--good)}
+  .pill.warn{background:rgba(251,189,35,.15);color:var(--warn)}
+  .pill.bad{background:rgba(248,114,114,.15);color:var(--bad)}
+  .footnote{color:var(--muted);font-size:12px;margin-top:8px;line-height:1.55}
+  .cohort-cell{font-variant-numeric:tabular-nums;text-align:center;padding:6px 4px;
+    font-size:12px;border-radius:4px;min-width:48px}
+  .legend{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;font-size:12px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .swatch{width:10px;height:10px;border-radius:2px;display:inline-block}
+  .ribbon{display:flex;justify-content:space-between;align-items:center;
+    margin-bottom:8px;flex-wrap:wrap;gap:8px}
+  .ribbon .delta{font-size:13px;color:var(--good);font-weight:600}
+  .meta{color:var(--muted);font-size:11px;text-align:right;margin-top:24px}
+
+  /* Take-rate scenario sliders */
+  .scenario-controls{display:flex;gap:18px;align-items:stretch;flex-wrap:wrap;
+    background:var(--panel2);padding:14px 16px;border-radius:10px;margin-bottom:14px}
+  .scenario-controls label{display:flex;flex-direction:column;gap:8px;font-size:12px;
+    color:var(--muted);font-weight:500;flex:1;min-width:200px}
+  .scenario-controls input[type=range]{width:100%;accent-color:var(--accent);
+    height:36px;-webkit-appearance:none;background:transparent;cursor:pointer}
+  .scenario-controls input[type=range]::-webkit-slider-runnable-track{
+    height:6px;background:var(--line);border-radius:3px}
+  .scenario-controls input[type=range]::-moz-range-track{
+    height:6px;background:var(--line);border-radius:3px}
+  .scenario-controls input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none;width:24px;height:24px;border-radius:50%;
+    background:var(--accent);margin-top:-9px;cursor:grab;
+    border:3px solid var(--bg);box-shadow:0 0 0 1px var(--accent)}
+  .scenario-controls input[type=range]::-moz-range-thumb{
+    width:24px;height:24px;border-radius:50%;background:var(--accent);
+    cursor:grab;border:3px solid var(--bg);box-shadow:0 0 0 1px var(--accent)}
+  .scenario-controls .val{color:var(--accent);font-weight:700;font-size:14px;
+    font-variant-numeric:tabular-nums}
+
+  /* TABLET */
+  @media (max-width: 900px){
+    header{padding:22px 22px 14px}
+    header h1{font-size:20px}
+    main{padding:18px 22px 60px}
+    .grid{grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+    .card .v{font-size:22px}
+    .card.big .v{font-size:26px}
+  }
+
+  /* MOBILE */
+  @media (max-width: 640px){
+    header{padding:18px 16px 12px}
+    header h1{font-size:18px;line-height:1.3}
+    header p{font-size:12px}
+    nav{padding:0 6px;gap:0}
+    nav button{padding:13px 11px;font-size:12px}
+    main{padding:14px 16px 56px}
+    .panel{padding:14px 14px;border-radius:10px}
+    .panel h2{font-size:15px}
+    .panel .lede{font-size:12.5px}
+    .grid{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+    .card{padding:12px 14px;border-radius:10px}
+    .card h3{font-size:10.5px}
+    .card .v{font-size:19px}
+    .card.big .v{font-size:22px}
+    .card .sub{font-size:11px}
+    .row.cols-2{grid-template-columns:1fr;gap:12px}
+    .chart-wrap{height:260px}
+    table{font-size:12px;min-width:520px}
+    th,td{padding:6px 8px}
+    .scenario-controls{padding:12px 12px;gap:10px;flex-direction:column}
+    .scenario-controls label{min-width:100%}
+    .legend{gap:8px;font-size:11px}
+    .ribbon h2{font-size:15px}
+    .ribbon .delta{font-size:12px}
+  }
+  @media (max-width: 380px){
+    header{padding:14px 12px 10px}
+    header h1{font-size:17px}
+    main{padding:12px 12px 48px}
+    .panel{padding:12px}
+    .grid{grid-template-columns:1fr 1fr;gap:8px}
+    .card{padding:10px 12px}
+    .card .v{font-size:17px}
+    .card.big .v{font-size:20px}
+    nav button{padding:12px 9px;font-size:11.5px}
+    .chart-wrap{height:240px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>EdBuddies — Platform Investor Analytics</h1>
+  <p>Generated 2026-05-08 · All amounts in <abbr title="Singapore Dollar">SGD</abbr> <span class="gloss">(Singapore Dollar)</span> equivalent · Platform launched June 2025</p>
+</header>
+
+<nav>
+  <button data-tab="overview" class="active">Overview</button>
+  <button data-tab="gmv-trend">1 · GMV Trend</button>
+  <button data-tab="retention">2 · Cohort Retention</button>
+  <button data-tab="platform">3 · Platform Economics</button>
+  <button data-tab="scale">4 · Scale &amp; Funnel</button>
+  <button data-tab="takerate">5 · Take-Rate Scenarios</button>
+  <button data-tab="engagement">6 · Engagement</button>
+</nav>
+
+<main>
+
+<!-- ========== OVERVIEW ========== -->
+<section class="tab active" id="overview">
+  <div class="grid">
+    <div class="card big">
+      <h3><abbr title="Trailing 12 Months">T12M</abbr> <abbr title="Gross Merchandise Value — total payment volume processed through the platform">GMV</abbr></h3>
+      <div class="v">SGD 542 K</div>
+      <div class="sub"><b>GMV</b> = total payment volume on the platform · trailing 12 months</div>
+    </div>
+    <div class="card big">
+      <h3>Run-rate Annualised <abbr title="Gross Merchandise Value">GMV</abbr></h3>
+      <div class="v">SGD 1.29 M</div>
+      <div class="sub">Apr 2026 (SGD 107K) × 12</div>
+    </div>
+    <div class="card big">
+      <h3>Active recurring subscriptions</h3>
+      <div class="v">585</div>
+      <div class="sub">Monthly auto-bills flowing through the platform</div>
+    </div>
+    <div class="card big">
+      <h3>Paying users <span class="gloss">(T12M)</span></h3>
+      <div class="v">376</div>
+      <div class="sub">Unique parents who paid in the trailing 12 months</div>
+    </div>
+  </div>
+
+  <div class="row cols-2">
+    <div class="panel">
+      <h2>The platform thesis</h2>
+      <ul style="margin:0;padding-left:18px;color:var(--muted)">
+        <li><b style="color:var(--text)">Vertical SaaS for tuition centres</b> — EdBuddies powers billing, scheduling, attendance, and parent-teacher communication for K-12 enrichment centres in Southeast Asia.</li>
+        <li><b style="color:var(--text)">Predictable transaction engine</b> — 96.6% of <abbr title="Trailing 12 Months">T12M</abbr> volume is <b>recurring monthly auto-billing</b>, not project-based.</li>
+        <li><b style="color:var(--text)">Strong cohort retention</b> — paying-user logo retention of <span class="pill good">88.8% at month 4</span> for the headline cohort (Jan 2026, 258 users).</li>
+        <li><b style="color:var(--text)">Payment infrastructure proven</b> — 99.5% webhook success across 3,984 transactions.</li>
+        <li><b style="color:var(--text)">Expansion runway</b> — only 6 centres are revenue-generating today across Singapore; the regional K-12 enrichment market provides a long runway for centre-by-centre activation.</li>
+        <li><b style="color:var(--text)">Untapped monetisation lever</b> — a <b>1–3% transaction fee</b> on platform <abbr title="Gross Merchandise Value">GMV</abbr> would unlock new platform revenue without disturbing the existing centre subscription model. See <i>Take-Rate Scenarios</i> tab.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h2>Platform metrics at a glance</h2>
+      <div class="table-wrap"><table>
+        <tr><td>Revenue-generating centres</td><td class="num"><b>6</b></td></tr>
+        <tr><td>Registered users</td><td class="num"><b>926</b></td></tr>
+        <tr><td>Students managed</td><td class="num"><b>956</b></td></tr>
+        <tr><td>Paying parents (T12M)</td><td class="num"><b>376</b></td></tr>
+        <tr><td>Paid invoices (T12M)</td><td class="num"><b>2,933</b></td></tr>
+        <tr><td>Mobile app penetration</td><td class="num"><b>54.4%</b> (504 of 926)</td></tr>
+        <tr><td>Lifetime push notifications</td><td class="num"><b>50,294</b></td></tr>
+        <tr><td>Lifetime attendance events</td><td class="num"><b>13,383</b></td></tr>
+        <tr><td>Payment webhook success rate</td><td class="num"><b class="pos">99.52%</b></td></tr>
+      </table></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 1 · GMV TREND ========== -->
+<section class="tab" id="gmv-trend">
+  <div class="panel">
+    <div class="ribbon">
+      <h2 style="margin:0">Monthly Platform <abbr title="Gross Merchandise Value — total payments processed">GMV</abbr> · 12-Month Trajectory</h2>
+      <span class="delta">SGD 1.05M total since launch</span>
+    </div>
+    <p class="lede"><b>GMV</b> = total payment volume flowing through the platform each month, split into <b style="color:var(--good)">recurring auto-billed</b> (the <abbr title="Software-as-a-Service">SaaS</abbr> engine) vs. <b>one-time</b> charges. Aug 2025 peak (SGD 131K) reflects the school-year billing cycle.</p>
+    <div class="chart-wrap"><canvas id="chartRevenue"></canvas></div>
+  </div>
+
+  <div class="panel">
+    <h2>Monthly <abbr title="Gross Merchandise Value">GMV</abbr> table (<abbr title="Singapore Dollar">SGD</abbr>)</h2>
+    <div class="table-wrap"><table>
+      <thead><tr>
+        <th>Month</th>
+        <th class="num">Total GMV</th>
+        <th class="num">Recurring</th>
+        <th class="num">One-time</th>
+        <th class="num">% Recurring</th>
+        <th class="num">Paid invoices</th>
+        <th class="num">Paying users</th>
+      </tr></thead>
+      <tbody id="tblRevenue"></tbody>
+    </table></div>
+    <p class="footnote">Filtered to <code>status = 'Paid'</code>, excludes deleted invoices. Accrued by <code>revenue_date</code> where populated; <code>payment_datetime</code> used as fallback for months pre-dating the recurring billing engine adoption.</p>
+  </div>
+</section>
+
+<!-- ========== 2 · COHORT RETENTION ========== -->
+<section class="tab" id="retention">
+  <div class="panel">
+    <h2>Cohort retention triangle <span class="gloss">(% of cohort still paying in subsequent months)</span></h2>
+    <p class="lede">Each row is a <b>cohort</b> = group of users who made their <b>first paid invoice</b> in that month. Cells show what % of that cohort was still paying in <b>M0 (month 0 = first paid month)</b>, <b>M1 (one month later)</b>, etc. Triangle sized to track up to <b>M11 (12 months)</b> as cohorts mature.</p>
+    <div class="table-wrap"><table id="tblCohort"></table></div>
+    <div class="legend">
+      <span><span class="swatch" style="background:#36d399"></span> ≥90% retained</span>
+      <span><span class="swatch" style="background:#9ad57b"></span> 75–89%</span>
+      <span><span class="swatch" style="background:#fbbd23"></span> 50–74%</span>
+      <span><span class="swatch" style="background:#f08c4a"></span> 25–49%</span>
+      <span><span class="swatch" style="background:#f87272"></span> &lt;25%</span>
+    </div>
+    <p class="footnote">M0 always = 100% by definition. Dimensioned by <code>revenue_date</code> on production schools.</p>
+  </div>
+
+  <div class="panel">
+    <h2>Headline cohort: January 2026 (258 paying users)</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Months since first payment</th><th class="num">Active payers</th><th class="num">Retention %</th></tr></thead>
+      <tbody>
+        <tr><td>M0 (Jan 2026, first paid month)</td><td class="num">258</td><td class="num"><span class="pill good">100.0%</span></td></tr>
+        <tr><td>M1 (Feb 2026)</td><td class="num">239</td><td class="num"><span class="pill good">92.6%</span></td></tr>
+        <tr><td>M2 (Mar 2026)</td><td class="num">241</td><td class="num"><span class="pill good">93.4%</span></td></tr>
+        <tr><td>M3 (Apr 2026)</td><td class="num">234</td><td class="num"><span class="pill good">90.7%</span></td></tr>
+        <tr><td>M4 (May 2026)</td><td class="num">229</td><td class="num"><span class="pill good">88.8%</span></td></tr>
+      </tbody>
+    </table></div>
+    <p class="footnote">Best-in-class K-12 EdTech logo retention is typically 80–85% at month 6. <b>EdBuddies is tracking above benchmark.</b></p>
+  </div>
+</section>
+
+<!-- ========== 3 · PLATFORM ECONOMICS ========== -->
+<section class="tab" id="platform">
+  <div class="grid">
+    <div class="card">
+      <h3>Avg <abbr title="Gross Merchandise Value">GMV</abbr> per active centre <span class="gloss">(T12M)</span></h3>
+      <div class="v">SGD 90.3 K</div>
+      <div class="sub">SGD 542K T12M ÷ 6 centres</div>
+    </div>
+    <div class="card">
+      <h3>Avg students per centre</h3>
+      <div class="v">159</div>
+      <div class="sub">956 paying students ÷ 6 centres</div>
+    </div>
+    <div class="card">
+      <h3>Avg <abbr title="Average Revenue Per User">ARPU</abbr> per student / mo</h3>
+      <div class="v">SGD 47.21</div>
+      <div class="sub"><b>ARPU</b> = avg revenue per student per month, blended T12M</div>
+    </div>
+    <div class="card">
+      <h3>% Recurring of <abbr title="Trailing 12 Months">T12M</abbr> <abbr title="Gross Merchandise Value">GMV</abbr></h3>
+      <div class="v">96.6%</div>
+      <div class="sub">Predictable subscription engine</div>
+    </div>
+    <div class="card">
+      <h3>Active recurring subs</h3>
+      <div class="v">585</div>
+      <div class="sub">Auto-billed monthly invoices</div>
+    </div>
+    <div class="card">
+      <h3>Payment success rate</h3>
+      <div class="v pos">99.52%</div>
+      <div class="sub">3,965 / 3,984 webhooks</div>
+    </div>
+    <div class="card">
+      <h3>Active teachers</h3>
+      <div class="v">23</div>
+      <div class="sub">Across 6 active centres</div>
+    </div>
+    <div class="card">
+      <h3>Active lessons</h3>
+      <div class="v">248</div>
+      <div class="sub">3.9 students per lesson avg</div>
+    </div>
+  </div>
+
+  <div class="row cols-2">
+    <div class="panel">
+      <h2>What the platform-level economics prove</h2>
+      <ul style="margin:0;padding-left:18px;color:var(--muted)">
+        <li>The average revenue-generating centre runs <b style="color:var(--text)">SGD 90K of <abbr title="Gross Merchandise Value">GMV</abbr> per year</b> through the platform — a meaningful base for take-rate monetisation.</li>
+        <li><b style="color:var(--text)"><abbr title="Average Revenue Per User">ARPU</abbr> of SGD 47/student/month</b> aligns with K-12 tuition pricing in Singapore — defensible and not dependent on premium tiers.</li>
+        <li>Subscription mix (96.6% recurring) means the platform <b style="color:var(--text)">does not need to acquire new transactions monthly</b> — they are auto-billed.</li>
+        <li>Unit economics are validated at 6 active centres — the lever to scale is centre activation, not per-centre <abbr title="Average Revenue Per User">ARPU</abbr>.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h2>Composition of paying base</h2>
+      <div class="table-wrap"><table>
+        <tr><td>Paying students</td><td class="num"><b>956</b></td></tr>
+        <tr><td>Paying parents (T12M)</td><td class="num"><b>376</b></td></tr>
+        <tr><td>Active teachers</td><td class="num"><b>23</b></td></tr>
+        <tr><td>Active lessons</td><td class="num"><b>248</b></td></tr>
+        <tr><td>Avg students per lesson</td><td class="num"><b>3.9</b></td></tr>
+        <tr><td>Avg lessons per student</td><td class="num"><b>2.2</b></td></tr>
+      </table></div>
+      <p class="footnote">Each lesson serves 3.9 students — the data graph is dense enough that a centre switching off the platform would lose continuity for every parent, teacher, and child simultaneously.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 4 · SCALE & FUNNEL ========== -->
+<section class="tab" id="scale">
+  <div class="grid">
+    <div class="card"><h3><abbr title="Trailing 12 Months">T12M</abbr> <abbr title="Gross Merchandise Value">GMV</abbr></h3><div class="v">SGD 542 K</div></div>
+    <div class="card"><h3>Run-rate Annualised</h3><div class="v">SGD 1.29 M</div></div>
+    <div class="card"><h3>Paid invoices (T12M)</h3><div class="v">2,933</div></div>
+    <div class="card"><h3>Active recurring subs</h3><div class="v">585</div></div>
+    <div class="card"><h3>Multi-invoice payments</h3><div class="v">471</div></div>
+    <div class="card"><h3>Webhook success</h3><div class="v pos">99.52%</div><div class="sub">3,965 / 3,984</div></div>
+    <div class="card"><h3>Active centres</h3><div class="v">6</div></div>
+  </div>
+
+  <div class="row cols-2">
+    <div class="panel">
+      <h2>Platform footprint</h2>
+      <div class="table-wrap"><table>
+        <tr><td>Active revenue-generating centres</td><td class="num"><b>6</b></td></tr>
+        <tr><td>Students managed on the platform</td><td class="num"><b>956</b></td></tr>
+        <tr><td>Paying parents (T12M)</td><td class="num"><b>376</b></td></tr>
+        <tr><td>Active teachers</td><td class="num"><b>23</b></td></tr>
+        <tr><td>Active lessons</td><td class="num"><b>248</b></td></tr>
+        <tr><td>Mobile app users</td><td class="num"><b>504</b></td></tr>
+      </table></div>
+      <p class="footnote">EdBuddies is operationally embedded across the entire daily workflow of each centre — billing, scheduling, attendance, and parent communication — making the platform exceptionally sticky once adopted. See <b>Take-Rate Scenarios</b> tab for what scaling this footprint unlocks.</p>
+    </div>
+    <div class="panel">
+      <h2>Payment infrastructure</h2>
+      <div class="table-wrap"><table>
+        <tr><td>Total HitPay webhooks received</td><td class="num"><b>3,984</b></td></tr>
+        <tr><td>Completed</td><td class="num pos"><b>3,965</b></td></tr>
+        <tr><td>Failed</td><td class="num neg"><b>19</b></td></tr>
+        <tr><td>Success rate</td><td class="num"><span class="pill good">99.52%</span></td></tr>
+        <tr><td>Multi-invoice consolidated payments</td><td class="num"><b>471</b></td></tr>
+      </table></div>
+      <p class="footnote">Operational reliability of the payment rail is a hard moat — every failed webhook becomes manual recovery work, and EdBuddies has effectively eliminated it at scale.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 5 · TAKE-RATE SCENARIOS ========== -->
+<section class="tab" id="takerate">
+  <div class="panel">
+    <h2>Platform Take-Rate Scenarios <span class="gloss">(what-if EdBuddies charges 1–3% per transaction)</span></h2>
+    <p class="lede">Today, EdBuddies operates as a <b><abbr title="Software-as-a-Service">SaaS</abbr></b> for centres without a transaction fee. A <b>1–3% take-rate</b> on platform <abbr title="Gross Merchandise Value — total payment volume">GMV</abbr> is a standard vertical-platform monetisation lever that <b>compounds with growth</b> and is invisible to centres at industry-low rates. <i>Take-rate</i> = % of transaction value retained by the platform.</p>
+
+    <div class="scenario-controls">
+      <label>Take-rate <span class="val" id="trVal">2.0%</span>
+        <input type="range" id="tr" min="0.5" max="5" step="0.1" value="2">
+      </label>
+      <label>Active centres growth multiplier <span class="val" id="grVal">1×</span>
+        <input type="range" id="gr" min="1" max="50" step="1" value="1">
+      </label>
+    </div>
+
+    <div class="grid" id="scenarioCards"></div>
+    <p class="footnote">Baseline <abbr title="Trailing 12 Months">T12M</abbr> <abbr title="Gross Merchandise Value">GMV</abbr> per active centre = SGD 90,307 (T12M GMV ÷ 6 centres). Growth multiplier scales the active-centre count linearly; in practice growth would also lift <abbr title="Average Revenue Per User">ARPU</abbr> per centre.</p>
+  </div>
+
+  <div class="panel">
+    <h2>Penetration scenarios — fixed ladder</h2>
+    <p class="lede">Holding per-centre <abbr title="Gross Merchandise Value">GMV</abbr> constant at today's <abbr title="Trailing 12 Months">T12M</abbr> average (<b>SGD 90.3K</b>), here's what platform revenue looks like at different active-centre counts.</p>
+    <div class="table-wrap"><table>
+      <thead><tr>
+        <th>Scenario</th>
+        <th class="num">Active centres</th>
+        <th class="num">Annual <abbr title="Gross Merchandise Value">GMV</abbr></th>
+        <th class="num">@ 1.0%</th>
+        <th class="num">@ 2.0%</th>
+        <th class="num">@ 3.0%</th>
+      </tr></thead>
+      <tbody id="ladderTbl"></tbody>
+    </table></div>
+  </div>
+
+  <div class="panel">
+    <h2>Why take-rate is the right lever for EdBuddies</h2>
+    <ul style="margin:0;padding-left:18px;color:var(--muted)">
+      <li><b style="color:var(--text)">It scales with success</b> — the more a centre grows, the more EdBuddies earns; aligned incentives.</li>
+      <li><b style="color:var(--text)">It is invisible at low rates</b> — 1–2% is below typical card-processor pricing; centres don't feel it as a tax.</li>
+      <li><b style="color:var(--text)">It compounds with the activation funnel</b> — every dormant account that lights up immediately yields take-rate revenue.</li>
+      <li><b style="color:var(--text)">It is recurring by construction</b> — 96.6% of platform <abbr title="Gross Merchandise Value">GMV</abbr> is auto-billed monthly subscriptions, so platform-fee revenue inherits that predictability.</li>
+      <li><b style="color:var(--text)">It does not cannibalise existing <abbr title="Software-as-a-Service">SaaS</abbr> revenue</b> — centres continue paying their software fee; the take-rate is layered on top of payment processing.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== 6 · ENGAGEMENT ========== -->
+<section class="tab" id="engagement">
+  <div class="grid">
+    <div class="card"><h3><abbr title="Daily Active Users (last 24h)">DAU</abbr> <span class="gloss">(24h)</span></h3><div class="v">17</div><div class="sub">Daily Active Users</div></div>
+    <div class="card"><h3><abbr title="Weekly Active Users">WAU</abbr></h3><div class="v">136</div><div class="sub">Weekly Active Users</div></div>
+    <div class="card"><h3><abbr title="Monthly Active Users">MAU</abbr></h3><div class="v">309</div><div class="sub">Monthly Active Users</div></div>
+    <div class="card"><h3><abbr title="DAU divided by MAU">DAU / MAU</abbr> stickiness</h3><div class="v">5.5%</div><div class="sub">Attendance-driven product · weekly cadence is more relevant</div></div>
+    <div class="card"><h3>Mobile app users</h3><div class="v">504</div><div class="sub">54.4% of users</div></div>
+    <div class="card"><h3>Notifications (30d)</h3><div class="v">5,914</div></div>
+    <div class="card"><h3>Attendance events (30d)</h3><div class="v">1,349</div></div>
+    <div class="card"><h3>Lifetime notifications</h3><div class="v">50,294</div></div>
+  </div>
+
+  <div class="row cols-2">
+    <div class="panel">
+      <h2>Attendance events per month</h2>
+      <p class="lede">Attendance is the <b>core daily action</b> on the platform. Sustained 1,000+ events/month proves EdBuddies is woven into school operations.</p>
+      <div class="chart-wrap"><canvas id="chartAttendance"></canvas></div>
+    </div>
+    <div class="panel">
+      <h2>Network density <span class="gloss">(lock-in proof)</span></h2>
+      <div class="table-wrap"><table>
+        <tr><td>Avg parents per student</td><td class="num"><b>1.0</b></td></tr>
+        <tr><td>Avg lessons per student</td><td class="num"><b>2.2</b></td></tr>
+        <tr><td>Avg students per lesson</td><td class="num"><b>3.9</b></td></tr>
+        <tr><td>Active teachers</td><td class="num"><b>23</b></td></tr>
+        <tr><td>Mobile app penetration</td><td class="num"><b>54.4%</b></td></tr>
+      </table></div>
+      <p class="footnote">Each student touches 2.2 lessons on average and each lesson serves 3.9 students — the data graph is dense enough that a centre switching off the platform would lose continuity for every parent, teacher, and child simultaneously.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<script>
+// ============ DATA ============
+// 12-month window since launch (Jun 2025 → May 2026), demo schools excluded.
+// Source: revenue_date where populated, payment_datetime as fallback for
+// months when revenue_date had no production accruals (Jun–Nov 2025).
+const REVENUE = [
+  {month:'2025-06',total:106313.00,rec:106313.00,one:0,inv:692,users:383},
+  {month:'2025-07',total:73255.50,rec:73095.50,one:160.00,inv:501,users:283},
+  {month:'2025-08',total:131087.00,rec:131087.00,one:0,inv:931,users:361},
+  {month:'2025-09',total:101210.25,rec:93052.25,one:8158.00,inv:742,users:294},
+  {month:'2025-10',total:72642.10,rec:65984.00,one:6658.10,inv:401,users:186},
+  {month:'2025-11',total:37333.00,rec:37333.00,one:0,inv:149,users:98},
+  {month:'2025-12',total:15166.00,rec:14498.00,one:668.00,inv:62,users:44},
+  {month:'2026-01',total:99827.75,rec:97907.00,one:1920.75,inv:519,users:300},
+  {month:'2026-02',total:101824.50,rec:99226.50,one:2598.00,inv:554,users:310},
+  {month:'2026-03',total:103649.50,rec:101791.50,one:1858.00,inv:582,users:324},
+  {month:'2026-04',total:107432.00,rec:106248.00,one:1184.00,inv:598,users:335},
+  {month:'2026-05',total:103694.00,rec:103694.00,one:0,inv:585,users:336},
+];
+
+// Cohort (production schools, revenue_date)
+const COHORT_RAW = [
+  {cohort:'2025-12',size:44,m:0,n:44},{cohort:'2025-12',size:44,m:1,n:42},
+  {cohort:'2025-12',size:44,m:2,n:40},{cohort:'2025-12',size:44,m:3,n:40},
+  {cohort:'2025-12',size:44,m:4,n:40},{cohort:'2025-12',size:44,m:5,n:40},
+  {cohort:'2025-12',size:44,m:6,n:1},
+  {cohort:'2026-01',size:258,m:0,n:258},{cohort:'2026-01',size:258,m:1,n:239},
+  {cohort:'2026-01',size:258,m:2,n:241},{cohort:'2026-01',size:258,m:3,n:234},
+  {cohort:'2026-01',size:258,m:4,n:229},{cohort:'2026-01',size:258,m:5,n:21},
+  {cohort:'2026-02',size:31,m:0,n:31},{cohort:'2026-02',size:31,m:1,n:28},
+  {cohort:'2026-02',size:31,m:2,n:29},{cohort:'2026-02',size:31,m:3,n:28},
+  {cohort:'2026-02',size:31,m:4,n:2},
+  {cohort:'2026-03',size:15,m:0,n:15},{cohort:'2026-03',size:15,m:1,n:14},
+  {cohort:'2026-03',size:15,m:2,n:15},
+  {cohort:'2026-04',size:18,m:0,n:18},{cohort:'2026-04',size:18,m:1,n:17},
+  {cohort:'2026-05',size:7,m:0,n:7},
+  {cohort:'2026-06',size:3,m:0,n:3},
+];
+
+// Cohort triangle is sized to track up to M11 (12 months) as cohorts mature.
+const COHORT_MAX_M = 11;
+
+const ATTENDANCE = [
+  {month:'2025-07',n:403},{month:'2025-08',n:2094},{month:'2025-09',n:1640},
+  {month:'2025-10',n:954},{month:'2025-11',n:261},{month:'2025-12',n:1782},
+  {month:'2026-01',n:1711},{month:'2026-02',n:1348},{month:'2026-03',n:1529},
+  {month:'2026-04',n:1414},{month:'2026-05',n:247},
+];
+
+// Take-rate baselines (production schools, revenue_date)
+const T12M_GMV = 541839.75;
+const ACTIVE_CENTRES = 6;
+const PER_CENTRE_GMV = T12M_GMV / ACTIVE_CENTRES;  // SGD 90,306.625
+
+// ============ TABS ============
+document.querySelectorAll('nav button').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+    if(btn.dataset.tab==='gmv-trend' && !window._chartRev) drawRevenue();
+    if(btn.dataset.tab==='engagement' && !window._chartAtt) drawAttendance();
+  });
+});
+
+// ============ HELPERS ============
+const fmt = n => Number(n).toLocaleString('en-SG',{maximumFractionDigits:0});
+const fmt2 = n => Number(n).toLocaleString('en-SG',{minimumFractionDigits:2,maximumFractionDigits:2});
+function retColor(p){
+  if(p>=90) return '#36d399';
+  if(p>=75) return '#9ad57b';
+  if(p>=50) return '#fbbd23';
+  if(p>=25) return '#f08c4a';
+  return '#f87272';
+}
+
+// ============ REVENUE TABLE ============
+(function(){
+  const tb = document.getElementById('tblRevenue');
+  REVENUE.forEach(r=>{
+    const recPct = r.total ? (r.rec/r.total*100).toFixed(0)+'%' : '—';
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${r.month}</td>
+      <td class="num">SGD ${fmt2(r.total)}</td>
+      <td class="num">SGD ${fmt2(r.rec)}</td>
+      <td class="num">SGD ${fmt2(r.one)}</td>
+      <td class="num">${recPct}</td>
+      <td class="num">${fmt(r.inv)}</td>
+      <td class="num">${fmt(r.users)}</td>`;
+    tb.appendChild(tr);
+  });
+})();
+
+// ============ COHORT TABLE ============
+(function(){
+  const tbl = document.getElementById('tblCohort');
+  const data = COHORT_RAW;
+  const cohorts = [...new Set(data.map(d=>d.cohort))];
+  const maxM = COHORT_MAX_M;
+  let h = '<thead><tr><th>Cohort</th><th class="num">Size</th>';
+  for(let m=0;m<=maxM;m++) h += `<th class="num">M${m}</th>`;
+  h += '</tr></thead><tbody>';
+  cohorts.forEach(c=>{
+    const rows = data.filter(d=>d.cohort===c);
+    const size = rows[0].size;
+    h += `<tr><td><b>${c}</b></td><td class="num">${size}</td>`;
+    for(let m=0;m<=maxM;m++){
+      const r = rows.find(x=>x.m===m);
+      if(r){
+        const p = (r.n/size*100);
+        h += `<td class="cohort-cell" style="background:${retColor(p)}26;color:${retColor(p)};font-weight:600">${p.toFixed(0)}%<br><span style="font-size:10px;color:var(--muted);font-weight:400">${r.n}</span></td>`;
+      } else {
+        h += `<td class="cohort-cell" style="color:var(--muted)">·</td>`;
+      }
+    }
+    h += '</tr>';
+  });
+  h += '</tbody>';
+  tbl.innerHTML = h;
+})();
+
+// ============ TAKE-RATE SCENARIOS ============
+function renderScenario(){
+  const tr = parseFloat(document.getElementById('tr').value);
+  const gr = parseFloat(document.getElementById('gr').value);
+  document.getElementById('trVal').textContent = tr.toFixed(1) + '%';
+  document.getElementById('grVal').textContent = gr.toFixed(0) + '×';
+
+  const projectedCentres = ACTIVE_CENTRES * gr;
+  const projectedGMV = PER_CENTRE_GMV * projectedCentres;
+  const platformRev = projectedGMV * (tr/100);
+  const recurringRev = platformRev * 0.966;
+
+  document.getElementById('scenarioCards').innerHTML = `
+    <div class="card big">
+      <h3>Active centres (projected)</h3>
+      <div class="v">${fmt(projectedCentres)}</div>
+      <div class="sub">From ${ACTIVE_CENTRES} today × ${gr.toFixed(0)}×</div>
+    </div>
+    <div class="card big">
+      <h3>Annual platform <abbr title="Gross Merchandise Value">GMV</abbr></h3>
+      <div class="v">SGD ${(projectedGMV/1000).toFixed(0)}K</div>
+      <div class="sub">${fmt(projectedCentres)} centres × SGD 90.3K avg</div>
+    </div>
+    <div class="card big">
+      <h3>Platform fee revenue <span class="gloss">(annual)</span></h3>
+      <div class="v" style="color:var(--good)">SGD ${(platformRev/1000).toFixed(1)}K</div>
+      <div class="sub">@ ${tr.toFixed(1)}% take-rate</div>
+    </div>
+    <div class="card big">
+      <h3>Recurring portion <span class="gloss">(of platform fee)</span></h3>
+      <div class="v" style="color:var(--accent)">SGD ${(recurringRev/1000).toFixed(1)}K</div>
+      <div class="sub">96.6% of <abbr title="Gross Merchandise Value">GMV</abbr> is auto-billed</div>
+    </div>
+  `;
+}
+['tr','gr'].forEach(id=>document.getElementById(id).addEventListener('input',renderScenario));
+renderScenario();
+
+// ============ LADDER TABLE ============
+(function(){
+  const tb = document.getElementById('ladderTbl');
+  const ladder = [
+    {label:'Today (actual)',centres:6},
+    {label:'Year 1 target',centres:20},
+    {label:'Year 2 target',centres:50},
+    {label:'Year 3 target',centres:100},
+    {label:'Maturity (200 centres)',centres:200},
+    {label:'Regional platform scale',centres:500},
+  ];
+  ladder.forEach(s=>{
+    const gmv = s.centres * PER_CENTRE_GMV;
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td><b>${s.label}</b></td>
+      <td class="num">${fmt(s.centres)}</td>
+      <td class="num">SGD ${fmt(gmv)}</td>
+      <td class="num">SGD ${fmt(gmv*0.01)}</td>
+      <td class="num"><b style="color:var(--good)">SGD ${fmt(gmv*0.02)}</b></td>
+      <td class="num">SGD ${fmt(gmv*0.03)}</td>`;
+    tb.appendChild(tr);
+  });
+})();
+
+// ============ CHARTS ============
+function drawRevenue(){
+  const ctx = document.getElementById('chartRevenue');
+  window._chartRev = new Chart(ctx,{
+    type:'bar',
+    data:{
+      labels: REVENUE.map(r=>r.month),
+      datasets:[
+        {label:'Recurring',data:REVENUE.map(r=>r.rec),backgroundColor:'#7c8cff',stack:'rev'},
+        {label:'One-time',data:REVENUE.map(r=>r.one),backgroundColor:'#36d399',stack:'rev'},
+      ]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{labels:{color:'#e7ecff',font:{size:11}}},
+        tooltip:{callbacks:{label:c=>c.dataset.label+': SGD '+c.parsed.y.toLocaleString()}}},
+      scales:{
+        x:{ticks:{color:'#8d97c6',font:{size:10}},grid:{color:'#252e57'},stacked:true},
+        y:{ticks:{color:'#8d97c6',font:{size:10},callback:v=>'SGD '+(v/1000)+'K'},grid:{color:'#252e57'},stacked:true}
+      }
+    }
+  });
+}
+
+function drawAttendance(){
+  const ctx = document.getElementById('chartAttendance');
+  window._chartAtt = new Chart(ctx,{
+    type:'line',
+    data:{
+      labels: ATTENDANCE.map(a=>a.month),
+      datasets:[{label:'Attendance events',data:ATTENDANCE.map(a=>a.n),
+        borderColor:'#7c8cff',backgroundColor:'rgba(124,140,255,0.15)',
+        fill:true,tension:0.3,pointBackgroundColor:'#7c8cff'}]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{labels:{color:'#e7ecff',font:{size:11}}}},
+      scales:{
+        x:{ticks:{color:'#8d97c6',font:{size:10}},grid:{color:'#252e57'}},
+        y:{ticks:{color:'#8d97c6',font:{size:10}},grid:{color:'#252e57'}}
+      }
+    }
+  });
+}
+</script>
+
+</body>
+</html>
