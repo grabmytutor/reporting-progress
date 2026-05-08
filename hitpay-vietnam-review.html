@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>HitPay — Vietnam Market Review (EdBuddies)</title>
+<style>
+/* ── RESET ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── TOKENS ── */
+:root {
+  --primary:    #059669;
+  --primary-dk: #047857;
+  --success:    #16a34a;
+  --warning:    #d97706;
+  --danger:     #dc2626;
+  --bg:         #f1f5f9;
+  --surface:    #ffffff;
+  --border:     #e2e8f0;
+  --text:       #0f172a;
+  --muted:      #64748b;
+  --radius:     12px;
+}
+
+/* ── BASE ── */
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ══════════════════════════════════
+   HEADER
+══════════════════════════════════ */
+.site-header {
+  background: linear-gradient(135deg, #052e16 0%, #065f46 55%, #059669 100%);
+  color: #fff;
+  padding: 36px 24px 32px;
+}
+.header-inner { max-width: 1080px; margin: 0 auto; }
+.header-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+.hbadge {
+  background: rgba(255,255,255,.14);
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 5px;
+  padding: 3px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.site-header h1 { font-size: clamp(22px, 4vw, 30px); font-weight: 800; margin-bottom: 6px; }
+.site-header .sub { font-size: 14px; color: rgba(255,255,255,.72); max-width: 560px; }
+.header-meta { display: flex; gap: 28px; flex-wrap: wrap; margin-top: 20px; }
+.hm-item { display: flex; flex-direction: column; gap: 2px; }
+.hm-label { font-size: 10px; text-transform: uppercase; letter-spacing: .08em; color: rgba(255,255,255,.5); }
+.hm-val   { font-size: 13px; font-weight: 700; }
+
+/* ══════════════════════════════════
+   VERDICT STRIP
+══════════════════════════════════ */
+.verdict-strip {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+}
+.verdict-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 20px 0;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.verdict-score {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  flex-shrink: 0;
+}
+.verdict-score .num {
+  font-size: 44px;
+  font-weight: 900;
+  color: var(--danger);
+  line-height: 1;
+}
+.verdict-score .denom { font-size: 18px; color: var(--muted); font-weight: 600; }
+.verdict-tag {
+  background: #fee2e2;
+  color: #991b1b;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  margin-left: 6px;
+}
+.verdict-divider { width: 1px; height: 44px; background: var(--border); flex-shrink: 0; }
+.verdict-text h2 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+.verdict-text p  { font-size: 13px; color: var(--muted); max-width: 680px; line-height: 1.5; }
+
+/* ══════════════════════════════════
+   TABS
+══════════════════════════════════ */
+.tabs-bar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 1px 6px rgba(0,0,0,.06);
+}
+.tabs-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.tabs-inner::-webkit-scrollbar { display: none; }
+.tab-btn {
+  white-space: nowrap;
+  padding: 14px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  transition: color .18s, border-color .18s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.tab-btn:hover { color: var(--primary); }
+.tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
+.tab-icon { font-size: 15px; }
+
+/* ══════════════════════════════════
+   TAB PANELS
+══════════════════════════════════ */
+.page-body { max-width: 1080px; margin: 0 auto; padding: 32px 24px 80px; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ══════════════════════════════════
+   SHARED COMPONENTS
+══════════════════════════════════ */
+
+/* Section heading */
+.sec-title {
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.sec-sub { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+
+/* Stat cards */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; }
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+}
+.stat-card .slabel { font-size: 10px; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); font-weight: 700; margin-bottom: 6px; }
+.stat-card .sval   { font-size: 26px; font-weight: 900; color: var(--primary); line-height: 1; }
+.stat-card .ssub   { font-size: 11px; color: var(--muted); margin-top: 5px; line-height: 1.4; }
+
+/* Two-col */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+/* Table */
+.tbl-wrap {
+  overflow-x: auto;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+table { width: 100%; border-collapse: collapse; background: var(--surface); font-size: 13px; }
+thead tr { background: #f8fafc; }
+th {
+  text-align: left;
+  padding: 11px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+td { padding: 11px 14px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: #f8fafc; }
+.td-bold { font-weight: 700; }
+.td-hi { background: #f0fdf4 !important; font-weight: 700; }
+.td-warn { background: #fffbeb !important; }
+.td-danger { background: #fef2f2 !important; }
+
+/* Pills */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 99px;
+  white-space: nowrap;
+}
+.pill::before { content: '●'; font-size: 7px; }
+.pill-green  { background: #dcfce7; color: #15803d; }
+.pill-yellow { background: #fef9c3; color: #a16207; }
+.pill-red    { background: #fee2e2; color: #b91c1c; }
+.pill-blue   { background: #dbeafe; color: #1d4ed8; }
+.pill-grey   { background: #f1f5f9; color: #475569; }
+
+/* Callout boxes */
+.box {
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  font-size: 13px;
+  line-height: 1.55;
+}
+.box strong { font-weight: 700; }
+.box-info    { background: #f0fdf4; border: 1px solid #86efac; color: #166534; }
+.box-warn    { background: #fffbeb; border: 1px solid #fcd34d; color: #92400e; }
+.box-danger  { background: #fef2f2; border: 1px solid #fca5a5; color: #991b1b; }
+.box-success { background: #ecfdf5; border: 1px solid #6ee7b7; color: #065f46; }
+.box-neutral { background: #f8fafc; border: 1px solid #e2e8f0; color: #334155; }
+
+/* Spacers */
+.mt8  { margin-top: 8px; }
+.mt12 { margin-top: 12px; }
+.mt16 { margin-top: 16px; }
+.mt20 { margin-top: 20px; }
+.mt28 { margin-top: 28px; }
+.mb16 { margin-bottom: 16px; }
+.mb20 { margin-bottom: 20px; }
+
+/* Section divider */
+.sdiv { height: 1px; background: var(--border); margin: 28px 0; }
+
+/* ══════════════════════════════════
+   RISK CARDS
+══════════════════════════════════ */
+.risk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+.risk-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  position: relative;
+  overflow: hidden;
+}
+.risk-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; }
+.risk-card.crit::before   { background: var(--danger); }
+.risk-card.high::before   { background: var(--warning); }
+.risk-card.med::before    { background: #eab308; }
+.risk-card.low::before    { background: var(--success); }
+.risk-hdr { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
+.risk-title { font-size: 14px; font-weight: 700; line-height: 1.3; }
+.risk-body  { font-size: 13px; color: var(--muted); line-height: 1.5; }
+.risk-lv {
+  font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .07em; padding: 2px 7px; border-radius: 4px; white-space: nowrap; flex-shrink: 0;
+}
+.risk-card.crit .risk-lv { background: #fee2e2; color: #991b1b; }
+.risk-card.high .risk-lv { background: #fef3c7; color: #92400e; }
+.risk-card.med  .risk-lv { background: #fefce8; color: #713f12; }
+.risk-card.low  .risk-lv { background: #dcfce7; color: #166534; }
+
+/* ══════════════════════════════════
+   STRENGTH / FEATURE CARDS
+══════════════════════════════════ */
+.feat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+.feat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.feat-icon {
+  width: 36px; height: 36px; border-radius: 9px;
+  background: #ecfdf5; color: var(--primary);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; flex-shrink: 0;
+}
+.feat-icon.warn { background: #fef9c3; color: #a16207; }
+.feat-icon.danger { background: #fee2e2; color: #b91c1c; }
+.feat-card h4 { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+.feat-card p  { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+/* ══════════════════════════════════
+   DASHBOARD FEATURE TILES
+══════════════════════════════════ */
+.dash-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+.dash-tile {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.dash-tile-hdr {
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid var(--border);
+  background: #f8fafc;
+}
+.dash-tile-icon {
+  width: 34px; height: 34px; border-radius: 8px;
+  background: var(--primary); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0;
+}
+.dash-tile-icon.grey { background: #94a3b8; }
+.dash-tile-hdr h3 { font-size: 14px; font-weight: 700; }
+.dash-tile-hdr span { font-size: 11px; color: var(--muted); margin-top: 1px; display: block; }
+.dash-tile-body { padding: 14px 16px; }
+.dash-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  padding: 7px 0;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 13px;
+}
+.dash-item:last-child { border-bottom: none; padding-bottom: 0; }
+.dash-item.ok::before  { content: '✓'; color: var(--success); font-weight: 800; font-size: 12px; margin-top: 2px; flex-shrink: 0; }
+.dash-item.gap::before { content: '✗'; color: var(--danger);  font-weight: 800; font-size: 12px; margin-top: 2px; flex-shrink: 0; }
+.dash-item.warn::before{ content: '!'; color: var(--warning); font-weight: 800; font-size: 12px; margin-top: 2px; flex-shrink: 0; }
+.dash-item strong { font-weight: 700; }
+.dash-item span   { color: var(--muted); font-size: 12px; display: block; margin-top: 1px; }
+
+/* ══════════════════════════════════
+   ACTION STEPS
+══════════════════════════════════ */
+.action-list { display: flex; flex-direction: column; gap: 10px; }
+.action-item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+}
+.action-num {
+  width: 28px; height: 28px; background: var(--primary); color: #fff;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 800; flex-shrink: 0;
+}
+.action-item h4 { font-size: 14px; font-weight: 700; margin-bottom: 3px; }
+.action-item p  { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+/* ══════════════════════════════════
+   SCORE BAR
+══════════════════════════════════ */
+.score-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+.score-row:last-child { border-bottom: none; }
+.score-label { font-size: 13px; font-weight: 600; min-width: 220px; }
+.score-bar-wrap { flex: 1; background: #f1f5f9; border-radius: 99px; height: 8px; }
+.score-bar { height: 8px; border-radius: 99px; }
+.score-val { font-size: 13px; font-weight: 800; min-width: 36px; text-align: right; }
+.bar-red    { background: var(--danger); }
+.bar-yellow { background: var(--warning); }
+.bar-green  { background: var(--success); }
+
+/* ══════════════════════════════════
+   FOOTER
+══════════════════════════════════ */
+footer {
+  background: #052e16;
+  color: rgba(255,255,255,.45);
+  text-align: center;
+  padding: 22px 24px;
+  font-size: 11px;
+  line-height: 1.6;
+}
+footer strong { color: rgba(255,255,255,.75); }
+
+/* ══════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════ */
+@media (max-width: 640px) {
+  .site-header { padding: 24px 16px; }
+  .page-body { padding: 20px 16px 60px; }
+  .two-col { grid-template-columns: 1fr; }
+  .verdict-inner { gap: 12px; }
+  .verdict-divider { display: none; }
+  .tab-btn { padding: 13px 13px; font-size: 12px; }
+  .score-label { min-width: 140px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-badges">
+      <span class="hbadge">Merchant Review</span>
+      <span class="hbadge">EdBuddies</span>
+      <span class="hbadge">Current Provider</span>
+    </div>
+    <h1>HitPay Payment Gateway</h1>
+    <p class="sub">Vietnam market assessment as an existing HitPay merchant — evaluating fitness for Vietnam customer acquisition and operations.</p>
+    <div class="header-meta">
+      <div class="hm-item"><span class="hm-label">Prepared</span><span class="hm-val">April 2026</span></div>
+      <div class="hm-item"><span class="hm-label">Market</span><span class="hm-val">Vietnam (VN)</span></div>
+      <div class="hm-item"><span class="hm-label">Perspective</span><span class="hm-val">Existing Merchant</span></div>
+      <div class="hm-item"><span class="hm-label">Focus</span><span class="hm-val">Vietnam Fitness</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- ══ VERDICT STRIP ══ -->
+<div class="verdict-strip">
+  <div class="verdict-inner">
+    <div class="verdict-score">
+      <span class="num">4.2</span>
+      <span class="denom">/10</span>
+      <span class="verdict-tag">Not Recommended for Vietnam</span>
+    </div>
+    <div class="verdict-divider"></div>
+    <div class="verdict-text">
+      <h2>HitPay is a capable Singapore SMB tool — but not built for Vietnam</h2>
+      <p>HitPay works well for EdBuddies' Singapore operations. For Vietnam, however, it cannot onboard Vietnam-registered entities, lacks SBV regulatory licensing, and does not support the three payment methods Vietnamese customers use most — MoMo, ZaloPay, and VNPay. Only VietQR (bank QR) is confirmed. <strong>EdBuddies would need a complementary or replacement gateway to serve Vietnam customers effectively.</strong></p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ TABS BAR ══ -->
+<div class="tabs-bar">
+  <div class="tabs-inner" role="tablist">
+    <button class="tab-btn active" data-tab="overview"    role="tab"><span class="tab-icon">🏢</span> Overview</button>
+    <button class="tab-btn"        data-tab="bizapp"      role="tab"><span class="tab-icon">📋</span> Business Application</button>
+    <button class="tab-btn"        data-tab="custexp"     role="tab"><span class="tab-icon">🇻🇳</span> Customer Experience</button>
+    <button class="tab-btn"        data-tab="merchant"    role="tab"><span class="tab-icon">🖥️</span> Merchant Experience</button>
+    <button class="tab-btn"        data-tab="support"     role="tab"><span class="tab-icon">🎧</span> Support</button>
+    <button class="tab-btn"        data-tab="pricing"     role="tab"><span class="tab-icon">💰</span> Pricing</button>
+    <button class="tab-btn"        data-tab="risks"       role="tab"><span class="tab-icon">⚠️</span> Risks</button>
+    <button class="tab-btn"        data-tab="nextsteps"   role="tab"><span class="tab-icon">📌</span> Next Steps</button>
+  </div>
+</div>
+
+<!-- ══ PANELS ══ -->
+<div class="page-body">
+
+  <!-- ─── OVERVIEW ─── -->
+  <div class="tab-panel active" id="tab-overview" role="tabpanel">
+    <p class="sec-title">🏢 Who is HitPay?</p>
+    <p class="sec-sub">A snapshot of the company's scale, financial health, and what they are built for — before assessing Vietnam fit.</p>
+
+    <div class="card-grid mb20">
+      <div class="stat-card"><div class="slabel">Founded</div><div class="sval">2016</div><div class="ssub">Singapore · Went through Y Combinator (YC)</div></div>
+      <div class="stat-card"><div class="slabel">Total Funding</div><div class="sval">$21M</div><div class="ssub">Series A $15.75M (May 2022) · Tiger Global, Global Founders Capital</div></div>
+      <div class="stat-card"><div class="slabel">Valuation</div><div class="sval">N/A</div><div class="ssub">Not publicly disclosed — significantly smaller than Airwallex's $8B</div></div>
+      <div class="stat-card"><div class="slabel">Merchants</div><div class="sval">20K+</div><div class="ssub">Primarily Singapore SMBs and regional businesses</div></div>
+      <div class="stat-card"><div class="slabel">Primary Market</div><div class="sval">SG</div><div class="ssub">Singapore-first · Malaysia, Philippines, Indonesia as secondary</div></div>
+      <div class="stat-card"><div class="slabel">Last Funding Round</div><div class="sval">2022</div><div class="ssub">No public funding since Series A — 3+ years without new capital</div></div>
+    </div>
+
+    <div class="two-col mt20">
+      <div>
+        <p style="font-size:13px;font-weight:700;margin-bottom:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;">Key Investors</p>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Investor</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td class="td-bold">Tiger Global Management</td><td>Major growth equity fund — led Series A</td></tr>
+              <tr><td class="td-bold">Global Founders Capital</td><td>European VC with SEA portfolio</td></tr>
+              <tr><td class="td-bold">Y Combinator</td><td>Early stage accelerator — seed $125K</td></tr>
+              <tr><td class="td-bold">HOF Capital</td><td>Multi-stage US fund</td></tr>
+              <tr><td class="td-bold">big_bets</td><td>European VC fund</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <p style="font-size:13px;font-weight:700;margin-bottom:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;">Regulatory Licences</p>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Region</th><th>Licence</th></tr></thead>
+            <tbody>
+              <tr><td>Singapore</td><td><span class="pill pill-green">MAS Major Payment Institution (PS20200643)</span></td></tr>
+              <tr><td>Malaysia</td><td><span class="pill pill-green">Bank Negara Malaysia (via Mobiedge)</span></td></tr>
+              <tr><td>Philippines</td><td><span class="pill pill-green">BSP Registered OPS (OPSCOR-2023-0006)</span></td></tr>
+              <tr><td>Australia</td><td><span class="pill pill-green">AUSTRAC Registered (IND100852288-001)</span></td></tr>
+              <tr><td><strong>Vietnam</strong></td><td><span class="pill pill-red">No licence — no SBV registration</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="sdiv"></div>
+
+    <p style="font-size:14px;font-weight:700;margin-bottom:12px;">Vietnam Scorecard at a Glance</p>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;">
+      <div class="score-row">
+        <div class="score-label">Business Registration (Vietnam entity)</div>
+        <div class="score-bar-wrap"><div class="score-bar bar-red" style="width:5%"></div></div>
+        <div class="score-val" style="color:var(--danger)">0.5</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">Vietnam Customer Payment Methods</div>
+        <div class="score-bar-wrap"><div class="score-bar bar-red" style="width:25%"></div></div>
+        <div class="score-val" style="color:var(--danger)">2.5</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">Merchant Dashboard & Operations</div>
+        <div class="score-bar-wrap"><div class="score-bar bar-yellow" style="width:65%"></div></div>
+        <div class="score-val" style="color:var(--warning)">6.5</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">Customer Support (Vietnam context)</div>
+        <div class="score-bar-wrap"><div class="score-bar bar-yellow" style="width:45%"></div></div>
+        <div class="score-val" style="color:var(--warning)">4.5</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">Pricing &amp; Cost Efficiency</div>
+        <div class="score-bar-wrap"><div class="score-bar bar-yellow" style="width:60%"></div></div>
+        <div class="score-val" style="color:var(--warning)">6.0</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">Regulatory Compliance (Vietnam)</div>
+        <div class="score-bar-wrap"><div class="score-bar bar-red" style="width:5%"></div></div>
+        <div class="score-val" style="color:var(--danger)">0.5</div>
+      </div>
+    </div>
+
+    <div class="box box-warn mt16">
+      <strong>Context on scale:</strong> HitPay raised its last round in May 2022 and has not announced new investment since. Compared to Airwallex ($8B valuation, $1.57B raised, profitable), HitPay is a much smaller company. This is not necessarily a risk to stability, but it does mean slower product expansion and fewer resources for new markets like Vietnam.
+    </div>
+  </div>
+
+  <!-- ─── BUSINESS APPLICATION ─── -->
+  <div class="tab-panel" id="tab-bizapp" role="tabpanel">
+    <p class="sec-title">📋 Business Application — Can EdBuddies Use HitPay for Vietnam?</p>
+    <p class="sec-sub">Two scenarios: EdBuddies as a Singapore-registered entity vs. a Vietnam-registered entity. The answers are very different.</p>
+
+    <div class="box box-danger mb20">
+      <strong>Critical finding:</strong> Vietnam is NOT on HitPay's list of supported merchant onboarding countries. If EdBuddies operates a Vietnam-registered legal entity, it cannot open a HitPay merchant account. HitPay's supported countries are: Singapore, Malaysia, Philippines, Indonesia, Thailand, Australia, New Zealand, Canada, United Kingdom, and United States.
+    </div>
+
+    <div class="two-col mb20">
+      <div>
+        <p style="font-size:13px;font-weight:700;margin-bottom:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;">Scenario A — Singapore Entity (Current)</p>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Requirement</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>Can EdBuddies (SG) apply for HitPay?</td><td><span class="pill pill-green">Yes — fully supported</span></td></tr>
+              <tr><td>ACRA business registration required</td><td><span class="pill pill-green">Required &amp; achievable</span></td></tr>
+              <tr><td>Registered Singapore address required</td><td><span class="pill pill-green">Required</span></td></tr>
+              <tr><td>Director ID / passport</td><td><span class="pill pill-green">Required</span></td></tr>
+              <tr><td>Singapore bank account required</td><td><span class="pill pill-green">Required</span></td></tr>
+              <tr><td>Website / app description</td><td><span class="pill pill-green">Required</span></td></tr>
+              <tr><td>Typical approval time</td><td>1–3 business days</td></tr>
+              <tr><td>Vietnam customer reach (via SG account)</td><td><span class="pill pill-yellow">VietQR only — wallets not supported</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <p style="font-size:13px;font-weight:700;margin-bottom:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;">Scenario B — Vietnam Entity</p>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Requirement</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>Can a Vietnam-registered company apply?</td><td><span class="pill pill-red">No — country not supported</span></td></tr>
+              <tr><td>Vietnamese business registration (ERC)</td><td><span class="pill pill-red">Not accepted</span></td></tr>
+              <tr><td>Settle to Vietnamese bank account?</td><td><span class="pill pill-red">Not available</span></td></tr>
+              <tr><td>VND merchant account?</td><td><span class="pill pill-red">Not available</span></td></tr>
+              <tr><td>SBV-licensed operations?</td><td><span class="pill pill-red">HitPay holds no SBV licence</span></td></tr>
+              <tr><td>Vietnamese-language onboarding?</td><td><span class="pill pill-red">Not available — English only</span></td></tr>
+              <tr><td>Workaround available?</td><td><span class="pill pill-yellow">Only if SG parent entity onboards</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="sdiv"></div>
+
+    <p style="font-size:14px;font-weight:700;margin-bottom:12px;">What EdBuddies' Application Would Look Like (Singapore Entity)</p>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-icon">📄</div>
+        <div>
+          <h4>Step 1 — Online Sign-Up</h4>
+          <p>Visit hitpayapp.com and register with business email. HitPay's onboarding is self-serve — no sales call required for standard applications. Takes 10–15 minutes to complete the form.</p>
+        </div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🔍</div>
+        <div>
+          <h4>Step 2 — KYB Verification</h4>
+          <p>Upload ACRA registration, proof of address, passport/NRIC for directors and any shareholder above 25%. HitPay runs automated identity checks via a third-party KYC provider.</p>
+        </div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">✅</div>
+        <div>
+          <h4>Step 3 — Approval (1–3 days)</h4>
+          <p>Standard Singapore businesses are typically approved within 1–3 business days. EdTech platforms are generally not considered high-risk, though HitPay may request details about tutor payout flows if volume is flagged.</p>
+        </div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon warn">⚠️</div>
+        <div>
+          <h4>Compliance Watch: Marketplace Payouts</h4>
+          <p>HitPay has a specific policy on businesses that both collect payments AND pay out to third parties (e.g., tutors). Platforms fitting this model may be classified as higher-risk and subject to the Merchant Monitoring Programme — requiring a 20–50% reserve hold on card volume.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="box box-warn mt16">
+      <strong>Practical implication for EdBuddies:</strong> If EdBuddies is Singapore-registered, you can use HitPay today — but Vietnamese students will only be able to pay via international cards (Visa/Mastercard) or VietQR. The most popular Vietnamese payment methods (MoMo, ZaloPay, VNPay) will not be available at checkout. This directly limits conversion from Vietnamese student traffic.
+    </div>
+  </div>
+
+  <!-- ─── CUSTOMER EXPERIENCE ─── -->
+  <div class="tab-panel" id="tab-custexp" role="tabpanel">
+    <p class="sec-title">🇻🇳 Vietnam Customer Experience — What Can Students Actually Pay With?</p>
+    <p class="sec-sub">The checkout experience for a Vietnamese student trying to pay on the EdBuddies platform via HitPay.</p>
+
+    <div class="box box-danger mb20">
+      <strong>The core problem:</strong> Vietnamese consumers rely overwhelmingly on local payment methods — MoMo (30M+ users), ZaloPay (18M+ users), VNPay (covering 90%+ of Vietnamese banks). HitPay does not support any of these. A Vietnamese student at checkout will see international cards and VietQR only — and the significant majority who primarily use e-wallets will not be able to complete their purchase.
+    </div>
+
+    <p style="font-size:14px;font-weight:700;margin-bottom:12px;">Payment Method Support — Vietnamese Customer Checkout</p>
+    <div class="tbl-wrap mb20">
+      <table>
+        <thead><tr><th>Payment Method</th><th>Status</th><th>Vietnamese User Penetration</th><th>Impact on EdBuddies</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="td-bold">VietQR (bank transfer QR)</td>
+            <td><span class="pill pill-green">Confirmed — supported</span></td>
+            <td>~60% of smartphone users have a bank app with VietQR</td>
+            <td>Covers bank transfer use case — positive. But not a wallet.</td>
+          </tr>
+          <tr>
+            <td class="td-bold">Visa / Mastercard</td>
+            <td><span class="pill pill-green">Confirmed — supported globally</span></td>
+            <td>~15–20% of Vietnamese adults have international credit cards</td>
+            <td>Works for international card holders — limited local reach.</td>
+          </tr>
+          <tr class="td-danger">
+            <td class="td-bold">MoMo</td>
+            <td><span class="pill pill-red">Not supported</span></td>
+            <td>30M+ registered users — Vietnam's largest e-wallet</td>
+            <td><strong>Critical gap.</strong> Most popular digital payment among young users and students.</td>
+          </tr>
+          <tr class="td-danger">
+            <td class="td-bold">ZaloPay</td>
+            <td><span class="pill pill-red">Not supported</span></td>
+            <td>18M+ users — integrated with Zalo (Vietnam's dominant messaging app)</td>
+            <td><strong>Critical gap.</strong> Highly penetrated among the 18–35 demographic — EdBuddies' core students.</td>
+          </tr>
+          <tr class="td-danger">
+            <td class="td-bold">VNPay QR / VNPay Checkout</td>
+            <td><span class="pill pill-red">Not supported</span></td>
+            <td>Accepted by 90%+ of Vietnamese banks — ubiquitous</td>
+            <td><strong>Critical gap.</strong> The most widely accepted QR standard via bank apps nationally.</td>
+          </tr>
+          <tr>
+            <td class="td-bold">Napas ATM / Domestic Debit Cards</td>
+            <td><span class="pill pill-red">Not supported</span></td>
+            <td>Most Vietnamese bank cards are Napas-issued domestic cards</td>
+            <td><strong>Critical gap.</strong> Students without international cards cannot pay at all.</td>
+          </tr>
+          <tr>
+            <td class="td-bold">GrabPay</td>
+            <td><span class="pill pill-yellow">Unconfirmed for Vietnam</span></td>
+            <td>GrabPay is supported in SG/MY — Vietnam presence is limited</td>
+            <td>Not a meaningful Vietnam payment channel regardless of HitPay support.</td>
+          </tr>
+          <tr>
+            <td class="td-bold">Alipay / WeChat Pay</td>
+            <td><span class="pill pill-yellow">Likely via cross-border</span></td>
+            <td>Used by Chinese tourists — not relevant to Vietnamese students</td>
+            <td>Not applicable for EdBuddies' Vietnam student base.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sdiv"></div>
+
+    <p style="font-size:14px;font-weight:700;margin-bottom:12px;">What the Checkout Actually Looks Like for a Vietnamese Student</p>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-icon danger">❌</div>
+        <div>
+          <h4>MoMo user — cannot pay</h4>
+          <p>A student who primarily uses MoMo (Vietnam's #1 wallet) opens the checkout page. HitPay does not offer MoMo as a payment option. The student sees no familiar payment method and abandons the purchase.</p>
+        </div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon danger">❌</div>
+        <div>
+          <h4>Napas card holder — cannot pay</h4>
+          <p>Most Vietnamese bank cards are domestic Napas debit cards, not international Visa/Mastercard. HitPay does not accept Napas cards. Students who have never applied for an international card are blocked entirely.</p>
+        </div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon warn">⚡</div>
+        <div>
+          <h4>VietQR user — can pay (partial win)</h4>
+          <p>A student with a Vietnamese bank account can scan a VietQR code to transfer money directly from their bank. This is a genuine pathway — but it is slower and less frictionless than wallet payments, and not all students will know how to use it.</p>
+        </div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon warn">💳</div>
+        <div>
+          <h4>International card holder — can pay</h4>
+          <p>A student with a Visa or Mastercard (often from a premium bank account) can pay. However, this demographic is a minority among Vietnamese students and young adults — typically urban, higher-income families.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="box box-danger mt16">
+      <strong>Estimated checkout coverage:</strong> Based on Vietnamese payment behaviour data, roughly 70–80% of Vietnamese student-age consumers would encounter no viable payment method at a HitPay checkout (no MoMo, no ZaloPay, no VNPay, no Napas card). Only ~20–30% — those with international cards or who know how to use VietQR bank transfer — could complete a payment. This directly translates to lost revenue and poor conversion rates in Vietnam.
+    </div>
+  </div>
+
+  <!-- ─── MERCHANT EXPERIENCE ─── -->
+  <div class="tab-panel" id="tab-merchant" role="tabpanel">
+    <p class="sec-title">🖥️ Merchant Experience — What EdBuddies Can Manage Day-to-Day</p>
+    <p class="sec-sub">What HitPay's dashboard offers to the EdBuddies operations and finance team — where it works and where it falls short for Vietnam.</p>
+
+    <div class="dash-grid">
+
+      <!-- Payment Management -->
+      <div class="dash-tile">
+        <div class="dash-tile-hdr">
+          <div class="dash-tile-icon">💳</div>
+          <div><h3>Payment Management</h3><span>Core transaction tracking and refunds</span></div>
+        </div>
+        <div class="dash-tile-body">
+          <div class="dash-item ok"><div><strong>View all transactions</strong><span>Unified view across payment links, invoices, POS, and online checkout — filter by date, method, or status</span></div></div>
+          <div class="dash-item ok"><div><strong>Issue refunds</strong><span>Refund any transaction directly from the dashboard — no need to contact support for standard cases</span></div></div>
+          <div class="dash-item ok"><div><strong>Export reports</strong><span>Download transaction history as CSV for reconciliation — standard feature, works reliably</span></div></div>
+          <div class="dash-item warn"><div><strong>Dispute management</strong><span>Chargebacks are managed via Stripe (HitPay's card processor) — process is less integrated than Airwallex's native dispute tools</span></div></div>
+        </div>
+      </div>
+
+      <!-- Multi-channel Sales -->
+      <div class="dash-tile">
+        <div class="dash-tile-hdr">
+          <div class="dash-tile-icon">🛒</div>
+          <div><h3>Sales Channel Tools</h3><span>Strong for Singapore-focused SMB operations</span></div>
+        </div>
+        <div class="dash-tile-body">
+          <div class="dash-item ok"><div><strong>Payment links</strong><span>Generate a payment link in seconds — share via WhatsApp, email, or embed in any page. Great for manual student invoicing.</span></div></div>
+          <div class="dash-item ok"><div><strong>Invoice generation</strong><span>Create and send professional invoices with a payment link embedded — ideal for tutor billing or B2B clients</span></div></div>
+          <div class="dash-item ok"><div><strong>Recurring billing</strong><span>Set up subscription payments for recurring tutor sessions or monthly plans — customers pay automatically each cycle</span></div></div>
+          <div class="dash-item ok"><div><strong>POS / in-person</strong><span>Card readers and QR code payments for face-to-face tutor sessions or physical locations in Singapore</span></div></div>
+        </div>
+      </div>
+
+      <!-- Payouts & Transfers -->
+      <div class="dash-tile">
+        <div class="dash-tile-hdr">
+          <div class="dash-tile-icon">📤</div>
+          <div><h3>Paying Tutors &amp; Partners</h3><span>Payout capabilities for marketplace models</span></div>
+        </div>
+        <div class="dash-tile-body">
+          <div class="dash-item ok"><div><strong>Mass Payout API</strong><span>HitPay launched a Mass Payouts API for sending to multiple recipients across SEA — useful for paying tutors in Singapore and Malaysia</span></div></div>
+          <div class="dash-item warn"><div><strong>Vietnam bank payouts</strong><span>Payouts to Vietnamese bank accounts are not confirmed as a standard feature — settlement is primarily designed for Singapore, Malaysia, Philippines</span></div></div>
+          <div class="dash-item warn"><div><strong>Settlement speed</strong><span>Non-card payments settle T+1; card payments T+2 to T+3. First-ever card payout is delayed 7–14 days (Stripe policy)</span></div></div>
+          <div class="dash-item gap"><div><strong>VND merchant settlement</strong><span>Not available. Merchants settle in their home currency (SGD for Singapore entities). VND wallet settlement is not offered.</span></div></div>
+        </div>
+      </div>
+
+      <!-- Multi-currency -->
+      <div class="dash-tile">
+        <div class="dash-tile-hdr">
+          <div class="dash-tile-icon">🌐</div>
+          <div><h3>Multi-Currency Support</h3><span>Cross-border acceptance vs. settlement</span></div>
+        </div>
+        <div class="dash-tile-body">
+          <div class="dash-item ok"><div><strong>Accept 150+ currencies</strong><span>HitPay can display checkout in the customer's local currency and accept payment in it — including VND for VietQR payments</span></div></div>
+          <div class="dash-item warn"><div><strong>Currency conversion</strong><span>HitPay converts received foreign currency to your settlement currency (e.g., SGD). FX rates are not published — less transparent than Airwallex's 0.5–1% spread model</span></div></div>
+          <div class="dash-item gap"><div><strong>VND settlement to VN bank</strong><span>Not available. You cannot receive settlement in VND into a Vietnamese bank account.</span></div></div>
+          <div class="dash-item gap"><div><strong>Multi-currency wallet / FX tools</strong><span>HitPay does not offer the treasury features (FX alerts, forward contracts, hold-in-currency) that Airwallex provides for sophisticated FX management</span></div></div>
+        </div>
+      </div>
+
+      <!-- Accounting & Integrations -->
+      <div class="dash-tile">
+        <div class="dash-tile-hdr">
+          <div class="dash-tile-icon">📊</div>
+          <div><h3>Accounting &amp; Integrations</h3><span>Connects to tools EdBuddies may already use</span></div>
+        </div>
+        <div class="dash-tile-body">
+          <div class="dash-item ok"><div><strong>Xero integration</strong><span>Native Xero sync — transactions flow in automatically. Good for Singapore entity accounting.</span></div></div>
+          <div class="dash-item ok"><div><strong>QuickBooks Online</strong><span>Supported with auto-sync capability</span></div></div>
+          <div class="dash-item ok"><div><strong>Shopify</strong><span>HitPay has a Shopify plugin — relevant if EdBuddies uses Shopify for any commerce flows</span></div></div>
+          <div class="dash-item warn"><div><strong>WooCommerce / custom APIs</strong><span>API and plugin support available but less comprehensive than Airwallex's developer tools and webhook system</span></div></div>
+        </div>
+      </div>
+
+      <!-- Team & Access Control -->
+      <div class="dash-tile">
+        <div class="dash-tile-hdr">
+          <div class="dash-tile-icon">👥</div>
+          <div><h3>Team &amp; Access</h3><span>Roles and user management</span></div>
+        </div>
+        <div class="dash-tile-body">
+          <div class="dash-item ok"><div><strong>Team member invitations</strong><span>Add team members to the account with defined access — suitable for small finance teams</span></div></div>
+          <div class="dash-item warn"><div><strong>Role granularity</strong><span>HitPay's role system is simpler than Airwallex's — fewer custom permission configurations available. Sufficient for an SMB but limited for complex approval chains</span></div></div>
+          <div class="dash-item warn"><div><strong>Approval workflows</strong><span>Multi-level approval for large payouts is not a native feature — would need to be managed operationally</span></div></div>
+          <div class="dash-item gap"><div><strong>Multi-entity management</strong><span>No native multi-entity or regional subsidiary management — each company must have its own separate HitPay account</span></div></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="box box-neutral mt20">
+      <strong>Bottom line for EdBuddies' ops team:</strong> HitPay's dashboard is clean and genuinely useful for Singapore operations — payment links, invoicing, recurring billing, and Xero sync all work well. It is a well-designed SMB tool. But it lacks the treasury capabilities, VND settlement, Vietnam payout rails, and multi-entity features that a growing EdTech marketplace serving Vietnam would eventually need.
+    </div>
+  </div>
+
+  <!-- ─── SUPPORT ─── -->
+  <div class="tab-panel" id="tab-support" role="tabpanel">
+    <p class="sec-title">🎧 Merchant Support — What to Expect as EdBuddies</p>
+    <p class="sec-sub">Support channels, response quality, review ratings, and known pain points — especially relevant for a Vietnam-facing operation.</p>
+
+    <div class="two-col mb20">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Review Platform</th><th>Rating</th><th>Volume</th></tr></thead>
+          <tbody>
+            <tr><td>G2 (verified business reviews)</td><td>⭐ 4.7 / 5</td><td>97 reviews</td></tr>
+            <tr><td>Trustpilot</td><td>⭐ 4.2 / 5</td><td>~409 reviews</td></tr>
+            <tr><td>Capterra</td><td>—</td><td>No dedicated listing found</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Support Channel</th><th>Availability</th></tr></thead>
+          <tbody>
+            <tr><td>Live Chat (in-dashboard)</td><td><span class="pill pill-green">Available</span></td></tr>
+            <tr><td>WhatsApp support</td><td><span class="pill pill-green">Available</span></td></tr>
+            <tr><td>Email (support@hit-pay.com)</td><td><span class="pill pill-green">Available</span></td></tr>
+            <tr><td>Phone / voice support</td><td><span class="pill pill-red">Not available</span></td></tr>
+            <tr><td>Dedicated account manager</td><td><span class="pill pill-yellow">Not standard — negotiable</span></td></tr>
+            <tr><td>Vietnamese-language support</td><td><span class="pill pill-red">Not available — English only</span></td></tr>
+            <tr><td>Vietnam business hours coverage</td><td><span class="pill pill-yellow">Partial — primarily SG hours</span></td></tr>
+            <tr><td>Published support SLA</td><td><span class="pill pill-red">None published</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="two-col mb20">
+      <div class="box box-success" style="font-size:13px;">
+        <strong>What merchants praise (G2 / Trustpilot):</strong>
+        <ul style="margin-top:8px;padding-left:16px;line-height:2;">
+          <li>Easy, fast onboarding — up and running in under a day</li>
+          <li>Clean, intuitive dashboard — minimal training needed</li>
+          <li>Payment links via WhatsApp work extremely well for Singapore SMBs</li>
+          <li>Competitive pricing with no monthly fee</li>
+          <li>Reliable payouts for standard Singapore-based operations</li>
+          <li>Xero accounting sync works smoothly once configured</li>
+          <li>Live chat is generally responsive during Singapore business hours</li>
+        </ul>
+      </div>
+      <div class="box box-danger" style="font-size:13px;">
+        <strong>What merchants complain about:</strong>
+        <ul style="margin-top:8px;padding-left:16px;line-height:2;">
+          <li>Accounts suspended or deleted with little or no advance warning</li>
+          <li>Payouts disabled during compliance reviews — merchants can still accept payments but cannot receive funds</li>
+          <li>Support slow or unhelpful when accounts are under investigation</li>
+          <li>20–50% cash reserve hold triggered for "high-risk" flagged transactions</li>
+          <li>No dedicated account manager for SME-tier accounts</li>
+          <li>Documentation sometimes unclear on which payment methods are actually live</li>
+          <li>Compliance tooling was historically immature (since improved)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sdiv"></div>
+
+    <p style="font-size:14px;font-weight:700;margin-bottom:12px;">Vietnam-Specific Support Gaps</p>
+    <div class="risk-grid">
+      <div class="risk-card high">
+        <div class="risk-hdr">
+          <div class="risk-title">No Vietnamese-Language Support</div>
+          <div class="risk-lv">High impact</div>
+        </div>
+        <p class="risk-body">All support documentation, the merchant dashboard, and live support channels are English-only. If EdBuddies' Vietnam operations team or Vietnamese-speaking staff need to escalate an issue, there is no Vietnamese-language pathway. This is a meaningful operational friction point for a Vietnam-focused team.</p>
+      </div>
+      <div class="risk-card high">
+        <div class="risk-hdr">
+          <div class="risk-title">No Vietnam-Specific Technical Support</div>
+          <div class="risk-lv">High impact</div>
+        </div>
+        <p class="risk-body">HitPay has no local team or office in Vietnam. If there is a checkout failure or payment method issue affecting Vietnamese customers, support is handled by the Singapore team — without local context, local bank relationships, or knowledge of Vietnamese payment infrastructure.</p>
+      </div>
+      <div class="risk-card med">
+        <div class="risk-hdr">
+          <div class="risk-title">Marketplace Payout Model — Elevated Scrutiny</div>
+          <div class="risk-lv">Medium impact</div>
+        </div>
+        <p class="risk-body">EdBuddies collects from students and pays out to tutors — a marketplace model. HitPay flags marketplace / money-flow platforms as higher-risk during compliance reviews. This increases the probability of account scrutiny, fund holds, or the Merchant Monitoring Programme being triggered.</p>
+      </div>
+    </div>
+
+    <div class="box box-warn mt16">
+      <strong>Support SLA reality:</strong> HitPay publishes no formal response time SLA. Based on merchant reviews, live chat during Singapore business hours (09:00–18:00 SGT) is reasonably fast, but email tickets for non-urgent issues can take 24–48+ hours. For a live payment platform serving students in Vietnam (who may need immediate resolution), this is an operational risk that should be discussed with HitPay before any Vietnam-focused campaign launch.
+    </div>
+  </div>
+
+  <!-- ─── PRICING ─── -->
+  <div class="tab-panel" id="tab-pricing" role="tabpanel">
+    <p class="sec-title">💰 Pricing — What Does HitPay Cost EdBuddies?</p>
+    <p class="sec-sub">Full fee breakdown — including the Merchant Monitoring Programme surcharge that is often not mentioned upfront.</p>
+
+    <div class="box box-success mb20">
+      <strong>Headline advantage:</strong> HitPay has no monthly subscription fee, no setup fee, and no PCI compliance fee on the standard plan. You only pay per transaction processed. For a low-volume or early-stage operation, this is genuinely cost-friendly.
+    </div>
+
+    <div class="two-col mb20">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>What EdBuddies Pays For</th><th>Cost</th></tr></thead>
+          <tbody>
+            <tr><td>Monthly platform fee</td><td style="font-weight:800;color:var(--success)">Free</td></tr>
+            <tr><td>Setup fee</td><td style="font-weight:800;color:var(--success)">None</td></tr>
+            <tr><td>Student pays via local Visa/Mastercard (Singapore)</td><td>2.8% + S$0.50</td></tr>
+            <tr><td>Student pays via international card (overseas Visa/MC)</td><td>3.65% + S$0.50</td></tr>
+            <tr><td>Singapore PayNow QR</td><td>0.4% (min S$0.10)</td></tr>
+            <tr><td>GrabPay (Singapore)</td><td>2.2%</td></tr>
+            <tr><td>VietQR (Vietnam bank transfer)</td><td>Not published — confirm with HitPay</td></tr>
+            <tr><td>MoMo / ZaloPay / VNPay</td><td style="color:var(--danger);font-weight:700">Not available</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Settlement Details</th><th></th></tr></thead>
+          <tbody>
+            <tr><td>Non-card payment settlement</td><td>T+1 (next banking day)</td></tr>
+            <tr><td>Card payment settlement</td><td>T+2 to T+3 typical</td></tr>
+            <tr><td>First-ever card payout delay</td><td>7–14 days (Stripe-imposed new account hold)</td></tr>
+            <tr><td>Settlement currency</td><td>SGD (for Singapore entity)</td></tr>
+            <tr><td>VND settlement to Vietnam bank</td><td style="color:var(--danger);font-weight:700">Not available</td></tr>
+            <tr><td>FX conversion rate transparency</td><td>Not published (not mid-market + fixed %)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="sdiv"></div>
+
+    <p style="font-size:14px;font-weight:700;margin-bottom:12px;">Hidden Cost: Merchant Monitoring Programme</p>
+    <div class="box box-danger mb16">
+      <strong>The reserve hold risk:</strong> If HitPay's systems flag EdBuddies as higher-risk — which is more likely for a marketplace model that collects and disburses funds — the Merchant Monitoring Programme can be triggered. This imposes:<br/><br/>
+      • A <strong>2% MDR surcharge</strong> on top of standard transaction rates<br/>
+      • A mandatory <strong>cash reserve of 20–50% of average monthly card payment volume</strong>, held for up to 4 months<br/>
+      • Payouts may be suspended while the review is ongoing, even while the account can still accept payments<br/><br/>
+      For an EdTech marketplace handling tutor payouts, a 4-month hold on 20–50% of card volume would be a serious cash-flow problem. This policy should be disclosed and discussed with HitPay before scaling card payment volume.
+    </div>
+
+    <p style="font-size:14px;font-weight:700;margin-bottom:12px;">Cost Comparison — Vietnam Payment Scenario</p>
+    <div class="tbl-wrap mb16">
+      <table>
+        <thead>
+          <tr>
+            <th>Provider</th>
+            <th>Vietnamese Student Can Pay With</th>
+            <th>Fee on $100 Card Payment</th>
+            <th>VND Settlement Available?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="td-hi">
+            <td class="td-bold">HitPay (current)</td>
+            <td>International card, VietQR only</td>
+            <td>$3.65 + S$0.50 (intl card)</td>
+            <td><span class="pill pill-red">No</span></td>
+          </tr>
+          <tr>
+            <td class="td-bold">Airwallex</td>
+            <td>Visa/MC, VND bank transfer, MoMo</td>
+            <td>~$2.80 + $0.30 (local card)</td>
+            <td><span class="pill pill-green">Yes</span></td>
+          </tr>
+          <tr>
+            <td class="td-bold">VNPay (domestic)</td>
+            <td>VNPay QR, MoMo, ZaloPay, ATM, all local</td>
+            <td>~1.5–2.0% (VND transactions)</td>
+            <td><span class="pill pill-green">Yes — VND native</span></td>
+          </tr>
+          <tr>
+            <td class="td-bold">PayOS (domestic)</td>
+            <td>Bank transfer, ATM, QR</td>
+            <td>~1.5% (VND transactions)</td>
+            <td><span class="pill pill-green">Yes — VND native</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box box-warn">
+      <strong>FX cost transparency:</strong> HitPay does not publish its FX conversion spread, unlike Airwallex's explicit 0.5–1% over mid-market. When a Vietnamese student pays in VND via VietQR and EdBuddies settles in SGD, the conversion happens inside HitPay at an undisclosed rate. At scale, this lack of transparency makes it harder to model actual revenue from Vietnamese students. Request the FX rate model in writing before committing.
+    </div>
+  </div>
+
+  <!-- ─── RISKS ─── -->
+  <div class="tab-panel" id="tab-risks" role="tabpanel">
+    <p class="sec-title">⚠️ Key Business Risks for EdBuddies Using HitPay in Vietnam</p>
+    <p class="sec-sub">Risks ranked by severity — the top three are fundamental structural gaps, not operational issues that can be contractually resolved.</p>
+
+    <div class="risk-grid">
+
+      <div class="risk-card crit">
+        <div class="risk-hdr">
+          <div class="risk-title">🚨 No SBV Licence — Regulatory Non-Compliance</div>
+          <div class="risk-lv">Critical</div>
+        </div>
+        <p class="risk-body">Vietnam's payment regulations (Circular 39 and its 2025 updates) require any payment intermediary processing payments in Vietnam to hold an SBV licence. HitPay holds no such licence and has no local Vietnamese entity. Accepting VND payments from Vietnamese customers through an unlicensed foreign gateway creates potential regulatory exposure — both for HitPay and for EdBuddies as its merchant. Confirm legal opinion on this before scaling Vietnam payment volume through HitPay.</p>
+      </div>
+
+      <div class="risk-card crit">
+        <div class="risk-hdr">
+          <div class="risk-title">🚨 Missing Core Vietnam Payment Methods</div>
+          <div class="risk-lv">Critical</div>
+        </div>
+        <p class="risk-body">MoMo, ZaloPay, VNPay, and Napas ATM cards are not supported. These cover an estimated 70–80% of payment method usage among Vietnamese student-age consumers. Without them, the majority of EdBuddies' Vietnam target users cannot pay. This is not a configuration issue — it is a fundamental product gap that HitPay cannot resolve quickly, as supporting these wallets requires Vietnamese regulatory partnerships that do not exist yet.</p>
+      </div>
+
+      <div class="risk-card crit">
+        <div class="risk-hdr">
+          <div class="risk-title">🚨 Vietnam Entity Cannot Onboard</div>
+          <div class="risk-lv">Critical</div>
+        </div>
+        <p class="risk-body">If EdBuddies expands with a Vietnam-registered legal entity (which may be required under Vietnamese law for operating a platform that collects payments from Vietnamese users), that entity cannot open a HitPay merchant account. HitPay does not support Vietnam as a merchant registration country. The business would need a separate payment provider for its Vietnam entity regardless.</p>
+      </div>
+
+      <div class="risk-card high">
+        <div class="risk-hdr">
+          <div class="risk-title">Account Freeze / Payout Suspension Risk</div>
+          <div class="risk-lv">High</div>
+        </div>
+        <p class="risk-body">Multiple verified merchant reports describe accounts having payouts suspended during compliance reviews, sometimes for weeks or months. HitPay's Merchant Monitoring Programme can freeze payouts while still allowing payment acceptance — meaning EdBuddies would collect revenue from students that it cannot access. For a marketplace that needs to pay tutors regularly, this is an operational catastrophe risk.</p>
+      </div>
+
+      <div class="risk-card high">
+        <div class="risk-hdr">
+          <div class="risk-title">Reserve Hold for Marketplace Model</div>
+          <div class="risk-lv">High</div>
+        </div>
+        <p class="risk-body">EdBuddies' business model — collecting from students and disbursing to tutors — is classified as higher-risk by most payment processors. HitPay's Merchant Monitoring Programme may trigger a 20–50% cash reserve requirement on monthly card volume, held for up to 4 months. At $50,000/month in card volume, this could lock up $10,000–$25,000 in reserves — a meaningful cash-flow drain for a growing startup.</p>
+      </div>
+
+      <div class="risk-card med">
+        <div class="risk-hdr">
+          <div class="risk-title">No Vietnamese-Language Operations</div>
+          <div class="risk-lv">Medium</div>
+        </div>
+        <p class="risk-body">The merchant dashboard, all documentation, and customer support are English-only. A Vietnam operations team would need English proficiency to use HitPay effectively. More practically, any payment-related issue experienced by a Vietnamese student cannot be escalated in Vietnamese — creating a customer support dead-end.</p>
+      </div>
+
+      <div class="risk-card med">
+        <div class="risk-hdr">
+          <div class="risk-title">Company Scale and Product Velocity</div>
+          <div class="risk-lv">Medium</div>
+        </div>
+        <p class="risk-body">HitPay last raised funds in May 2022. It has fewer resources than competitors like Airwallex or 2C2P to invest in Vietnam market development. MoMo, ZaloPay, and VNPay integrations require local regulatory agreements — progress may be slow. EdBuddies should not wait for HitPay to add Vietnam payment methods as a strategy.</p>
+      </div>
+
+      <div class="risk-card low">
+        <div class="risk-hdr">
+          <div class="risk-title">Opaque FX Pricing on VND Conversions</div>
+          <div class="risk-lv">Low</div>
+        </div>
+        <p class="risk-body">HitPay does not publish its FX spread for currency conversion. When Vietnamese students pay in VND and EdBuddies settles in SGD, the conversion happens at an undisclosed rate. At low volume this is immaterial, but at scale the spread could become a meaningful cost versus providers with published 0.5–1% FX rates.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ─── NEXT STEPS ─── -->
+  <div class="tab-panel" id="tab-nextsteps" role="tabpanel">
+    <p class="sec-title">📌 What Should EdBuddies Do?</p>
+    <p class="sec-sub">A clear-eyed action plan based on whether Vietnam is a core or peripheral market for EdBuddies.</p>
+
+    <div class="box box-danger mb20">
+      <strong>The honest summary:</strong> HitPay is not the right primary gateway for Vietnam. It should continue to serve EdBuddies' Singapore operations where it works well — but Vietnam requires a complementary solution. The question is not whether to add a Vietnam-capable gateway, but which one and how quickly.
+    </div>
+
+    <div class="action-list mb20">
+
+      <div class="action-item">
+        <div class="action-num">1</div>
+        <div>
+          <h4>Keep HitPay for Singapore — do not replace it</h4>
+          <p>HitPay works well for EdBuddies' Singapore operations: payment links, invoicing, PayNow, Xero sync. It is cost-effective and the team already knows it. Do not disrupt what works. The goal is to extend capability for Vietnam, not do a full platform migration.</p>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="action-num">2</div>
+        <div>
+          <h4>Immediately evaluate a Vietnam-capable gateway as a parallel integration</h4>
+          <p>EdBuddies needs MoMo, ZaloPay, VNPay, and VietQR for Vietnamese students. The two strongest candidates are: (a) <strong>Airwallex</strong> — licensed in Vietnam (via CTIN Pay), supports MoMo and VND bank transfer, handles cross-border FX well; and (b) <strong>VNPay/PayOS</strong> — Vietnam-native, full local wallet coverage, lowest VND transaction fees but no cross-border capability. A combined approach (Airwallex for cards/cross-border + VNPay for local wallets) may be optimal.</p>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="action-num">3</div>
+        <div>
+          <h4>Get legal clarity on the regulatory position of VietQR-only collection</h4>
+          <p>Before scaling VND collection through HitPay's VietQR integration, get a legal opinion on whether a Singapore-registered entity accepting VND payments from Vietnamese users via an unlicensed-in-Vietnam gateway creates any regulatory exposure under SBV rules. This is a compliance question, not a technical one — it requires a Vietnamese legal firm with fintech expertise.</p>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="action-num">4</div>
+        <div>
+          <h4>Confirm HitPay's VietQR fee structure in writing</h4>
+          <p>HitPay has not published pricing for VietQR transactions on its standard pricing page. Before routing any significant Vietnamese student volume through VietQR, request the exact fee schedule in writing from HitPay support. Also confirm settlement currency and FX rate model for VND → SGD conversions.</p>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="action-num">5</div>
+        <div>
+          <h4>Negotiate payout protection terms before scaling card volume</h4>
+          <p>If EdBuddies grows card payment volume on HitPay, the risk of triggering the Merchant Monitoring Programme (and associated reserve holds) increases. Before this happens, negotiate with HitPay for: (a) advance notice before any payout restriction, (b) a maximum reserve hold percentage and duration, and (c) a named escalation contact. Get these in writing or in a signed addendum to the merchant agreement.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="sdiv"></div>
+
+    <p class="sec-title" style="font-size:16px;">📊 Vietnam Gateway Decision Matrix</p>
+    <p class="sec-sub">How the main options compare for EdBuddies' Vietnam use case specifically.</p>
+    <div class="tbl-wrap mb20">
+      <table>
+        <thead>
+          <tr>
+            <th>Provider</th>
+            <th>Vietnam entity onboarding</th>
+            <th>MoMo / ZaloPay / VNPay</th>
+            <th>VietQR</th>
+            <th>VND settlement</th>
+            <th>Cross-border FX</th>
+            <th>Best for</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="td-bold">HitPay (current)</td>
+            <td><span class="pill pill-red">No</span></td>
+            <td><span class="pill pill-red">None</span></td>
+            <td><span class="pill pill-green">Yes</span></td>
+            <td><span class="pill pill-red">No</span></td>
+            <td><span class="pill pill-yellow">Opaque FX</span></td>
+            <td>SG operations only</td>
+          </tr>
+          <tr class="td-hi">
+            <td class="td-bold">Airwallex</td>
+            <td><span class="pill pill-green">Yes (via CTIN Pay)</span></td>
+            <td><span class="pill pill-green">MoMo ✓ · VNPay TBC · ZaloPay TBC</span></td>
+            <td><span class="pill pill-green">Yes</span></td>
+            <td><span class="pill pill-green">Yes</span></td>
+            <td>0.5–1% — excellent</td>
+            <td>Cross-border + Vietnam combined</td>
+          </tr>
+          <tr>
+            <td class="td-bold">VNPay</td>
+            <td><span class="pill pill-green">Yes</span></td>
+            <td><span class="pill pill-green">Full local suite</span></td>
+            <td><span class="pill pill-green">Yes</span></td>
+            <td><span class="pill pill-green">Yes — VND native</span></td>
+            <td><span class="pill pill-red">None — VND only</span></td>
+            <td>Vietnamese domestic payments</td>
+          </tr>
+          <tr>
+            <td class="td-bold">PayOS</td>
+            <td><span class="pill pill-green">Yes</span></td>
+            <td><span class="pill pill-yellow">Bank QR + ATM — no wallets</span></td>
+            <td><span class="pill pill-green">Yes</span></td>
+            <td><span class="pill pill-green">Yes — VND native</span></td>
+            <td><span class="pill pill-red">None</span></td>
+            <td>Vietnamese SME checkout</td>
+          </tr>
+          <tr>
+            <td class="td-bold">2C2P</td>
+            <td><span class="pill pill-green">Yes</span></td>
+            <td><span class="pill pill-green">Full local + regional</span></td>
+            <td><span class="pill pill-green">Yes</span></td>
+            <td><span class="pill pill-green">Yes</span></td>
+            <td>Competitive SEA rates</td>
+            <td>SEA regional with full local methods</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box box-info">
+      <strong>Recommended approach for EdBuddies:</strong> Run a dual-gateway model — retain HitPay for Singapore PayNow / card / invoice workflows where it excels. Add Airwallex or VNPay (or both) for the Vietnam checkout flow. Route Vietnamese students to the Vietnam-capable gateway at checkout based on their country of residence. This avoids a full platform migration while immediately unblocking the Vietnam market.
+    </div>
+
+  </div><!-- /nextsteps -->
+
+</div><!-- /page-body -->
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <strong>HitPay Vietnam Market Review — EdBuddies</strong> · Prepared April 2026 · For internal stakeholder use only<br/>
+  Based on publicly available sources, HitPay documentation, and merchant reviews as of April 2026. This document does not constitute legal or financial advice. All fees, payment method support, and regulatory status should be verified directly with HitPay and qualified legal counsel before any operational decision.
+</footer>
+
+<!-- ══ TAB SCRIPT ══ -->
+<script>
+(function () {
+  const btns   = document.querySelectorAll('.tab-btn');
+  const panels = document.querySelectorAll('.tab-panel');
+
+  function activate(tabId) {
+    btns.forEach(b => b.classList.toggle('active', b.dataset.tab === tabId));
+    panels.forEach(p => p.classList.toggle('active', p.id === 'tab-' + tabId));
+    const activeBtn = document.querySelector('.tab-btn[data-tab="' + tabId + '"]');
+    if (activeBtn) activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  }
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => activate(btn.dataset.tab));
+  });
+
+  const tabList = document.querySelector('.tabs-inner');
+  tabList.addEventListener('keydown', (e) => {
+    const current = document.querySelector('.tab-btn.active');
+    const all = [...btns];
+    const idx = all.indexOf(current);
+    if (e.key === 'ArrowRight' && idx < all.length - 1) { all[idx + 1].click(); all[idx + 1].focus(); }
+    if (e.key === 'ArrowLeft'  && idx > 0)              { all[idx - 1].click(); all[idx - 1].focus(); }
+  });
+})();
+</script>
+</body>
+</html>
