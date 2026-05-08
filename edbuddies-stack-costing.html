@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EdBuddies — Stack Costing</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --surface-2: #22263a;
+      --border: #2e3250;
+      --text: #e8eaf6;
+      --muted: #7b82b0;
+      --accent: #6c6ef7;
+      --accent-2: #4ecca3;
+
+      --cat-cloud: #9c6de8;
+      --cat-saas: #e85d5d;
+      --cat-database: #8a8fa8;
+      --cat-backend: #e8843d;
+      --cat-push: #3dc47e;
+      --cat-analytic: #b07050;
+      --cat-monitoring: #4d8ff5;
+      --cat-source: #c0c4d8;
+      --cat-management: #d4a017;
+      --cat-design: #e870b8;
+      --cat-distribution: #c8b200;
+      --cat-marketing: #e86840;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    /* ── Header ── */
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .logo {
+      width: 44px; height: 44px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+    }
+    .header-text h1 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; }
+    .header-text p  { font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
+
+    /* ── Estimation banner ── */
+    .estimation-banner {
+      background: linear-gradient(135deg, #1a1d3a 0%, #16202e 100%);
+      border: 1px solid #3a3f6e;
+      border-radius: 16px;
+      padding: 1.75rem 2rem;
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .estimation-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(108,110,247,0.08) 0%, rgba(78,204,163,0.06) 100%);
+      pointer-events: none;
+    }
+    .estimation-banner::after {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 180px; height: 180px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(108,110,247,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .estimation-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .estimation-label::before {
+      content: '';
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+    }
+    .estimation-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+      align-items: flex-end;
+    }
+    .est-item { position: relative; }
+    .est-item-label { font-size: 0.7rem; color: var(--muted); margin-bottom: 0.3rem; }
+    .est-item-value {
+      font-size: 2.4rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+    .est-item-value.highlight-usd  { color: var(--accent-2); text-shadow: 0 0 30px rgba(78,204,163,0.35); }
+    .est-item-value.highlight-rm   { color: #f5a623; text-shadow: 0 0 30px rgba(245,166,35,0.35); }
+    .est-item-value.highlight-total{ color: var(--accent); text-shadow: 0 0 30px rgba(108,110,247,0.35); }
+    .est-item-sub { font-size: 0.7rem; color: var(--muted); margin-top: 0.3rem; }
+    .est-divider { width: 1px; height: 3.5rem; background: var(--border); align-self: center; }
+    .est-note {
+      font-size: 0.7rem;
+      color: var(--muted);
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── Summary cards ── */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.25rem 1.5rem;
+    }
+    .card-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 0.4rem; }
+    .card-value { font-size: 1.8rem; font-weight: 700; letter-spacing: -0.03em; }
+    .card-sub   { font-size: 0.75rem; color: var(--muted); margin-top: 0.25rem; }
+    .card-value.usd { color: var(--accent-2); }
+    .card-value.rm  { color: #f5a623; }
+    .card-value.ann { color: var(--accent); }
+    .card-value.cnt { color: var(--text); }
+
+    /* ── Charts row ── */
+    .charts-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    @media (max-width: 700px) { .charts-row { grid-template-columns: 1fr; } }
+    .chart-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.5rem;
+    }
+    .chart-card h3 {
+      font-size: 0.85rem; font-weight: 600; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 1.25rem;
+    }
+    .chart-wrap { position: relative; height: 220px; display: flex; align-items: center; justify-content: center; }
+    .chart-wrap canvas { max-height: 220px; }
+
+    /* ── Filter bar ── */
+    .filter-bar { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.25rem; align-items: center; }
+    .filter-label { font-size: 0.75rem; color: var(--muted); margin-right: 0.25rem; }
+    .filter-btn {
+      padding: 0.3rem 0.75rem;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      font-size: 0.72rem;
+      cursor: pointer;
+      transition: all 0.15s;
+      font-family: inherit;
+    }
+    .filter-btn:hover { border-color: var(--accent); color: var(--text); }
+    .filter-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+    /* ── Table ── */
+    .table-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+    .table-card h3 {
+      font-size: 0.85rem; font-weight: 600; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 0.06em;
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    table { width: 100%; border-collapse: collapse; }
+    thead th {
+      padding: 0.75rem 1.25rem;
+      font-size: 0.7rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.07em;
+      color: var(--muted);
+      background: var(--surface-2);
+      text-align: left;
+      white-space: nowrap;
+    }
+    tbody tr { border-top: 1px solid var(--border); transition: background 0.1s; }
+    tbody tr:hover { background: var(--surface-2); }
+    tbody tr.hidden { display: none; }
+    td { padding: 0.85rem 1.25rem; font-size: 0.82rem; vertical-align: middle; }
+
+    .service-name { font-weight: 600; color: var(--text); font-size: 0.88rem; }
+    .users-badge  { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.75rem; color: var(--muted); }
+    .cost-usd { color: var(--accent-2); font-weight: 600; font-variant-numeric: tabular-nums; }
+    .cost-rm  { color: #f5a623; font-weight: 600; font-variant-numeric: tabular-nums; }
+    .cost-ann { color: var(--accent); font-weight: 600; font-variant-numeric: tabular-nums; }
+    .cost-nil { color: var(--border); }
+
+    /* actual badge on updated rows */
+    .actual-badge {
+      display: inline-block;
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.58rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      background: rgba(78,204,163,0.15);
+      color: var(--accent-2);
+      border: 1px solid rgba(78,204,163,0.3);
+      margin-left: 0.3rem;
+      vertical-align: middle;
+    }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+    .tag {
+      display: inline-block;
+      padding: 0.18rem 0.55rem;
+      border-radius: 20px;
+      font-size: 0.65rem; font-weight: 600; letter-spacing: 0.03em;
+    }
+
+    .billing-link {
+      display: inline-flex; align-items: center; gap: 0.3rem;
+      color: var(--muted); text-decoration: none; font-size: 0.75rem;
+      transition: color 0.15s;
+    }
+    .billing-link:hover { color: var(--accent); }
+
+    tfoot td {
+      padding: 0.9rem 1.25rem;
+      font-weight: 700; font-size: 0.82rem;
+      background: var(--surface-2);
+      border-top: 2px solid var(--border);
+    }
+
+    /* ── Billing History Section ── */
+    .section-title {
+      font-size: 0.85rem; font-weight: 600; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 0.06em;
+      margin-bottom: 1rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .section-title::after {
+      content: 'Actual invoices from billing screenshots';
+      font-size: 0.65rem; font-weight: 400; letter-spacing: 0.02em;
+      color: var(--border);
+      text-transform: none;
+    }
+
+    .billing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .billing-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .billing-card-header {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .billing-card-title {
+      font-size: 0.9rem; font-weight: 700; color: var(--text);
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .billing-card-meta { text-align: right; }
+    .billing-latest-label { font-size: 0.62rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+    .billing-latest-value { font-size: 1.3rem; font-weight: 800; letter-spacing: -0.03em; color: var(--accent-2); }
+
+    /* mini bar chart */
+    .billing-chart-wrap { padding: 1rem 1.25rem 0; }
+    .billing-bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 64px;
+    }
+    .billing-bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+    .billing-bar {
+      width: 100%;
+      border-radius: 3px 3px 0 0;
+      min-height: 2px;
+      transition: opacity 0.15s;
+      cursor: default;
+      position: relative;
+    }
+    .billing-bar:hover { opacity: 0.75; }
+    .billing-bar-label { font-size: 0.5rem; color: var(--muted); white-space: nowrap; }
+
+    /* invoice list */
+    .invoice-list { padding: 0.5rem 0; }
+    .invoice-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.45rem 1.25rem;
+      border-top: 1px solid var(--border);
+      transition: background 0.1s;
+    }
+    .invoice-row:hover { background: var(--surface-2); }
+    .invoice-row.latest {
+      background: rgba(78,204,163,0.05);
+      border-left: 2px solid var(--accent-2);
+    }
+    .invoice-month { font-size: 0.78rem; color: var(--text); }
+    .invoice-right { display: flex; align-items: center; gap: 0.75rem; }
+    .invoice-amount { font-size: 0.82rem; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--accent-2); }
+    .invoice-badge {
+      font-size: 0.6rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
+      padding: 0.1rem 0.4rem; border-radius: 4px;
+    }
+    .badge-paid     { background: rgba(61,196,126,0.15); color: #3dc47e; }
+    .badge-upcoming { background: rgba(108,110,247,0.15); color: var(--accent); }
+    .badge-free     { background: rgba(123,130,176,0.15); color: var(--muted); }
+
+    .invoice-delta {
+      font-size: 0.68rem;
+      font-variant-numeric: tabular-nums;
+    }
+    .delta-up   { color: #e85d5d; }
+    .delta-down { color: #3dc47e; }
+    .delta-flat { color: var(--muted); }
+
+    .show-more-btn {
+      width: 100%;
+      padding: 0.65rem;
+      background: transparent;
+      border: none;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.72rem;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.15s;
+    }
+    .show-more-btn:hover { background: var(--surface-2); color: var(--text); }
+
+    /* ── Legend ── */
+    .legend { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.5rem; }
+    .legend-item { display: flex; align-items: center; gap: 0.35rem; font-size: 0.72rem; color: var(--muted); }
+    .legend-dot  { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="logo">💰</div>
+    <div class="header-text">
+      <h1>EdBuddies Stack Costing</h1>
+      <p>Infrastructure &amp; tooling cost overview · Updated May 2026 · Actual billing from invoices</p>
+    </div>
+  </div>
+
+  <!-- Estimation Banner -->
+  <div class="estimation-banner">
+    <div class="estimation-label">Annual Cost Estimation</div>
+    <div class="estimation-row">
+      <div class="est-item">
+        <div class="est-item-label">Projected Annual (USD)</div>
+        <div class="est-item-value highlight-usd" id="est-annual-usd">—</div>
+        <div class="est-item-sub">Monthly × 12 + one-time annual</div>
+      </div>
+      <div class="est-divider"></div>
+      <div class="est-item">
+        <div class="est-item-label">Est. Monthly Burn</div>
+        <div class="est-item-value highlight-total" id="est-monthly-burn">—</div>
+        <div class="est-item-sub">USD services only</div>
+      </div>
+    </div>
+    <div class="est-note">⚡ DO, Figma &amp; Supabase reflect actual latest invoice · RM/USD not converted · Twilio billed by usage</div>
+  </div>
+
+  <!-- Summary Cards -->
+  <div class="summary-grid">
+    <div class="card">
+      <div class="card-label">Monthly (USD)</div>
+      <div class="card-value usd" id="total-usd">—</div>
+      <div class="card-sub">USD-billed services</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Monthly (RM)</div>
+      <div class="card-value rm" id="total-rm">—</div>
+      <div class="card-sub">MYR-billed services</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Annual (USD)</div>
+      <div class="card-value ann" id="total-ann">—</div>
+      <div class="card-sub">One-time yearly subscriptions</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Total Services</div>
+      <div class="card-value cnt" id="total-count">—</div>
+      <div class="card-sub">Tracked in stack</div>
+    </div>
+  </div>
+
+  <!-- Charts -->
+  <div class="charts-row">
+    <div class="chart-card">
+      <h3>Spending by Category (USD/mo)</h3>
+      <div class="chart-wrap"><canvas id="chartUSD"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h3>Spending by Category (RM/mo)</h3>
+      <div class="chart-wrap"><canvas id="chartRM"></canvas></div>
+    </div>
+  </div>
+
+  <!-- Filter -->
+  <div class="filter-bar">
+    <span class="filter-label">Filter:</span>
+    <button class="filter-btn active" data-cat="All">All</button>
+    <button class="filter-btn" data-cat="Cloud">Cloud</button>
+    <button class="filter-btn" data-cat="Backend">Backend</button>
+    <button class="filter-btn" data-cat="Database">Database</button>
+    <button class="filter-btn" data-cat="SaaS">SaaS</button>
+    <button class="filter-btn" data-cat="Design">Design</button>
+    <button class="filter-btn" data-cat="Management">Management</button>
+    <button class="filter-btn" data-cat="Source Code">Source Code</button>
+    <button class="filter-btn" data-cat="Distribution">Distribution</button>
+    <button class="filter-btn" data-cat="Marketing">Marketing</button>
+  </div>
+
+  <!-- Table -->
+  <div class="table-card">
+    <h3>Services</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Service</th>
+          <th>Categories</th>
+          <th>Users</th>
+          <th>Monthly (USD)</th>
+          <th>Monthly (RM)</th>
+          <th>Annual (USD)</th>
+        </tr>
+      </thead>
+      <tbody id="table-body"></tbody>
+      <tfoot>
+        <tr>
+          <td>Total</td>
+          <td></td>
+          <td id="foot-users"></td>
+          <td class="cost-usd" id="foot-usd"></td>
+          <td class="cost-rm"  id="foot-rm"></td>
+          <td class="cost-ann" id="foot-ann"></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <!-- Billing History -->
+  <div class="section-title">Billing History</div>
+  <div class="billing-grid" id="billing-grid"></div>
+
+  <!-- Legend -->
+  <div class="legend" id="legend"></div>
+
+<script>
+const CAT_COLORS = {
+  'Cloud':             '#9c6de8',
+  'SaaS':              '#e85d5d',
+  'Database':          '#8a8fa8',
+  'Backend':           '#e8843d',
+  'Push Notification': '#3dc47e',
+  'Analytic':          '#b07050',
+  'Monitoring':        '#4d8ff5',
+  'Source Code':       '#c0c4d8',
+  'Management':        '#d4a017',
+  'Design':            '#e870b8',
+  'Distribution':      '#c8b200',
+  'Marketing':         '#e86840',
+};
+
+const SERVICES = [
+  {
+    name: 'Digital Ocean',
+    categories: ['Cloud', 'Backend'],
+    users: 17,
+    monthlyUSD: 105.03,
+    monthlyRM: null,
+    annualUSD: null,
+    actualBilling: true,
+    billing: 'https://drive.google.com/drive/folders/1v6e7e_e0oBZqXswTHmbhyZv2OPBu4tC7',
+  },
+  {
+    name: 'Figma',
+    categories: ['Design'],
+    users: 4,
+    monthlyUSD: 65.40,
+    monthlyRM: null,
+    annualUSD: null,
+    actualBilling: true,
+    billing: 'https://drive.google.com/drive/folders/1rHhOoZlcSN3Uv5s9_mGnVO_lNkG_Fca-',
+  },
+  {
+    name: 'Supabase',
+    categories: ['Cloud', 'Database', 'Backend'],
+    users: 2,
+    monthlyUSD: 162.25,
+    monthlyRM: null,
+    annualUSD: null,
+    actualBilling: true,
+    billing: 'https://drive.google.com/drive/folders/1s6a-l8Ps-ZblR0ZmnM6fLzYH7bX-JOMU',
+  },
+  {
+    name: 'Notion',
+    categories: ['Management', 'Design'],
+    users: 2,
+    monthlyUSD: 24,
+    monthlyRM: null,
+    annualUSD: null,
+    billing: 'https://drive.google.com/drive/folders/1RhSabhVjyC4fZfXl83f95n7gjow58HzN',
+  },
+  {
+    name: 'Github',
+    categories: ['Source Code'],
+    users: 3,
+    monthlyUSD: 12,
+    monthlyRM: null,
+    annualUSD: null,
+    billing: 'https://drive.google.com/drive/folders/1K-0yGhjukxHYUzdY9YuEWToeBbHhtyEc',
+  },
+  {
+    name: 'Twilio SMS',
+    categories: ['SaaS', 'Backend'],
+    users: 1,
+    monthlyUSD: 6,
+    monthlyRM: null,
+    annualUSD: null,
+    billing: 'https://drive.google.com/drive/folders/1t4O_7dLUcgaxjIjjD-rMO2MsmCDKzOoO',
+  },
+  {
+    name: 'Google Workspace',
+    categories: ['Marketing'],
+    users: 5,
+    monthlyUSD: null,
+    monthlyRM: 94.50,
+    annualUSD: null,
+    billing: 'https://drive.google.com/drive/folders/1uX6t9Kk4rqaHlodtAiqT8T3gG_tzKavz',
+  },
+  {
+    name: 'Zoom',
+    categories: ['Management'],
+    users: 1,
+    monthlyUSD: null,
+    monthlyRM: 65.33,
+    annualUSD: null,
+    billing: 'https://drive.google.com/drive/folders/1w5QedBBwIQKM-bGLwmyAWYZDVSGcMkgW',
+  },
+  {
+    name: 'Apple App Store',
+    categories: ['Distribution'],
+    users: 1,
+    monthlyUSD: null,
+    monthlyRM: null,
+    annualUSD: 99,
+    billing: 'https://drive.google.com/drive/folders/1_Duu_hlDF0Wy1B1zaU4_Z2YBIZ7IDaEY',
+  },
+  {
+    name: 'Google Play Store',
+    categories: ['Distribution'],
+    users: 1,
+    monthlyUSD: null,
+    monthlyRM: null,
+    annualUSD: 25,
+    billing: 'https://drive.google.com/drive/folders/1k6KcoXgeDBg4FLA_i9kor8wxRz9Ew9gA',
+  },
+];
+
+// ── Actual billing history data (from invoice screenshots) ───────────────
+const BILLING_HISTORY = {
+  'Digital Ocean': [
+    { month: 'Apr 2026', amount: 105.03, status: 'paid' },
+    { month: 'Mar 2026', amount: 100.47, status: 'paid' },
+    { month: 'Feb 2026', amount: 100.44, status: 'paid' },
+    { month: 'Dec 2025', amount: 93.96,  status: 'paid' },
+    { month: 'Nov 2025', amount: 90.41,  status: 'paid' },
+    { month: 'Oct 2025', amount: 87.48,  status: 'paid' },
+    { month: 'Sep 2025', amount: 87.48,  status: 'paid' },
+    { month: 'Aug 2025', amount: 87.48,  status: 'paid' },
+    { month: 'Jul 2025', amount: 87.48,  status: 'paid' },
+    { month: 'Jun 2025', amount: 107.70, status: 'paid' },
+    { month: 'May 2025', amount: 110.61, status: 'paid' },
+    { month: 'Mar 2025', amount: 98.65,  status: 'paid' },
+    { month: 'Feb 2025', amount: 30.22,  status: 'paid' },
+    { month: 'Jan 2025', amount: 16.51,  status: 'paid' },
+    { month: 'Dec 2024', amount: 15.12,  status: 'paid' },
+  ],
+  'Figma': [
+    { month: 'May 2026', amount: 65.40,  status: 'paid' },
+    { month: 'Apr 2026', amount: 65.40,  status: 'paid' },
+    { month: 'Mar 2026', amount: 65.40,  status: 'paid' },
+    { month: 'Feb 2026', amount: 109.00, status: 'paid' },
+    { month: 'Jan 2026', amount: 109.00, status: 'paid' },
+    { month: 'Dec 2025', amount: 109.00, status: 'paid' },
+    { month: 'Nov 2025', amount: 109.00, status: 'paid' },
+    { month: 'Oct 2025', amount: 109.00, status: 'paid' },
+    { month: 'Sep 2025', amount: 114.10, status: 'paid' },
+  ],
+  'Supabase': [
+    { month: 'Apr 2026', amount: 162.25, status: 'paid', ref: 'EPIDUT-00017' },
+    { month: 'Mar 2026', amount: 148.00, status: 'paid', ref: 'EPIDUT-00016' },
+    { month: 'Feb 2026', amount: 162.25, status: 'paid', ref: 'EPIDUT-00015' },
+    { month: 'Jan 2026', amount: 162.25, status: 'paid', ref: 'EPIDUT-00014' },
+    { month: 'Dec 2025', amount: 157.44, status: 'paid', ref: 'EPIDUT-00013' },
+    { month: 'Nov 2025', amount: 162.25, status: 'paid', ref: 'EPIDUT-00012' },
+    { month: 'Oct 2025', amount: 157.34, status: 'paid', ref: 'EPIDUT-00011' },
+    { month: 'Sep 2025', amount: 162.25, status: 'paid', ref: 'EPIDUT-00010' },
+    { month: 'Aug 2025', amount: 51.72,  status: 'paid', ref: 'EPIDUT-00009' },
+    { month: 'Jul 2025', amount: 44.02,  status: 'paid', ref: 'EPIDUT-00008' },
+    { month: 'Jun 2025', amount: 28.28,  status: 'paid', ref: 'EPIDUT-00007' },
+    { month: 'May 2025', amount: 25.00,  status: 'paid', ref: 'EPIDUT-00005' },
+  ],
+};
+
+// ── Totals ───────────────────────────────────────────
+const totalUSD = SERVICES.reduce((s, r) => s + (r.monthlyUSD || 0), 0);
+const totalRM  = SERVICES.reduce((s, r) => s + (r.monthlyRM  || 0), 0);
+const totalAnn = SERVICES.reduce((s, r) => s + (r.annualUSD  || 0), 0);
+
+const estAnnualUSD = (totalUSD * 12) + totalAnn;
+const estAnnualRM  = totalRM * 12;
+
+document.getElementById('est-annual-usd').textContent   = `$${estAnnualUSD.toFixed(2)}`;
+document.getElementById('est-monthly-burn').textContent = `$${totalUSD.toFixed(2)}`;
+document.getElementById('total-usd').textContent   = `$${totalUSD.toFixed(2)}`;
+document.getElementById('total-rm').textContent    = `RM ${totalRM.toFixed(2)}`;
+document.getElementById('total-ann').textContent   = `$${totalAnn.toFixed(2)}`;
+document.getElementById('total-count').textContent = SERVICES.length;
+
+// ── Table ────────────────────────────────────────────
+function renderTag(cat) {
+  const color = CAT_COLORS[cat] || '#888';
+  return `<span class="tag" style="background:${color}22;color:${color}">${cat}</span>`;
+}
+
+const tbody = document.getElementById('table-body');
+SERVICES.forEach(s => {
+  const tr = document.createElement('tr');
+  tr.dataset.cats = JSON.stringify(s.categories);
+  const costUSD = s.monthlyUSD != null
+    ? `<span class="cost-usd">$${s.monthlyUSD.toFixed(2)}</span>${s.actualBilling ? '<span class="actual-badge">actual</span>' : ''}`
+    : `<span class="cost-nil">—</span>`;
+  tr.innerHTML = `
+    <td class="service-name">${s.name}</td>
+    <td><div class="tags">${s.categories.map(renderTag).join('')}</div></td>
+    <td><span class="users-badge">👤 ${s.users}</span></td>
+    <td>${costUSD}</td>
+    <td>${s.monthlyRM  != null ? `<span class="cost-rm">RM ${s.monthlyRM.toFixed(2)}</span>` : `<span class="cost-nil">—</span>`}</td>
+    <td>${s.annualUSD  != null ? `<span class="cost-ann">$${s.annualUSD.toFixed(2)}</span>`  : `<span class="cost-nil">—</span>`}</td>
+  `;
+  tbody.appendChild(tr);
+});
+
+document.getElementById('foot-users').textContent = `${SERVICES.reduce((s,r) => s + r.users, 0)} seats`;
+document.getElementById('foot-usd').textContent   = `$${totalUSD.toFixed(2)}`;
+document.getElementById('foot-rm').textContent    = `RM ${totalRM.toFixed(2)}`;
+document.getElementById('foot-ann').textContent   = `$${totalAnn.toFixed(2)}`;
+
+// ── Filter ───────────────────────────────────────────
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const cat = btn.dataset.cat;
+    document.querySelectorAll('#table-body tr').forEach(tr => {
+      const cats = JSON.parse(tr.dataset.cats);
+      tr.classList.toggle('hidden', cat !== 'All' && !cats.includes(cat));
+    });
+  });
+});
+
+// ── Charts ───────────────────────────────────────────
+function buildCatData(field) {
+  const map = {};
+  SERVICES.forEach(s => {
+    if (s[field] == null) return;
+    s.categories.forEach(cat => { map[cat] = (map[cat] || 0) + s[field]; });
+  });
+  return map;
+}
+
+function makeChart(id, data, label) {
+  const cats   = Object.keys(data);
+  const values = Object.values(data);
+  const colors = cats.map(c => CAT_COLORS[c] || '#888');
+  new Chart(document.getElementById(id), {
+    type: 'doughnut',
+    data: {
+      labels: cats,
+      datasets: [{
+        data: values,
+        backgroundColor: colors.map(c => c + 'cc'),
+        borderColor: colors,
+        borderWidth: 1.5,
+        hoverOffset: 6,
+      }]
+    },
+    options: {
+      cutout: '62%',
+      plugins: {
+        legend: {
+          position: 'right',
+          labels: {
+            color: '#7b82b0',
+            font: { size: 11, family: '-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif' },
+            padding: 10, boxWidth: 10, boxHeight: 10,
+          }
+        },
+        tooltip: {
+          callbacks: { label: ctx => ` ${ctx.label}: ${label}${ctx.parsed.toFixed(2)}` },
+          backgroundColor: '#22263a', borderColor: '#2e3250', borderWidth: 1,
+          titleColor: '#e8eaf6', bodyColor: '#7b82b0', padding: 10,
+        }
+      }
+    }
+  });
+}
+
+makeChart('chartUSD', buildCatData('monthlyUSD'), '$');
+makeChart('chartRM',  buildCatData('monthlyRM'),  'RM ');
+
+// ── Billing History cards ─────────────────────────────
+const SERVICE_COLORS = {
+  'Digital Ocean': '#9c6de8',
+  'Figma':         '#e870b8',
+  'Supabase':      '#3dc47e',
+};
+const SERVICE_ICONS = {
+  'Digital Ocean': '🌊',
+  'Figma':         '🎨',
+  'Supabase':      '🗄️',
+};
+
+const PREVIEW_COUNT = 6;
+
+function buildBillingCard(name, invoices) {
+  const color   = SERVICE_COLORS[name] || '#888';
+  const icon    = SERVICE_ICONS[name]  || '💳';
+  const latest  = invoices[0];
+  const maxAmt  = Math.max(...invoices.map(i => i.amount));
+
+  // mini bars — show last 12 (reversed so oldest left)
+  const barData = invoices.slice(0, 12).reverse();
+  const BAR_MAX_PX = 52;
+  const barsHTML = barData.map((inv, i) => {
+    const heightPx = maxAmt > 0 ? Math.max((inv.amount / maxAmt) * BAR_MAX_PX, 2) : 2;
+    const isLast = i === barData.length - 1;
+    return `
+      <div class="billing-bar-wrap" title="${inv.month}: $${inv.amount.toFixed(2)}">
+        <div class="billing-bar"
+             style="height:${heightPx.toFixed(1)}px;background:${isLast ? color : color + '66'}"></div>
+        <div class="billing-bar-label">${inv.month.split(' ')[0]}</div>
+      </div>`;
+  }).join('');
+
+  // invoice rows
+  function invoiceRowHTML(inv, idx) {
+    const prev  = invoices[idx + 1];
+    let delta = '';
+    if (prev && prev.amount > 0) {
+      const diff = inv.amount - prev.amount;
+      if (Math.abs(diff) > 0.01) {
+        const sign = diff > 0 ? '+' : '';
+        const cls  = diff > 0 ? 'delta-up' : 'delta-down';
+        delta = `<span class="invoice-delta ${cls}">${sign}$${Math.abs(diff).toFixed(2)}</span>`;
+      } else {
+        delta = `<span class="invoice-delta delta-flat">—</span>`;
+      }
+    }
+    const badgeCls = inv.status === 'paid' ? 'badge-paid'
+                   : inv.status === 'upcoming' ? 'badge-upcoming' : 'badge-free';
+    const isLatest = idx === 0;
+    const ref = inv.ref ? `<span style="font-size:0.6rem;color:var(--border);margin-left:0.3rem">${inv.ref}</span>` : '';
+    return `
+      <div class="invoice-row${isLatest ? ' latest' : ''}">
+        <span class="invoice-month">${inv.month}${ref}</span>
+        <div class="invoice-right">
+          ${delta}
+          <span class="invoice-badge ${badgeCls}">${inv.status}</span>
+          <span class="invoice-amount">$${inv.amount.toFixed(2)}</span>
+        </div>
+      </div>`;
+  }
+
+  const previewRows = invoices.slice(0, PREVIEW_COUNT).map((inv, i) => invoiceRowHTML(inv, i)).join('');
+  const extraRows   = invoices.slice(PREVIEW_COUNT).map((inv, i) => invoiceRowHTML(inv, i + PREVIEW_COUNT)).join('');
+  const hasMore     = invoices.length > PREVIEW_COUNT;
+
+  const cardId = name.replace(/\s+/g, '-').toLowerCase();
+
+  return `
+    <div class="billing-card">
+      <div class="billing-card-header">
+        <div class="billing-card-title">${icon} ${name}</div>
+        <div class="billing-card-meta">
+          <div class="billing-latest-label">Latest Invoice</div>
+          <div class="billing-latest-value" style="color:${color}">$${latest.amount.toFixed(2)}</div>
+        </div>
+      </div>
+      <div class="billing-chart-wrap">
+        <div class="billing-bars">${barsHTML}</div>
+      </div>
+      <div class="invoice-list">
+        ${previewRows}
+        ${hasMore ? `
+          <div id="extra-${cardId}" style="display:none">${extraRows}</div>
+          <button class="show-more-btn" onclick="toggleExtra('${cardId}', this)">
+            Show ${invoices.length - PREVIEW_COUNT} more months ↓
+          </button>` : ''}
+      </div>
+    </div>`;
+}
+
+const grid = document.getElementById('billing-grid');
+Object.entries(BILLING_HISTORY).forEach(([name, invoices]) => {
+  grid.innerHTML += buildBillingCard(name, invoices);
+});
+
+function toggleExtra(cardId, btn) {
+  const el = document.getElementById(`extra-${cardId}`);
+  const hidden = el.style.display === 'none';
+  el.style.display = hidden ? 'block' : 'none';
+  btn.textContent  = hidden ? 'Show less ↑' : `Show more months ↓`;
+}
+
+// ── Legend ───────────────────────────────────────────
+const legend = document.getElementById('legend');
+Object.entries(CAT_COLORS).forEach(([cat, color]) => {
+  if (!SERVICES.some(s => s.categories.includes(cat))) return;
+  const div = document.createElement('div');
+  div.className = 'legend-item';
+  div.innerHTML = `<div class="legend-dot" style="background:${color}"></div>${cat}`;
+  legend.appendChild(div);
+});
+</script>
+</body>
+</html>
