@@ -1,0 +1,3894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>EdBuddies.ai — Investment Teaser (EN | VI)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+
+/* ─── TOKENS ─────────────────────────────────────────────── */
+:root {
+  --orange-50:  #FFF7ED;
+  --orange-100: #FFEDD5;
+  --orange-400: #FB923C;
+  --orange-500: #F97316;
+  --orange-600: #EA6C0A;
+  --navy-50:    #EEF2FF;
+  --navy-100:   #E0E7FF;
+  --navy-600:   #2448A5;
+  --navy-700:   #1E3A8A;
+  --navy-800:   #162D6E;
+  --navy-900:   #0D1B4B;
+  --gray-50:    #F8FAFC;
+  --gray-100:   #F1F5F9;
+  --gray-200:   #E2E8F0;
+  --gray-300:   #CBD5E1;
+  --gray-400:   #94A3B8;
+  --gray-500:   #64748B;
+  --gray-600:   #475569;
+  --gray-700:   #334155;
+  --gray-900:   #0F172A;
+  --white:      #FFFFFF;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --inner: 1200px;
+  --pad-x: 80px;
+  --pad-y: 96px;
+}
+
+/* ─── RESET ──────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-family: var(--font); scroll-behavior: smooth; }
+body { color: var(--gray-900); line-height: 1.6; background: var(--white); }
+
+/* ─── INNER CONTAINER ────────────────────────────────────── */
+.inner {
+  max-width: var(--inner);
+  margin: 0 auto;
+  padding: 0 var(--pad-x);
+}
+
+/* ─── STICKY TOPBAR ──────────────────────────────────────── */
+.topbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 999;
+  background: rgba(13,27,75,0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+.topbar .inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.topbar-logo { height: 30px; object-fit: contain; }
+.topbar-nav { display: flex; align-items: center; gap: 6px; }
+.topbar-nav a {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.55);
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+.topbar-nav a:hover, .topbar-nav a.active {
+  color: var(--white);
+  background: rgba(255,255,255,0.08);
+}
+.topbar-right { display: flex; align-items: center; gap: 12px; }
+.hamburger {
+  display: none;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #fff;
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, border-color 0.2s;
+}
+.hamburger:hover { background: rgba(255,255,255,0.08); border-color: rgba(249,115,22,0.5); }
+.hamburger .bar {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: #fff;
+  position: relative;
+}
+.hamburger .bar::before,
+.hamburger .bar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 18px;
+  height: 2px;
+  background: #fff;
+  transition: transform 0.2s;
+}
+.hamburger .bar::before { top: -6px; }
+.hamburger .bar::after  { top: 6px; }
+.hamburger.is-open .bar { background: transparent; }
+.hamburger.is-open .bar::before { top: 0; transform: rotate(45deg); }
+.hamburger.is-open .bar::after  { top: 0; transform: rotate(-45deg); }
+.badge-conf {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 4px 12px;
+  border-radius: 100px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.btn-export {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--white);
+  background: var(--orange-500);
+  border: none;
+  border-radius: 8px;
+  padding: 8px 18px;
+  cursor: pointer;
+  font-family: var(--font);
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+.btn-export:hover { background: var(--orange-600); }
+
+/* ─── SECTION RHYTHM ─────────────────────────────────────── */
+section { padding: var(--pad-y) 0; }
+section.tight { padding: 72px 0; }
+
+/* ─── SECTION LABELS ─────────────────────────────────────── */
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--orange-500);
+  margin-bottom: 16px;
+}
+.label .dot { width: 6px; height: 6px; background: var(--orange-500); border-radius: 50%; }
+.label--light { color: var(--orange-400); }
+.label--light .dot { background: var(--orange-400); }
+
+/* ─── HEADINGS ───────────────────────────────────────────── */
+h1.hero {
+  font-size: clamp(38px, 5vw, 64px);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  color: var(--white);
+}
+h2.sec {
+  font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--navy-900);
+}
+h2.sec--white { color: var(--white); }
+.accent { color: var(--orange-500); }
+.accent--light { color: var(--orange-400); }
+
+/* ─── DIVIDER ────────────────────────────────────────────── */
+.divider { width: 48px; height: 4px; background: var(--orange-500); border-radius: 4px; margin: 20px 0 32px; }
+.divider--light { background: var(--orange-400); }
+
+/* ─── BODY TEXT ──────────────────────────────────────────── */
+p.body { font-size: 16px; color: var(--gray-600); line-height: 1.8; }
+p.body--white { color: rgba(255,255,255,0.72); }
+p.body--lg { font-size: 18px; }
+
+/* ─── GRIDS ──────────────────────────────────────────────── */
+.col-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.col-2--60 { grid-template-columns: 1.5fr 1fr; }
+.col-2--40 { grid-template-columns: 1fr 1.5fr; }
+.col-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.col-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.col-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
+
+/* ─────────────────────────────────────────────────────────
+   SECTION 1 — HERO / COVER
+───────────────────────────────────────────────────────── */
+#hero {
+  min-height: 100vh;
+  background: var(--navy-900);
+  display: flex;
+  align-items: center;
+  padding: 100px 0 80px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-bg-blob {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.hero-bg-blob--1 {
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(249,115,22,0.18) 0%, transparent 70%);
+  top: -200px; right: -150px;
+}
+.hero-bg-blob--2 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(30,58,138,0.5) 0%, transparent 70%);
+  bottom: -100px; left: -100px;
+}
+.hero-bg-blob--3 {
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(249,115,22,0.08) 0%, transparent 70%);
+  top: 40%; left: 38%;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 60px;
+  align-items: center;
+}
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(249,115,22,0.12);
+  border: 1px solid rgba(249,115,22,0.3);
+  color: var(--orange-400);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 7px 16px;
+  border-radius: 100px;
+  margin-bottom: 28px;
+  width: fit-content;
+}
+.hero-sub {
+  font-size: 18px;
+  color: rgba(255,255,255,0.6);
+  margin-top: 24px;
+  line-height: 1.75;
+  max-width: 560px;
+}
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-top: 48px;
+}
+.hero-stat {
+  padding: 24px 28px;
+  background: rgba(255,255,255,0.03);
+}
+.hero-stat .val {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--orange-400);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+.hero-stat .lbl {
+  font-size: 13px;
+  color: rgba(255,255,255,0.45);
+  margin-top: 4px;
+}
+.hero-right {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+.hero-mascot {
+  width: 280px;
+  filter: drop-shadow(0 24px 48px rgba(0,0,0,0.4));
+  animation: float 4s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+.hero-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 14px;
+  padding: 20px 24px;
+  width: 100%;
+  backdrop-filter: blur(8px);
+}
+.hero-card .card-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 12px;
+}
+.hero-card .card-items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.hero-card .card-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.75);
+  font-weight: 500;
+}
+.hero-card .card-item::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--orange-500);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.hero-scroll {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255,255,255,0.3);
+  font-size: 13px;
+  margin-top: 48px;
+  font-weight: 500;
+}
+.hero-scroll-icon {
+  width: 32px; height: 32px;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  animation: bounce 2s infinite;
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+/* ─────────────────────────────────────────────────────────
+   SECTION 2 — OVERVIEW
+───────────────────────────────────────────────────────── */
+#overview { background: var(--white); }
+.overview-snapshot {
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.snapshot-header {
+  padding: 16px 24px;
+  background: var(--navy-900);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+}
+.snapshot-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 9px 24px;
+  border-bottom: 1px solid var(--gray-200);
+  font-size: 14px;
+}
+.snapshot-row:last-child { border-bottom: none; }
+.snapshot-row .sk { color: var(--gray-500); }
+.snapshot-row .sv { font-weight: 700; color: var(--navy-900); }
+.snapshot-row .sv--orange { color: var(--orange-500); }
+.overview-quote {
+  border-left: 4px solid var(--orange-500);
+  background: var(--orange-50);
+  padding: 20px 28px;
+  border-radius: 0 12px 12px 0;
+  margin-top: 32px;
+}
+.overview-quote p { font-size: 15px; font-weight: 600; color: var(--navy-800); font-style: italic; line-height: 1.7; }
+
+/* ─────────────────────────────────────────────────────────
+   SECTION 3 — PROBLEM
+───────────────────────────────────────────────────────── */
+#problem { background: var(--gray-50); }
+.problem-intro {
+  max-width: 760px;
+  margin-bottom: 56px;
+}
+.prob-card {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 14px;
+  padding: 28px 24px;
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.prob-card:hover { box-shadow: 0 8px 32px rgba(13,27,75,0.1); transform: translateY(-3px); }
+.prob-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--orange-500), var(--orange-400));
+}
+.prob-icon {
+  width: 48px; height: 48px;
+  background: var(--orange-50);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin-bottom: 16px;
+}
+.prob-card h3 { font-size: 16px; font-weight: 700; color: var(--navy-900); margin-bottom: 10px; }
+.prob-card p  { font-size: 14px; color: var(--gray-500); line-height: 1.7; }
+
+/* ─────────────────────────────────────────────────────────
+   SECTION 4 — SOLUTION
+───────────────────────────────────────────────────────── */
+#solution { background: var(--white); }
+.feat-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--gray-100);
+}
+.feat-row:last-child { border-bottom: none; }
+.feat-icon {
+  width: 44px; height: 44px; min-width: 44px;
+  background: var(--orange-50);
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+.feat-row h3 { font-size: 15px; font-weight: 700; color: var(--navy-900); margin-bottom: 4px; }
+.feat-row p  { font-size: 14px; color: var(--gray-500); line-height: 1.65; }
+.roadmap-box {
+  background: var(--navy-50);
+  border: 1px solid var(--navy-100);
+  border-radius: 16px;
+  padding: 28px 32px;
+}
+.roadmap-box h3 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--orange-500); margin-bottom: 20px; }
+.roadmap-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--navy-100);
+  font-size: 14px;
+  color: var(--gray-600);
+  font-weight: 500;
+}
+.roadmap-item:last-child { border-bottom: none; }
+.roadmap-item .ri-dot { width: 8px; height: 8px; background: var(--gray-300); border-radius: 50%; flex-shrink: 0; }
+.position-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, var(--navy-900), var(--navy-700));
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 700;
+  padding: 12px 24px;
+  border-radius: 100px;
+  margin-top: 32px;
+}
+
+/* ─────────────────────────────────────────────────────────
+   SECTION 5 — WHY NOW
+───────────────────────────────────────────────────────── */
+#whynow {
+  background: var(--navy-900);
+  position: relative;
+  overflow: hidden;
+}
+#whynow .bg-grad {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 80% 50%, rgba(249,115,22,0.12) 0%, transparent 60%);
+  pointer-events: none;
+}
+.why-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 32px 24px;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.2s, border-color 0.2s;
+}
+.why-card:hover {
+  background: rgba(249,115,22,0.08);
+  border-color: rgba(249,115,22,0.3);
+}
+.why-num {
+  font-size: 48px;
+  font-weight: 900;
+  color: rgba(249,115,22,0.25);
+  line-height: 1;
+  position: absolute;
+  top: 16px; right: 20px;
+  letter-spacing: -0.03em;
+}
+.why-card h3 { font-size: 16px; font-weight: 700; color: var(--white); margin-bottom: 12px; margin-top: 8px; line-height: 1.3; }
+.why-card p  { font-size: 14px; color: rgba(255,255,255,0.58); line-height: 1.7; }
+.why-icon { font-size: 28px; margin-bottom: 14px; }
+
+/* ─────────────────────────────────────────────────────────
+   SECTION 6 — TRACTION
+───────────────────────────────────────────────────────── */
+#traction {
+  background: linear-gradient(160deg, #0D1B4B 0%, #1E3A8A 100%);
+  position: relative;
+  overflow: hidden;
+}
+#traction .bg-grad {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 20% 80%, rgba(249,115,22,0.15) 0%, transparent 55%);
+  pointer-events: none;
+}
+.met-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
+  margin-top: 48px;
+}
+.met-card {
+  padding: 40px 36px;
+  background: rgba(255,255,255,0.03);
+  text-align: left;
+  position: relative;
+}
+.met-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--orange-500), transparent);
+}
+.met-card .val {
+  font-size: 42px;
+  font-weight: 900;
+  color: var(--white);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.met-card .val span { color: var(--orange-400); }
+.met-card .lbl {
+  font-size: 14px;
+  color: rgba(255,255,255,0.5);
+  margin-top: 10px;
+  line-height: 1.5;
+}
+.met-card .sig {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #4ade80;
+  background: rgba(74,222,128,0.1);
+  border-radius: 100px;
+  padding: 4px 12px;
+}
+.met-summary {
+  background: rgba(249,115,22,0.1);
+  border: 1px solid rgba(249,115,22,0.25);
+  border-radius: 16px;
+  padding: 32px 36px;
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+.met-summary .check-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px 32px;
+  flex: 1;
+}
+.met-check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.85);
+}
+.met-check::before {
+  content: '✓';
+  width: 24px; height: 24px;
+  background: rgba(249,115,22,0.2);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: var(--orange-400);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* ─────────────────────────────────────────────────────────
+   SECTION 7 — PRODUCT PHILOSOPHY
+───────────────────────────────────────────────────────── */
+#philosophy { background: var(--gray-50); }
+.phil-card {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 16px;
+  padding: 28px;
+}
+.phil-card .pi { font-size: 28px; margin-bottom: 14px; }
+.phil-card h3 { font-size: 16px; font-weight: 700; color: var(--navy-900); margin-bottom: 8px; }
+.phil-card p  { font-size: 14px; color: var(--gray-500); line-height: 1.7; }
+.phil-quote {
+  background: var(--navy-900);
+  border-radius: 20px;
+  padding: 40px 48px;
+  color: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+.phil-quote::before {
+  content: '"';
+  position: absolute;
+  top: -20px; left: 32px;
+  font-size: 160px;
+  font-weight: 900;
+  color: rgba(249,115,22,0.15);
+  line-height: 1;
+  font-family: serif;
+}
+.phil-quote blockquote {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.65;
+  color: var(--white);
+  font-style: italic;
+  position: relative;
+  z-index: 1;
+  max-width: 600px;
+}
+.phil-quote cite {
+  display: block;
+  margin-top: 20px;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 600;
+  color: var(--orange-400);
+}
+
+/* ─────────────────────────────────────────────────────────
+   SECTION 8 — BUSINESS MODEL
+───────────────────────────────────────────────────────── */
+#bizmodel { background: var(--white); }
+.bm-section {
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--gray-200);
+}
+.bm-head {
+  padding: 20px 28px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.bm-head--current { background: var(--navy-900); color: var(--orange-400); }
+.bm-head--future  { background: var(--navy-700); color: rgba(255,255,255,0.7); }
+.bm-list { display: flex; flex-direction: column; }
+.bm-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 11px 28px;
+  border-bottom: 1px solid var(--gray-100);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--navy-800);
+  background: var(--white);
+}
+.bm-row:last-child { border-bottom: none; }
+.bm-row .ico { font-size: 22px; min-width: 30px; }
+.bm-row--future { color: var(--navy-700); background: var(--navy-50); border-color: var(--navy-100); }
+.bm-attr {
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: 16px;
+  padding: 32px;
+}
+.bm-attr h3 { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray-500); margin-bottom: 20px; }
+.bm-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--gray-200);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--navy-800);
+}
+.bm-check:last-child { border-bottom: none; }
+.bm-check .ck { color: var(--orange-500); font-size: 18px; margin-top: -1px; }
+
+/* ─────────────────────────────────────────────────────────
+   SECTION 9 — POSITIONING
+───────────────────────────────────────────────────────── */
+#positioning {
+  background: var(--navy-900);
+  position: relative;
+  overflow: hidden;
+}
+#positioning .bg-grad {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 100% 100%, rgba(249,115,22,0.12) 0%, transparent 55%);
+  pointer-events: none;
+}
+.pos-table {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 28px;
+}
+.pos-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+}
+.pos-row--no {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  color: rgba(255,255,255,0.45);
+}
+.pos-row--yes {
+  background: rgba(249,115,22,0.1);
+  border: 1px solid rgba(249,115,22,0.25);
+  color: var(--white);
+}
+.pos-tag {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 14px;
+  border-radius: 100px;
+}
+.pos-tag--no  { background: rgba(248,113,113,0.12); color: #f87171; }
+.pos-tag--yes { background: rgba(249,115,22,0.2); color: var(--orange-400); }
+
+/* ─────────────────────────────────────────────────────────
+   SECTION 10 — INVESTMENT
+───────────────────────────────────────────────────────── */
+#investment { background: var(--gray-50); }
+.inv-card {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-top: 3px solid var(--navy-700);
+  border-radius: 14px;
+  padding: 28px 24px;
+}
+.inv-card h3 { font-size: 16px; font-weight: 700; color: var(--navy-900); margin-bottom: 10px; }
+.inv-card p  { font-size: 14px; color: var(--gray-500); line-height: 1.7; }
+.inv-approach {
+  background: var(--navy-900);
+  border-radius: 20px;
+  padding: 40px 44px;
+  color: var(--white);
+  margin-top: 56px;
+}
+.inv-approach h3 {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 32px;
+}
+.inv-points { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+.inv-point {}
+.inv-point .ip-icon {
+  width: 44px; height: 44px;
+  background: rgba(249,115,22,0.15);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  margin-bottom: 14px;
+}
+.inv-point h4 { font-size: 16px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+.inv-point p  { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.65; }
+
+/* ─────────────────────────────────────────────────────────
+   SECTION 11 — ROADMAP
+───────────────────────────────────────────────────────── */
+#roadmap { background: var(--white); }
+.rm-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  position: relative;
+  margin-top: 56px;
+  gap: 0;
+}
+.rm-steps::before {
+  content: '';
+  position: absolute;
+  top: 28px;
+  left: calc(12.5%);
+  right: calc(12.5%);
+  height: 2px;
+  background: linear-gradient(90deg, var(--orange-500) 0%, var(--orange-500) 25%, var(--navy-200, #C7D2FE) 25%, var(--navy-200, #C7D2FE) 100%);
+  z-index: 0;
+}
+.rm-step { text-align: center; padding: 0 16px; position: relative; z-index: 1; }
+.rm-dot {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin: 0 auto 20px;
+  border: 2px solid;
+}
+.rm-dot--live   { background: var(--orange-500); border-color: var(--orange-500); box-shadow: 0 0 0 6px rgba(249,115,22,0.15); }
+.rm-dot--future { background: var(--white); border-color: var(--gray-300); }
+.rm-step .phase {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 10px;
+  display: block;
+}
+.rm-step .phase--live   { color: var(--orange-500); }
+.rm-step .phase--future { color: var(--gray-400); }
+.rm-step h3 { font-size: 16px; font-weight: 700; color: var(--navy-900); margin-bottom: 10px; }
+.rm-step p  { font-size: 13px; color: var(--gray-500); line-height: 1.65; }
+.rm-vision {
+  margin-top: 56px;
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: 20px;
+  padding: 40px 48px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+.rm-vision img { height: 100px; object-fit: contain; }
+.rm-vision h3 { font-size: 22px; font-weight: 800; color: var(--navy-900); margin-bottom: 10px; }
+.rm-vision p  { font-size: 15px; color: var(--gray-600); line-height: 1.75; }
+
+/* ─────────────────────────────────────────────────────────
+   SECTION 12 — CONTACT / CTA
+───────────────────────────────────────────────────────── */
+#contact {
+  background: var(--navy-900);
+  padding-bottom: 80px;
+  position: relative;
+  overflow: hidden;
+}
+#contact .bg-grad {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 60% 0%, rgba(249,115,22,0.18) 0%, transparent 55%);
+  pointer-events: none;
+}
+.cta-center { text-align: center; max-width: 680px; margin: 0 auto 56px; }
+.cta-center p { font-size: 17px; color: rgba(255,255,255,0.62); line-height: 1.8; margin-top: 20px; }
+.contact-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 24px;
+  padding: 48px 56px;
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  max-width: 860px;
+  margin: 0 auto;
+  backdrop-filter: blur(8px);
+}
+.contact-avatar {
+  width: 96px; height: 96px; min-width: 96px;
+  background: linear-gradient(135deg, var(--navy-700), var(--orange-500));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--white);
+  box-shadow: 0 0 0 6px rgba(249,115,22,0.2);
+}
+.contact-info { flex: 1; }
+.contact-info h3 { font-size: 26px; font-weight: 800; color: var(--white); margin-bottom: 4px; }
+.contact-info .role { font-size: 15px; color: rgba(255,255,255,0.55); margin-bottom: 20px; }
+.contact-links { display: flex; gap: 12px; flex-wrap: wrap; }
+.contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.8);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.contact-link:hover { background: rgba(255,255,255,0.14); }
+.contact-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(249,115,22,0.15);
+  border: 1px solid rgba(249,115,22,0.3);
+  color: var(--orange-400);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+.contact-footer {
+  text-align: center;
+  margin-top: 56px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.contact-footer p { font-size: 12px; color: rgba(255,255,255,0.25); line-height: 1.9; }
+.contact-footer strong { color: rgba(255,255,255,0.45); }
+
+/* ── TEAM GRID ── */
+.team-section {
+  margin-top: 48px;
+}
+.team-section-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: 20px;
+}
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.team-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 24px 22px;
+  transition: background 0.2s, border-color 0.2s;
+}
+.team-card:hover {
+  background: rgba(249,115,22,0.07);
+  border-color: rgba(249,115,22,0.2);
+}
+.team-card-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.team-avatar {
+  width: 44px; height: 44px; min-width: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--navy-700), var(--orange-500));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--white);
+}
+.team-name {
+  font-size: 19px;
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1.2;
+}
+.team-role {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--orange-400);
+  margin-top: 2px;
+  letter-spacing: 0.04em;
+}
+.team-bio {
+  font-size: 12.5px;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.7;
+}
+.team-avatar-img {
+  width: 44px; height: 44px; min-width: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(249,115,22,0.4);
+}
+
+/* ─── MICRO ANIMATIONS ───────────────────────────────────── */
+
+/* Keyframes */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.88); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes dividerGrow {
+  from { width: 0; }
+  to   { width: 48px; }
+}
+@keyframes counterPulse {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.04); }
+  100% { transform: scale(1); }
+}
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+@keyframes progressFill {
+  from { width: 0%; }
+  to   { width: 99.5%; }
+}
+@keyframes dotPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(249,115,22,0.4); }
+  50%       { box-shadow: 0 0 0 10px rgba(249,115,22,0); }
+}
+@keyframes borderGlow {
+  0%, 100% { border-color: rgba(249,115,22,0.25); }
+  50%       { border-color: rgba(249,115,22,0.6); }
+}
+
+/* Base hidden state — applied by JS before element enters viewport */
+.will-anim {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: none;
+}
+/* fade-only: no translateY shift — just opacity */
+.will-anim.fade-only {
+  transform: none;
+}
+
+/* Triggered state */
+.will-anim.in-view {
+  animation: fadeUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.will-anim.from-left.in-view  { animation: slideInLeft  0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+.will-anim.from-right.in-view { animation: slideInRight 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+.will-anim.scale-in.in-view   { animation: scaleIn      0.5s  cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+.will-anim.fade-only.in-view  { animation: fadeIn       0.5s  ease forwards; }
+
+/* Stagger delays */
+.d-1  { animation-delay: 0.05s !important; }
+.d-2  { animation-delay: 0.12s !important; }
+.d-3  { animation-delay: 0.19s !important; }
+.d-4  { animation-delay: 0.26s !important; }
+.d-5  { animation-delay: 0.33s !important; }
+.d-6  { animation-delay: 0.40s !important; }
+.d-7  { animation-delay: 0.47s !important; }
+
+/* Divider animated width */
+.divider.in-view {
+  animation: dividerGrow 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards !important;
+  width: 0;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Hero stat pulse after count */
+.hero-stat.counted .val { animation: counterPulse 0.4s ease; }
+.met-card.counted .val  { animation: counterPulse 0.4s ease; }
+
+/* Progress bar animation trigger */
+.progress-bar { animation: none; }
+.progress-bar.in-view { animation: progressFill 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards !important; }
+
+/* Live dot pulse on roadmap */
+.rm-dot--live { animation: dotPulse 2s ease-in-out infinite; }
+
+/* Hover: cards lift smoothly */
+.prob-card, .why-card, .phil-card, .inv-card, .met-card, .bm-section, .hero-card {
+  transition: transform 0.22s cubic-bezier(0.22,1,0.36,1), box-shadow 0.22s ease, border-color 0.22s ease;
+}
+.prob-card:hover  { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(13,27,75,0.12); }
+.phil-card:hover  { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(13,27,75,0.09); }
+.inv-card:hover   { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(13,27,75,0.09); }
+.met-card:hover   { transform: translateY(-3px); }
+.bm-section:hover { box-shadow: 0 8px 28px rgba(13,27,75,0.08); }
+
+/* Shimmer on hero stats on load */
+.hero-stat::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.04) 50%, transparent 100%);
+  background-size: 400px 100%;
+  animation: shimmer 2.5s infinite;
+  pointer-events: none;
+}
+.hero-stat { position: relative; overflow: hidden; }
+
+/* Nav link underline slide */
+.topbar-nav a { position: relative; }
+.topbar-nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 2px; left: 12px; right: 12px;
+  height: 2px;
+  background: var(--orange-500);
+  border-radius: 2px;
+  transform: scaleX(0);
+  transition: transform 0.2s cubic-bezier(0.22,1,0.36,1);
+  transform-origin: left;
+}
+.topbar-nav a:hover::after,
+.topbar-nav a.active::after { transform: scaleX(1); }
+
+/* Snapshot row hover */
+.snapshot-row {
+  transition: background 0.15s ease;
+  cursor: default;
+}
+.snapshot-row:hover { background: var(--navy-50); }
+
+/* bm-row hover */
+.bm-row {
+  transition: background 0.15s ease, padding-left 0.2s ease;
+}
+.bm-row:hover { padding-left: 36px; padding-top: 11px; padding-bottom: 11px; background: var(--gray-50); }
+.bm-row--future:hover { background: var(--navy-100); }
+
+/* pos-row hover */
+.pos-row { transition: transform 0.2s ease, opacity 0.2s ease; }
+.pos-row--yes:hover { transform: translateX(4px); }
+
+/* why-card icon bounce on hover */
+.why-card:hover .why-icon { animation: counterPulse 0.3s ease; }
+
+/* Feature row hover */
+.feat-row {
+  transition: background 0.15s ease, padding-left 0.2s ease;
+  border-radius: 10px;
+  padding-left: 8px;
+}
+.feat-row:hover { background: var(--gray-50); padding-left: 14px; }
+
+/* Section heading line reveal */
+.label { overflow: hidden; }
+
+/* ─────────────────────────────────────────────────────────
+   VISION / INFRASTRUCTURE POSITIONING
+───────────────────────────────────────────────────────── */
+#vision { background: var(--navy-900); position: relative; overflow: hidden; }
+#vision .bg-grad {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 30% 50%, rgba(249,115,22,0.10) 0%, transparent 60%);
+  pointer-events: none;
+}
+.vision-not-edtech {
+  text-align: center;
+  padding: 48px 0 36px;
+}
+.vision-not-edtech .net-line {
+  font-size: clamp(28px, 4vw, 52px);
+  font-weight: 900;
+  color: var(--white);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+.vision-not-edtech .net-line .strike {
+  text-decoration: line-through;
+  text-decoration-color: rgba(249,115,22,0.5);
+  color: rgba(255,255,255,0.35);
+}
+.vision-not-edtech .net-line .infra {
+  color: var(--orange-400);
+}
+.vision-vm-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 40px;
+}
+.vision-vm-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 32px 28px;
+}
+.vision-vm-card h3 {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--orange-400);
+  margin-bottom: 14px;
+}
+.vision-vm-card p {
+  font-size: 15px;
+  color: rgba(255,255,255,0.68);
+  line-height: 1.8;
+}
+.vision-os-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(249,115,22,0.12);
+  border: 1px solid rgba(249,115,22,0.3);
+  color: var(--orange-400);
+  font-size: 15px;
+  font-weight: 700;
+  padding: 12px 28px;
+  border-radius: 100px;
+  margin-top: 32px;
+}
+.infra-backbone-bar {
+  margin-top: 40px;
+  padding: 28px 32px;
+  background: rgba(249,115,22,0.08);
+  border: 1px solid rgba(249,115,22,0.22);
+  border-radius: 14px;
+}
+.infra-backbone-bar p {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--white);
+  font-style: italic;
+  line-height: 1.65;
+}
+
+/* ─────────────────────────────────────────────────────────
+   SIX LAYERS / INFRASTRUCTURE STACK
+───────────────────────────────────────────────────────── */
+#sixlayers { background: var(--navy-900); position: relative; overflow: hidden; }
+#sixlayers .bg-grad {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 80% 20%, rgba(249,115,22,0.08) 0%, transparent 55%);
+  pointer-events: none;
+}
+.sl-hold-badge {
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 900;
+  color: var(--white);
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  margin-bottom: 8px;
+}
+.sl-hold-badge em { font-style: normal; color: var(--orange-400); }
+.sl-body-text {
+  font-size: 16px;
+  color: rgba(255,255,255,0.62);
+  line-height: 1.8;
+  max-width: 480px;
+  margin-top: 16px;
+}
+.sl-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.sl-layer {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 18px 24px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  transition: background 0.2s, border-color 0.2s;
+}
+.sl-layer:first-child {
+  background: rgba(249,115,22,0.1);
+  border-color: rgba(249,115,22,0.3);
+}
+.sl-layer:hover { background: rgba(249,115,22,0.07); border-color: rgba(249,115,22,0.2); }
+.sl-layer-num {
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.3);
+  min-width: 20px;
+}
+.sl-layer-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--orange-400);
+  min-width: 160px;
+}
+.sl-layer-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--white);
+}
+.sl-layer-desc {
+  font-size: 13px;
+  color: rgba(255,255,255,0.45);
+  margin-left: auto;
+  text-align: right;
+  max-width: 220px;
+}
+.sl-nervous {
+  margin-top: 28px;
+  padding: 24px 32px;
+  background: rgba(249,115,22,0.08);
+  border: 1px solid rgba(249,115,22,0.2);
+  border-radius: 14px;
+  font-size: 15px;
+  font-style: italic;
+  color: rgba(255,255,255,0.78);
+  line-height: 1.7;
+}
+
+/* ─────────────────────────────────────────────────────────
+   COMMERCIAL INFLECTION POINT
+───────────────────────────────────────────────────────── */
+#inflection { background: var(--gray-50); }
+.inflection-pre-text {
+  font-size: 17px;
+  color: var(--gray-600);
+  line-height: 1.8;
+  max-width: 680px;
+  margin-bottom: 48px;
+}
+.inflection-pre-text strong { color: var(--navy-900); }
+.inflection-main {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 48px;
+  align-items: start;
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 20px;
+  padding: 48px 44px;
+}
+.inflection-num {
+  font-size: clamp(80px, 12vw, 140px);
+  font-weight: 900;
+  color: var(--orange-500);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.inflection-num-sub {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--gray-400);
+  margin-bottom: 20px;
+}
+.inflection-entity-name {
+  font-size: clamp(22px, 3vw, 36px);
+  font-weight: 800;
+  color: var(--navy-900);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 6px;
+}
+.inflection-entity-sub {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--orange-500);
+}
+.inflection-desc {
+  font-size: 15px;
+  color: var(--gray-600);
+  line-height: 1.8;
+  margin-bottom: 28px;
+}
+.inflection-desc strong { color: var(--navy-900); }
+.inflection-pillars-list { display: flex; flex-direction: column; gap: 8px; }
+.inf-pillar {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 18px;
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: 10px;
+}
+.inf-pillar-num {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--orange-500);
+  min-width: 24px;
+  margin-top: 1px;
+}
+.inf-pillar-text { font-size: 14px; font-weight: 700; color: var(--navy-900); line-height: 1.4; }
+.inf-pillar-sub { font-size: 12px; color: var(--gray-500); margin-top: 3px; line-height: 1.5; }
+.inflection-quote {
+  margin-top: 32px;
+  padding: 28px 36px;
+  background: var(--navy-900);
+  border-radius: 16px;
+  font-size: 16px;
+  font-style: italic;
+  font-weight: 600;
+  color: var(--white);
+  line-height: 1.65;
+}
+.inflection-quote em { color: var(--orange-400); font-style: normal; }
+
+/* ─────────────────────────────────────────────────────────
+   DEPLOYMENT SIGNALS
+───────────────────────────────────────────────────────── */
+#deployment { background: var(--white); }
+.dep-header-text {
+  font-size: 17px;
+  color: var(--gray-600);
+  max-width: 680px;
+  line-height: 1.8;
+  margin-bottom: 40px;
+}
+.dep-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+.dep-card-new {
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-top: 3px solid var(--orange-500);
+  border-radius: 14px;
+  padding: 32px 28px;
+}
+.dep-card-idx { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 14px; }
+.dep-card-name { font-size: 24px; font-weight: 800; color: var(--navy-900); margin-bottom: 6px; }
+.dep-card-eco { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--orange-500); margin-bottom: 14px; }
+.dep-card-body { font-size: 14px; color: var(--gray-500); line-height: 1.75; }
+.dep-summary-box {
+  background: var(--navy-900);
+  border-radius: 16px;
+  padding: 28px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+.dep-summary-text { font-size: 15px; font-style: italic; color: rgba(255,255,255,0.8); line-height: 1.65; flex: 1; }
+.dep-summary-label { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--orange-400); white-space: nowrap; }
+
+/* ─────────────────────────────────────────────────────────
+   STRATEGIC THESIS
+───────────────────────────────────────────────────────── */
+#strategic-thesis { background: var(--gray-50); }
+.thesis-body-text {
+  font-size: 17px;
+  color: var(--gray-700);
+  line-height: 1.85;
+  max-width: 600px;
+}
+.thesis-body-text strong { color: var(--navy-900); }
+.thesis-disciplines-list { display: flex; flex-direction: column; gap: 6px; }
+.thesis-disc {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 18px;
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--navy-800);
+}
+.thesis-disc-num { font-size: 12px; font-weight: 700; color: var(--orange-500); min-width: 20px; }
+.thesis-box-new {
+  margin-top: 48px;
+  background: var(--navy-900);
+  border-radius: 20px;
+  padding: 48px 52px;
+  text-align: center;
+  position: relative;
+}
+.thesis-box-kicker {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 20px;
+  display: block;
+}
+.thesis-box-text {
+  font-size: 18px;
+  color: var(--white);
+  line-height: 1.75;
+}
+.thesis-box-text em { color: var(--orange-400); font-style: italic; }
+
+/* ─────────────────────────────────────────────────────────
+   STRATEGIC DIRECTION (near roadmap)
+───────────────────────────────────────────────────────── */
+.strategic-direction-block {
+  margin-top: 48px;
+  padding: 36px 40px;
+  background: var(--navy-900);
+  border-radius: 20px;
+}
+.strategic-direction-block h3 {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--orange-400);
+  margin-bottom: 16px;
+}
+.strategic-direction-block p {
+  font-size: 16px;
+  color: rgba(255,255,255,0.72);
+  line-height: 1.8;
+}
+
+/* ─────────────────────────────────────────────────────────
+   PARTNERSHIP PHILOSOPHY (in investment)
+───────────────────────────────────────────────────────── */
+.partnership-philosophy {
+  margin-top: 36px;
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-left: 4px solid var(--orange-500);
+  border-radius: 0 16px 16px 0;
+  padding: 32px 36px;
+}
+.partnership-philosophy h3 {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--orange-600);
+  margin-bottom: 16px;
+}
+.partnership-philosophy p {
+  font-size: 15px;
+  color: var(--gray-700);
+  line-height: 1.8;
+  margin-bottom: 12px;
+}
+.partnership-philosophy p:last-child { margin-bottom: 0; }
+
+/* ─────────────────────────────────────────────────────────
+   CLOSING THOUGHT
+───────────────────────────────────────────────────────── */
+#closing-thought {
+  background: var(--navy-900);
+  padding: 80px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+#closing-thought .bg-grad {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 50%, rgba(249,115,22,0.12) 0%, transparent 60%);
+  pointer-events: none;
+}
+.closing-headline {
+  font-size: clamp(48px, 8vw, 100px);
+  font-weight: 900;
+  color: var(--white);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 32px;
+}
+.closing-headline .not { color: var(--orange-400); }
+.closing-sub-text {
+  font-size: clamp(16px, 2vw, 20px);
+  color: rgba(255,255,255,0.65);
+  line-height: 1.8;
+  max-width: 580px;
+  margin: 0 auto;
+  font-style: italic;
+}
+
+/* ─── PRINT / PDF EXPORT ─────────────────────────────────── */
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 0;
+  }
+
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+  html, body {
+    width: 297mm;
+    background: var(--white);
+  }
+
+  /* Hide UI chrome */
+  .topbar,
+  .btn-export,
+  .hero-scroll,
+  .hero-scroll-icon { display: none !important; }
+
+  /* Every section = exactly one A4-landscape page */
+  section {
+    width: 297mm !important;
+    height: 210mm !important;
+    min-height: 0 !important;
+    max-height: 210mm !important;
+    overflow: hidden !important;
+    page-break-after: always !important;
+    break-after: page !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    padding: 28px 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Inner container — full width with fixed side padding */
+  .inner {
+    max-width: none !important;
+    padding: 0 52px !important;
+    width: 100% !important;
+  }
+
+  /* Hero — centre layout */
+  #hero {
+    padding: 32px 0 !important;
+    min-height: 0 !important;
+  }
+  .hero-grid { gap: 32px; }
+  h1.hero { font-size: 36px !important; }
+  .hero-sub { font-size: 13px !important; margin-top: 12px !important; }
+  .hero-stats { margin-top: 20px !important; }
+  .hero-stat .val { font-size: 20px !important; }
+  .hero-mascot { width: 160px !important; }
+
+  /* Headings scale */
+  h2.sec { font-size: 26px !important; line-height: 1.15 !important; }
+  .divider { margin: 10px 0 18px !important; }
+  p.body { font-size: 12px !important; line-height: 1.65 !important; }
+  p.body--lg { font-size: 13px !important; }
+
+  /* Cards — tighten spacing */
+  .prob-card, .why-card, .phil-card, .inv-card, .met-card, .dep-card-new,
+  .vision-vm-card, .sl-layer, .inf-pillar, .thesis-disc { padding: 10px 14px !important; }
+  .met-card .val { font-size: 26px !important; }
+  .why-card h3, .prob-card h3, .phil-card h3, .inv-card h3 { font-size: 13px !important; }
+  .why-card p, .prob-card p, .phil-card p, .inv-card p { font-size: 11px !important; }
+  .why-num { font-size: 28px !important; }
+
+  /* Grids — tighter gaps */
+  .col-2 { gap: 28px !important; }
+  .col-3 { gap: 12px !important; }
+  .col-4 { gap: 12px !important; }
+  .col-5 { gap: 10px !important; }
+  .met-grid { gap: 1px !important; margin-top: 16px !important; }
+
+  /* Traction cards compact */
+  .met-card { padding: 14px 18px !important; }
+  .met-summary { padding: 14px 20px !important; margin-top: 10px !important; }
+  .met-check { font-size: 11px !important; }
+
+  /* Vision */
+  .vision-not-edtech { padding: 16px 0 12px !important; }
+  .net-line { font-size: 30px !important; }
+  .vision-vm-grid { gap: 12px !important; margin-top: 16px !important; }
+  .infra-backbone-bar { margin-top: 14px !important; padding: 14px 20px !important; }
+
+  /* Six Layers */
+  .sl-hold-badge { font-size: 32px !important; }
+  .sl-body-text { font-size: 12px !important; margin-top: 8px !important; }
+  .sl-layer { padding: 9px 14px !important; }
+  .sl-layer-name { font-size: 12px !important; }
+  .sl-layer-tag { font-size: 8px !important; min-width: 120px !important; }
+  .sl-layer-desc { font-size: 10px !important; }
+
+  /* Inflection */
+  .inflection-main { padding: 24px 28px !important; gap: 24px !important; }
+  .inflection-num { font-size: 60px !important; }
+  .inflection-entity-name { font-size: 20px !important; }
+  .inflection-desc { font-size: 12px !important; margin-bottom: 12px !important; }
+  .inf-pillar { padding: 8px 12px !important; }
+  .inf-pillar-text { font-size: 12px !important; }
+  .inflection-quote { padding: 14px 20px !important; font-size: 13px !important; margin-top: 14px !important; }
+  .inflection-pre-text { font-size: 13px !important; margin-bottom: 18px !important; }
+
+  /* Deployment */
+  .dep-cards-grid { gap: 12px !important; margin-bottom: 14px !important; }
+  .dep-card-new { padding: 18px 20px !important; }
+  .dep-card-new img { height: 36px !important; margin-bottom: 6px !important; }
+  .dep-card-name { font-size: 18px !important; }
+  .dep-card-body { font-size: 11px !important; }
+  .dep-summary-box { padding: 14px 22px !important; }
+  .dep-header-text { font-size: 13px !important; margin-bottom: 16px !important; }
+
+  /* Strategic Thesis */
+  .thesis-body-text { font-size: 13px !important; }
+  .thesis-disc { padding: 7px 12px !important; font-size: 12px !important; }
+  .thesis-box-new { padding: 24px 32px !important; margin-top: 20px !important; }
+  .thesis-box-text { font-size: 13px !important; }
+
+  /* Roadmap */
+  .rm-steps { margin-top: 24px !important; }
+  .rm-step p { font-size: 11px !important; }
+  .rm-step h3 { font-size: 13px !important; }
+  .rm-dot { width: 36px !important; height: 36px !important; font-size: 16px !important; margin-bottom: 10px !important; }
+  .strategic-direction-block { margin-top: 16px !important; padding: 18px 24px !important; }
+  .rm-vision { margin-top: 16px !important; padding: 18px 28px !important; }
+  .rm-vision img { height: 56px !important; }
+
+  /* Investment */
+  .inv-card { padding: 16px 18px !important; }
+  .partnership-philosophy { padding: 16px 22px !important; margin-top: 16px !important; }
+  .partnership-philosophy p { font-size: 12px !important; }
+  .inv-approach { padding: 22px 28px !important; margin-top: 20px !important; }
+  .inv-points { gap: 16px !important; }
+  .inv-point p { font-size: 11px !important; }
+
+  /* Contact */
+  .cta-center { margin-bottom: 16px !important; }
+  .cta-center p { font-size: 13px !important; }
+  .contact-card { padding: 20px 28px !important; }
+  .team-section { margin-top: 20px !important; }
+  .team-section-label { margin-bottom: 10px !important; }
+  .team-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 8px !important; }
+  .team-card { padding: 12px 14px !important; }
+  .team-avatar { width: 32px !important; height: 32px !important; min-width: 32px !important; font-size: 10px !important; }
+  .team-avatar-img { width: 32px !important; height: 32px !important; min-width: 32px !important; }
+  .team-name { font-size: 11px !important; }
+  .team-role { font-size: 9px !important; }
+  .team-bio { font-size: 9.5px !important; line-height: 1.5 !important; }
+  .team-card-top { gap: 8px !important; margin-bottom: 8px !important; }
+
+  /* Closing */
+  .closing-headline { font-size: 56px !important; }
+  .closing-sub-text { font-size: 14px !important; }
+
+  /* Positioning */
+  .pos-row { padding: 10px 16px !important; font-size: 12px !important; }
+
+  /* Business model */
+  .bm-row { padding: 7px 20px !important; font-size: 12px !important; }
+  .bm-head { padding: 10px 20px !important; font-size: 11px !important; }
+
+  /* Snapshot */
+  .snapshot-row { padding: 6px 18px !important; font-size: 12px !important; }
+
+  /* Solution */
+  .feat-row { padding: 8px 0 !important; }
+  .feat-row h3 { font-size: 12px !important; }
+  .feat-row p { font-size: 11px !important; }
+  .roadmap-box { padding: 14px 18px !important; }
+  .roadmap-item { font-size: 12px !important; }
+
+  /* Why Now */
+  #whynow .col-5 { margin-top: 16px !important; }
+
+  /* Philosophy */
+  .phil-quote { padding: 20px 28px !important; }
+  .phil-quote blockquote { font-size: 14px !important; }
+
+  /* ── Override responsive breakpoints — force desktop grid layouts in print ── */
+  .met-grid       { grid-template-columns: repeat(3, 1fr) !important; }
+  .inv-points     { grid-template-columns: repeat(3, 1fr) !important; gap: 20px !important; }
+  .rm-steps       { grid-template-columns: repeat(4, 1fr) !important; }
+  .col-2, .col-2--60, .col-2--40 { grid-template-columns: 1fr 1fr !important; gap: 28px !important; }
+  .col-2--60      { grid-template-columns: 1.5fr 1fr !important; }
+  .col-2--40      { grid-template-columns: 1fr 1.5fr !important; }
+  .col-3          { grid-template-columns: repeat(3, 1fr) !important; gap: 12px !important; }
+  .col-4          { grid-template-columns: repeat(4, 1fr) !important; }
+  .col-5          { grid-template-columns: repeat(5, 1fr) !important; }
+  .hero-grid      { grid-template-columns: 1fr 360px !important; gap: 32px !important; }
+  .dep-cards-grid { grid-template-columns: 1fr 1fr !important; }
+  .vision-vm-grid { grid-template-columns: 1fr 1fr !important; }
+  .inv-points .inv-point .ip-icon { width: 32px !important; height: 32px !important; font-size: 15px !important; margin-bottom: 8px !important; }
+  .inv-approach   { padding: 20px 28px !important; margin-top: 16px !important; }
+  .inv-approach h3 { margin-bottom: 16px !important; }
+
+  /* ── Traction: compact the 10-card grid so it fits ── */
+  .met-grid { gap: 1px !important; margin-top: 10px !important; }
+  .met-card { padding: 10px 14px !important; }
+  .met-card .val { font-size: 22px !important; line-height: 1 !important; }
+  .met-card .lbl { font-size: 10px !important; margin-top: 5px !important; line-height: 1.3 !important; }
+  .met-card .sig { font-size: 9px !important; margin-top: 6px !important; padding: 2px 8px !important; }
+  .met-summary    { padding: 10px 16px !important; margin-top: 8px !important; }
+  .met-summary > div:first-child { margin-bottom: 10px !important; font-size: 11px !important; }
+  .check-list     { gap: 6px 24px !important; }
+  .met-check      { font-size: 10px !important; gap: 6px !important; }
+  .met-check::before { width: 16px !important; height: 16px !important; font-size: 9px !important; }
+  #traction > div > p { font-size: 11px !important; margin-bottom: 6px !important; }
+
+  /* ── Investment: fix inv-approach and points layout ── */
+  .inv-card       { padding: 12px 14px !important; }
+  .inv-card h3    { font-size: 12px !important; margin-bottom: 5px !important; }
+  .inv-card p     { font-size: 10px !important; line-height: 1.5 !important; }
+  .inv-points h4  { font-size: 12px !important; margin-bottom: 4px !important; }
+  .inv-points p   { font-size: 10px !important; line-height: 1.5 !important; }
+  .partnership-philosophy { padding: 14px 20px !important; margin-top: 12px !important; }
+  .partnership-philosophy h3 { margin-bottom: 8px !important; }
+  .partnership-philosophy p { font-size: 11px !important; margin-bottom: 6px !important; line-height: 1.6 !important; }
+  .col-3.inv-cards-grid { gap: 8px !important; }
+
+  /* ── Roadmap: hide the vision panel in print (too much for one page) ── */
+  .rm-vision { display: none !important; }
+  .rm-steps  { margin-top: 16px !important; }
+  .rm-step p { font-size: 10px !important; }
+  .rm-step h3 { font-size: 12px !important; margin-bottom: 6px !important; }
+  .rm-dot     { width: 32px !important; height: 32px !important; font-size: 14px !important; margin-bottom: 8px !important; }
+  .rm-steps::before { top: 21px !important; }
+  .strategic-direction-block { margin-top: 14px !important; padding: 16px 22px !important; }
+  .strategic-direction-block h3 { margin-bottom: 8px !important; }
+  .strategic-direction-block p { font-size: 12px !important; line-height: 1.65 !important; }
+  #roadmap > div > p { font-size: 12px !important; max-width: none !important; margin-bottom: 0 !important; }
+
+  /* ── Animations reset for print ── */
+  .will-anim { opacity: 1 !important; transform: none !important; animation: none !important; }
+  .in-view { animation: none !important; }
+  .progress-bar { width: 99.5% !important; }
+}
+
+/* ─── LANGUAGE TOGGLE ────────────────────────────────────── */
+.lang-toggle {
+  position: fixed;
+  top: 74px;
+  right: 24px;
+  z-index: 998;
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  background: rgba(13,27,75,0.92);
+  border: 1px solid rgba(249,115,22,0.4);
+  border-radius: 100px;
+  padding: 3px;
+  font-family: var(--font);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+}
+.lang-toggle button {
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.55);
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  padding: 4px 10px;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.lang-toggle button.active {
+  background: var(--orange-500);
+  color: var(--white);
+  box-shadow: 0 2px 8px rgba(249,115,22,0.4);
+}
+.lang-toggle button:hover:not(.active) {
+  color: var(--white);
+}
+@media print {
+  .lang-toggle { display: none !important; }
+}
+
+/* ─── RESPONSIVE ─────────────────────────────────────────── */
+@media (max-width: 900px) {
+  :root { --pad-x: 24px; --pad-y: 64px; }
+  .hero-grid, .col-2, .col-2--60, .col-2--40 { grid-template-columns: 1fr; gap: 40px; }
+  .col-3 { grid-template-columns: 1fr 1fr; }
+  .col-5 { grid-template-columns: 1fr 1fr; }
+  .met-grid { grid-template-columns: 1fr; }
+  .rm-steps { grid-template-columns: 1fr 1fr; }
+  .rm-steps::before { display: none; }
+  .hero-mascot { width: 180px; }
+  .inv-points { grid-template-columns: 1fr; }
+  .met-summary .check-list { grid-template-columns: 1fr; }
+
+  .hamburger { display: inline-flex; }
+  .topbar .inner { gap: 12px; }
+  .topbar-nav {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    padding: 12px 20px 20px;
+    background: rgba(13,27,75,0.98);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    transform: translateY(-12px);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.25s ease, opacity 0.2s ease;
+    z-index: 998;
+  }
+  .topbar-nav.is-open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .topbar-nav a {
+    font-size: 14px;
+    padding: 12px 14px;
+  }
+  .badge-conf { display: none; }
+  .btn-export { padding: 6px 12px; font-size: 11px; }
+  .lang-toggle { top: 70px; right: 16px; }
+}
+@media (max-width: 480px) {
+  .btn-export { padding: 6px 10px; font-size: 10px; }
+  .topbar-logo { height: 24px; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- Language Toggle -->
+<div class="lang-toggle" id="langToggle">
+  <button id="langEn" class="active" onclick="setLanguage('en')">EN</button>
+  <button id="langVi" onclick="setLanguage('vi')">VI</button>
+</div>
+
+<!-- ══════════════════════════════════════════
+     STICKY TOPBAR
+══════════════════════════════════════════ -->
+<header class="topbar">
+  <div class="inner">
+    <img src="./Edbuddies Horizontal (For Dark Bg).png" alt="EdBuddies" class="topbar-logo" />
+    <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false" onclick="toggleMobileMenu()"><span class="bar"></span></button>
+    <nav class="topbar-nav" id="topbarNav">
+      <a href="#hero">Overview</a>
+      <a href="#vision">Vision</a>
+      <a href="#problem">Problem</a>
+      <a href="#solution">Solution</a>
+      <a href="#traction">Traction</a>
+      <a href="#inflection">Commercial</a>
+      <a href="#deployment">Deployment</a>
+      <a href="#investment">Investment</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="topbar-right">
+      <span class="badge-conf">🔒 Confidential</span>
+      <button class="btn-export" onclick="exportPDF()">⬇ Export PDF</button>
+    </div>
+  </div>
+</header>
+
+
+<!-- ══════════════════════════════════════════
+     01 — HERO
+══════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-bg-blob hero-bg-blob--1"></div>
+  <div class="hero-bg-blob hero-bg-blob--2"></div>
+  <div class="hero-bg-blob hero-bg-blob--3"></div>
+  <div class="inner">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-eyebrow">📄 Investment Teaser · Singapore · 2026</div>
+        <h1 class="hero">
+          Building the<br>
+          <span style="color:var(--orange-400);">Operating System</span><br>
+          for Southeast Asia's<br>
+          <span style="color:rgba(255,255,255,0.55);">Enrichment Economy</span>
+        </h1>
+        <p class="hero-sub">
+          EdBuddies.ai is a Singapore-based vertical SaaS company digitising the highly fragmented tuition and enrichment sector — powering the <strong style="color:white;">EdBuddiesOS™</strong> infrastructure layer.
+        </p>
+
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="val">SGD 542K</div>
+            <div class="lbl">Trailing 12-Month GMV</div>
+          </div>
+          <div class="hero-stat">
+            <div class="val">SGD 1.29M</div>
+            <div class="lbl">Annualised GMV Run-Rate</div>
+          </div>
+          <div class="hero-stat">
+            <div class="val">96.6%</div>
+            <div class="lbl">Recurring Transaction Volume</div>
+          </div>
+          <div class="hero-stat">
+            <div class="val">585</div>
+            <div class="lbl">Active Subscriptions</div>
+          </div>
+        </div>
+
+        <div class="hero-scroll">
+          <div class="hero-scroll-icon">↓</div>
+          Scroll to explore
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <img src="./EdBuddies V2 logo.png" alt="EdBuddies Mascot" class="hero-mascot" />
+        <div class="hero-card">
+          <div class="card-label">Platform Capabilities</div>
+          <div class="card-items">
+            <div class="card-item">Recurring Subscription Billing</div>
+            <div class="card-item">Scheduling & Timetable Management</div>
+            <div class="card-item">Attendance Tracking</div>
+            <div class="card-item">Parent Communication</div>
+            <div class="card-item">AI-Powered Automation (Roadmap)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     02 — EXECUTIVE OVERVIEW
+══════════════════════════════════════════ -->
+<section id="overview">
+  <div class="inner">
+    <div class="col-2 col-2--60">
+      <div>
+        <div class="label"><span class="dot"></span>Executive Overview</div>
+        <h2 class="sec">The Platform <span class="accent">Powering</span> Education Operations</h2>
+        <div class="divider"></div>
+        <p class="body">
+          EdBuddies.ai provides a unified operating platform powering <strong>recurring billing, scheduling, attendance, parent communication,</strong> and administrative workflows for tuition centres and enrichment operators across Southeast Asia.
+        </p>
+        <p class="body" style="margin-top:18px;">
+          While the global education sector has seen substantial investment into content platforms and consumer learning applications, the <strong>operational infrastructure layer</strong> supporting the enrichment economy across Southeast Asia remains significantly under-digitised.
+        </p>
+        <p class="body" style="margin-top:18px;">
+          The platform is currently deployed within live operating environments and has already processed over <strong>SGD 542K in trailing twelve-month GMV</strong>, with approximately <strong>96.6%</strong> of platform transaction volume recurring in nature.
+        </p>
+        <div class="overview-quote">
+          <p>"The company is presently focused on deepening operational density within Singapore before measured regional expansion."</p>
+        </div>
+      </div>
+      <div>
+        <div class="overview-snapshot">
+          <div class="snapshot-header">Company Snapshot</div>
+          <div class="snapshot-row"><span class="sk">Headquarters</span><span class="sv">Singapore</span></div>
+          <div class="snapshot-row"><span class="sk">Category</span><span class="sv">Vertical SaaS</span></div>
+          <div class="snapshot-row"><span class="sk">Sector</span><span class="sv">EdTech Infrastructure</span></div>
+          <div class="snapshot-row"><span class="sk">Market</span><span class="sv">Southeast Asia</span></div>
+          <div class="snapshot-row"><span class="sk">Stage</span><span class="sv sv--orange">Early Traction · Live</span></div>
+          <div class="snapshot-row"><span class="sk">Funding</span><span class="sv">Founder-Funded</span></div>
+          <div class="snapshot-row"><span class="sk">Product</span><span class="sv">EdBuddiesOS™</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     02B — VISION / INFRASTRUCTURE POSITIONING
+══════════════════════════════════════════ -->
+<section id="vision">
+  <div class="bg-grad"></div>
+  <div class="inner" style="position:relative;z-index:1;">
+    <div class="label label--light"><span class="dot"></span>Vision &amp; Positioning</div>
+    <div class="vision-not-edtech">
+      <div class="net-line">EdBuddies.ai is <span class="strike">NOT EdTech</span>.</div>
+      <div class="net-line">EdBuddies.ai is <span class="infra">INFRASTRUCTURE</span>.</div>
+    </div>
+
+    <div class="vision-vm-grid">
+      <div class="vision-vm-card">
+        <h3>Vision</h3>
+        <p>Building the Operating System (EdBuddiesOS™) for Southeast Asia's Enrichment Economy.</p>
+        <div class="vision-os-badge">🏗️ EdBuddiesOS™</div>
+      </div>
+      <div class="vision-vm-card">
+        <h3>Mission</h3>
+        <p>EdBuddies.ai is a Singapore-based vertical SaaS and operational infrastructure company digitising the highly fragmented tuition and enrichment sector across Southeast Asia.</p>
+        <p style="margin-top:12px;">The company provides a unified operating platform powering: recurring billing, scheduling, attendance, parent communication, and administrative workflows for tuition centres and enrichment operators.</p>
+      </div>
+    </div>
+
+    <div class="infra-backbone-bar">
+      <p>While the global education sector has seen substantial investment into content platforms and consumer learning applications over the past decade, the <strong style="color:var(--orange-400);">operational infrastructure layer</strong> supporting the enrichment economy across Southeast Asia remains significantly under-digitised. EdBuddies.ai was built specifically to address this gap.</p>
+    </div>
+
+    <div style="margin-top:28px;padding:24px 32px;background:rgba(249,115,22,0.1);border:1px solid rgba(249,115,22,0.25);border-radius:14px;text-align:center;">
+      <p style="font-size:16px;font-weight:700;color:var(--white);font-style:italic;line-height:1.65;">
+        "Rather than competing within the crowded consumer EdTech landscape, EdBuddies.ai is positioning itself as: <span style="color:var(--orange-400);">Mission-Critical Infrastructure for Education Operators.</span>"
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     03 — THE PROBLEM
+══════════════════════════════════════════ -->
+<section id="problem">
+  <div class="inner">
+    <div class="label"><span class="dot"></span>The Problem</div>
+    <h2 class="sec">Southeast Asia's Enrichment Sector is <span class="accent">Massively Under-Digitised</span></h2>
+    <div class="divider"></div>
+    <div class="problem-intro">
+      <p class="body body--lg">
+        The tuition and enrichment industry across Southeast Asia represents a large and structurally resilient market — yet many operators continue to rely on fragmented, manual tools. These inefficiencies directly impact <strong>scalability, profitability, parent experience,</strong> and service quality.
+      </p>
+    </div>
+
+    <div class="col-3">
+      <div class="prob-card">
+        <div class="prob-icon">📊</div>
+        <h3>Spreadsheet Dependency</h3>
+        <p>Student data, billing records, and attendance managed through disconnected spreadsheets with no integration.</p>
+      </div>
+      <div class="prob-card">
+        <div class="prob-icon">🧾</div>
+        <h3>Manual Invoicing</h3>
+        <p>Time-intensive manual invoice creation, tracking, and follow-up with no automated payment workflows.</p>
+      </div>
+      <div class="prob-card">
+        <div class="prob-icon">💬</div>
+        <h3>Fragmented Communication</h3>
+        <p>Parent-teacher communication scattered across WhatsApp, email, and SMS with no unified system.</p>
+      </div>
+      <div class="prob-card">
+        <div class="prob-icon">📅</div>
+        <h3>Disconnected Scheduling</h3>
+        <p>Class timetables managed in isolation, with no integration to billing, attendance, or communications.</p>
+      </div>
+      <div class="prob-card">
+        <div class="prob-icon">✅</div>
+        <h3>Attendance Gaps</h3>
+        <p>Paper-based attendance systems with no real-time visibility for operators or parents.</p>
+      </div>
+      <div class="prob-card">
+        <div class="prob-icon">📈</div>
+        <h3>Rising Expectations</h3>
+        <p>Parents and regulators now expect digital transparency, responsiveness and operational efficiency at every touchpoint.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     04 — THE SOLUTION
+══════════════════════════════════════════ -->
+<section id="solution">
+  <div class="inner">
+    <div class="col-2">
+      <div>
+        <div class="label"><span class="dot"></span>The Solution</div>
+        <h2 class="sec">An Integrated Platform <span class="accent">Purpose-Built</span> for Education Operators</h2>
+        <div class="divider"></div>
+        <p class="body">EdBuddies.ai replaces fragmented manual tools with a single unified system — purpose-built for tuition and enrichment businesses.</p>
+        <div style="margin-top:32px;">
+          <div class="feat-row">
+            <div class="feat-icon">💳</div>
+            <div><h3>Recurring Subscription Billing</h3><p>Automated monthly billing cycles with smart payment workflows and real-time tracking</p></div>
+          </div>
+          <div class="feat-row">
+            <div class="feat-icon">📅</div>
+            <div><h3>Timetable & Scheduling Management</h3><p>Integrated class scheduling synced with billing, attendance, and parent communications</p></div>
+          </div>
+          <div class="feat-row">
+            <div class="feat-icon">✅</div>
+            <div><h3>Attendance Tracking</h3><p>Real-time attendance capture with instant parent notifications and full operator visibility</p></div>
+          </div>
+          <div class="feat-row">
+            <div class="feat-icon">📣</div>
+            <div><h3>Parent-Teacher Communication</h3><p>Unified communication channel replacing fragmented messaging across multiple apps</p></div>
+          </div>
+          <div class="feat-row">
+            <div class="feat-icon">📊</div>
+            <div><h3>Operational Reporting</h3><p>Real-time dashboards and workflow coordination across classes, centres, and teachers</p></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="roadmap-box">
+          <h3>🤖 AI-Powered Roadmap</h3>
+          <div class="roadmap-item"><div class="ri-dot"></div>AI-Powered Operational Automation</div>
+          <div class="roadmap-item"><div class="ri-dot"></div>Predictive Retention Analytics</div>
+          <div class="roadmap-item"><div class="ri-dot"></div>Intelligent Parent Communication Systems</div>
+          <div class="roadmap-item"><div class="ri-dot"></div>Embedded Financial Infrastructure</div>
+        </div>
+
+        <div style="margin-top:28px;padding:28px;background:var(--gray-50);border-radius:16px;border:1px solid var(--gray-200);">
+          <div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--gray-500);margin-bottom:16px;">99.5% Payment Webhook Success Rate</div>
+          <div style="height:8px;background:var(--gray-200);border-radius:4px;overflow:hidden;">
+            <div class="progress-bar" style="width:0%;height:100%;background:linear-gradient(90deg,var(--orange-500),var(--orange-400));border-radius:4px;"></div>
+          </div>
+          <p style="font-size:13px;color:var(--gray-500);margin-top:10px;">Operational reliability at infrastructure grade</p>
+        </div>
+
+        <div class="position-pill">
+          🏗️ Mission-Critical Infrastructure for Education Operators
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     04B — SIX LAYERS / INFRASTRUCTURE STACK
+══════════════════════════════════════════ -->
+<section id="sixlayers">
+  <div class="bg-grad"></div>
+  <div class="inner" style="position:relative;z-index:1;">
+    <div class="label label--light"><span class="dot"></span>The Infrastructure Stack</div>
+    <div class="sl-hold-badge">SIX LAYERS.<br/><em>ONE</em> HOLD.</div>
+    <p class="sl-body-text">Each layer is not a feature. It is a structural integration into the daily operating rhythm of an enrichment centre. Together, they are not software — they are the nervous system.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:40px;align-items:start;">
+      <div class="sl-stack">
+        <div class="sl-layer">
+          <span class="sl-layer-num">01</span>
+          <span class="sl-layer-tag">Revenue Layer</span>
+          <span class="sl-layer-name">Recurring Billing Engine</span>
+          <span class="sl-layer-desc">Subscription billing &amp; automated payment workflows</span>
+        </div>
+        <div class="sl-layer">
+          <span class="sl-layer-num">02</span>
+          <span class="sl-layer-tag">Operations Layer</span>
+          <span class="sl-layer-name">Attendance Infrastructure</span>
+          <span class="sl-layer-desc">Real-time attendance capture &amp; parent notifications</span>
+        </div>
+        <div class="sl-layer">
+          <span class="sl-layer-num">03</span>
+          <span class="sl-layer-tag">Workflow Layer</span>
+          <span class="sl-layer-name">Scheduling Orchestration</span>
+          <span class="sl-layer-desc">Timetable management synced across billing &amp; comms</span>
+        </div>
+        <div class="sl-layer">
+          <span class="sl-layer-num">04</span>
+          <span class="sl-layer-tag">Engagement Layer</span>
+          <span class="sl-layer-name">Parent Communication</span>
+          <span class="sl-layer-desc">Unified parent workflows replacing fragmented messaging</span>
+        </div>
+        <div class="sl-layer">
+          <span class="sl-layer-num">05</span>
+          <span class="sl-layer-tag">Automation Layer</span>
+          <span class="sl-layer-name">Workflow Orchestration</span>
+          <span class="sl-layer-desc">Operational coordination across centres, teachers, classes</span>
+        </div>
+        <div class="sl-layer">
+          <span class="sl-layer-num">06</span>
+          <span class="sl-layer-tag">Intelligence Layer</span>
+          <span class="sl-layer-name">AI-Enabled Admin Automation</span>
+          <span class="sl-layer-desc">AI-powered operational automation &amp; workflow intelligence</span>
+        </div>
+      </div>
+      <div>
+        <div class="sl-nervous">
+          "recurring billing, attendance, scheduling, parent workflows, operational coordination, AI-enabled admin automation — six layers that embed EdBuddies.ai into the daily operating rhythm of every enrichment centre it touches."
+        </div>
+        <div style="margin-top:24px;padding:28px;background:rgba(249,115,22,0.08);border:1px solid rgba(249,115,22,0.2);border-radius:14px;">
+          <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--orange-400);margin-bottom:10px;">Annual Infrastructure Stack Cost</div>
+          <div style="font-size:36px;font-weight:900;color:var(--white);letter-spacing:-0.02em;">~USD 4,600</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.4);margin-top:6px;text-transform:uppercase;letter-spacing:0.1em;">Founder-funded · No external capital</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     05 — WHY NOW
+══════════════════════════════════════════ -->
+<section id="whynow">
+  <div class="bg-grad"></div>
+  <div class="inner" style="position:relative;z-index:1;">
+    <div class="label label--light"><span class="dot"></span>Why Now</div>
+    <h2 class="sec sec--white">5 Structural Trends <span class="accent--light">Converging Simultaneously</span></h2>
+    <div class="divider divider--light"></div>
+    <div class="col-5" style="margin-top:40px;">
+      <div class="why-card">
+        <div class="why-num">01</div>
+        <div class="why-icon">⚡</div>
+        <h3>Rapid Operational Digitisation</h3>
+        <p>Education operators across SEA are increasingly transitioning away from manual administrative systems</p>
+      </div>
+      <div class="why-card">
+        <div class="why-num">02</div>
+        <div class="why-icon">🔁</div>
+        <h3>Recurring Revenue Infrastructure</h3>
+        <p>The enrichment economy operates on recurring monthly payment flows — perfectly aligned with SaaS models</p>
+      </div>
+      <div class="why-card">
+        <div class="why-num">03</div>
+        <div class="why-icon">📈</div>
+        <h3>Rising Administrative Complexity</h3>
+        <p>Scaling operators across multiple classes, centres, and teachers demands integrated workflow systems</p>
+      </div>
+      <div class="why-card">
+        <div class="why-num">04</div>
+        <div class="why-icon">🤖</div>
+        <h3>AI Productivity Adoption</h3>
+        <p>AI is accelerating demand for workflow automation, operational efficiency, and cost reduction</p>
+      </div>
+      <div class="why-card">
+        <div class="why-num">05</div>
+        <div class="why-icon">🌏</div>
+        <h3>Fragmented Competitive Landscape</h3>
+        <p>No dominant regional infrastructure platform currently exists — the category is wide open</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     06 — TRACTION
+══════════════════════════════════════════ -->
+<section id="traction">
+  <div class="bg-grad"></div>
+  <div class="inner" style="position:relative;z-index:1;">
+    <div class="label label--light"><span class="dot"></span>Traction &amp; Operational Signals</div>
+    <h2 class="sec sec--white">Early Infrastructure Characteristics <span class="accent--light">Already Demonstrated</span></h2>
+    <div class="divider divider--light"></div>
+
+    <p style="font-size:16px;color:rgba(255,255,255,0.62);line-height:1.8;max-width:680px;margin-bottom:8px;">EdBuddies.ai is already demonstrating early infrastructure characteristics:</p>
+
+    <div class="met-grid">
+      <div class="met-card">
+        <div class="val">SGD <span>542K</span></div>
+        <div class="lbl">Trailing 12-Month GMV</div>
+        <div class="sig">↑ Live Platform</div>
+      </div>
+      <div class="met-card">
+        <div class="val">SGD <span>1.29M</span></div>
+        <div class="lbl">Annualised GMV Run-Rate</div>
+        <div class="sig">↑ Growing</div>
+      </div>
+      <div class="met-card">
+        <div class="val"><span>585</span></div>
+        <div class="lbl">Active Recurring Subscriptions</div>
+        <div class="sig">↑ Recurring</div>
+      </div>
+      <div class="met-card">
+        <div class="val"><span>96.6%</span></div>
+        <div class="lbl">Recurring Transaction Volume</div>
+        <div class="sig">● Infrastructure Signal</div>
+      </div>
+      <div class="met-card">
+        <div class="val"><span>99.5%</span></div>
+        <div class="lbl">Payment Webhook Success Rate</div>
+        <div class="sig">● Operational Reliability</div>
+      </div>
+      <div class="met-card">
+        <div class="val"><span>88.8%</span></div>
+        <div class="lbl">Month-4 Cohort Retention</div>
+        <div class="sig">● Compounding Lock-In</div>
+      </div>
+      <div class="met-card">
+        <div class="val"><span>13,300</span><span style="font-size:22px;color:var(--orange-400);">+</span></div>
+        <div class="lbl">Attendance Events Processed</div>
+        <div class="sig">● Operational Footprint</div>
+      </div>
+      <div class="met-card">
+        <div class="val"><span>50,000</span><span style="font-size:22px;color:var(--orange-400);">+</span></div>
+        <div class="lbl">Workflow Notifications Delivered</div>
+        <div class="sig">● Workflow Dependency</div>
+      </div>
+      <div class="met-card">
+        <div class="val"><span>54.4%</span></div>
+        <div class="lbl">Mobile Penetration (Parent-Side)</div>
+        <div class="sig">● Live Usage Signal</div>
+      </div>
+      <div class="met-card" style="background:rgba(249,115,22,0.07);border-color:rgba(249,115,22,0.2);">
+        <div style="font-size:13px;font-weight:700;color:var(--orange-400);margin-bottom:16px;text-transform:uppercase;letter-spacing:0.08em;">Lean Operations</div>
+        <div style="font-size:14px;color:rgba(255,255,255,0.65);line-height:1.9;">
+          Highly disciplined operating structure with lean infrastructure costs and <strong style="color:rgba(255,255,255,0.85);">founder-funded product development</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="met-summary" style="flex-direction:column;align-items:flex-start;">
+      <div style="font-size:14px;font-weight:700;color:var(--orange-400);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:20px;">Why These Matter:</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px 48px;width:100%;">
+        <div class="met-check">Recurring workflow dependency</div>
+        <div class="met-check">Capital efficiency</div>
+        <div class="met-check">Operational embedding</div>
+        <div class="met-check">Platform reliability</div>
+        <div class="met-check">Strong monetisation potential</div>
+        <div class="met-check">Early infrastructure characteristics</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     06B — COMMERCIAL INFLECTION POINT
+══════════════════════════════════════════ -->
+<section id="inflection">
+  <div class="inner">
+    <div class="label"><span class="dot"></span>Commercialisation Phase</div>
+    <h2 class="sec">Commercial <span class="accent">Inflection Point</span></h2>
+    <div class="divider"></div>
+
+    <p class="inflection-pre-text">
+      The platform was built first for <strong>operational proof</strong>. It has now arrived at the moment of <strong>formalised monetisation</strong>.
+    </p>
+
+    <div class="inflection-main">
+      <div>
+        <div class="inflection-num">6</div>
+        <div class="inflection-num-sub">Active Enrichment Centres · Singapore</div>
+        <div class="inflection-entity-name">WHIZMINDS<br/>ACADEMY GROUP</div>
+        <div class="inflection-entity-sub" style="margin-top:8px;">Structured SaaS · Transaction-Layer Economics</div>
+      </div>
+      <div>
+        <p class="inflection-desc">
+          Whizminds Academy Group — operating across <strong>6 active enrichment centres in Singapore</strong> — is commencing structured commercial agreements with EdBuddies.ai under formal operational frameworks.<br/><br/>
+          This is the transition from <strong>internal operational deployment</strong> to <strong>formalised infrastructure monetisation</strong>.
+        </p>
+        <div class="inflection-pillars-list">
+          <div class="inf-pillar">
+            <span class="inf-pillar-num">I</span>
+            <div>
+              <div class="inf-pillar-text">SaaS Subscription Architecture</div>
+              <div class="inf-pillar-sub">Recurring platform licensing formalised at the centre level</div>
+            </div>
+          </div>
+          <div class="inf-pillar">
+            <span class="inf-pillar-num">II</span>
+            <div>
+              <div class="inf-pillar-text">Transaction-Layer Economics</div>
+              <div class="inf-pillar-sub">Structured fee architecture embedded in the billing flow</div>
+            </div>
+          </div>
+          <div class="inf-pillar">
+            <span class="inf-pillar-num">III</span>
+            <div>
+              <div class="inf-pillar-text">Pricing Validation</div>
+              <div class="inf-pillar-sub">First external commercial proof of monetisation architecture</div>
+            </div>
+          </div>
+          <div class="inf-pillar">
+            <span class="inf-pillar-num">IV</span>
+            <div>
+              <div class="inf-pillar-text">Infrastructure-Grade Commercial Logic</div>
+              <div class="inf-pillar-sub">Established before broader external and regional onboarding</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="inflection-quote">
+      "Pricing validated. Architecture proven. The commercial layer is now being built on infrastructure that was <em>already operationally irreplaceable</em>."
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     07 — PRODUCT PHILOSOPHY
+══════════════════════════════════════════ -->
+<section id="philosophy">
+  <div class="inner">
+    <div class="label"><span class="dot"></span>Product Philosophy</div>
+    <h2 class="sec">Built From <span class="accent">Within</span> Live Operations</h2>
+    <div class="divider"></div>
+
+    <!-- 3 cards in one full-width row -->
+    <div class="col-3" style="margin-top:16px;gap:20px;">
+      <div class="phil-card">
+        <div class="pi">🔬</div>
+        <h3>Built Inside Real Operations</h3>
+        <p>Tested in live education environments before external deployment — ensuring real-world fit</p>
+      </div>
+      <div class="phil-card">
+        <div class="pi">🔄</div>
+        <h3>Rapid Iteration</h3>
+        <p>Continuous improvement driven directly by operator feedback in production environments</p>
+      </div>
+      <div class="phil-card">
+        <div class="pi">🎯</div>
+        <h3>Workflow Depth</h3>
+        <p>Deep integration creates high switching costs and durable long-term customer retention</p>
+      </div>
+    </div>
+
+    <!-- Quote + body text below -->
+    <div class="col-2" style="margin-top:28px;gap:32px;align-items:start;">
+      <div class="phil-quote">
+        <blockquote>
+          "Sustainable infrastructure businesses are built through operational relevance, workflow depth, and long-term customer embedding — rather than aggressive user acquisition alone."
+        </blockquote>
+        <cite>— EdBuddies.ai Product Philosophy</cite>
+      </div>
+      <p class="body" style="align-self:center;">
+        The company has maintained a highly disciplined operating structure with <strong>lean infrastructure costs</strong> and <strong>founder-funded product development</strong>, demonstrating capital efficiency from day one.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     08 — BUSINESS MODEL
+══════════════════════════════════════════ -->
+<section id="bizmodel">
+  <div class="inner">
+    <div class="label"><span class="dot"></span>Business Model</div>
+    <h2 class="sec">Multiple <span class="accent">Revenue Layers</span> with Expansion Optionality</h2>
+    <div class="divider"></div>
+
+    <!-- Top row: two columns side by side -->
+    <div class="col-2" style="margin-top:16px;align-items:start;">
+      <div class="bm-section">
+        <div class="bm-head bm-head--current">Current Revenue Streams</div>
+        <div class="bm-list">
+          <div class="bm-row"><span class="ico">🔁</span>Recurring SaaS Subscriptions</div>
+          <div class="bm-row"><span class="ico">🏫</span>Centre-Level Operational Licensing</div>
+          <div class="bm-row"><span class="ico">💸</span>Payment Workflow Infrastructure</div>
+        </div>
+      </div>
+      <div class="bm-section">
+        <div class="bm-head bm-head--future">Future Expansion Opportunities</div>
+        <div class="bm-list">
+          <div class="bm-row bm-row--future"><span class="ico">💳</span>Embedded Payments</div>
+          <div class="bm-row bm-row--future"><span class="ico">📊</span>Transaction Monetisation</div>
+          <div class="bm-row bm-row--future"><span class="ico">🤖</span>AI Workflow Automation</div>
+          <div class="bm-row bm-row--future"><span class="ico">📈</span>Analytics Infrastructure</div>
+          <div class="bm-row bm-row--future"><span class="ico">🏦</span>Operational Financial Services</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Why This Market Is Attractive — full width, checks in one row -->
+    <div style="margin-top:32px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:16px;padding:28px 32px;">
+      <h3 style="font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--gray-500);margin-bottom:20px;">Why This Market Is Attractive</h3>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px 40px;">
+        <div class="bm-check"><span class="ck">✓</span>Recurring payment behaviour</div>
+        <div class="bm-check"><span class="ck">✓</span>Sticky workflows once embedded</div>
+        <div class="bm-check"><span class="ck">✓</span>Highly fragmented operator base</div>
+        <div class="bm-check"><span class="ck">✓</span>High switching costs once operationally embedded</div>
+      </div>
+    </div>
+
+    <!-- Infrastructure Monetisation Thesis — full width below -->
+    <div style="margin-top:16px;padding:28px 32px;background:var(--orange-50);border:1px solid var(--orange-100);border-radius:16px;">
+      <div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--orange-600);margin-bottom:10px;">Infrastructure Monetisation Thesis</div>
+      <p style="font-size:15px;color:var(--gray-700);line-height:1.75;">
+        The underlying enrichment economy exhibits highly attractive characteristics. As operational density deepens, monetisation opportunities expand across the entire workflow stack.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     09 — STRATEGIC POSITIONING
+══════════════════════════════════════════ -->
+<section id="positioning">
+  <div class="bg-grad"></div>
+  <div class="inner" style="position:relative;z-index:1;">
+    <div class="label label--light"><span class="dot"></span>Strategic Positioning</div>
+    <h2 class="sec sec--white">Infrastructure, <span class="accent--light">Not Consumer EdTech</span></h2>
+    <div class="divider divider--light"></div>
+
+    <div class="col-2 col-2--40" style="margin-top:16px;align-items:start;">
+      <div>
+        <p class="body body--white body--lg">
+          EdBuddies.ai is not attempting to become another broad-based consumer EdTech platform. The company is building towards becoming the <strong style="color:white;">operational infrastructure layer</strong> powering the enrichment economy across Southeast Asia.
+        </p>
+        <p class="body body--white" style="margin-top:20px;">
+          This positioning aligns more closely with <strong style="color:white;">vertical SaaS, embedded fintech, and workflow infrastructure businesses</strong> than traditional education marketplaces or content-driven platforms.
+        </p>
+        <div style="margin-top:32px;padding:24px 28px;background:rgba(249,115,22,0.1);border:1px solid rgba(249,115,22,0.25);border-radius:14px;">
+          <p style="font-size:16px;font-weight:700;color:var(--white);font-style:italic;line-height:1.65;">
+            "The company is building the operating system — <span style="color:var(--orange-400);">EdBuddiesOS™</span> — for Southeast Asia's enrichment economy."
+          </p>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.35);margin-bottom:16px;">Positioning Comparison</div>
+        <div class="pos-table">
+          <div class="pos-row pos-row--no">
+            <span>Consumer EdTech Platforms</span>
+            <span class="pos-tag pos-tag--no">Not Us</span>
+          </div>
+          <div class="pos-row pos-row--no">
+            <span>Content / Learning Marketplaces</span>
+            <span class="pos-tag pos-tag--no">Not Us</span>
+          </div>
+          <div class="pos-row pos-row--no">
+            <span>Student-Facing Apps</span>
+            <span class="pos-tag pos-tag--no">Not Us</span>
+          </div>
+          <div class="pos-row pos-row--yes">
+            <span>Vertical SaaS Infrastructure</span>
+            <span class="pos-tag pos-tag--yes">✓ EdBuddies</span>
+          </div>
+          <div class="pos-row pos-row--yes">
+            <span>Embedded Fintech &amp; Payments</span>
+            <span class="pos-tag pos-tag--yes">✓ EdBuddies</span>
+          </div>
+          <div class="pos-row pos-row--yes">
+            <span>Workflow Infrastructure</span>
+            <span class="pos-tag pos-tag--yes">✓ EdBuddies</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     09B — OPERATIONAL DEPLOYMENT VALIDATED
+══════════════════════════════════════════ -->
+<section id="deployment">
+  <div class="inner">
+    <div class="label"><span class="dot"></span>Deployment Signals</div>
+    <h2 class="sec">Operational <span class="accent">Deployment Validated</span></h2>
+    <div class="divider"></div>
+
+    <p class="dep-header-text">
+      Commercial, institutional, community-service — three distinct operational environments, one city-state, one infrastructure layer, before regional expansion commences.
+    </p>
+
+    <div class="dep-cards-grid">
+      <div class="dep-card-new">
+        <div class="dep-card-idx">Deployment Signal · 01</div>
+        <img src="./NeuGen-logo.png" alt="NeuGen logo" style="height:48px;object-fit:contain;object-position:left;margin-bottom:10px;display:block;max-width:180px;" />
+        <div class="dep-card-name">Neugen</div>
+        <div class="dep-card-eco">Yellow Ribbon Ecosystem · Singapore</div>
+        <p class="dep-card-body">Onboarding collaboration confirmed under the Yellow Ribbon Programme ecosystem. Validates operational range and institutional deployment capacity across non-commercial environments — broadening the infrastructure addressable surface.</p>
+      </div>
+      <div class="dep-card-new">
+        <div class="dep-card-idx">Deployment Signal · 02</div>
+        <img src="./lovingheart-logo.png?v=2" alt="Loving Hearts logo" style="height:48px;object-fit:contain;object-position:left;margin-bottom:10px;display:block;max-width:180px;" />
+        <div class="dep-card-name">Loving Hearts</div>
+        <div class="dep-card-eco">Community Tuition Services · Boon Lay</div>
+        <p class="dep-card-body">Live operational workflows embedded within community-service tuition operations. Demonstrates infrastructure applicability across commercial, institutional, and community-service environments within a single operational density cluster.</p>
+      </div>
+    </div>
+
+    <div class="dep-summary-box">
+      <p class="dep-summary-text">"Commercial, institutional, community-service: three distinct operational environments, one city-state, one infrastructure layer — before regional expansion commences."</p>
+      <span class="dep-summary-label">Operational Density Signal</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     09C — STRATEGIC THESIS
+══════════════════════════════════════════ -->
+<section id="strategic-thesis">
+  <div class="inner">
+    <div class="label"><span class="dot"></span>Strategic Thesis</div>
+    <h2 class="sec">Infrastructure Before <span class="accent">Monetisation</span></h2>
+    <div class="divider"></div>
+
+    <div class="col-2 col-2--40" style="margin-top:16px;align-items:start;">
+      <div>
+        <p class="thesis-body-text">
+          EdBuddies.ai was not built to grow quickly.<br/><br/>
+          It was built to embed deeply — at the recurring transaction layer, at the operational dependency layer, at the workflow level where switching cost is not a feature but a structural reality.<br/><br/>
+          <strong>The company does not require external capital to survive.</strong><br/><br/>
+          Strategic capital, if correctly aligned, may accelerate what is already compounding.
+        </p>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--gray-400);margin-bottom:16px;">Strategic Disciplines</div>
+        <div class="thesis-disciplines-list">
+          <div class="thesis-disc"><span class="thesis-disc-num">I</span>Founder-Funded Operating Discipline</div>
+          <div class="thesis-disc"><span class="thesis-disc-num">II</span>Infrastructure Before Monetisation Optimisation</div>
+          <div class="thesis-disc"><span class="thesis-disc-num">III</span>Operational Density Before Regional Expansion</div>
+          <div class="thesis-disc"><span class="thesis-disc-num">IV</span>Workflow Depth Before Hypergrowth</div>
+          <div class="thesis-disc"><span class="thesis-disc-num">V</span>Embedded Infrastructure Before Scale</div>
+          <div class="thesis-disc"><span class="thesis-disc-num">VI</span>Strategic Alignment Over Passive Capital</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="thesis-box-new">
+      <span class="thesis-box-kicker">Infrastructure Investment Thesis</span>
+      <p class="thesis-box-text">
+        The opportunity is not in the application layer.<br/>
+        The opportunity is in the <em>operational substrate</em> — the recurring billing, the attendance systems, the workflow engines — that power every enrichment centre, every month, compounding silently and invisibly.<br/><br/>
+        <em>That substrate is what EdBuddies.ai is quietly becoming.</em>
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     10 — INVESTMENT PHILOSOPHY
+══════════════════════════════════════════ -->
+<section id="investment">
+  <div class="inner">
+    <div class="label"><span class="dot"></span>Investment Philosophy</div>
+    <h2 class="sec">Seeking <span class="accent">Strategic Partners</span>, Not Just Capital</h2>
+    <div class="divider"></div>
+    <p class="body body--lg" style="max-width:720px;margin-bottom:48px;">
+      EdBuddies.ai is entering a selective phase of strategic investor engagement. The founders are specifically interested in engaging investors and strategic partners who can contribute meaningful value beyond capital.
+    </p>
+
+    <div class="col-3" style="gap:20px;">
+      <div class="inv-card">
+        <h3>Vertical SaaS Expertise</h3>
+        <p>Operating experience building and scaling vertical SaaS businesses in emerging Asian markets</p>
+      </div>
+      <div class="inv-card">
+        <h3>Fintech Infrastructure</h3>
+        <p>Capabilities in embedded payments, financial services, and transaction infrastructure</p>
+      </div>
+      <div class="inv-card">
+        <h3>Regional Scaling</h3>
+        <p>Proven experience scaling platforms and products across Southeast Asia markets</p>
+      </div>
+      <div class="inv-card">
+        <h3>Enterprise Partnerships</h3>
+        <p>Access to education operators, enterprise channels, and regional distribution networks</p>
+      </div>
+      <div class="inv-card">
+        <h3>Ecosystem Value</h3>
+        <p>Long-term ecosystem value creation beyond the initial investment engagement period</p>
+      </div>
+      <div class="inv-card" style="border-top-color:var(--orange-500);">
+        <h3 style="color:var(--orange-600);">Founder Optionality</h3>
+        <p>The founders continue to self-fund core R&amp;D and remain prepared to scale independently if strategic alignment is not achieved — ensuring a disciplined and patient approach</p>
+      </div>
+    </div>
+
+    <div class="partnership-philosophy">
+      <h3>Partnership Philosophy</h3>
+      <p>The company is entering a selective phase of strategic investor engagement. EdBuddies.ai is not seeking passive capital participation alone. The founders are specifically interested in engaging investors and strategic partners who can contribute: vertical SaaS operating expertise, fintech infrastructure capabilities, regional scaling experience, enterprise partnerships, and long-term ecosystem value creation.</p>
+      <p>The founders continue to self-fund core R&amp;D and operational growth and remain fully prepared to continue scaling independently should suitable strategic alignment not emerge.</p>
+      <p>This allows the company to remain disciplined, patient, and highly selective regarding future partnerships.</p>
+    </div>
+
+    <div class="inv-approach">
+      <h3>Our Approach to Partnerships</h3>
+      <div class="inv-points">
+        <div class="inv-point">
+          <div class="ip-icon">🎯</div>
+          <h4>Selective &amp; Disciplined</h4>
+          <p>Opening a limited number of exploratory discussions with strategically aligned investors and operators — quality over volume</p>
+        </div>
+        <div class="inv-point">
+          <div class="ip-icon">🤝</div>
+          <h4>Strategic Alignment First</h4>
+          <p>Prioritising partners who share a long-term infrastructure-building mindset and see value in SEA's enrichment economy digitisation</p>
+        </div>
+        <div class="inv-point">
+          <div class="ip-icon">⚡</div>
+          <h4>Patient Capital Welcome</h4>
+          <p>Long-term value creation over short-term exits — building durable infrastructure in a structurally resilient sector</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     11 — ROADMAP / LOOKING AHEAD
+══════════════════════════════════════════ -->
+<section id="roadmap">
+  <div class="inner">
+    <div class="label"><span class="dot"></span>Looking Ahead</div>
+    <h2 class="sec">The Opportunity <span class="accent">Extends Far Beyond</span> Workflow Software</h2>
+    <div class="divider"></div>
+    <p class="body body--lg" style="max-width:700px;">
+      As operational density increases, EdBuddies.ai believes the platform can evolve into a comprehensive business infrastructure stack for education operators across the entire region.
+    </p>
+
+    <div class="rm-steps">
+      <div class="rm-step">
+        <span class="phase phase--live">Now — Live</span>
+        <div class="rm-dot rm-dot--live">🏗️</div>
+        <h3>Operational Foundation</h3>
+        <p>Deepening Singapore density. Billing, scheduling, attendance, parent communications — all live in production</p>
+      </div>
+      <div class="rm-step">
+        <span class="phase phase--future">Near-Term</span>
+        <div class="rm-dot rm-dot--future">🤖</div>
+        <h3>AI Workflow Layer</h3>
+        <p>AI-powered automation, predictive retention analytics, and intelligent parent communication systems</p>
+      </div>
+      <div class="rm-step">
+        <span class="phase phase--future">Mid-Term</span>
+        <div class="rm-dot rm-dot--future">💳</div>
+        <h3>Embedded Financial Infrastructure</h3>
+        <p>Transaction monetisation, embedded payments, and operational financial services for education operators</p>
+      </div>
+      <div class="rm-step">
+        <span class="phase phase--future">Long-Term</span>
+        <div class="rm-dot rm-dot--future">🌏</div>
+        <h3>SEA Regional Expansion</h3>
+        <p>Operational intelligence tooling and broader business infrastructure deployed across Southeast Asia</p>
+      </div>
+    </div>
+
+    <div class="strategic-direction-block">
+      <h3>Strategic Direction</h3>
+      <p>The long-term opportunity extends beyond workflow software alone. As operational density increases, EdBuddies.ai believes the platform can evolve into: <strong style="color:var(--orange-400);">embedded financial infrastructure, operational intelligence tooling, AI-enabled workflow automation, and broader business infrastructure</strong> for education operators across the region.<br/><br/>The company remains focused on: building durable infrastructure within a structurally resilient sector through disciplined and operationally grounded execution.</p>
+    </div>
+
+    <div class="rm-vision" style="flex-direction:column;align-items:center;text-align:center;">
+      <img src="./EdBuddies V2 logo.png" alt="EdBuddies Mascot" style="height:120px;" />
+      <div>
+        <h3>The EdBuddiesOS™ Vision</h3>
+        <p>
+          The company remains focused on <strong>building durable infrastructure within a structurally resilient sector</strong> through disciplined and operationally grounded execution — creating long-term, compounding value for operators, parents, students, and investors across Southeast Asia.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     11B — CLOSING THOUGHT
+══════════════════════════════════════════ -->
+<section id="closing-thought">
+  <div class="bg-grad"></div>
+  <div class="inner" style="position:relative;z-index:1;text-align:center;">
+    <div class="label label--light" style="justify-content:center;margin-bottom:32px;"><span class="dot"></span>EdBuddies.ai · Infrastructure Formation · 2026</div>
+    <div class="closing-headline">
+      THIS IS <span class="not">NOT</span><br/>A STARTUP.
+    </div>
+    <p class="closing-sub-text">
+      This is the early formation of infrastructure.<br/>
+      The kind that, once embedded, becomes invisible — and irreplaceable.<br/>
+      The kind that compounds before anyone notices it is compounding.
+    </p>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     12 — CONTACT / CTA
+══════════════════════════════════════════ -->
+<section id="contact">
+  <div class="bg-grad"></div>
+  <div class="inner" style="position:relative;z-index:1;">
+    <div class="cta-center">
+      <div class="label label--light" style="justify-content:center;"><span class="dot"></span>Selective Strategic Conversations</div>
+      <h2 class="sec sec--white" style="font-size:clamp(28px,4vw,48px);">Let's Build the Future of <span class="accent--light">Education Infrastructure</span> Together</h2>
+      <p>
+        EdBuddies.ai is currently opening a limited number of exploratory discussions with strategically aligned investors, operators, and ecosystem partners. We welcome conversations with parties who share a long-term infrastructure-building mindset.
+      </p>
+    </div>
+
+    <div class="contact-card">
+      <img src="./stanley-avatar.png" alt="Dr Stanley Yew" style="width:180px;height:180px;min-width:180px;border-radius:50%;object-fit:cover;border:3px solid rgba(249,115,22,0.4);box-shadow:0 0 0 6px rgba(249,115,22,0.15);" />
+      <div class="contact-info">
+        <h3>Dr Stanley Yew</h3>
+        <div class="role">Founder &amp; Chief Executive Officer · EdBuddies.ai</div>
+        <p style="font-size:14px;color:rgba(255,255,255,0.6);line-height:1.75;margin:14px 0 20px;max-width:560px;">Operator-founder with over two decades of direct experience within Singapore's education and enrichment ecosystem, including multi-centre operational management, workflow systems development, and recurring education infrastructure operations.</p>
+        <div class="contact-links">
+          <a class="contact-link" href="#">🌐 edbuddies.ai</a>
+          <a class="contact-link" href="#">📧 Get In Touch</a>
+          <span class="contact-badge">🌏 Singapore-based · SEA focus</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Team Grid -->
+    <div class="team-section">
+      <div class="team-section-label">The Team</div>
+      <div class="team-grid">
+
+        <!-- 1. Darren -->
+        <div class="team-card">
+          <div class="team-card-top">
+            <img src="./darren-avatar.png" alt="Darren Eng" class="team-avatar-img" />
+            <div>
+              <div class="team-name">Darren Eng</div>
+              <div class="team-role">Co-Founder &amp; COO</div>
+            </div>
+          </div>
+          <p class="team-bio">Darren turns business ambition into operating discipline. From strategy to execution, he makes sure EdBuddies is not just building a strong product, but building a company that can scale. He connects market needs, business direction, and operational decisions into one clear path forward. EdBuddies moves with structure because Darren keeps the business grounded and growing.</p>
+        </div>
+
+        <!-- 2. Shaun -->
+        <div class="team-card">
+          <div class="team-card-top">
+            <img src="./Shaun-avatar.png" alt="Shaun" class="team-avatar-img" />
+            <div>
+              <div class="team-name">Shaun</div>
+              <div class="team-role">Tech &amp; Product Head</div>
+            </div>
+          </div>
+          <p class="team-bio">Shaun holds the line between vision and shipping. He architects what the platform becomes three quarters from now while making sure today's release goes out on time. Every feature earns its place, every decision serves the operating-system bet. EdBuddies has a roadmap because Shaun has the map.</p>
+        </div>
+
+        <!-- 3. Forest -->
+        <div class="team-card">
+          <div class="team-card-top">
+            <img src="./forest-avatar.png" alt="Forest Chong" class="team-avatar-img" />
+            <div>
+              <div class="team-name">Forest Chong</div>
+              <div class="team-role">Full-Stack Engineer</div>
+            </div>
+          </div>
+          <p class="team-bio">Forest is the engine room. From the recurring billing engine clocking a 99.5% webhook success rate to the attendance pipeline that's processed 13,300+ events without flinching, his fingerprints are on every layer of the stack. He doesn't just ship — he builds systems that quietly compound. EdBuddies runs because Forest's code does.</p>
+        </div>
+
+        <!-- 4. Hailey -->
+        <div class="team-card">
+          <div class="team-card-top">
+            <img src="./hailey-avatar.png" alt="Hailey" class="team-avatar-img" />
+            <div>
+              <div class="team-name">Hailey</div>
+              <div class="team-role">UI/UX Engineer</div>
+            </div>
+          </div>
+          <p class="team-bio">Hailey turns operational complexity into interfaces parents and operators actually want to use. The 54.4% mobile parent penetration isn't an accident — it's the product of obsessive attention to clarity, hierarchy, and the small interactions that make software feel effortless. She's the reason EdBuddies looks like infrastructure people trust.</p>
+        </div>
+
+        <!-- 5. Kenneth -->
+        <div class="team-card">
+          <div class="team-card-top">
+            <img src="./kenneth-avatar.png" alt="Kenneth" class="team-avatar-img" />
+            <div>
+              <div class="team-name">Kenneth</div>
+              <div class="team-role">Marketing HOD</div>
+            </div>
+          </div>
+          <p class="team-bio">Kenneth is the signal amplifier. He turns what EdBuddies builds into messages the market can understand, remember, and act on. From brand positioning to growth campaigns, his work makes EdBuddies feel like the future operating system for education centres. EdBuddies gets seen because Kenneth makes the story land.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="contact-footer">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:24px;">
+        <img src="./Edbuddies Horizontal (For Dark Bg).png" alt="EdBuddies" style="height:36px;object-fit:contain;" />
+        <div style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.45);letter-spacing:0.06em;">Edusphere Technologies</div>
+      </div>
+      <p>
+        <strong>© 2026 EdBuddies.ai · All Rights Reserved</strong><br>
+        This document is confidential and intended solely for the named recipient.<br>
+        EdBuddiesOS™ is a trademark of EdBuddies.ai · Singapore
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<script>
+  /* ── Active nav highlight ── */
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.topbar-nav a');
+  const navObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        const active = document.querySelector(`.topbar-nav a[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { threshold: 0.35 });
+  sections.forEach(s => navObs.observe(s));
+
+  /* ── Scroll-triggered entrance animations ── */
+  const animTargets = [
+    // Section labels & headings
+    { sel: '.label',          cls: 'fade-only', stagger: false },
+    { sel: 'h2.sec',          cls: '',          stagger: false },
+    { sel: 'h1.hero',         cls: '',          stagger: false },
+    { sel: '.divider',        cls: '',          stagger: false },
+    // Body copy
+    { sel: 'p.body',          cls: 'fade-only', stagger: false },
+    { sel: '.hero-sub',       cls: 'fade-only', stagger: false },
+    // Cards & grids — staggered
+    { sel: '.prob-card',      cls: '',          stagger: true },
+    { sel: '.why-card',       cls: 'scale-in',  stagger: true },
+    { sel: '.met-card',       cls: 'scale-in',  stagger: true },
+    { sel: '.phil-card',      cls: '',          stagger: true },
+    { sel: '.inv-card',       cls: '',          stagger: true },
+    { sel: '.roadmap-item',   cls: 'fade-only', stagger: true },
+    { sel: '.rm-step',        cls: '',          stagger: true },
+    { sel: '.bm-row',         cls: 'fade-only', stagger: true },
+    { sel: '.feat-row',       cls: 'fade-only', stagger: true },
+    { sel: '.met-check',      cls: 'fade-only', stagger: true },
+    { sel: '.pos-row',        cls: 'fade-only', stagger: true },
+    { sel: '.inv-point',      cls: '',          stagger: true },
+    { sel: '.snapshot-row',   cls: 'fade-only', stagger: true },
+    // Blocks
+    { sel: '.overview-quote', cls: 'from-left', stagger: false },
+    { sel: '.phil-quote',     cls: 'from-right',stagger: false },
+    { sel: '.overview-snapshot', cls: 'from-right', stagger: false },
+    { sel: '.roadmap-box',    cls: 'from-right',stagger: false },
+    { sel: '.position-pill',  cls: 'scale-in',  stagger: false },
+    { sel: '.rm-vision',      cls: '',          stagger: false },
+    { sel: '.met-summary',    cls: '',          stagger: false },
+    { sel: '.inv-approach',   cls: '',          stagger: false },
+    { sel: '.contact-card',   cls: 'scale-in',  stagger: false },
+    { sel: '.team-card',      cls: '',          stagger: true  },
+    { sel: '.cta-center',     cls: '',          stagger: false },
+    { sel: '.hero-stats',     cls: '',          stagger: false },
+    { sel: '.hero-card',      cls: 'from-right',stagger: false },
+    { sel: '.bm-section',     cls: '',          stagger: true  },
+    { sel: '.bm-attr',        cls: '',          stagger: false },
+    { sel: '.vision-vm-card', cls: '',          stagger: true  },
+    { sel: '.sl-layer',       cls: 'fade-only', stagger: true  },
+    { sel: '.dep-card-new',   cls: '',          stagger: true  },
+    { sel: '.thesis-disc',    cls: 'fade-only', stagger: true  },
+    { sel: '.inf-pillar',     cls: 'fade-only', stagger: true  },
+    { sel: '.thesis-box-new', cls: '',          stagger: false },
+    { sel: '.inflection-main',cls: '',          stagger: false },
+    { sel: '.dep-summary-box',cls: '',          stagger: false },
+    { sel: '.partnership-philosophy', cls: '',  stagger: false },
+    { sel: '.strategic-direction-block', cls: '', stagger: false },
+    { sel: '.closing-headline', cls: '',        stagger: false },
+    { sel: '.closing-sub-text', cls: 'fade-only', stagger: false },
+  ];
+
+  // Track which elements already have the class to avoid duplicates
+  const registered = new WeakSet();
+
+  animTargets.forEach(({ sel, cls, stagger }) => {
+    const els = document.querySelectorAll(sel);
+    // Group siblings by parent for stagger offset calculation
+    const parentMap = new Map();
+    els.forEach(el => {
+      if (registered.has(el)) return;
+      registered.add(el);
+      el.classList.add('will-anim');
+      if (cls) el.classList.add(cls);
+      if (stagger) {
+        const parent = el.parentElement;
+        if (!parentMap.has(parent)) parentMap.set(parent, []);
+        parentMap.get(parent).push(el);
+      }
+    });
+    if (stagger) {
+      parentMap.forEach(group => {
+        group.forEach((el, i) => {
+          const delay = Math.min(i, 6);
+          el.classList.add(`d-${delay + 1}`);
+        });
+      });
+    }
+  });
+
+  // IntersectionObserver to trigger animations
+  const animObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        animObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.will-anim').forEach(el => animObs.observe(el));
+
+  /* ── Progress bar trigger ── */
+  const progressObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        progressObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.progress-bar').forEach(el => progressObs.observe(el));
+
+  /* ── Animated number counter ── */
+  function animateCounter(el, target, prefix = '', suffix = '', duration = 1400, decimals = null) {
+    if (decimals === null) decimals = (target % 1 !== 0) ? 1 : 0;
+    const start = performance.now();
+    const update = (now) => {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      // Ease out expo
+      const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+      const current = target * eased;
+      el.textContent = prefix + current.toFixed(decimals) + suffix;
+      if (progress < 1) requestAnimationFrame(update);
+      else {
+        el.textContent = prefix + target.toFixed(decimals) + suffix;
+        el.closest('.hero-stat, .met-card')?.classList.add('counted');
+      }
+    };
+    requestAnimationFrame(update);
+  }
+
+  // Map selector → { target, prefix, suffix }
+  const counters = [
+    { sel: '.hero-stat:nth-child(1) .val', target: 542, prefix: 'SGD ', suffix: 'K' },
+    { sel: '.hero-stat:nth-child(2) .val', target: 1.29, prefix: 'SGD ', suffix: 'M' },
+    { sel: '.hero-stat:nth-child(3) .val', target: 96.6, prefix: '', suffix: '%' },
+    { sel: '.hero-stat:nth-child(4) .val', target: 585, prefix: '', suffix: '' },
+  ];
+
+  const metCounters = [
+    { sel: '.met-card:nth-child(1) .val span', target: 542,  prefix: '', suffix: 'K',  decimals: 0 },
+    { sel: '.met-card:nth-child(2) .val span', target: 1.29, prefix: '', suffix: 'M',  decimals: 2 },
+    { sel: '.met-card:nth-child(3) .val span', target: 585,  prefix: '', suffix: '',   decimals: 0 },
+    { sel: '.met-card:nth-child(4) .val span', target: 96.6, prefix: '', suffix: '%',  decimals: 1 },
+    { sel: '.met-card:nth-child(5) .val span', target: 99.5, prefix: '', suffix: '%',  decimals: 1 },
+  ];
+
+  const countedEls = new WeakSet();
+
+  const counterObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting || countedEls.has(entry.target)) return;
+      countedEls.add(entry.target);
+
+      // Hero counters
+      counters.forEach(({ sel, target, prefix, suffix }) => {
+        const el = document.querySelector(sel);
+        if (el && entry.target.contains(el)) animateCounter(el, target, prefix, suffix);
+      });
+
+      // Traction metric counters — target the span directly, no prefix duplication
+      metCounters.forEach(({ sel, target, prefix, suffix, decimals }) => {
+        const el = document.querySelector(sel);
+        if (el && entry.target.contains(el)) {
+          animateCounter(el, target, prefix, suffix, 1400, decimals);
+        }
+      });
+    });
+  }, { threshold: 0.5 });
+
+  // Observe hero stats block and traction section
+  const heroStatsEl = document.querySelector('.hero-stats');
+  const tractionEl  = document.querySelector('#traction');
+  if (heroStatsEl) counterObs.observe(heroStatsEl);
+  if (tractionEl)  counterObs.observe(tractionEl);
+
+  /* ── Bilingual Translation System ── */
+  // Map: exact original innerHTML (trimmed) -> Vietnamese innerHTML
+  // We normalize whitespace (collapse runs) when matching.
+  const TRANSLATIONS = {
+    // Page title
+    "EdBuddies.ai — Investment Teaser (EN | VI)": "EdBuddies.ai — Hồ Sơ Giới Thiệu Đầu Tư (EN | VI)",
+
+    // Topbar nav
+    "Overview": "Tổng Quan",
+    "Vision": "Tầm Nhìn",
+    "Problem": "Vấn Đề",
+    "Solution": "Giải Pháp",
+    "Traction": "Lực Kéo",
+    "Commercial": "Thương Mại",
+    "Deployment": "Triển Khai",
+    "Investment": "Đầu Tư",
+    "Roadmap": "Lộ Trình",
+    "Contact": "Liên Hệ",
+    "🔒 Confidential": "🔒 Bảo Mật",
+    "⬇ Export PDF": "⬇ Xuất PDF",
+
+    // Hero
+    "📄 Investment Teaser · Singapore · 2026": "📄 Hồ Sơ Giới Thiệu Đầu Tư · Singapore · 2026",
+    "Building the<br>\n          <span style=\"color:var(--orange-400);\">Operating System</span><br>\n          for Southeast Asia's<br>\n          <span style=\"color:rgba(255,255,255,0.55);\">Enrichment Economy</span>":
+      "Xây Dựng<br>\n          <span style=\"color:var(--orange-400);\">Hệ Điều Hành</span><br>\n          cho Nền Kinh Tế<br>\n          <span style=\"color:rgba(255,255,255,0.55);\">Bồi Dưỡng tại Đông Nam Á</span>",
+    "EdBuddies.ai is a Singapore-based vertical SaaS company digitising the highly fragmented tuition and enrichment sector — powering the <strong style=\"color:white;\">EdBuddiesOS™</strong> infrastructure layer.":
+      "EdBuddies.ai là công ty SaaS chuyên ngành có trụ sở tại Singapore, đang số hóa lĩnh vực dạy thêm và bồi dưỡng phân mảnh cao — vận hành tầng hạ tầng <strong style=\"color:white;\">EdBuddiesOS™</strong>.",
+    "Trailing 12-Month GMV": "GMV 12 Tháng Gần Nhất",
+    "Annualised GMV Run-Rate": "Tốc Độ GMV Hàng Năm",
+    "Recurring Transaction Volume": "Khối Lượng Giao Dịch Định Kỳ",
+    "Active Subscriptions": "Đăng Ký Đang Hoạt Động",
+    "Scroll to explore": "Cuộn để khám phá",
+    "Platform Capabilities": "Năng Lực Nền Tảng",
+    "Recurring Subscription Billing": "Thanh Toán Đăng Ký Định Kỳ",
+    "Scheduling & Timetable Management": "Quản Lý Lịch Trình & Thời Khóa Biểu",
+    "Attendance Tracking": "Theo Dõi Điểm Danh",
+    "Parent Communication": "Giao Tiếp Phụ Huynh",
+    "AI-Powered Automation (Roadmap)": "Tự Động Hóa Sử Dụng AI (Lộ Trình)",
+
+    // Overview
+    "Executive Overview": "Tổng Quan Điều Hành",
+    "The Platform <span class=\"accent\">Powering</span> Education Operations":
+      "Nền Tảng <span class=\"accent\">Vận Hành</span> Hoạt Động Giáo Dục",
+    "EdBuddies.ai provides a unified operating platform powering <strong>recurring billing, scheduling, attendance, parent communication,</strong> and administrative workflows for tuition centres and enrichment operators across Southeast Asia.":
+      "EdBuddies.ai cung cấp nền tảng vận hành thống nhất, hỗ trợ <strong>thanh toán định kỳ, lập lịch, điểm danh, giao tiếp phụ huynh</strong> và các quy trình quản trị cho các trung tâm dạy thêm và nhà vận hành bồi dưỡng khắp Đông Nam Á.",
+    "While the global education sector has seen substantial investment into content platforms and consumer learning applications, the <strong>operational infrastructure layer</strong> supporting the enrichment economy across Southeast Asia remains significantly under-digitised.":
+      "Trong khi ngành giáo dục toàn cầu đã nhận được khoản đầu tư đáng kể vào các nền tảng nội dung và ứng dụng học tập tiêu dùng, <strong>tầng hạ tầng vận hành</strong> hỗ trợ nền kinh tế bồi dưỡng tại Đông Nam Á vẫn còn ít được số hóa.",
+    "The platform is currently deployed within live operating environments and has already processed over <strong>SGD 542K in trailing twelve-month GMV</strong>, with approximately <strong>96.6%</strong> of platform transaction volume recurring in nature.":
+      "Nền tảng hiện đang được triển khai trong các môi trường vận hành thực và đã xử lý hơn <strong>SGD 542K GMV trong 12 tháng gần nhất</strong>, với khoảng <strong>96,6%</strong> khối lượng giao dịch mang tính định kỳ.",
+    "\"The company is presently focused on deepening operational density within Singapore before measured regional expansion.\"":
+      "\"Hiện công ty tập trung vào việc làm sâu thêm mật độ vận hành tại Singapore trước khi mở rộng có kiểm soát ra khu vực.\"",
+    "Company Snapshot": "Hồ Sơ Công Ty",
+    "Headquarters": "Trụ Sở",
+    "Singapore": "Singapore",
+    "Category": "Phân Loại",
+    "Vertical SaaS": "SaaS Chuyên Ngành",
+    "Sector": "Lĩnh Vực",
+    "EdTech Infrastructure": "Hạ Tầng EdTech",
+    "Market": "Thị Trường",
+    "Southeast Asia": "Đông Nam Á",
+    "Stage": "Giai Đoạn",
+    "Early Traction · Live": "Lực Kéo Sớm · Đang Hoạt Động",
+    "Funding": "Huy Động Vốn",
+    "Founder-Funded": "Tự Tài Trợ Bởi Nhà Sáng Lập",
+    "Product": "Sản Phẩm",
+    "EdBuddiesOS™": "EdBuddiesOS™",
+
+    // Vision
+    "Vision &amp; Positioning": "Tầm Nhìn &amp; Định Vị",
+    "EdBuddies.ai is <span class=\"strike\">NOT EdTech</span>.":
+      "EdBuddies.ai <span class=\"strike\">KHÔNG PHẢI EdTech</span>.",
+    "EdBuddies.ai is <span class=\"infra\">INFRASTRUCTURE</span>.":
+      "EdBuddies.ai là <span class=\"infra\">HẠ TẦNG</span>.",
+    "Building the Operating System (EdBuddiesOS™) for Southeast Asia's Enrichment Economy.":
+      "Xây dựng Hệ Điều Hành (EdBuddiesOS™) cho Nền Kinh Tế Bồi Dưỡng tại Đông Nam Á.",
+    "🏗️ EdBuddiesOS™": "🏗️ EdBuddiesOS™",
+    "Mission": "Sứ Mệnh",
+    "EdBuddies.ai is a Singapore-based vertical SaaS and operational infrastructure company digitising the highly fragmented tuition and enrichment sector across Southeast Asia.":
+      "EdBuddies.ai là công ty SaaS chuyên ngành và hạ tầng vận hành có trụ sở tại Singapore, đang số hóa lĩnh vực dạy thêm và bồi dưỡng phân mảnh cao tại Đông Nam Á.",
+    "The company provides a unified operating platform powering: recurring billing, scheduling, attendance, parent communication, and administrative workflows for tuition centres and enrichment operators.":
+      "Công ty cung cấp nền tảng vận hành thống nhất hỗ trợ: thanh toán định kỳ, lập lịch, điểm danh, giao tiếp phụ huynh và quy trình quản trị cho các trung tâm dạy thêm và nhà vận hành bồi dưỡng.",
+    "While the global education sector has seen substantial investment into content platforms and consumer learning applications over the past decade, the <strong style=\"color:var(--orange-400);\">operational infrastructure layer</strong> supporting the enrichment economy across Southeast Asia remains significantly under-digitised. EdBuddies.ai was built specifically to address this gap.":
+      "Trong thập kỷ qua, ngành giáo dục toàn cầu đã nhận được đầu tư lớn vào các nền tảng nội dung và ứng dụng học tập tiêu dùng, nhưng <strong style=\"color:var(--orange-400);\">tầng hạ tầng vận hành</strong> hỗ trợ nền kinh tế bồi dưỡng tại Đông Nam Á vẫn còn ít được số hóa. EdBuddies.ai được xây dựng cụ thể để giải quyết khoảng trống này.",
+    "\"Rather than competing within the crowded consumer EdTech landscape, EdBuddies.ai is positioning itself as: <span style=\"color:var(--orange-400);\">Mission-Critical Infrastructure for Education Operators.</span>\"":
+      "\"Thay vì cạnh tranh trong thị trường EdTech tiêu dùng đông đúc, EdBuddies.ai đang định vị mình là: <span style=\"color:var(--orange-400);\">Hạ Tầng Cốt Lõi cho Nhà Vận Hành Giáo Dục.</span>\"",
+
+    // Problem
+    "The Problem": "Vấn Đề",
+    "Southeast Asia's Enrichment Sector is <span class=\"accent\">Massively Under-Digitised</span>":
+      "Ngành Bồi Dưỡng tại Đông Nam Á <span class=\"accent\">Còn Rất Ít Được Số Hóa</span>",
+    "The tuition and enrichment industry across Southeast Asia represents a large and structurally resilient market — yet many operators continue to rely on fragmented, manual tools. These inefficiencies directly impact <strong>scalability, profitability, parent experience,</strong> and service quality.":
+      "Ngành dạy thêm và bồi dưỡng tại Đông Nam Á là thị trường lớn và bền vững về cấu trúc — nhưng nhiều nhà vận hành vẫn dựa vào các công cụ thủ công, phân mảnh. Sự kém hiệu quả này ảnh hưởng trực tiếp đến <strong>khả năng mở rộng, lợi nhuận, trải nghiệm phụ huynh</strong> và chất lượng dịch vụ.",
+    "Spreadsheet Dependency": "Phụ Thuộc Bảng Tính",
+    "Student data, billing records, and attendance managed through disconnected spreadsheets with no integration.":
+      "Dữ liệu học sinh, hồ sơ thanh toán và điểm danh được quản lý qua các bảng tính rời rạc, không có sự tích hợp.",
+    "Manual Invoicing": "Lập Hóa Đơn Thủ Công",
+    "Time-intensive manual invoice creation, tracking, and follow-up with no automated payment workflows.":
+      "Việc tạo, theo dõi và nhắc nhở hóa đơn thủ công tốn nhiều thời gian, không có quy trình thanh toán tự động.",
+    "Fragmented Communication": "Giao Tiếp Phân Mảnh",
+    "Parent-teacher communication scattered across WhatsApp, email, and SMS with no unified system.":
+      "Giao tiếp giữa phụ huynh và giáo viên rải rác trên WhatsApp, email và SMS, không có hệ thống thống nhất.",
+    "Disconnected Scheduling": "Lập Lịch Rời Rạc",
+    "Class timetables managed in isolation, with no integration to billing, attendance, or communications.":
+      "Thời khóa biểu lớp học được quản lý độc lập, không tích hợp với thanh toán, điểm danh hay giao tiếp.",
+    "Attendance Gaps": "Khoảng Trống Điểm Danh",
+    "Paper-based attendance systems with no real-time visibility for operators or parents.":
+      "Hệ thống điểm danh trên giấy, không có khả năng theo dõi thời gian thực cho nhà vận hành hoặc phụ huynh.",
+    "Rising Expectations": "Kỳ Vọng Ngày Càng Cao",
+    "Parents and regulators now expect digital transparency, responsiveness and operational efficiency at every touchpoint.":
+      "Phụ huynh và cơ quan quản lý hiện kỳ vọng sự minh bạch số, khả năng phản hồi và hiệu quả vận hành ở mọi điểm tiếp xúc.",
+
+    // Solution
+    "The Solution": "Giải Pháp",
+    "An Integrated Platform <span class=\"accent\">Purpose-Built</span> for Education Operators":
+      "Một Nền Tảng Tích Hợp <span class=\"accent\">Được Xây Dựng Chuyên Biệt</span> cho Nhà Vận Hành Giáo Dục",
+    "EdBuddies.ai replaces fragmented manual tools with a single unified system — purpose-built for tuition and enrichment businesses.":
+      "EdBuddies.ai thay thế các công cụ thủ công phân mảnh bằng một hệ thống thống nhất duy nhất — được xây dựng chuyên biệt cho các doanh nghiệp dạy thêm và bồi dưỡng.",
+    "Automated monthly billing cycles with smart payment workflows and real-time tracking":
+      "Chu kỳ thanh toán hàng tháng tự động với quy trình thanh toán thông minh và theo dõi thời gian thực",
+    "Timetable & Scheduling Management": "Quản Lý Thời Khóa Biểu & Lập Lịch",
+    "Integrated class scheduling synced with billing, attendance, and parent communications":
+      "Lập lịch lớp học tích hợp đồng bộ với thanh toán, điểm danh và giao tiếp phụ huynh",
+    "Real-time attendance capture with instant parent notifications and full operator visibility":
+      "Ghi nhận điểm danh thời gian thực kèm thông báo phụ huynh tức thì và khả năng quan sát đầy đủ cho nhà vận hành",
+    "Parent-Teacher Communication": "Giao Tiếp Phụ Huynh - Giáo Viên",
+    "Unified communication channel replacing fragmented messaging across multiple apps":
+      "Kênh giao tiếp thống nhất thay thế việc nhắn tin phân mảnh trên nhiều ứng dụng",
+    "Operational Reporting": "Báo Cáo Vận Hành",
+    "Real-time dashboards and workflow coordination across classes, centres, and teachers":
+      "Bảng điều khiển thời gian thực và điều phối quy trình giữa các lớp, trung tâm và giáo viên",
+    "🤖 AI-Powered Roadmap": "🤖 Lộ Trình Sử Dụng AI",
+    "AI-Powered Operational Automation": "Tự Động Hóa Vận Hành Bằng AI",
+    "Predictive Retention Analytics": "Phân Tích Giữ Chân Dự Báo",
+    "Intelligent Parent Communication Systems": "Hệ Thống Giao Tiếp Phụ Huynh Thông Minh",
+    "Embedded Financial Infrastructure": "Hạ Tầng Tài Chính Tích Hợp",
+    "99.5% Payment Webhook Success Rate": "Tỷ Lệ Thành Công Webhook Thanh Toán 99,5%",
+    "Operational reliability at infrastructure grade": "Độ tin cậy vận hành ở cấp độ hạ tầng",
+    "🏗️ Mission-Critical Infrastructure for Education Operators":
+      "🏗️ Hạ Tầng Cốt Lõi cho Nhà Vận Hành Giáo Dục",
+
+    // Six Layers
+    "The Infrastructure Stack": "Tầng Hạ Tầng",
+    "SIX LAYERS.<br><em>ONE</em> HOLD.": "SÁU TẦNG.<br><em>MỘT</em> ĐIỂM TỰA.",
+    "Each layer is not a feature. It is a structural integration into the daily operating rhythm of an enrichment centre. Together, they are not software — they are the nervous system.":
+      "Mỗi tầng không phải là một tính năng. Đó là sự tích hợp cấu trúc vào nhịp vận hành hàng ngày của một trung tâm bồi dưỡng. Cùng nhau, chúng không phải là phần mềm — chúng là hệ thần kinh.",
+    "Revenue Layer": "Tầng Doanh Thu",
+    "Recurring Billing Engine": "Hệ Thanh Toán Định Kỳ",
+    "Subscription billing &amp; automated payment workflows":
+      "Thanh toán đăng ký &amp; quy trình thanh toán tự động",
+    "Operations Layer": "Tầng Vận Hành",
+    "Attendance Infrastructure": "Hạ Tầng Điểm Danh",
+    "Real-time attendance capture &amp; parent notifications":
+      "Ghi nhận điểm danh thời gian thực &amp; thông báo phụ huynh",
+    "Workflow Layer": "Tầng Quy Trình",
+    "Scheduling Orchestration": "Điều Phối Lập Lịch",
+    "Timetable management synced across billing &amp; comms":
+      "Quản lý thời khóa biểu đồng bộ với thanh toán &amp; giao tiếp",
+    "Engagement Layer": "Tầng Tương Tác",
+    "Unified parent workflows replacing fragmented messaging":
+      "Quy trình phụ huynh thống nhất thay thế nhắn tin phân mảnh",
+    "Automation Layer": "Tầng Tự Động Hóa",
+    "Workflow Orchestration": "Điều Phối Quy Trình",
+    "Operational coordination across centres, teachers, classes":
+      "Điều phối vận hành giữa các trung tâm, giáo viên, lớp học",
+    "Intelligence Layer": "Tầng Trí Tuệ",
+    "AI-Enabled Admin Automation": "Tự Động Hóa Quản Trị Hỗ Trợ AI",
+    "AI-powered operational automation &amp; workflow intelligence":
+      "Tự động hóa vận hành sử dụng AI &amp; trí tuệ quy trình",
+    "\"recurring billing, attendance, scheduling, parent workflows, operational coordination, AI-enabled admin automation — six layers that embed EdBuddies.ai into the daily operating rhythm of every enrichment centre it touches.\"":
+      "\"thanh toán định kỳ, điểm danh, lập lịch, quy trình phụ huynh, điều phối vận hành, tự động hóa quản trị bằng AI — sáu tầng đưa EdBuddies.ai vào nhịp vận hành hàng ngày của mọi trung tâm bồi dưỡng mà nó chạm tới.\"",
+    "Annual Infrastructure Stack Cost": "Chi Phí Hạ Tầng Hàng Năm",
+    "Founder-funded · No external capital": "Tự tài trợ bởi nhà sáng lập · Không vốn bên ngoài",
+
+    // Why Now
+    "Why Now": "Vì Sao Là Lúc Này",
+    "5 Structural Trends <span class=\"accent--light\">Converging Simultaneously</span>":
+      "5 Xu Hướng Cấu Trúc <span class=\"accent--light\">Hội Tụ Cùng Lúc</span>",
+    "Rapid Operational Digitisation": "Số Hóa Vận Hành Nhanh Chóng",
+    "Education operators across SEA are increasingly transitioning away from manual administrative systems":
+      "Các nhà vận hành giáo dục tại Đông Nam Á ngày càng chuyển dịch khỏi các hệ thống quản trị thủ công",
+    "Recurring Revenue Infrastructure": "Hạ Tầng Doanh Thu Định Kỳ",
+    "The enrichment economy operates on recurring monthly payment flows — perfectly aligned with SaaS models":
+      "Nền kinh tế bồi dưỡng vận hành trên dòng thanh toán hàng tháng định kỳ — hoàn toàn phù hợp với mô hình SaaS",
+    "Rising Administrative Complexity": "Độ Phức Tạp Quản Trị Tăng Cao",
+    "Scaling operators across multiple classes, centres, and teachers demands integrated workflow systems":
+      "Việc mở rộng quy mô vận hành qua nhiều lớp, trung tâm và giáo viên đòi hỏi hệ thống quy trình tích hợp",
+    "AI Productivity Adoption": "Áp Dụng AI Tăng Năng Suất",
+    "AI is accelerating demand for workflow automation, operational efficiency, and cost reduction":
+      "AI đang thúc đẩy nhu cầu tự động hóa quy trình, hiệu quả vận hành và giảm chi phí",
+    "Fragmented Competitive Landscape": "Bối Cảnh Cạnh Tranh Phân Mảnh",
+    "No dominant regional infrastructure platform currently exists — the category is wide open":
+      "Hiện không có nền tảng hạ tầng khu vực nào chiếm ưu thế — lĩnh vực này còn rất rộng mở",
+
+    // Traction
+    "Traction &amp; Operational Signals": "Lực Kéo &amp; Tín Hiệu Vận Hành",
+    "Early Infrastructure Characteristics <span class=\"accent--light\">Already Demonstrated</span>":
+      "Đặc Tính Hạ Tầng Sớm <span class=\"accent--light\">Đã Được Chứng Minh</span>",
+    "EdBuddies.ai is already demonstrating early infrastructure characteristics:":
+      "EdBuddies.ai đã thể hiện các đặc tính hạ tầng ban đầu:",
+    "↑ Live Platform": "↑ Nền Tảng Đang Hoạt Động",
+    "↑ Growing": "↑ Đang Tăng Trưởng",
+    "Active Recurring Subscriptions": "Đăng Ký Định Kỳ Đang Hoạt Động",
+    "↑ Recurring": "↑ Định Kỳ",
+    "● Infrastructure Signal": "● Tín Hiệu Hạ Tầng",
+    "Payment Webhook Success Rate": "Tỷ Lệ Thành Công Webhook Thanh Toán",
+    "● Operational Reliability": "● Độ Tin Cậy Vận Hành",
+    "Month-4 Cohort Retention": "Tỷ Lệ Giữ Chân Tháng Thứ 4",
+    "● Compounding Lock-In": "● Khóa Chặt Tích Lũy",
+    "Attendance Events Processed": "Sự Kiện Điểm Danh Đã Xử Lý",
+    "● Operational Footprint": "● Dấu Ấn Vận Hành",
+    "Workflow Notifications Delivered": "Thông Báo Quy Trình Đã Gửi",
+    "● Workflow Dependency": "● Phụ Thuộc Quy Trình",
+    "Mobile Penetration (Parent-Side)": "Tỷ Lệ Dùng Di Động (Phía Phụ Huynh)",
+    "● Live Usage Signal": "● Tín Hiệu Sử Dụng Trực Tiếp",
+    "Lean Operations": "Vận Hành Tinh Gọn",
+    "Highly disciplined operating structure with lean infrastructure costs and <strong style=\"color:rgba(255,255,255,0.85);\">founder-funded product development</strong>":
+      "Cấu trúc vận hành kỷ luật cao với chi phí hạ tầng tinh gọn và <strong style=\"color:rgba(255,255,255,0.85);\">phát triển sản phẩm tự tài trợ bởi nhà sáng lập</strong>",
+    "Why These Matter:": "Vì Sao Những Điều Này Quan Trọng:",
+    "Recurring workflow dependency": "Phụ thuộc quy trình định kỳ",
+    "Capital efficiency": "Hiệu quả sử dụng vốn",
+    "Operational embedding": "Tích hợp vận hành sâu",
+    "Platform reliability": "Độ tin cậy nền tảng",
+    "Strong monetisation potential": "Tiềm năng kiếm tiền mạnh",
+    "Early infrastructure characteristics": "Đặc tính hạ tầng sớm",
+
+    // Inflection
+    "Commercialisation Phase": "Giai Đoạn Thương Mại Hóa",
+    "Commercial <span class=\"accent\">Inflection Point</span>":
+      "<span class=\"accent\">Điểm Uốn</span> Thương Mại",
+    "The platform was built first for <strong>operational proof</strong>. It has now arrived at the moment of <strong>formalised monetisation</strong>.":
+      "Nền tảng ban đầu được xây dựng để <strong>chứng minh khả năng vận hành</strong>. Nay đã đến thời điểm <strong>thương mại hóa chính thức</strong>.",
+    "Active Enrichment Centres · Singapore": "Trung Tâm Bồi Dưỡng Đang Hoạt Động · Singapore",
+    "WHIZMINDS<br>ACADEMY GROUP": "WHIZMINDS<br>ACADEMY GROUP",
+    "Structured SaaS · Transaction-Layer Economics":
+      "SaaS Có Cấu Trúc · Kinh Tế Tầng Giao Dịch",
+    "Whizminds Academy Group — operating across <strong>6 active enrichment centres in Singapore</strong> — is commencing structured commercial agreements with EdBuddies.ai under formal operational frameworks.<br><br>\n          This is the transition from <strong>internal operational deployment</strong> to <strong>formalised infrastructure monetisation</strong>.":
+      "Whizminds Academy Group — vận hành <strong>6 trung tâm bồi dưỡng đang hoạt động tại Singapore</strong> — đang khởi động các thỏa thuận thương mại có cấu trúc với EdBuddies.ai theo khung vận hành chính thức.<br><br>\n          Đây là quá trình chuyển từ <strong>triển khai vận hành nội bộ</strong> sang <strong>thương mại hóa hạ tầng chính thức</strong>.",
+    "SaaS Subscription Architecture": "Kiến Trúc Đăng Ký SaaS",
+    "Recurring platform licensing formalised at the centre level":
+      "Cấp phép nền tảng định kỳ được chính thức hóa ở cấp trung tâm",
+    "Transaction-Layer Economics": "Kinh Tế Tầng Giao Dịch",
+    "Structured fee architecture embedded in the billing flow":
+      "Kiến trúc phí có cấu trúc được tích hợp vào luồng thanh toán",
+    "Pricing Validation": "Xác Thực Định Giá",
+    "First external commercial proof of monetisation architecture":
+      "Bằng chứng thương mại bên ngoài đầu tiên cho kiến trúc kiếm tiền",
+    "Infrastructure-Grade Commercial Logic": "Logic Thương Mại Cấp Hạ Tầng",
+    "Established before broader external and regional onboarding":
+      "Được thiết lập trước khi mở rộng tiếp nhận bên ngoài và khu vực",
+    "\"Pricing validated. Architecture proven. The commercial layer is now being built on infrastructure that was <em>already operationally irreplaceable</em>.\"":
+      "\"Định giá đã được xác thực. Kiến trúc đã được chứng minh. Tầng thương mại nay được xây dựng trên hạ tầng <em>vốn đã không thể thay thế về mặt vận hành</em>.\"",
+
+    // Philosophy
+    "Product Philosophy": "Triết Lý Sản Phẩm",
+    "Built From <span class=\"accent\">Within</span> Live Operations":
+      "Xây Dựng Từ <span class=\"accent\">Bên Trong</span> Hoạt Động Thực Tế",
+    "Built Inside Real Operations": "Xây Dựng Trong Vận Hành Thực",
+    "Tested in live education environments before external deployment — ensuring real-world fit":
+      "Được kiểm chứng trong môi trường giáo dục thực trước khi triển khai bên ngoài — đảm bảo phù hợp thực tế",
+    "Rapid Iteration": "Lặp Lại Nhanh Chóng",
+    "Continuous improvement driven directly by operator feedback in production environments":
+      "Cải tiến liên tục được dẫn dắt trực tiếp bởi phản hồi từ nhà vận hành trong môi trường thực",
+    "Workflow Depth": "Độ Sâu Quy Trình",
+    "Deep integration creates high switching costs and durable long-term customer retention":
+      "Sự tích hợp sâu tạo ra chi phí chuyển đổi cao và khả năng giữ chân khách hàng lâu dài bền vững",
+    "\"Sustainable infrastructure businesses are built through operational relevance, workflow depth, and long-term customer embedding — rather than aggressive user acquisition alone.\"":
+      "\"Các doanh nghiệp hạ tầng bền vững được xây dựng thông qua sự liên quan vận hành, độ sâu quy trình và sự gắn kết khách hàng dài hạn — không chỉ qua việc thu hút người dùng ồ ạt.\"",
+    "— EdBuddies.ai Product Philosophy": "— Triết Lý Sản Phẩm EdBuddies.ai",
+    "The company has maintained a highly disciplined operating structure with <strong>lean infrastructure costs</strong> and <strong>founder-funded product development</strong>, demonstrating capital efficiency from day one.":
+      "Công ty duy trì cấu trúc vận hành kỷ luật cao với <strong>chi phí hạ tầng tinh gọn</strong> và <strong>phát triển sản phẩm tự tài trợ bởi nhà sáng lập</strong>, thể hiện hiệu quả sử dụng vốn ngay từ ngày đầu.",
+
+    // Business model
+    "Business Model": "Mô Hình Kinh Doanh",
+    "Multiple <span class=\"accent\">Revenue Layers</span> with Expansion Optionality":
+      "Nhiều <span class=\"accent\">Tầng Doanh Thu</span> Với Khả Năng Mở Rộng",
+    "Current Revenue Streams": "Dòng Doanh Thu Hiện Tại",
+    "Recurring SaaS Subscriptions": "Đăng Ký SaaS Định Kỳ",
+    "Centre-Level Operational Licensing": "Cấp Phép Vận Hành Cấp Trung Tâm",
+    "Payment Workflow Infrastructure": "Hạ Tầng Quy Trình Thanh Toán",
+    "Future Expansion Opportunities": "Cơ Hội Mở Rộng Tương Lai",
+    "Embedded Payments": "Thanh Toán Tích Hợp",
+    "Transaction Monetisation": "Kiếm Tiền Từ Giao Dịch",
+    "AI Workflow Automation": "Tự Động Hóa Quy Trình AI",
+    "Analytics Infrastructure": "Hạ Tầng Phân Tích",
+    "Operational Financial Services": "Dịch Vụ Tài Chính Vận Hành",
+    "Why This Market Is Attractive": "Vì Sao Thị Trường Này Hấp Dẫn",
+    "Recurring payment behaviour": "Hành vi thanh toán định kỳ",
+    "Sticky workflows once embedded": "Quy trình bám chắc sau khi tích hợp",
+    "Highly fragmented operator base": "Cơ sở nhà vận hành phân mảnh cao",
+    "High switching costs once operationally embedded":
+      "Chi phí chuyển đổi cao khi đã tích hợp vận hành",
+    "Infrastructure Monetisation Thesis": "Luận Đề Kiếm Tiền Từ Hạ Tầng",
+    "The underlying enrichment economy exhibits highly attractive characteristics. As operational density deepens, monetisation opportunities expand across the entire workflow stack.":
+      "Nền kinh tế bồi dưỡng cơ bản thể hiện các đặc tính rất hấp dẫn. Khi mật độ vận hành sâu hơn, các cơ hội kiếm tiền mở rộng ra toàn bộ tầng quy trình.",
+
+    // Positioning
+    "Strategic Positioning": "Định Vị Chiến Lược",
+    "Infrastructure, <span class=\"accent--light\">Not Consumer EdTech</span>":
+      "Hạ Tầng, <span class=\"accent--light\">Không Phải EdTech Tiêu Dùng</span>",
+    "EdBuddies.ai is not attempting to become another broad-based consumer EdTech platform. The company is building towards becoming the <strong style=\"color:white;\">operational infrastructure layer</strong> powering the enrichment economy across Southeast Asia.":
+      "EdBuddies.ai không cố trở thành một nền tảng EdTech tiêu dùng đại trà khác. Công ty đang hướng tới việc trở thành <strong style=\"color:white;\">tầng hạ tầng vận hành</strong> cho nền kinh tế bồi dưỡng tại Đông Nam Á.",
+    "This positioning aligns more closely with <strong style=\"color:white;\">vertical SaaS, embedded fintech, and workflow infrastructure businesses</strong> than traditional education marketplaces or content-driven platforms.":
+      "Định vị này phù hợp hơn với <strong style=\"color:white;\">SaaS chuyên ngành, fintech tích hợp và doanh nghiệp hạ tầng quy trình</strong> hơn là các sàn giáo dục truyền thống hay nền tảng nội dung.",
+    "\"The company is building the operating system — <span style=\"color:var(--orange-400);\">EdBuddiesOS™</span> — for Southeast Asia's enrichment economy.\"":
+      "\"Công ty đang xây dựng hệ điều hành — <span style=\"color:var(--orange-400);\">EdBuddiesOS™</span> — cho nền kinh tế bồi dưỡng tại Đông Nam Á.\"",
+    "Positioning Comparison": "So Sánh Định Vị",
+    "Consumer EdTech Platforms": "Nền Tảng EdTech Tiêu Dùng",
+    "Not Us": "Không Phải Chúng Tôi",
+    "Content / Learning Marketplaces": "Sàn Nội Dung / Học Tập",
+    "Student-Facing Apps": "Ứng Dụng Hướng Học Sinh",
+    "Vertical SaaS Infrastructure": "Hạ Tầng SaaS Chuyên Ngành",
+    "✓ EdBuddies": "✓ EdBuddies",
+    "Embedded Fintech &amp; Payments": "Fintech &amp; Thanh Toán Tích Hợp",
+    "Workflow Infrastructure": "Hạ Tầng Quy Trình",
+
+    // Deployment
+    "Deployment Signals": "Tín Hiệu Triển Khai",
+    "Operational <span class=\"accent\">Deployment Validated</span>":
+      "Triển Khai Vận Hành <span class=\"accent\">Đã Được Xác Thực</span>",
+    "Commercial, institutional, community-service — three distinct operational environments, one city-state, one infrastructure layer, before regional expansion commences.":
+      "Thương mại, tổ chức, dịch vụ cộng đồng — ba môi trường vận hành riêng biệt, một quốc đảo, một tầng hạ tầng, trước khi mở rộng khu vực bắt đầu.",
+    "Deployment Signal · 01": "Tín Hiệu Triển Khai · 01",
+    "Neugen": "Neugen",
+    "Yellow Ribbon Ecosystem · Singapore": "Hệ Sinh Thái Yellow Ribbon · Singapore",
+    "Onboarding collaboration confirmed under the Yellow Ribbon Programme ecosystem. Validates operational range and institutional deployment capacity across non-commercial environments — broadening the infrastructure addressable surface.":
+      "Hợp tác tiếp nhận đã được xác nhận trong hệ sinh thái Yellow Ribbon Programme. Khẳng định phạm vi vận hành và năng lực triển khai cấp tổ chức trong các môi trường phi thương mại — mở rộng bề mặt hạ tầng có thể tiếp cận.",
+    "Deployment Signal · 02": "Tín Hiệu Triển Khai · 02",
+    "Loving Hearts": "Loving Hearts",
+    "Community Tuition Services · Boon Lay": "Dịch Vụ Dạy Thêm Cộng Đồng · Boon Lay",
+    "Live operational workflows embedded within community-service tuition operations. Demonstrates infrastructure applicability across commercial, institutional, and community-service environments within a single operational density cluster.":
+      "Các quy trình vận hành thực tế được tích hợp trong hoạt động dạy thêm dịch vụ cộng đồng. Chứng minh tính ứng dụng của hạ tầng trên các môi trường thương mại, tổ chức và dịch vụ cộng đồng trong cùng một cụm mật độ vận hành.",
+    "\"Commercial, institutional, community-service: three distinct operational environments, one city-state, one infrastructure layer — before regional expansion commences.\"":
+      "\"Thương mại, tổ chức, dịch vụ cộng đồng: ba môi trường vận hành riêng biệt, một quốc đảo, một tầng hạ tầng — trước khi mở rộng khu vực bắt đầu.\"",
+    "Operational Density Signal": "Tín Hiệu Mật Độ Vận Hành",
+
+    // Strategic thesis
+    "Strategic Thesis": "Luận Đề Chiến Lược",
+    "Infrastructure Before <span class=\"accent\">Monetisation</span>":
+      "Hạ Tầng Trước <span class=\"accent\">Kiếm Tiền</span>",
+    "EdBuddies.ai was not built to grow quickly.<br><br>\n          It was built to embed deeply — at the recurring transaction layer, at the operational dependency layer, at the workflow level where switching cost is not a feature but a structural reality.<br><br>\n          <strong>The company does not require external capital to survive.</strong><br><br>\n          Strategic capital, if correctly aligned, may accelerate what is already compounding.":
+      "EdBuddies.ai không được xây dựng để tăng trưởng nhanh.<br><br>\n          Nó được xây dựng để tích hợp sâu — ở tầng giao dịch định kỳ, ở tầng phụ thuộc vận hành, ở cấp quy trình nơi chi phí chuyển đổi không phải là tính năng mà là thực tế cấu trúc.<br><br>\n          <strong>Công ty không cần vốn bên ngoài để tồn tại.</strong><br><br>\n          Vốn chiến lược, nếu được căn chỉnh đúng, có thể tăng tốc những gì đã đang tích lũy.",
+    "Strategic Disciplines": "Kỷ Luật Chiến Lược",
+    "Founder-Funded Operating Discipline": "Kỷ Luật Vận Hành Tự Tài Trợ",
+    "Infrastructure Before Monetisation Optimisation": "Hạ Tầng Trước Tối Ưu Hóa Kiếm Tiền",
+    "Operational Density Before Regional Expansion": "Mật Độ Vận Hành Trước Mở Rộng Khu Vực",
+    "Workflow Depth Before Hypergrowth": "Độ Sâu Quy Trình Trước Tăng Trưởng Bùng Nổ",
+    "Embedded Infrastructure Before Scale": "Hạ Tầng Tích Hợp Trước Quy Mô",
+    "Strategic Alignment Over Passive Capital": "Căn Chỉnh Chiến Lược Hơn Là Vốn Thụ Động",
+    "Infrastructure Investment Thesis": "Luận Đề Đầu Tư Hạ Tầng",
+    "The opportunity is not in the application layer.<br>\n        The opportunity is in the <em>operational substrate</em> — the recurring billing, the attendance systems, the workflow engines — that power every enrichment centre, every month, compounding silently and invisibly.<br><br>\n        <em>That substrate is what EdBuddies.ai is quietly becoming.</em>":
+      "Cơ hội không nằm ở tầng ứng dụng.<br>\n        Cơ hội nằm ở <em>nền tảng vận hành</em> — thanh toán định kỳ, hệ thống điểm danh, hệ quy trình — vận hành mọi trung tâm bồi dưỡng, mỗi tháng, tích lũy âm thầm và vô hình.<br><br>\n        <em>Đó chính là nền tảng mà EdBuddies.ai đang âm thầm trở thành.</em>",
+
+    // Investment
+    "Investment Philosophy": "Triết Lý Đầu Tư",
+    "Seeking <span class=\"accent\">Strategic Partners</span>, Not Just Capital":
+      "Tìm Kiếm <span class=\"accent\">Đối Tác Chiến Lược</span>, Không Chỉ Là Vốn",
+    "EdBuddies.ai is entering a selective phase of strategic investor engagement. The founders are specifically interested in engaging investors and strategic partners who can contribute meaningful value beyond capital.":
+      "EdBuddies.ai đang bước vào giai đoạn chọn lọc trong việc tiếp xúc nhà đầu tư chiến lược. Các nhà sáng lập đặc biệt quan tâm đến những nhà đầu tư và đối tác chiến lược có thể đóng góp giá trị thực sự vượt ngoài vốn.",
+    "Vertical SaaS Expertise": "Chuyên Môn SaaS Chuyên Ngành",
+    "Operating experience building and scaling vertical SaaS businesses in emerging Asian markets":
+      "Kinh nghiệm vận hành xây dựng và mở rộng doanh nghiệp SaaS chuyên ngành tại các thị trường châu Á mới nổi",
+    "Fintech Infrastructure": "Hạ Tầng Fintech",
+    "Capabilities in embedded payments, financial services, and transaction infrastructure":
+      "Năng lực về thanh toán tích hợp, dịch vụ tài chính và hạ tầng giao dịch",
+    "Regional Scaling": "Mở Rộng Khu Vực",
+    "Proven experience scaling platforms and products across Southeast Asia markets":
+      "Kinh nghiệm đã được chứng minh trong việc mở rộng nền tảng và sản phẩm tại các thị trường Đông Nam Á",
+    "Enterprise Partnerships": "Đối Tác Doanh Nghiệp",
+    "Access to education operators, enterprise channels, and regional distribution networks":
+      "Tiếp cận các nhà vận hành giáo dục, kênh doanh nghiệp và mạng lưới phân phối khu vực",
+    "Ecosystem Value": "Giá Trị Hệ Sinh Thái",
+    "Long-term ecosystem value creation beyond the initial investment engagement period":
+      "Tạo giá trị hệ sinh thái dài hạn vượt ra ngoài giai đoạn tiếp xúc đầu tư ban đầu",
+    "Founder Optionality": "Quyền Lựa Chọn Của Nhà Sáng Lập",
+    "The founders continue to self-fund core R&amp;D and remain prepared to scale independently if strategic alignment is not achieved — ensuring a disciplined and patient approach":
+      "Các nhà sáng lập tiếp tục tự tài trợ R&amp;D cốt lõi và sẵn sàng mở rộng độc lập nếu không đạt được sự căn chỉnh chiến lược — đảm bảo cách tiếp cận kỷ luật và kiên nhẫn",
+    "Partnership Philosophy": "Triết Lý Hợp Tác",
+    "The company is entering a selective phase of strategic investor engagement. EdBuddies.ai is not seeking passive capital participation alone. The founders are specifically interested in engaging investors and strategic partners who can contribute: vertical SaaS operating expertise, fintech infrastructure capabilities, regional scaling experience, enterprise partnerships, and long-term ecosystem value creation.":
+      "Công ty đang bước vào giai đoạn chọn lọc trong việc tiếp xúc nhà đầu tư chiến lược. EdBuddies.ai không tìm kiếm sự tham gia vốn thụ động đơn thuần. Các nhà sáng lập đặc biệt quan tâm đến những nhà đầu tư và đối tác chiến lược có thể đóng góp: chuyên môn vận hành SaaS chuyên ngành, năng lực hạ tầng fintech, kinh nghiệm mở rộng khu vực, đối tác doanh nghiệp và tạo giá trị hệ sinh thái dài hạn.",
+    "The founders continue to self-fund core R&amp;D and operational growth and remain fully prepared to continue scaling independently should suitable strategic alignment not emerge.":
+      "Các nhà sáng lập tiếp tục tự tài trợ R&amp;D cốt lõi và tăng trưởng vận hành, và hoàn toàn sẵn sàng tiếp tục mở rộng độc lập nếu không đạt được sự căn chỉnh chiến lược phù hợp.",
+    "This allows the company to remain disciplined, patient, and highly selective regarding future partnerships.":
+      "Điều này cho phép công ty duy trì sự kỷ luật, kiên nhẫn và chọn lọc cao đối với các đối tác trong tương lai.",
+    "Our Approach to Partnerships": "Cách Tiếp Cận Hợp Tác Của Chúng Tôi",
+    "Selective &amp; Disciplined": "Chọn Lọc &amp; Kỷ Luật",
+    "Opening a limited number of exploratory discussions with strategically aligned investors and operators — quality over volume":
+      "Mở một số lượng hạn chế các cuộc thảo luận thăm dò với nhà đầu tư và nhà vận hành phù hợp chiến lược — chất lượng hơn số lượng",
+    "Strategic Alignment First": "Căn Chỉnh Chiến Lược Trên Hết",
+    "Prioritising partners who share a long-term infrastructure-building mindset and see value in SEA's enrichment economy digitisation":
+      "Ưu tiên các đối tác có chung tư duy xây dựng hạ tầng dài hạn và thấy được giá trị trong số hóa nền kinh tế bồi dưỡng Đông Nam Á",
+    "Patient Capital Welcome": "Hoan Nghênh Vốn Kiên Nhẫn",
+    "Long-term value creation over short-term exits — building durable infrastructure in a structurally resilient sector":
+      "Tạo giá trị dài hạn hơn là rút vốn ngắn hạn — xây dựng hạ tầng bền vững trong một ngành có cấu trúc kiên cường",
+
+    // Roadmap
+    "Looking Ahead": "Hướng Tới Tương Lai",
+    "The Opportunity <span class=\"accent\">Extends Far Beyond</span> Workflow Software":
+      "Cơ Hội <span class=\"accent\">Vượt Xa</span> Phần Mềm Quy Trình",
+    "As operational density increases, EdBuddies.ai believes the platform can evolve into a comprehensive business infrastructure stack for education operators across the entire region.":
+      "Khi mật độ vận hành tăng, EdBuddies.ai tin rằng nền tảng có thể phát triển thành một tầng hạ tầng kinh doanh toàn diện cho các nhà vận hành giáo dục trên toàn khu vực.",
+    "Now — Live": "Hiện Tại — Đang Hoạt Động",
+    "Operational Foundation": "Nền Tảng Vận Hành",
+    "Deepening Singapore density. Billing, scheduling, attendance, parent communications — all live in production":
+      "Làm sâu mật độ tại Singapore. Thanh toán, lập lịch, điểm danh, giao tiếp phụ huynh — tất cả đang hoạt động",
+    "Near-Term": "Ngắn Hạn",
+    "AI Workflow Layer": "Tầng Quy Trình AI",
+    "AI-powered automation, predictive retention analytics, and intelligent parent communication systems":
+      "Tự động hóa bằng AI, phân tích giữ chân dự báo và hệ thống giao tiếp phụ huynh thông minh",
+    "Mid-Term": "Trung Hạn",
+    "Transaction monetisation, embedded payments, and operational financial services for education operators":
+      "Kiếm tiền từ giao dịch, thanh toán tích hợp và dịch vụ tài chính vận hành cho nhà vận hành giáo dục",
+    "Long-Term": "Dài Hạn",
+    "SEA Regional Expansion": "Mở Rộng Khu Vực Đông Nam Á",
+    "Operational intelligence tooling and broader business infrastructure deployed across Southeast Asia":
+      "Công cụ trí tuệ vận hành và hạ tầng kinh doanh rộng hơn được triển khai khắp Đông Nam Á",
+    "Strategic Direction": "Định Hướng Chiến Lược",
+    "The long-term opportunity extends beyond workflow software alone. As operational density increases, EdBuddies.ai believes the platform can evolve into: <strong style=\"color:var(--orange-400);\">embedded financial infrastructure, operational intelligence tooling, AI-enabled workflow automation, and broader business infrastructure</strong> for education operators across the region.<br><br>The company remains focused on: building durable infrastructure within a structurally resilient sector through disciplined and operationally grounded execution.":
+      "Cơ hội dài hạn vượt xa phần mềm quy trình. Khi mật độ vận hành tăng, EdBuddies.ai tin rằng nền tảng có thể phát triển thành: <strong style=\"color:var(--orange-400);\">hạ tầng tài chính tích hợp, công cụ trí tuệ vận hành, tự động hóa quy trình bằng AI và hạ tầng kinh doanh rộng hơn</strong> cho các nhà vận hành giáo dục trên toàn khu vực.<br><br>Công ty vẫn tập trung vào: xây dựng hạ tầng bền vững trong một ngành có cấu trúc kiên cường thông qua thực thi kỷ luật và bám sát vận hành.",
+    "The EdBuddiesOS™ Vision": "Tầm Nhìn EdBuddiesOS™",
+    "The company remains focused on <strong>building durable infrastructure within a structurally resilient sector</strong> through disciplined and operationally grounded execution — creating long-term, compounding value for operators, parents, students, and investors across Southeast Asia.":
+      "Công ty vẫn tập trung vào <strong>xây dựng hạ tầng bền vững trong một ngành có cấu trúc kiên cường</strong> thông qua thực thi kỷ luật và bám sát vận hành — tạo giá trị dài hạn, tích lũy cho nhà vận hành, phụ huynh, học sinh và nhà đầu tư trên toàn Đông Nam Á.",
+
+    // Closing
+    "EdBuddies.ai · Infrastructure Formation · 2026": "EdBuddies.ai · Hình Thành Hạ Tầng · 2026",
+    "THIS IS <span class=\"not\">NOT</span><br>A STARTUP.":
+      "ĐÂY <span class=\"not\">KHÔNG</span><br>PHẢI MỘT STARTUP.",
+    "This is the early formation of infrastructure.<br>\n      The kind that, once embedded, becomes invisible — and irreplaceable.<br>\n      The kind that compounds before anyone notices it is compounding.":
+      "Đây là sự hình thành sớm của hạ tầng.<br>\n      Loại hạ tầng, một khi đã tích hợp, sẽ trở nên vô hình — và không thể thay thế.<br>\n      Loại hạ tầng tích lũy trước khi ai đó nhận ra nó đang tích lũy.",
+
+    // Contact
+    "Selective Strategic Conversations": "Cuộc Đối Thoại Chiến Lược Chọn Lọc",
+    "Let's Build the Future of <span class=\"accent--light\">Education Infrastructure</span> Together":
+      "Hãy Cùng Xây Dựng Tương Lai <span class=\"accent--light\">Hạ Tầng Giáo Dục</span>",
+    "EdBuddies.ai is currently opening a limited number of exploratory discussions with strategically aligned investors, operators, and ecosystem partners. We welcome conversations with parties who share a long-term infrastructure-building mindset.":
+      "EdBuddies.ai hiện đang mở một số lượng hạn chế các cuộc thảo luận thăm dò với các nhà đầu tư, nhà vận hành và đối tác hệ sinh thái phù hợp chiến lược. Chúng tôi hoan nghênh các cuộc trò chuyện với những bên có chung tư duy xây dựng hạ tầng dài hạn.",
+    "Dr Stanley Yew": "Dr Stanley Yew",
+    "Founder &amp; Chief Executive Officer · EdBuddies.ai":
+      "Nhà Sáng Lập &amp; Giám Đốc Điều Hành · EdBuddies.ai",
+    "Operator-founder with over two decades of direct experience within Singapore's education and enrichment ecosystem, including multi-centre operational management, workflow systems development, and recurring education infrastructure operations.":
+      "Nhà sáng lập kiêm nhà vận hành với hơn hai thập kỷ kinh nghiệm trực tiếp trong hệ sinh thái giáo dục và bồi dưỡng tại Singapore, bao gồm quản lý vận hành đa trung tâm, phát triển hệ thống quy trình và vận hành hạ tầng giáo dục định kỳ.",
+    "🌐 edbuddies.ai": "🌐 edbuddies.ai",
+    "📧 Get In Touch": "📧 Liên Hệ Với Chúng Tôi",
+    "🌏 Singapore-based · SEA focus": "🌏 Trụ Sở Tại Singapore · Tập Trung Vào Đông Nam Á",
+    "The Team": "Đội Ngũ",
+
+    // Team bios
+    "Darren Eng": "Darren Eng",
+    "Co-Founder &amp; COO": "Đồng Sáng Lập &amp; Giám Đốc Vận Hành",
+    "Darren turns business ambition into operating discipline. From strategy to execution, he makes sure EdBuddies is not just building a strong product, but building a company that can scale. He connects market needs, business direction, and operational decisions into one clear path forward. EdBuddies moves with structure because Darren keeps the business grounded and growing.":
+      "Darren biến tham vọng kinh doanh thành kỷ luật vận hành. Từ chiến lược đến thực thi, anh đảm bảo EdBuddies không chỉ xây dựng một sản phẩm mạnh mà còn xây dựng một công ty có thể mở rộng. Anh kết nối nhu cầu thị trường, định hướng kinh doanh và các quyết định vận hành thành một con đường rõ ràng. EdBuddies tiến bước có cấu trúc vì Darren giữ cho doanh nghiệp vững vàng và phát triển.",
+    "Shaun": "Shaun",
+    "Tech &amp; Product Head": "Trưởng Bộ Phận Công Nghệ &amp; Sản Phẩm",
+    "Shaun holds the line between vision and shipping. He architects what the platform becomes three quarters from now while making sure today's release goes out on time. Every feature earns its place, every decision serves the operating-system bet. EdBuddies has a roadmap because Shaun has the map.":
+      "Shaun giữ ranh giới giữa tầm nhìn và việc giao hàng. Anh kiến trúc những gì nền tảng sẽ trở thành ba quý tới trong khi đảm bảo bản phát hành hôm nay ra đúng hạn. Mỗi tính năng đều có chỗ đứng, mỗi quyết định phục vụ canh bạc hệ điều hành. EdBuddies có lộ trình vì Shaun có bản đồ.",
+    "Forest Chong": "Forest Chong",
+    "Full-Stack Engineer": "Kỹ Sư Full-Stack",
+    "Forest is the engine room. From the recurring billing engine clocking a 99.5% webhook success rate to the attendance pipeline that's processed 13,300+ events without flinching, his fingerprints are on every layer of the stack. He doesn't just ship — he builds systems that quietly compound. EdBuddies runs because Forest's code does.":
+      "Forest là buồng động cơ. Từ hệ thanh toán định kỳ đạt tỷ lệ thành công webhook 99,5% đến đường ống điểm danh xử lý hơn 13.300 sự kiện không nao núng, dấu tay anh có trên mọi tầng của stack. Anh không chỉ giao hàng — anh xây dựng các hệ thống tích lũy âm thầm. EdBuddies vận hành vì mã của Forest vận hành.",
+    "Hailey": "Hailey",
+    "UI/UX Engineer": "Kỹ Sư UI/UX",
+    "Hailey turns operational complexity into interfaces parents and operators actually want to use. The 54.4% mobile parent penetration isn't an accident — it's the product of obsessive attention to clarity, hierarchy, and the small interactions that make software feel effortless. She's the reason EdBuddies looks like infrastructure people trust.":
+      "Hailey biến sự phức tạp vận hành thành những giao diện mà phụ huynh và nhà vận hành thực sự muốn sử dụng. Tỷ lệ phụ huynh dùng di động 54,4% không phải ngẫu nhiên — đó là kết quả của sự chú trọng tỉ mỉ đến độ rõ ràng, thứ bậc và những tương tác nhỏ làm cho phần mềm trở nên dễ dàng. Cô là lý do EdBuddies trông giống một hạ tầng mà mọi người tin cậy.",
+    "Kenneth": "Kenneth",
+    "Marketing HOD": "Trưởng Bộ Phận Marketing",
+    "Kenneth is the signal amplifier. He turns what EdBuddies builds into messages the market can understand, remember, and act on. From brand positioning to growth campaigns, his work makes EdBuddies feel like the future operating system for education centres. EdBuddies gets seen because Kenneth makes the story land.":
+      "Kenneth là người khuếch đại tín hiệu. Anh biến những gì EdBuddies xây dựng thành thông điệp mà thị trường có thể hiểu, ghi nhớ và hành động. Từ định vị thương hiệu đến chiến dịch tăng trưởng, công việc của anh làm cho EdBuddies trở thành hệ điều hành tương lai cho các trung tâm giáo dục. EdBuddies được nhìn thấy vì Kenneth làm cho câu chuyện chạm tới khán giả.",
+
+    // Footer
+    "<strong>© 2026 EdBuddies.ai · All Rights Reserved</strong><br>\n        This document is confidential and intended solely for the named recipient.<br>\n        EdBuddiesOS™ is a trademark of EdBuddies.ai · Singapore":
+      "<strong>© 2026 EdBuddies.ai · Mọi Quyền Được Bảo Lưu</strong><br>\n        Tài liệu này là bí mật và chỉ dành cho người nhận được nêu tên.<br>\n        EdBuddiesOS™ là thương hiệu của EdBuddies.ai · Singapore",
+    "Edusphere Technologies": "Edusphere Technologies"
+  };
+
+  // Selectors of elements that contain translatable content.
+  // We use broad selectors to catch every text-bearing element.
+  const I18N_SELECTORS = [
+    'title',
+    '.topbar-nav a',
+    '.badge-conf',
+    '.btn-export',
+    '.hero-eyebrow',
+    'h1.hero',
+    '.hero-sub',
+    '.hero-stat .lbl',
+    '.hero-scroll',
+    '.card-label',
+    '.card-item',
+    '.label',
+    'h2.sec',
+    'p.body',
+    '.overview-quote p',
+    '.snapshot-header',
+    '.snapshot-row .sk',
+    '.snapshot-row .sv',
+    '.net-line',
+    '.vision-vm-card h3',
+    '.vision-vm-card p',
+    '.vision-os-badge',
+    '.infra-backbone-bar p',
+    '#vision .inner > div:last-child p',
+    '.problem-intro p',
+    '.prob-card h3',
+    '.prob-card p',
+    '.feat-row h3',
+    '.feat-row p',
+    '.roadmap-box h3',
+    '.roadmap-item',
+    '.position-pill',
+    '.sl-hold-badge',
+    '.sl-body-text',
+    '.sl-layer-tag',
+    '.sl-layer-name',
+    '.sl-layer-desc',
+    '.sl-nervous',
+    '.why-card h3',
+    '.why-card p',
+    '.met-card .lbl',
+    '.met-card .sig',
+    '.met-summary > div',
+    '.met-check',
+    '.inflection-pre-text',
+    '.inflection-num-sub',
+    '.inflection-entity-name',
+    '.inflection-entity-sub',
+    '.inflection-desc',
+    '.inf-pillar-text',
+    '.inf-pillar-sub',
+    '.inflection-quote',
+    '.phil-card h3',
+    '.phil-card p',
+    '.phil-quote blockquote',
+    '.phil-quote cite',
+    '.bm-head',
+    '.bm-row',
+    '.bm-check',
+    '.pos-row span',
+    '.pos-tag',
+    '.dep-header-text',
+    '.dep-card-idx',
+    '.dep-card-name',
+    '.dep-card-eco',
+    '.dep-card-body',
+    '.dep-summary-text',
+    '.dep-summary-label',
+    '.thesis-body-text',
+    '.thesis-disc',
+    '.thesis-box-kicker',
+    '.thesis-box-text',
+    '.inv-card h3',
+    '.inv-card p',
+    '.partnership-philosophy h3',
+    '.partnership-philosophy p',
+    '.inv-approach h3',
+    '.inv-point h4',
+    '.inv-point p',
+    '.rm-step .phase',
+    '.rm-step h3',
+    '.rm-step p',
+    '.strategic-direction-block h3',
+    '.strategic-direction-block p',
+    '.rm-vision h3',
+    '.rm-vision p',
+    '.closing-headline',
+    '.closing-sub-text',
+    '.cta-center p',
+    '.contact-info h3',
+    '.contact-info .role',
+    '.contact-info > p',
+    '.contact-link',
+    '.contact-badge',
+    '.team-section-label',
+    '.team-name',
+    '.team-role',
+    '.team-bio',
+    '.contact-footer p',
+    '.contact-footer > div > div'
+  ];
+
+  const normalizeKey = (s) => s.replace(/\s+/g, ' ').trim();
+
+  // Build a normalized translation lookup
+  const NORMALIZED_TRANSLATIONS = {};
+  Object.keys(TRANSLATIONS).forEach(k => {
+    NORMALIZED_TRANSLATIONS[normalizeKey(k)] = TRANSLATIONS[k];
+  });
+
+  // Collect & store original innerHTML on each translatable element
+  function collectI18nElements() {
+    const set = new Set();
+    I18N_SELECTORS.forEach(sel => {
+      try {
+        document.querySelectorAll(sel).forEach(el => set.add(el));
+      } catch(e) { /* ignore selector errors */ }
+    });
+    set.forEach(el => {
+      if (!el.hasAttribute('data-en-html')) {
+        el.setAttribute('data-en-html', el.innerHTML);
+      }
+    });
+    return set;
+  }
+
+  const i18nElements = collectI18nElements();
+
+  function applyLanguage(lang) {
+    i18nElements.forEach(el => {
+      const enHtml = el.getAttribute('data-en-html');
+      if (!enHtml) return;
+      if (lang === 'vi') {
+        const key = normalizeKey(enHtml);
+        const vi = NORMALIZED_TRANSLATIONS[key];
+        if (vi !== undefined) {
+          el.innerHTML = vi;
+        }
+        // If no translation found, leave the English text in place
+      } else {
+        el.innerHTML = enHtml;
+      }
+    });
+    // Update <html lang>
+    document.documentElement.setAttribute('lang', lang === 'vi' ? 'vi' : 'en');
+    // Update title element manually (since <title> innerHTML can be inconsistent)
+    if (lang === 'vi') {
+      const titleVi = TRANSLATIONS["EdBuddies.ai — Investment Teaser (EN | VI)"];
+      if (titleVi) document.title = titleVi;
+    } else {
+      document.title = "EdBuddies.ai — Investment Teaser (EN | VI)";
+    }
+    // Toggle button states
+    const enBtn = document.getElementById('langEn');
+    const viBtn = document.getElementById('langVi');
+    if (enBtn && viBtn) {
+      enBtn.classList.toggle('active', lang === 'en');
+      viBtn.classList.toggle('active', lang === 'vi');
+    }
+  }
+
+  window.setLanguage = function(lang) {
+    try { localStorage.setItem('edbuddies-lang', lang); } catch(e) {}
+    applyLanguage(lang);
+  };
+
+  // Initialize from localStorage
+  let initialLang = 'en';
+  try {
+    const saved = localStorage.getItem('edbuddies-lang');
+    if (saved === 'vi' || saved === 'en') initialLang = saved;
+  } catch(e) {}
+  if (initialLang === 'vi') applyLanguage('vi');
+
+  /* ── PDF Export ── */
+  function toggleMobileMenu() {
+    const nav = document.getElementById('topbarNav');
+    const btn = document.getElementById('hamburger');
+    if (!nav || !btn) return;
+    const open = nav.classList.toggle('is-open');
+    btn.classList.toggle('is-open', open);
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  document.addEventListener('click', function(e) {
+    const nav = document.getElementById('topbarNav');
+    const btn = document.getElementById('hamburger');
+    if (!nav || !btn) return;
+    if (nav.classList.contains('is-open') && e.target.closest('.topbar-nav a')) {
+      nav.classList.remove('is-open');
+      btn.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  function exportPDF() {
+    // Force all animated elements visible before print
+    document.querySelectorAll('.will-anim').forEach(el => {
+      el.classList.add('in-view');
+    });
+    // Force progress bar to fill
+    document.querySelectorAll('.progress-bar').forEach(el => {
+      el.style.width = '99.5%';
+    });
+    // Short delay so any pending transitions settle, then print
+    setTimeout(() => { window.print(); }, 120);
+  }
+
+</script>
+
+</body>
+</html>
