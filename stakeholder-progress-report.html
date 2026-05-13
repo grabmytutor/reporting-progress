@@ -59,9 +59,77 @@
     }
     .header h1 { font-size: 26px; font-weight: 800; line-height: 1.2; margin-bottom: 6px; }
     .header-sub { font-size: 13px; color: rgba(255,255,255,0.55); }
+    .header-date-pill {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.18);
+      color: #FFD38A;
+      font-size: 12px; font-weight: 700;
+      padding: 7px 14px; border-radius: 999px;
+      align-self: center;
+    }
+    .header-date-pill span { color: #fff; font-weight: 600; }
 
     /* ── MAIN ── */
     main { max-width: 1120px; margin: 0 auto; padding: 28px 24px 80px; }
+
+    /* ── WHAT'S NEW CALLOUT ── */
+    .whats-new {
+      background: linear-gradient(135deg, #ECFDF5 0%, #F0F9FF 100%);
+      border: 1px solid #A7F3D0;
+      border-left: 4px solid var(--green);
+      border-radius: 16px;
+      padding: 18px 22px 16px;
+      margin-bottom: 20px;
+    }
+    .whats-new-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .whats-new-eyebrow {
+      background: var(--green);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 999px;
+    }
+    .whats-new-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--navy);
+    }
+    .whats-new-items {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      padding-left: 4px;
+    }
+    .whats-new-item {
+      font-size: 13px;
+      color: var(--gray-700);
+      line-height: 1.55;
+      padding-left: 18px;
+      position: relative;
+    }
+    .whats-new-item::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--green-mid);
+      font-weight: 800;
+    }
+    .whats-new-item strong { color: var(--navy); font-weight: 800; }
+    .whats-new-item code {
+      background: rgba(9,36,75,0.06);
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-size: 11px;
+    }
 
     /* ── SUMMARY BAR ── */
     .summary-bar {
@@ -284,6 +352,13 @@
       text-transform: uppercase; padding: 2px 6px; border-radius: 5px;
       vertical-align: middle; margin-left: 5px;
     }
+    .w18-badge {
+      display: inline-block;
+      background: #EEF3FA; color: var(--navy);
+      font-size: 9px; font-weight: 800; letter-spacing: 0.6px;
+      text-transform: uppercase; padding: 2px 6px; border-radius: 5px;
+      vertical-align: middle; margin-left: 5px;
+    }
     .effort {
       display: inline-block; font-size: 10px; font-weight: 800;
       padding: 2px 7px; border-radius: 5px;
@@ -292,6 +367,71 @@
     .effort-low    { background: #dcfce7; color: #166534; }
     .effort-medium { background: #fef3c7; color: #92400e; }
     .effort-high   { background: #fee2e2; color: #991b1b; }
+
+    /* ── PRIORITY BACKLOG ── */
+    .priority-section { margin-top: 36px; }
+    .priority-header-bar {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 16px; font-weight: 800;
+      color: var(--navy); margin-bottom: 14px;
+    }
+    .priority-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--orange);
+    }
+    .priority-card {
+      background: var(--surface);
+      border: 1px solid var(--gray-300);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .priority-card-header {
+      background: linear-gradient(135deg, #09244B 0%, #1a3a6b 100%);
+      color: #fff;
+      padding: 14px 22px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+    }
+    .priority-item {
+      padding: 16px 22px;
+      border-top: 1px solid var(--gray-200);
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .priority-item:first-of-type { border-top: none; }
+    .priority-rank {
+      min-width: 30px; height: 30px;
+      border-radius: 50%;
+      background: var(--navy-pale);
+      color: var(--navy);
+      font-weight: 900; font-size: 13px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .priority-item.priority-top .priority-rank {
+      background: var(--orange);
+      color: #fff;
+    }
+    .priority-body { flex: 1; }
+    .priority-feature {
+      font-size: 14px; font-weight: 800; color: var(--navy);
+      margin-bottom: 4px;
+      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    }
+    .priority-reason {
+      font-size: 12px; color: var(--gray-500); line-height: 1.55;
+    }
+    .priority-reason code {
+      background: var(--gray-200);
+      padding: 1px 5px; border-radius: 4px; font-size: 11px;
+    }
+    .infra-badge {
+      background: #DBEAFE; color: #1E40AF;
+      font-size: 9px; font-weight: 800; letter-spacing: 0.5px;
+      padding: 2px 7px; border-radius: 4px; text-transform: uppercase;
+    }
 
     /* empty state */
     .empty-state {
@@ -322,37 +462,69 @@
       <h1>Feature Integration Progress</h1>
       <div class="header-sub">Branch: develop/api-integration &nbsp;·&nbsp; React Native · Expo · Tamagui · Axios</div>
     </div>
+    <div class="header-date-pill">Week 20 · W1 &nbsp;·&nbsp; <span>Updated 13 May 2026</span></div>
   </div>
 </div>
 
 <main>
+
+  <!-- WHAT'S NEW SINCE LAST REPORT -->
+  <div class="whats-new">
+    <div class="whats-new-header">
+      <span class="whats-new-eyebrow">What's New Since Last Report</span>
+      <span class="whats-new-title">+2 features fully integrated · W20 W1 re-scan</span>
+    </div>
+    <ul class="whats-new-items">
+      <li class="whats-new-item">
+        <strong>Recurring Invoice CRUD promoted to Complete</strong> — moved from In Progress to Fully Integrated. Create, view, update, batch-delete now wired through <code>invoice/recurring-*</code> endpoints with Formik/Yup validation and tax-inclusive totals.
+      </li>
+      <li class="whats-new-item">
+        <strong>Invoice Checkout &amp; Payments (NEW · Complete)</strong> — unified single + multi-invoice checkout flow shipped via <code>invoice/checkout</code> and <code>invoice/checkout-multiple</code>. Used by the new parent-invoice batch-payment journey.
+      </li>
+      <li class="whats-new-item">
+        <strong>Internationalisation &amp; Dark Mode (NEW · Complete)</strong> — i18n translation strings added across every screen (tabs, auth, students, invoice, leaves, attendance, class, centre, announcements, rewards). Dark-mode theme gaps patched and skeleton loaders updated. Single-sprint W18 delivery (Hailey).
+      </li>
+      <li class="whats-new-item">
+        <strong>Exam Papers Module (NEW · In Progress)</strong> — combined former "Exam Dashboard &amp; Paper Attempt" + Centre Papers backend work into a single stream. Loong driving app screens + service API in parallel.
+      </li>
+      <li class="whats-new-item">
+        <strong>School &amp; Lesson Soft Delete (NEW · In Progress)</strong> — backend foundation under construction (Forest). Unblocks mobile delete flows for centres and lessons once shipped.
+      </li>
+      <li class="whats-new-item">
+        <strong>Parent-role scaffolding shipped</strong> — six new tab/screen trees added (<code>class-parent/</code>, <code>child-parent/</code>, <code>invoice-parent/</code>, <code>parent-class/</code>, <code>parent-child/</code>, <code>parent-invoice/</code>) plus parent-invoice batch-payment screens. UI complete, API rollup still classified under existing tab features.
+      </li>
+      <li class="whats-new-item">
+        <strong>W20 W1 re-scan result:</strong> No new feature commits on <code>develop/api-integration</code> since 8 May (W19 W2). Counts hold at 19 fully integrated · 5 in progress · 8 not started.
+      </li>
+    </ul>
+  </div>
 
   <!-- SUMMARY BAR -->
   <div class="summary-bar">
     <div class="summary-top">
       <div>
         <div class="summary-title">Overall Integration Progress</div>
-        <div class="summary-sub">15 completed · 4 in progress · 10 not started · 29 total</div>
+        <div class="summary-sub">19 completed · 5 in progress · 8 not started · 32 total</div>
       </div>
       <div class="summary-pct-block">
-        <div class="summary-pct">52%</div>
+        <div class="summary-pct">59%</div>
         <div class="summary-pct-label">complete</div>
       </div>
     </div>
     <div class="bar-track">
-      <div class="bar-seg bar-green" style="width:51.7%;"></div>
-      <div class="bar-seg bar-amber" style="width:13.8%;"></div>
-      <div class="bar-seg bar-gray"  style="width:34.5%;"></div>
+      <div class="bar-seg bar-green" style="width:59.4%;"></div>
+      <div class="bar-seg bar-amber" style="width:15.6%;"></div>
+      <div class="bar-seg bar-gray"  style="width:25.0%;"></div>
     </div>
     <div class="bar-legend">
       <div class="legend-item" onclick="switchTab('completed')">
-        <div class="legend-dot" style="background:var(--green);"></div> Completed — 15 (52%)
+        <div class="legend-dot" style="background:var(--green);"></div> Completed — 19 (59%)
       </div>
       <div class="legend-item" onclick="switchTab('progress')">
-        <div class="legend-dot" style="background:#f59e0b;"></div> In Progress — 4 (14%)
+        <div class="legend-dot" style="background:#f59e0b;"></div> In Progress — 5 (16%)
       </div>
       <div class="legend-item" onclick="switchTab('none')">
-        <div class="legend-dot" style="background:var(--gray-300);border:1px solid #d1d5db;"></div> Not Started — 10 (34%)
+        <div class="legend-dot" style="background:var(--gray-300);border:1px solid #d1d5db;"></div> Not Started — 8 (25%)
       </div>
     </div>
   </div>
@@ -360,22 +532,22 @@
   <!-- STAT PILLS (clickable, act as tab shortcuts) -->
   <div class="stat-pills">
     <div class="stat-pill stat-pill-green pill-green active-green" id="pill-completed" onclick="switchTab('completed')">
-      <div class="pill-value">15</div>
+      <div class="pill-value">19</div>
       <div class="pill-label">Features Completed</div>
-      <div class="pill-sub">+2 this sprint</div>
+      <div class="pill-sub">+2 since W19 baseline</div>
     </div>
     <div class="stat-pill stat-pill-amber pill-amber" id="pill-progress" onclick="switchTab('progress')">
-      <div class="pill-value">4</div>
+      <div class="pill-value">5</div>
       <div class="pill-label">In Progress</div>
-      <div class="pill-sub">Partially integrated</div>
+      <div class="pill-sub">Active W20 sprint</div>
     </div>
     <div class="stat-pill stat-pill-red pill-red" id="pill-none" onclick="switchTab('none')">
-      <div class="pill-value">10</div>
+      <div class="pill-value">8</div>
       <div class="pill-label">Not Started</div>
       <div class="pill-sub">Awaiting API / backend</div>
     </div>
     <div class="stat-pill stat-pill-navy pill-navy" id="pill-all" onclick="switchTab('all')">
-      <div class="pill-value">29</div>
+      <div class="pill-value">32</div>
       <div class="pill-label">Total Features</div>
       <div class="pill-sub">Across all modules</div>
     </div>
@@ -385,26 +557,26 @@
   <div class="tabs-bar">
     <button class="tab-btn active-completed" id="tab-completed" onclick="switchTab('completed')">
       ✅ Completed
-      <span class="tab-count tab-count-completed">15</span>
+      <span class="tab-count tab-count-completed">19</span>
     </button>
     <button class="tab-btn" id="tab-progress" onclick="switchTab('progress')">
       🔄 In Progress
-      <span class="tab-count tab-count-progress">4</span>
+      <span class="tab-count tab-count-progress">5</span>
     </button>
     <button class="tab-btn" id="tab-none" onclick="switchTab('none')">
       ⏳ Not Started
-      <span class="tab-count tab-count-none">10</span>
+      <span class="tab-count tab-count-none">8</span>
     </button>
     <button class="tab-btn" id="tab-all" onclick="switchTab('all')">
       📋 All
-      <span class="tab-count tab-count-all">29</span>
+      <span class="tab-count tab-count-all">32</span>
     </button>
   </div>
 
   <!-- ══════════ CARD GRID ══════════ -->
   <div class="card-grid" id="card-grid">
 
-    <!-- ─── COMPLETED (15) ─── -->
+    <!-- ─── COMPLETED (19) ─── -->
 
     <div class="card" data-status="completed">
       <div class="card-top">
@@ -453,7 +625,7 @@
       <div class="endpoint-list">
         <span class="endpoint-pill">school/list-student-by-school-ids</span>
       </div>
-      <div class="card-note">Paginated student list with real-time search, filter, and sort. Abort-signal safe pagination.</div>
+      <div class="card-note">Paginated student list with real-time search, filter, and sort. Abort-signal safe pagination. <strong>Algolia omni-search</strong> integrated for instant cross-field results (W17).</div>
     </div>
 
     <div class="card" data-status="completed">
@@ -469,7 +641,7 @@
         <span class="endpoint-pill">invoice/list-by-school-ids</span>
         <span class="endpoint-pill">invoice/get-invoice-statistic</span>
       </div>
-      <div class="card-note">Paginated invoice list with Unpaid/Paid tabs, date range and school filters.</div>
+      <div class="card-note">Paginated invoice list with Unpaid/Paid tabs, date range and school filters. Tab empty-state flash fixed.</div>
     </div>
 
     <div class="card" data-status="completed">
@@ -478,15 +650,53 @@
         <span class="card-status-chip chip-green"><span class="chip-dot"></span>Complete</span>
       </div>
       <div>
-        <div class="card-title">Invoice Create &amp; Preview <span class="new-badge">New</span></div>
-        <div class="card-path">app/(screens)/invoice/create/ · preview/ · preview-multiple/</div>
+        <div class="card-title">Invoice Create, View &amp; Preview</div>
+        <div class="card-path">app/(screens)/invoice/create/ · view/ · preview/ · preview-multiple/</div>
       </div>
       <div class="endpoint-list">
         <span class="endpoint-pill">invoice/create</span>
         <span class="endpoint-pill">invoice/edit/:id</span>
         <span class="endpoint-pill">invoice/create-multiple</span>
+        <span class="endpoint-pill">invoice/get-by-id</span>
+        <span class="endpoint-pill">invoice/payment-link</span>
       </div>
-      <div class="card-note">Create form fetches lessons and students live. Preview calls <code>createInvoice</code> / <code>createMultipleInvoice</code> on confirm.</div>
+      <div class="card-note">Create form, multi-invoice, and standalone <strong>View Invoice</strong> screen with inline PDF preview. Parent actions: WhatsApp, copy email, HitPay share link. Status-gated actions (blocked for paid/voided invoices). New enrollment flag added to v2 flow.</div>
+    </div>
+
+    <div class="card" data-status="completed">
+      <div class="card-top">
+        <div class="card-icon icon-green">🔁</div>
+        <span class="card-status-chip chip-green"><span class="chip-dot"></span>Complete</span>
+      </div>
+      <div>
+        <div class="card-title">Recurring Invoice CRUD <span class="new-badge">Promoted</span></div>
+        <div class="card-path">app/(screens)/recurring-invoices/</div>
+      </div>
+      <div class="endpoint-list">
+        <span class="endpoint-pill">invoice/get-recurring-invoices</span>
+        <span class="endpoint-pill">invoice/get-recurring-by-id</span>
+        <span class="endpoint-pill">invoice/create-recurring</span>
+        <span class="endpoint-pill">invoice/update-recurring/:id</span>
+        <span class="endpoint-pill">invoice/delete-recurring</span>
+      </div>
+      <div class="card-note">Dedicated view + update flow wired. Batch deletion with selection clarity. Formik/Yup validation on create &amp; update. Tax included in list totals. <strong>Promoted from In Progress → Complete</strong> as of W19.</div>
+    </div>
+
+    <div class="card" data-status="completed">
+      <div class="card-top">
+        <div class="card-icon icon-green">💳</div>
+        <span class="card-status-chip chip-green"><span class="chip-dot"></span>Complete</span>
+      </div>
+      <div>
+        <div class="card-title">Invoice Checkout &amp; Payments <span class="new-badge">New</span></div>
+        <div class="card-path">app/(screens)/invoice/checkout/ · payment/ · payment-success/ · parent-invoice/batch-payment/</div>
+      </div>
+      <div class="endpoint-list">
+        <span class="endpoint-pill">invoice/checkout</span>
+        <span class="endpoint-pill">invoice/checkout-multiple</span>
+        <span class="endpoint-pill">invoice/pay-multi-invoices</span>
+      </div>
+      <div class="card-note">Shared checkout flow handles both single and multi-invoice payments via a unified endpoint. Parent batch-payment journey uses <code>payMultiInvoices</code>. UI adapts to invoice count automatically.</div>
     </div>
 
     <div class="card" data-status="completed">
@@ -503,7 +713,7 @@
         <span class="endpoint-pill">schedule/list-all-by-teacher</span>
         <span class="endpoint-pill">school/list-users-by-schools</span>
       </div>
-      <div class="card-note">Day/Week/Month calendar views. Teacher filter dropdown now live-populated.</div>
+      <div class="card-note">Day/Week/Month calendar views. Teacher filter dropdown live-populated. Advanced class detail view enhancements shipped in W17 (Forest).</div>
     </div>
 
     <div class="card" data-status="completed">
@@ -512,7 +722,7 @@
         <span class="card-status-chip chip-green"><span class="chip-dot"></span>Complete</span>
       </div>
       <div>
-        <div class="card-title">Class Create <span class="new-badge">New</span></div>
+        <div class="card-title">Class Create</div>
         <div class="card-path">app/(screens)/class/create-class/</div>
       </div>
       <div class="endpoint-list">
@@ -637,7 +847,7 @@
         <span class="endpoint-pill">users/invite</span>
         <span class="endpoint-pill">users/update-permission</span>
       </div>
-      <div class="card-note">Add user (invite flow), manage permissions, and view user profiles — all wired.</div>
+      <div class="card-note">Add user (invite flow), manage permissions, and view user profiles — all wired. <strong>Known bug:</strong> Creating a user with the Centre Director role shows an error toast (under investigation).</div>
     </div>
 
     <div class="card" data-status="completed">
@@ -655,32 +865,45 @@
         <span class="endpoint-pill">holiday/update/:id</span>
         <span class="endpoint-pill">holiday/delete/:id</span>
       </div>
-      <div class="card-note">Full CRUD for holiday closures. Keyboard behavior improvements applied this sprint.</div>
+      <div class="card-note">Full CRUD for holiday closures with section-card flow and keyboard behaviour improvements.</div>
     </div>
 
-    <!-- ─── IN PROGRESS (4) ─── -->
-
-    <div class="card" data-status="progress">
+    <div class="card" data-status="completed">
       <div class="card-top">
-        <div class="card-icon icon-amber">🔄</div>
-        <span class="card-status-chip chip-amber"><span class="chip-dot"></span>In Progress</span>
+        <div class="card-icon icon-green">🏖️</div>
+        <span class="card-status-chip chip-green"><span class="chip-dot"></span>Complete</span>
       </div>
       <div>
-        <div class="card-title">Recurring Invoice CRUD</div>
-        <div class="card-path">app/(screens)/recurring-invoices/</div>
+        <div class="card-title">Leaves Management</div>
+        <div class="card-path">app/(screens)/leaves/ · manage-leaves/ · teaching-leave-report/</div>
       </div>
       <div class="endpoint-list">
-        <span class="endpoint-pill">invoice/get-recurring-invoices</span>
-        <span class="endpoint-pill">invoice/get-recurring-by-id</span>
-        <span class="endpoint-pill pending">create — pending</span>
-        <span class="endpoint-pill pending">update — pending</span>
-        <span class="endpoint-pill pending">delete — pending</span>
+        <span class="endpoint-pill">leave/list</span>
+        <span class="endpoint-pill">leave/apply</span>
+        <span class="endpoint-pill">leave/balance</span>
+        <span class="endpoint-pill">leave/calendar</span>
+        <span class="endpoint-pill">POST /api/v2/leave/export</span>
       </div>
-      <div class="card-note">
-        <strong>Done:</strong> List + edit pre-fill wired.<br/>
-        <strong>Remaining:</strong> Submit handlers for create, update, delete. <span class="effort effort-low">Low effort</span>
-      </div>
+      <div class="card-note">My Leaves, Manage Leaves (admin), apply form, calendar view, leave requests, and teaching leave export — all fully wired. Leave balance check with FAB warning banner. <strong>Currently in UAT testing</strong> (Hailey, W18).</div>
     </div>
+
+    <div class="card" data-status="completed">
+      <div class="card-top">
+        <div class="card-icon icon-green">🌐</div>
+        <span class="card-status-chip chip-green"><span class="chip-dot"></span>Complete</span>
+      </div>
+      <div>
+        <div class="card-title">Internationalisation &amp; Dark Mode <span class="new-badge">New</span></div>
+        <div class="card-path">locales/ · components/ (all screens)</div>
+      </div>
+      <div class="endpoint-list">
+        <span class="endpoint-pill">i18n — all screens</span>
+        <span class="endpoint-pill">dark mode — all screens</span>
+      </div>
+      <div class="card-note">Full <strong>i18n translation strings</strong> added to every screen — tabs, auth, students, invoice, leaves, attendance, class, centre, announcements, rewards, and more. Dark mode theme gaps patched across components. Skeleton loaders updated. Completed in a single W18 sprint (Hailey).</div>
+    </div>
+
+    <!-- ─── IN PROGRESS (5) ─── -->
 
     <div class="card" data-status="progress">
       <div class="card-top">
@@ -718,7 +941,7 @@
         <span class="endpoint-pill pending">student/update — pending</span>
       </div>
       <div class="card-note">
-        <strong>Done:</strong> Centre enrollment and section card pickers use live API.<br/>
+        <strong>Done:</strong> Centre enrollment and section card pickers use live API. Status change wired.<br/>
         <strong>Remaining:</strong> Final form submit + parent details API. <span class="effort effort-medium">Medium effort</span>
       </div>
     </div>
@@ -742,7 +965,46 @@
       </div>
     </div>
 
-    <!-- ─── NOT STARTED (10) ─── -->
+    <div class="card" data-status="progress">
+      <div class="card-top">
+        <div class="card-icon icon-amber">📝</div>
+        <span class="card-status-chip chip-amber"><span class="chip-dot"></span>In Progress</span>
+      </div>
+      <div>
+        <div class="card-title">Exam Papers Module <span class="w18-badge">W18 New</span></div>
+        <div class="card-path">app/(tabs)/class/exam/ · class-parent/exam/ · app/(screens)/centre-papers/</div>
+      </div>
+      <div class="endpoint-list">
+        <span class="endpoint-pill pending">exam/list — in design</span>
+        <span class="endpoint-pill pending">exam/create — in design</span>
+        <span class="endpoint-pill pending">exam/attempt — in design</span>
+      </div>
+      <div class="card-note">
+        <strong>Started W18 (Loong):</strong> Both app screens and backend API being developed in parallel. Parent and teacher exam attempt flows duplicated.<br/>
+        <strong>Scope:</strong> Exam dashboard, paper builder, student attempt flow, results. <span class="effort effort-high">High effort</span>
+      </div>
+    </div>
+
+    <div class="card" data-status="progress">
+      <div class="card-top">
+        <div class="card-icon icon-amber">🗑️</div>
+        <span class="card-status-chip chip-amber"><span class="chip-dot"></span>In Progress</span>
+      </div>
+      <div>
+        <div class="card-title">School &amp; Lesson Soft Delete <span class="w18-badge">W18 New</span></div>
+        <div class="card-path">api-school · api-lesson (backend)</div>
+      </div>
+      <div class="endpoint-list">
+        <span class="endpoint-pill pending">school/soft-delete/:id — pending</span>
+        <span class="endpoint-pill pending">lesson/soft-delete/:id — pending</span>
+      </div>
+      <div class="card-note">
+        <strong>Started W18 (Forest):</strong> Backend API work to add soft-delete capability to schools and lessons.<br/>
+        <strong>Impact:</strong> Enables safe deletion with recovery, required before mobile delete flows can be wired. <span class="effort effort-medium">Medium effort</span>
+      </div>
+    </div>
+
+    <!-- ─── NOT STARTED (8) ─── -->
 
     <div class="card" data-status="none">
       <div class="card-top">
@@ -761,21 +1023,6 @@
 
     <div class="card" data-status="none">
       <div class="card-top">
-        <div class="card-icon icon-red">📝</div>
-        <span class="card-status-chip chip-red"><span class="chip-dot"></span>Not Started</span>
-      </div>
-      <div>
-        <div class="card-title">Exam Dashboard &amp; Paper Attempt</div>
-        <div class="card-path">app/(tabs)/class/exam/ (5 screens)</div>
-      </div>
-      <div class="card-note">
-        Full student exam flow (dashboard, attempt, paper, finish, results) on static mock data.<br/><br/>
-        <strong>Blocker:</strong> No exam API on backend yet. <span class="effort effort-high">High effort</span>
-      </div>
-    </div>
-
-    <div class="card" data-status="none">
-      <div class="card-top">
         <div class="card-icon icon-red">📚</div>
         <span class="card-status-chip chip-red"><span class="chip-dot"></span>Not Started</span>
       </div>
@@ -785,7 +1032,7 @@
       </div>
       <div class="card-note">
         Paper builder, AI question generation, PDF preview, student tracker — all on local stores.<br/><br/>
-        <strong>Blocker:</strong> Depends on exam service API. <span class="effort effort-high">High effort</span>
+        <strong>Blocker:</strong> Depends on exam service API (currently in design — see Exam Papers above). <span class="effort effort-high">High effort</span>
       </div>
     </div>
 
@@ -879,26 +1126,112 @@
       </div>
     </div>
 
-    <div class="card" data-status="none">
-      <div class="card-top">
-        <div class="card-icon icon-red">🏖️</div>
-        <span class="card-status-chip chip-red"><span class="chip-dot"></span>Not Started</span>
-      </div>
-      <div>
-        <div class="card-title">Teaching Leave Reports</div>
-        <div class="card-path">app/(screens)/teaching-leave-report/ · teaching-leave-report-activity/</div>
-      </div>
-      <div class="card-note">
-        Export store scaffolded but no API call for leave/absence data.<br/><br/>
-        Needs a leave endpoint from backend. <span class="effort effort-medium">Medium effort</span>
-      </div>
-    </div>
-
   </div><!-- /card-grid -->
+
+  <!-- ── PRIORITY BACKLOG ── -->
+  <div class="priority-section">
+    <div class="priority-header-bar">
+      <span class="priority-dot"></span>
+      Integration Priority Backlog
+    </div>
+    <div class="priority-card">
+      <div class="priority-card-header">Top Recommendations — Ordered by Impact (W20 W1)</div>
+
+      <div class="priority-item priority-top">
+        <div class="priority-rank">#1</div>
+        <div class="priority-body">
+          <div class="priority-feature">Finish Partial Integration — Class Tab</div>
+          <div class="priority-reason">
+            The Class Tab is the last remaining Partial feature in the engineering rollup.
+            Residual mock-data imports in <code>app/(tabs)/class/lesson/[id].tsx</code> and modal flows
+            block the promotion. <strong>Top recommendation for the W20 sprint</strong> — clears the
+            partial bucket entirely with low-effort changes.
+          </div>
+        </div>
+      </div>
+
+      <div class="priority-item">
+        <div class="priority-rank">#2</div>
+        <div class="priority-body">
+          <div class="priority-feature">Super Admin Home Dashboard (Company View)</div>
+          <div class="priority-reason">
+            The super-admin view inside <code>app/(tabs)/home/index.tsx</code> renders a multi-centre
+            overview panel that still falls back to demo aggregates. Needs a
+            <code>company/statistic/:id</code> endpoint to land before stakeholder demos can rely on
+            real numbers.
+          </div>
+        </div>
+      </div>
+
+      <div class="priority-item">
+        <div class="priority-rank">#3</div>
+        <div class="priority-body">
+          <div class="priority-feature">Centre Analytics — Revenue, New Course, New Enrollment, Attendance</div>
+          <div class="priority-reason">
+            26 drill-down screens (year → month → day) across four reports remain on hard-coded
+            constants. All four are blocked on backend aggregation endpoints. Unblocking these
+            cuts the Not Started bucket by half in a single backend sprint.
+          </div>
+        </div>
+      </div>
+
+      <div class="priority-item">
+        <div class="priority-rank">#4</div>
+        <div class="priority-body">
+          <div class="priority-feature">
+            Switch UAT to Supabase edbuddies-prod Clone
+            <span class="infra-badge">Infrastructure</span>
+          </div>
+          <div class="priority-reason">
+            A nightly clone on Supabase gives QA and UAT a fully populated mirror of production —
+            real centre configurations, students, invoices, and schedules. Unblocks realistic
+            confidence testing for all 19 fully integrated features.
+          </div>
+        </div>
+      </div>
+
+      <div class="priority-item">
+        <div class="priority-rank">#5</div>
+        <div class="priority-body">
+          <div class="priority-feature">Parent Home Dashboard API Integration</div>
+          <div class="priority-reason">
+            <code>app/(tabs)/home-parent.tsx</code> is the primary landing screen for the parent
+            role but still pulls from <code>features/screen-constants/</code>. Critical for the
+            parent-role rollout that landed scaffolding this period.
+          </div>
+        </div>
+      </div>
+
+      <div class="priority-item">
+        <div class="priority-rank">#6</div>
+        <div class="priority-body">
+          <div class="priority-feature">Rewards System Service Design</div>
+          <div class="priority-reason">
+            All 8 rewards screens (catalog, assign, history, student-overview, student-collection,
+            create, index, stamp) sit on mock data. Requires a net-new rewards service —
+            kick off API design now so build can start once Exam Papers ships.
+          </div>
+        </div>
+      </div>
+
+      <div class="priority-item">
+        <div class="priority-rank">#7</div>
+        <div class="priority-body">
+          <div class="priority-feature">Exam System — Ship Loong's Sprint</div>
+          <div class="priority-reason">
+            Exam Papers Module is the only High-effort In Progress item. Once it lands, the
+            "Centre Papers (Teacher View)" Not Started entry can be promoted directly, removing
+            two items from the backlog in one go.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
 
   <hr />
   <div class="footer">
-    Generated by Claude Code &nbsp;·&nbsp; Branch: <code>develop/api-integration</code>
+    Generated by Claude Code scheduled task &nbsp;·&nbsp; Branch: <code>develop/api-integration</code> &nbsp;·&nbsp; Updated <code>13 May 2026</code> (W20 W1 re-scan)
   </div>
 
 </main>
@@ -935,7 +1268,6 @@
     // update stat pills
     TABS.forEach(t => {
       const el = document.getElementById('pill-' + t);
-      // remove all active classes
       Object.values(PILL_ACTIVE_CLASS).forEach(c => el.classList.remove(c));
       if (t === tab) el.classList.add(PILL_ACTIVE_CLASS[t]);
     });
@@ -950,7 +1282,6 @@
         card.classList.remove('hidden');
         card.style.animationDelay = delay + 'ms';
         card.style.animation = 'none';
-        // force reflow
         void card.offsetWidth;
         card.style.animation = '';
         delay += 30;
@@ -960,7 +1291,6 @@
     });
   }
 
-  // initialise on load
   switchTab('completed');
 </script>
 </body>

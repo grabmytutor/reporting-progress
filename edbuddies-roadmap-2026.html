@@ -1,0 +1,1608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EdBuddies · 2026 Product Roadmap</title>
+  <style>
+    /* ─────────────────────────────── RESET & BASE ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 15px; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: #F0F4FF;
+      color: #0F172A;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ─────────────────────────────── CSS VARS ─────── */
+    :root {
+      --sidebar-w: 260px;
+      --top-h: 64px;
+      --primary: #4F46E5;
+      --primary-light: #EEF2FF;
+      --q1: #10B981;
+      --q1-light: #D1FAE5;
+      --q2: #6366F1;
+      --q2-light: #E0E7FF;
+      --q3: #F59E0B;
+      --q3-light: #FEF3C7;
+      --q4: #EC4899;
+      --q4-light: #FCE7F3;
+      --done-bg: #DCFCE7; --done-fg: #15803D;
+      --wip-bg: #DBEAFE;  --wip-fg: #1D4ED8;
+      --plan-bg: #FEF3C7; --plan-fg: #B45309;
+      --back-bg: #F1F5F9; --back-fg: #475569;
+      --radius: 12px;
+      --shadow: 0 1px 3px rgba(0,0,0,.08), 0 4px 16px rgba(0,0,0,.05);
+      --shadow-hover: 0 4px 24px rgba(79,70,229,.15);
+    }
+
+    /* ─────────────────────────────── TOPBAR ───────── */
+    .topbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--top-h);
+      background: #fff;
+      border-bottom: 1px solid #E2E8F0;
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      z-index: 100;
+      gap: 16px;
+    }
+    .topbar-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: -.5px;
+      color: var(--primary);
+    }
+    .topbar-logo svg { width: 28px; height: 28px; }
+    .topbar-title { color: #0F172A; }
+    .topbar-title span { color: var(--primary); }
+    .topbar-sub { color: #64748B; font-size: .82rem; margin-left: 4px; }
+    .topbar-spacer { flex: 1; }
+    .topbar-badge {
+      display: flex; align-items: center; gap: 6px;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: .75rem; font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 99px;
+    }
+    .topbar-date {
+      font-size: .78rem; color: #94A3B8;
+      border-left: 1px solid #E2E8F0;
+      padding-left: 16px;
+    }
+
+    /* ─────────────────────────────── SIDEBAR ──────── */
+    .sidebar {
+      position: fixed;
+      top: var(--top-h); left: 0;
+      width: var(--sidebar-w);
+      height: calc(100vh - var(--top-h));
+      background: #fff;
+      border-right: 1px solid #E2E8F0;
+      overflow-y: auto;
+      padding: 20px 0 40px;
+      z-index: 90;
+    }
+    .sidebar::-webkit-scrollbar { width: 4px; }
+    .sidebar::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
+    .nav-section { padding: 0 16px; margin-bottom: 6px; }
+    .nav-label {
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: #94A3B8;
+      padding: 12px 8px 6px;
+    }
+    .nav-item {
+      display: flex; align-items: center; gap: 8px;
+      padding: 7px 8px;
+      border-radius: 8px;
+      color: #475569;
+      font-size: .84rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all .15s;
+      cursor: pointer;
+    }
+    .nav-item:hover { background: var(--primary-light); color: var(--primary); }
+    .nav-item.active { background: var(--primary); color: #fff; }
+    .nav-item .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .nav-sub {
+      padding-left: 28px;
+      font-size: .78rem;
+      color: #64748B;
+      margin: 2px 0;
+      padding-top: 3px; padding-bottom: 3px;
+      border-left: 2px solid #E2E8F0;
+      margin-left: 11px;
+      display: block;
+      text-decoration: none;
+      transition: color .15s;
+    }
+    .nav-sub:hover { color: var(--primary); border-color: var(--primary); }
+    .q-pill {
+      font-size: .68rem; font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 99px;
+      margin-left: auto;
+    }
+    .nav-legend { padding: 16px 16px 0; }
+    .legend-title { font-size: .68rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #94A3B8; margin-bottom: 8px; }
+    .legend-row { display: flex; align-items: center; gap: 8px; font-size: .78rem; color: #64748B; margin-bottom: 5px; }
+    .legend-dot { width: 9px; height: 9px; border-radius: 50%; }
+
+    /* ─────────────────────────────── MAIN ─────────── */
+    .main {
+      margin-left: var(--sidebar-w);
+      margin-top: var(--top-h);
+      flex: 1;
+      padding: 32px 40px 80px;
+      max-width: calc(100vw - var(--sidebar-w));
+    }
+
+    /* ─────────────────────────────── HERO ─────────── */
+    .hero {
+      background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 50%, #0EA5E9 100%);
+      border-radius: 20px;
+      padding: 40px 48px;
+      color: #fff;
+      margin-bottom: 36px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 280px; height: 280px;
+      background: rgba(255,255,255,.07);
+      border-radius: 50%;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; right: 120px;
+      width: 200px; height: 200px;
+      background: rgba(255,255,255,.05);
+      border-radius: 50%;
+    }
+    .hero-eyebrow {
+      font-size: .75rem; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase;
+      opacity: .75;
+      margin-bottom: 10px;
+    }
+    .hero h1 { font-size: 2rem; font-weight: 800; letter-spacing: -.5px; margin-bottom: 12px; }
+    .hero-sub { font-size: 1rem; opacity: .85; max-width: 560px; line-height: 1.6; margin-bottom: 24px; }
+    .hero-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .hero-chip {
+      background: rgba(255,255,255,.15);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 99px;
+      padding: 4px 14px;
+      font-size: .78rem;
+      font-weight: 600;
+    }
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 28px;
+    }
+    .hero-stat {
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 12px;
+      padding: 14px 18px;
+    }
+    .hero-stat-val { font-size: 1.6rem; font-weight: 800; }
+    .hero-stat-lbl { font-size: .73rem; opacity: .8; margin-top: 2px; }
+
+    /* ─────────────────────────────── SECTION ──────── */
+    .section { margin-bottom: 48px; scroll-margin-top: calc(var(--top-h) + 20px); }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .section-q {
+      font-size: .7rem; font-weight: 800; letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 99px;
+    }
+    .section-title { font-size: 1.35rem; font-weight: 800; letter-spacing: -.3px; }
+    .section-subtitle { font-size: .85rem; color: #64748B; margin-top: 2px; }
+    .section-meta { margin-left: auto; text-align: right; }
+    .section-dates { font-size: .78rem; color: #94A3B8; font-weight: 500; }
+    .section-progress-label { font-size: .72rem; color: #64748B; margin-top: 4px; }
+    .progress-bar {
+      width: 100px; height: 6px;
+      background: #E2E8F0;
+      border-radius: 99px;
+      overflow: hidden;
+      margin-top: 6px;
+      margin-left: auto;
+    }
+    .progress-fill { height: 100%; border-radius: 99px; transition: width 1s ease; }
+
+    /* ─────────────────────────────── CARDS GRID ───── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 16px;
+    }
+    .card {
+      background: #fff;
+      border: 1px solid #E2E8F0;
+      border-radius: var(--radius);
+      padding: 20px 22px;
+      box-shadow: var(--shadow);
+      transition: box-shadow .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+    .card-accent {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      border-radius: var(--radius) var(--radius) 0 0;
+    }
+    .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+    .card-icon {
+      width: 36px; height: 36px;
+      border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .card-title { font-size: .95rem; font-weight: 700; color: #0F172A; line-height: 1.35; }
+    .card-desc { font-size: .82rem; color: #475569; line-height: 1.55; margin-bottom: 14px; }
+    .card-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 12px; }
+    .tag {
+      font-size: .68rem; font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 99px;
+      background: #F1F5F9;
+      color: #475569;
+    }
+    .tag-mobile { background: #F3E8FF; color: #7E22CE; }
+    .tag-web    { background: #DBEAFE; color: #1D4ED8; }
+    .tag-backend{ background: #F0FDF4; color: #15803D; }
+    .tag-api    { background: #FFF7ED; color: #C2410C; }
+    .tag-ai     { background: #FDF2F8; color: #9D174D; }
+    .tag-infra  { background: #F0F9FF; color: #0369A1; }
+    .status-badge {
+      font-size: .68rem; font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 99px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .status-done  { background: var(--done-bg); color: var(--done-fg); }
+    .status-wip   { background: var(--wip-bg);  color: var(--wip-fg); }
+    .status-plan  { background: var(--plan-bg); color: var(--plan-fg); }
+    .status-back  { background: var(--back-bg); color: var(--back-fg); }
+    .card-roles { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 8px; }
+    .role-chip {
+      font-size: .65rem; font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 4px;
+      border: 1px solid #E2E8F0;
+      color: #64748B;
+    }
+    .card-metrics {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid #F1F5F9;
+      display: flex; flex-wrap: wrap; gap: 12px;
+    }
+    .metric-item { font-size: .75rem; color: #64748B; }
+    .metric-item strong { color: #0F172A; display: block; font-size: .82rem; }
+
+    /* ─────────────────────────────── WIDE CARD ────── */
+    .card-wide {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 800px) { .card-wide { grid-template-columns: 1fr; } }
+    .card-wide-left {}
+    .card-wide-right {
+      background: #FAFBFF;
+      border-left: 1px solid #E2E8F0;
+      padding-left: 24px;
+      margin-left: -22px;
+      padding-top: 6px;
+    }
+    .mini-timeline { display: flex; flex-direction: column; gap: 10px; }
+    .mini-phase {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: .8rem;
+    }
+    .phase-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      margin-top: 4px;
+      flex-shrink: 0;
+    }
+    .phase-label { font-weight: 600; color: #0F172A; }
+    .phase-sub { color: #64748B; font-size: .75rem; margin-top: 1px; }
+
+    /* ─────────────────────────────── TECH STACK ───── */
+    .stack-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 12px;
+    }
+    .stack-card {
+      background: #fff;
+      border: 1px solid #E2E8F0;
+      border-radius: 10px;
+      padding: 14px 16px;
+      box-shadow: var(--shadow);
+    }
+    .stack-cat { font-size: .65rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #94A3B8; margin-bottom: 6px; }
+    .stack-item { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
+    .stack-name { font-size: .8rem; font-weight: 600; color: #334155; }
+    .stack-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--primary); flex-shrink: 0; }
+
+    /* ─────────────────────────────── OKR TABLE ────── */
+    .okr-table { width: 100%; border-collapse: collapse; }
+    .okr-table th {
+      text-align: left;
+      font-size: .72rem; font-weight: 700;
+      letter-spacing: .06em; text-transform: uppercase;
+      color: #94A3B8;
+      padding: 8px 16px;
+      border-bottom: 2px solid #E2E8F0;
+    }
+    .okr-table td {
+      padding: 12px 16px;
+      font-size: .84rem;
+      border-bottom: 1px solid #F1F5F9;
+      vertical-align: top;
+    }
+    .okr-table tr:last-child td { border-bottom: none; }
+    .okr-table tr:hover td { background: #FAFBFF; }
+    .okr-obj { font-weight: 700; color: #0F172A; }
+    .okr-kr { color: #475569; font-size: .8rem; }
+    .okr-q { font-weight: 600; font-size: .78rem; }
+
+    /* ─────────────────────────────── MICRO SERVICES ── */
+    .ms-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+    .ms-chip {
+      background: #fff;
+      border: 1px solid #E2E8F0;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: .8rem; font-weight: 600;
+      color: #334155;
+      box-shadow: var(--shadow);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .ms-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--q1); }
+
+    /* ─────────────────────────────── DIVIDER ──────── */
+    .divider { height: 1px; background: #E2E8F0; margin: 40px 0; }
+
+    /* ─────────────────────────────── ROLES MATRIX ─── */
+    .roles-matrix { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+    .role-card {
+      background: #fff;
+      border: 1px solid #E2E8F0;
+      border-radius: 10px;
+      padding: 12px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+    .role-icon { font-size: 1.4rem; margin-bottom: 4px; }
+    .role-name { font-size: .72rem; font-weight: 700; color: #334155; }
+
+    /* ─────────────────────────────── CALLOUT ──────── */
+    .callout {
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-size: .84rem;
+      line-height: 1.6;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+    .callout-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+    .callout-blue  { background: var(--wip-bg);  border-left: 3px solid #3B82F6; }
+    .callout-green { background: var(--done-bg); border-left: 3px solid var(--q1); }
+    .callout-amber { background: var(--plan-bg); border-left: 3px solid var(--q3); }
+
+    /* ─────────────────────────────── SCROLL HIGHLIGHT  */
+    .section[data-q="q1"] .card-accent { background: var(--q1); }
+    .section[data-q="q1"] .card-icon   { background: var(--q1-light); }
+    .section[data-q="q2"] .card-accent { background: var(--q2); }
+    .section[data-q="q2"] .card-icon   { background: var(--q2-light); }
+    .section[data-q="q3"] .card-accent { background: var(--q3); }
+    .section[data-q="q3"] .card-icon   { background: var(--q3-light); }
+    .section[data-q="q4"] .card-accent { background: var(--q4); }
+    .section[data-q="q4"] .card-icon   { background: var(--q4-light); }
+
+    .q1-pill { background: var(--q1-light); color: var(--q1); }
+    .q2-pill { background: var(--q2-light); color: var(--q2); }
+    .q3-pill { background: var(--q3-light); color: var(--q3); }
+    .q4-pill { background: var(--q4-light); color: var(--q4); }
+
+    /* ─────────────────────────────── FOOTER ──────────── */
+    .footer {
+      margin-top: 60px;
+      text-align: center;
+      color: #94A3B8;
+      font-size: .78rem;
+    }
+    .footer strong { color: #475569; }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════ TOPBAR ═══════════ -->
+<header class="topbar">
+  <div class="topbar-logo">
+    <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="40" height="40" rx="10" fill="#4F46E5"/>
+      <path d="M10 20C10 14.477 14.477 10 20 10s10 4.477 10 10-4.477 10-10 10S10 25.523 10 20z" fill="white" fill-opacity=".2"/>
+      <path d="M14 20a6 6 0 1 1 12 0 6 6 0 0 1-12 0z" fill="white"/>
+      <circle cx="20" cy="20" r="2.5" fill="#4F46E5"/>
+    </svg>
+    <span class="topbar-title">Ed<span>Buddies</span></span>
+  </div>
+  <span class="topbar-sub">2026 Product Roadmap</span>
+  <div class="topbar-spacer"></div>
+  <div class="topbar-badge">
+    <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" fill="#4F46E5"/><circle cx="5" cy="5" r="2" fill="white"/></svg>
+    Empowering Education Centres
+  </div>
+  <div class="topbar-date">Updated May 5, 2026</div>
+</header>
+
+<!-- ═══════════ SIDEBAR ══════════ -->
+<nav class="sidebar">
+  <div class="nav-section">
+    <div class="nav-label">Overview</div>
+    <a href="#vision" class="nav-item active">
+      <span class="dot" style="background:#4F46E5"></span>
+      Vision &amp; Mission
+    </a>
+    <a href="#stack" class="nav-item">
+      <span class="dot" style="background:#0EA5E9"></span>
+      Tech Foundation
+    </a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-label">Quarters</div>
+    <a href="#q1" class="nav-item">
+      <span class="dot" style="background:var(--q1)"></span>
+      Q1 2026 — Foundation
+      <span class="q-pill q1-pill">Jan–Mar</span>
+    </a>
+    <a href="#q1-enrollment" class="nav-sub">Enrollment & Withdrawal</a>
+    <a href="#q1-invoicing" class="nav-sub">Invoice & Payments</a>
+    <a href="#q1-dashboard" class="nav-sub">Dashboard Search v2</a>
+    <a href="#q1-xero" class="nav-sub">Xero Sync</a>
+
+    <a href="#q2" class="nav-item">
+      <span class="dot" style="background:var(--q2)"></span>
+      Q2 2026 — Intelligence
+      <span class="q-pill q2-pill">Apr–Jun</span>
+    </a>
+    <a href="#q2-activity" class="nav-sub">Activity Logging</a>
+    <a href="#q2-parent" class="nav-sub">Parent Portal v2</a>
+    <a href="#q2-website" class="nav-sub">Website Revamp</a>
+    <a href="#q2-mobile" class="nav-sub">Mobile App v2</a>
+
+    <a href="#q3" class="nav-item">
+      <span class="dot" style="background:var(--q3)"></span>
+      Q3 2026 — AI &amp; Ecosystem
+      <span class="q-pill q3-pill">Jul–Sep</span>
+    </a>
+    <a href="#q3-mcp" class="nav-sub">EdBuddies MCP Server</a>
+    <a href="#q3-ipad" class="nav-sub">iPad Version</a>
+    <a href="#q3-admin-dashboard" class="nav-sub">Super Admin Dashboard</a>
+    <a href="#q3-localisation" class="nav-sub">VN &amp; PH Localisation Prep</a>
+
+    <a href="#q4" class="nav-item">
+      <span class="dot" style="background:var(--q4)"></span>
+      Q4 2026 — Scale &amp; Growth
+      <span class="q-pill q4-pill">Oct–Dec</span>
+    </a>
+    <a href="#q4-openapi" class="nav-sub">Open API Phase 1 &amp; 2</a>
+    <a href="#q4-launch" class="nav-sub">Open API Public Launch</a>
+    <a href="#q4-enterprise" class="nav-sub">Enterprise Features</a>
+    <a href="#q4-admin-dashboard" class="nav-sub">Super Admin Dashboard</a>
+    <a href="#q4-expansion" class="nav-sub">Regional Expansion</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-label">Goals</div>
+    <a href="#okrs" class="nav-item">
+      <span class="dot" style="background:#8B5CF6"></span>
+      2026 OKRs
+    </a>
+    <a href="#infra" class="nav-item">
+      <span class="dot" style="background:#64748B"></span>
+      Infra &amp; Tech Debt
+    </a>
+  </div>
+
+  <div class="nav-legend">
+    <div class="legend-title">Status</div>
+    <div class="legend-row"><span class="legend-dot" style="background:var(--q1)"></span>Done</div>
+    <div class="legend-row"><span class="legend-dot" style="background:var(--q2)"></span>In Progress</div>
+    <div class="legend-row"><span class="legend-dot" style="background:var(--q3)"></span>Planned</div>
+    <div class="legend-row"><span class="legend-dot" style="background:#CBD5E1"></span>Backlog</div>
+  </div>
+</nav>
+
+<!-- ═══════════ MAIN CONTENT ═════ -->
+<main class="main">
+
+  <!-- ─── HERO ─── -->
+  <section id="vision" class="section">
+    <div class="hero">
+      <div class="hero-eyebrow">EdBuddies · 2026 Product Roadmap</div>
+      <h1>Empowering Every Education Centre</h1>
+      <p class="hero-sub">
+        From streamlined operations to AI-powered insights — our 2026 roadmap builds on a robust NestJS microservice foundation to help tuition centres run smarter, delight students and parents, and grow with confidence.
+      </p>
+      <div class="hero-chips">
+        <span class="hero-chip">🎓 Education-first</span>
+        <span class="hero-chip">📱 Mobile + Web</span>
+        <span class="hero-chip">🤖 AI & MCP Ready</span>
+        <span class="hero-chip">🔗 Open API & B2B</span>
+        <span class="hero-chip">🌏 SEA-focused</span>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-val">6</div>
+          <div class="hero-stat-lbl">Microservices in Production</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-val">5</div>
+          <div class="hero-stat-lbl">User Roles Served</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-val">30+</div>
+          <div class="hero-stat-lbl">Features Shipping in 2026</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-val">Q4</div>
+          <div class="hero-stat-lbl">Open API Public Launch</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Roles -->
+    <div style="margin-bottom:24px;">
+      <div style="font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#94A3B8;margin-bottom:12px;">Roles We Empower</div>
+      <div class="roles-matrix">
+        <div class="role-card"><div class="role-icon">🏫</div><div class="role-name">Admin</div></div>
+        <div class="role-card"><div class="role-icon">👩‍💼</div><div class="role-name">Staff</div></div>
+        <div class="role-card"><div class="role-icon">👨‍🏫</div><div class="role-name">Teacher</div></div>
+        <div class="role-card"><div class="role-icon">🎒</div><div class="role-name">Student</div></div>
+        <div class="role-card"><div class="role-icon">👨‍👩‍👧</div><div class="role-name">Parents</div></div>
+        <div class="role-card"><div class="role-icon">🔑</div><div class="role-name">Super Admin</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── TECH STACK ─── -->
+  <section id="stack" class="section">
+    <div class="section-header">
+      <div class="section-q" style="background:#E0F2FE;color:#0369A1;">🏗 Foundation</div>
+      <div>
+        <div class="section-title">Current Tech Stack</div>
+        <div class="section-subtitle">The foundation powering EdBuddies today</div>
+      </div>
+    </div>
+
+    <div class="callout callout-blue">
+      <span class="callout-icon">💡</span>
+      <span>Our 2026 roadmap is fully grounded in this stack. Every initiative extends — not replaces — what's already in production. New investments (AI, Open API, analytics) are layered on top of our NestJS microservices and Supabase foundation.</span>
+    </div>
+
+    <div style="margin-bottom:16px;">
+      <div style="font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#94A3B8;margin-bottom:10px;">Production Microservices</div>
+      <div class="ms-grid">
+        <div class="ms-chip"><span class="ms-dot"></span>api-auth</div>
+        <div class="ms-chip"><span class="ms-dot"></span>api-user</div>
+        <div class="ms-chip"><span class="ms-dot"></span>api-school</div>
+        <div class="ms-chip"><span class="ms-dot"></span>api-lesson</div>
+        <div class="ms-chip"><span class="ms-dot"></span>api-invoice</div>
+        <div class="ms-chip"><span class="ms-dot"></span>api-notification</div>
+      </div>
+    </div>
+
+    <div class="stack-grid">
+      <div class="stack-card">
+        <div class="stack-cat">Backend</div>
+        <div class="stack-item"><span class="stack-dot"></span><span class="stack-name">NestJS</span></div>
+        <div class="stack-item"><span class="stack-dot"></span><span class="stack-name">TypeScript</span></div>
+        <div class="stack-item"><span class="stack-dot" style="background:#0EA5E9"></span><span class="stack-name">PostgreSQL (Supabase)</span></div>
+        <div class="stack-item"><span class="stack-dot" style="background:#EF4444"></span><span class="stack-name">Redis Cloud</span></div>
+      </div>
+      <div class="stack-card">
+        <div class="stack-cat">Mobile &amp; Web</div>
+        <div class="stack-item"><span class="stack-dot" style="background:#8B5CF6"></span><span class="stack-name">React Native</span></div>
+        <div class="stack-item"><span class="stack-dot" style="background:#F59E0B"></span><span class="stack-name">enroll.edbuddies.ai</span></div>
+        <div class="stack-item"><span class="stack-dot" style="background:#EC4899"></span><span class="stack-name">edbuddies.ai</span></div>
+      </div>
+      <div class="stack-card">
+        <div class="stack-cat">Notifications</div>
+        <div class="stack-item"><span class="stack-dot" style="background:#EF4444"></span><span class="stack-name">OneSignal (Push)</span></div>
+        <div class="stack-item"><span class="stack-dot" style="background:#F59E0B"></span><span class="stack-name">SendGrid (Email)</span></div>
+        <div class="stack-item"><span class="stack-dot" style="background:#10B981"></span><span class="stack-name">Twilio (SMS)</span></div>
+      </div>
+      <div class="stack-card">
+        <div class="stack-cat">Payments &amp; Finance</div>
+        <div class="stack-item"><span class="stack-dot" style="background:#10B981"></span><span class="stack-name">HitPay (SGD)</span></div>
+        <div class="stack-item"><span class="stack-dot" style="background:#8B5CF6"></span><span class="stack-name">Voucherify (Promos)</span></div>
+        <div class="stack-item"><span class="stack-dot" style="background:#0EA5E9"></span><span class="stack-name">Xero (Accounting) →</span></div>
+      </div>
+      <div class="stack-card">
+        <div class="stack-cat">Dev Workflow</div>
+        <div class="stack-item"><span class="stack-dot" style="background:#8B5CF6"></span><span class="stack-name">RN screens generated directly</span></div>
+        <div class="stack-item"><span class="stack-dot" style="background:#0EA5E9"></span><span class="stack-name">Postman (Mocks + Tests)</span></div>
+        <div class="stack-item"><span class="stack-dot" style="background:#4F46E5"></span><span class="stack-name">Cursor + Claude MCP</span></div>
+      </div>
+      <div class="stack-card">
+        <div class="stack-cat">Observability</div>
+        <div class="stack-item"><span class="stack-dot" style="background:#EF4444"></span><span class="stack-name">LogSnag → sunsetting Q2</span></div>
+        <div class="stack-item"><span class="stack-dot" style="background:#10B981"></span><span class="stack-name">Puppeteer (PDF gen)</span></div>
+        <div class="stack-item"><span class="stack-dot" style="background:#8B5CF6"></span><span class="stack-name">Looker (Analytics)</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ════════════════════════════════════════════════
+       Q1 2026 — FOUNDATION HARDENING
+       ════════════════════════════════════════════════ -->
+  <section id="q1" data-q="q1" class="section">
+    <div class="section-header">
+      <div class="section-q q1-pill">Q1 2026</div>
+      <div>
+        <div class="section-title">Foundation Hardening</div>
+        <div class="section-subtitle">Stabilise core operations, fix critical flows, ship enrollment & invoice precision</div>
+      </div>
+      <div class="section-meta">
+        <div class="section-dates">Jan 1 – Mar 31, 2026</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:100%;background:var(--q1)"></div></div>
+        <div class="section-progress-label" style="color:var(--q1);font-weight:600;">✓ Completed</div>
+      </div>
+    </div>
+
+    <div class="callout callout-green">
+      <span class="callout-icon">✅</span>
+      <span>Q1 is complete. All key items shipped to production. This quarter hardened the data model, closed enrollment/withdrawal edge cases, and upgraded invoice payment precision.</span>
+    </div>
+
+    <div class="cards-grid">
+
+      <div id="q1-enrollment" class="card">
+        <div class="card-accent"></div>
+        <div class="card-top">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div class="card-icon">📋</div>
+            <div class="card-title">Enrollment Fix &amp; Archive Student</div>
+          </div>
+          <span class="status-badge status-done">Done</span>
+        </div>
+        <p class="card-desc">Corrected student enrollment edge cases: `student_lesson_relation` inserts, withdrawal reason logging, archived student exclusion from active invoice generation.</p>
+        <div class="card-tags">
+          <span class="tag tag-backend">Backend</span>
+          <span class="tag tag-mobile">Mobile</span>
+          <span class="tag tag-web">Web</span>
+        </div>
+        <div class="card-roles">
+          <span class="role-chip">Admin</span><span class="role-chip">Staff</span><span class="role-chip">Student</span>
+        </div>
+      </div>
+
+      <div id="q1-invoicing" class="card">
+        <div class="card-accent"></div>
+        <div class="card-top">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div class="card-icon">🧾</div>
+            <div class="card-title">Invoice Payment Datetime Precision</div>
+          </div>
+          <span class="status-badge status-done">Done</span>
+        </div>
+        <p class="card-desc">Fixed `payment_datetime_utc` to use Unix timestamp millisecond precision rather than date-only strings. Patched `updateInvoiceStatus` and `updateBatchInvoicesStatus` in `invoice.service.ts`.</p>
+        <div class="card-tags">
+          <span class="tag tag-backend">Backend</span>
+        </div>
+        <div class="card-roles">
+          <span class="role-chip">Admin</span><span class="role-chip">Staff</span>
+        </div>
+        <div class="card-metrics">
+          <div class="metric-item"><strong>0 migration</strong>DB unchanged (timestamptz)</div>
+          <div class="metric-item"><strong>Low risk</strong>Backward compatible</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-accent"></div>
+        <div class="card-top">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div class="card-icon">🔔</div>
+            <div class="card-title">Enrollment Notifications</div>
+          </div>
+          <span class="status-badge status-done">Done</span>
+        </div>
+        <p class="card-desc">In-app push notification when a student enrolls in a lesson. Admin receives real-time alert via OneSignal. SendGrid email fallback included.</p>
+        <div class="card-tags">
+          <span class="tag tag-backend">Backend</span>
+          <span class="tag tag-mobile">Mobile</span>
+        </div>
+        <div class="card-roles">
+          <span class="role-chip">Admin</span>
+        </div>
+      </div>
+
+      <div id="q1-dashboard" class="card">
+        <div class="card-accent"></div>
+        <div class="card-top">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div class="card-icon">🔍</div>
+            <div class="card-title">Dashboard Search Bar v2</div>
+          </div>
+          <span class="status-badge status-done">Done</span>
+        </div>
+        <p class="card-desc">Unified smart search across students, lessons, invoices. Returns structured results with entity_type, title, subtitle, and search_keywords. Architecture supports Meilisearch/pgvector in future.</p>
+        <div class="card-tags">
+          <span class="tag tag-web">Web</span>
+          <span class="tag tag-mobile">Mobile</span>
+          <span class="tag tag-backend">Backend</span>
+        </div>
+        <div class="card-roles">
+          <span class="role-chip">Admin</span><span class="role-chip">Staff</span><span class="role-chip">Teacher</span>
+        </div>
+      </div>
+
+      <div id="q1-xero" class="card">
+        <div class="card-accent"></div>
+        <div class="card-top">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div class="card-icon">💼</div>
+            <div class="card-title">Xero Accounting Sync</div>
+          </div>
+          <span class="status-badge status-done">Done</span>
+        </div>
+        <p class="card-desc">Secure API bridge between Supabase and Xero. Auto-sync invoices, payments, and student fees. Eliminates manual export for accountants and gives centre owners real-time financial visibility.</p>
+        <div class="card-tags">
+          <span class="tag tag-backend">Backend</span>
+          <span class="tag tag-api">API</span>
+        </div>
+        <div class="card-roles">
+          <span class="role-chip">Admin</span><span class="role-chip">Super Admin</span>
+        </div>
+        <div class="card-metrics">
+          <div class="metric-item"><strong>OAuth 2.0</strong>Xero connection</div>
+          <div class="metric-item"><strong>Direction</strong>EdBuddies → Xero</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ════════════════════════════════════════════════
+       Q2 2026 — PLATFORM INTELLIGENCE
+       ════════════════════════════════════════════════ -->
+  <section id="q2" data-q="q2" class="section">
+    <div class="section-header">
+      <div class="section-q q2-pill">Q2 2026</div>
+      <div>
+        <div class="section-title">Platform Intelligence</div>
+        <div class="section-subtitle">Activity visibility, accounting sync, mobile app integration, and deeper parent engagement</div>
+      </div>
+      <div class="section-meta">
+        <div class="section-dates">Apr 1 – Jun 30, 2026</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:60%;background:var(--q2)"></div></div>
+        <div class="section-progress-label" style="color:var(--q2);font-weight:600;">↗ In Progress</div>
+      </div>
+    </div>
+
+    <div class="callout callout-blue">
+      <span class="callout-icon">🚧</span>
+      <span>We're midway through Q2. Activity logging and Xero are in active development. Mobile App v2 is at 59% — full-stack invoice, leaves, and i18n shipped in W17–19. Open API Phase 1 &amp; 2 moves to Q4.</span>
+    </div>
+
+    <div class="cards-grid">
+
+      <div id="q2-activity" class="card card-wide">
+        <div class="card-accent"></div>
+        <div class="card-wide-left">
+          <div class="card-top">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div class="card-icon">📡</div>
+              <div>
+                <div class="card-title">Level-up Activity Logging</div>
+              </div>
+            </div>
+            <span class="status-badge status-wip">In Progress</span>
+          </div>
+          <p class="card-desc">Sunset LogSnag and replace with a custom internal <code>/events</code> API (Option B). Track user actions across mobile and backend with predictable cost, no vendor dependency, and full domain alignment (centre, student, lesson, invoice).</p>
+          <div class="card-tags">
+            <span class="tag tag-backend">Backend</span>
+            <span class="tag tag-mobile">Mobile</span>
+          </div>
+          <div class="card-roles">
+            <span class="role-chip">Admin</span><span class="role-chip">Super Admin</span>
+          </div>
+          <div class="card-metrics">
+            <div class="metric-item"><strong>Table</strong>user_activity_events</div>
+            <div class="metric-item"><strong>Retention</strong>90 days hot</div>
+            <div class="metric-item"><strong>Access</strong>Admin + Super Admin only</div>
+          </div>
+        </div>
+        <div class="card-wide-right">
+          <div style="font-size:.75rem;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;">Event Fields</div>
+          <div class="mini-timeline">
+            <div class="mini-phase">
+              <span class="phase-dot" style="background:var(--q2)"></span>
+              <div><div class="phase-label">Identity</div><div class="phase-sub">user_id, role, centre_id</div></div>
+            </div>
+            <div class="mini-phase">
+              <span class="phase-dot" style="background:var(--q2)"></span>
+              <div><div class="phase-label">Entity</div><div class="phase-sub">entity_type, entity_id, action</div></div>
+            </div>
+            <div class="mini-phase">
+              <span class="phase-dot" style="background:var(--q2)"></span>
+              <div><div class="phase-label">Device</div><div class="phase-sub">device_id, platform, app_version</div></div>
+            </div>
+            <div class="mini-phase">
+              <span class="phase-dot" style="background:#CBD5E1)"></span>
+              <div><div class="phase-label">Metadata</div><div class="phase-sub">JSON blob, no PII in payload</div></div>
+            </div>
+          </div>
+          <div style="margin-top:14px;font-size:.75rem;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;">LogSnag → Sunset Q2</div>
+          <div style="font-size:.78rem;color:#64748B;">Once /events API is live, LOGSNAG_TOKEN is removed from all microservices. No DevOps overhead, no vendor lock-in.</div>
+        </div>
+      </div>
+
+      <div id="q2-parent" class="card">
+        <div class="card-accent"></div>
+        <div class="card-top">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div class="card-icon">👨‍👩‍👧</div>
+            <div class="card-title">Parent Portal v2</div>
+          </div>
+          <span class="status-badge status-plan">Planned</span>
+        </div>
+        <p class="card-desc">Enhanced parent-facing mobile experience: real-time lesson attendance, invoice history with HitPay deep link, progress snapshots, and lesson schedule at a glance.</p>
+        <div class="card-tags">
+          <span class="tag tag-mobile">Mobile</span>
+          <span class="tag tag-backend">Backend</span>
+        </div>
+        <div class="card-roles">
+          <span class="role-chip">Parents</span><span class="role-chip">Student</span>
+        </div>
+      </div>
+
+      <div id="q2-website" class="card">
+        <div class="card-accent"></div>
+        <div class="card-top">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div class="card-icon">🌐</div>
+            <div class="card-title">EdBuddies.ai Website Revamp</div>
+          </div>
+          <span class="status-badge status-wip">In Progress</span>
+        </div>
+        <p class="card-desc">Full redesign of edbuddies.ai — mobile-first, performance-optimised, showcases enrollment, invoicing, and reporting features. Acts as a living portfolio for the web design service line.</p>
+        <div class="card-tags">
+          <span class="tag tag-web">Web</span>
+        </div>
+        <div class="card-metrics">
+          <div class="metric-item"><strong>CTAs</strong>Demo &amp; Onboarding</div>
+          <div class="metric-item"><strong>Animations</strong>CSS + motion</div>
+        </div>
+      </div>
+
+      <div id="q2-mobile" class="card card-wide">
+        <div class="card-accent"></div>
+        <div class="card-wide-left">
+          <div class="card-top">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div class="card-icon">📱</div>
+              <div>
+                <div class="card-title">Mobile App v2 — Full API Integration</div>
+                <div style="font-size:.72rem;color:#64748B;margin-top:2px;">React Native · Expo · Tamagui · Axios</div>
+              </div>
+            </div>
+            <span class="status-badge status-wip">In Progress</span>
+          </div>
+          <p class="card-desc">Complete live API wiring of every screen in the React Native v2 app. Replaces all hardcoded mock data with live NestJS microservice calls. Includes full i18n (all screens), dark mode, HitPay checkout, invoice PDF preview, leave module, and Algolia omni-search.</p>
+          <div class="card-tags">
+            <span class="tag tag-mobile">Mobile</span>
+            <span class="tag tag-backend">Backend</span>
+            <span class="tag tag-api">API</span>
+          </div>
+          <div class="card-roles">
+            <span class="role-chip">All Roles</span>
+          </div>
+          <div class="card-metrics">
+            <div class="metric-item"><strong>59%</strong>Features wired (19 / 32)</div>
+            <div class="metric-item"><strong>Platforms</strong>iOS + Android</div>
+            <div class="metric-item"><strong>Ship via</strong>App Store + TestFlight</div>
+          </div>
+        </div>
+        <div class="card-wide-right">
+          <div style="font-size:.75rem;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;">Integration Status</div>
+          <div class="mini-timeline">
+            <div class="mini-phase">
+              <span class="phase-dot" style="background:var(--q1)"></span>
+              <div><div class="phase-label">Core flows ✓</div><div class="phase-sub">Auth, Home, Students, Invoice, Classes, Centres, Users, Notifications</div></div>
+            </div>
+            <div class="mini-phase">
+              <span class="phase-dot" style="background:var(--q1)"></span>
+              <div><div class="phase-label">W17–19 completions ✓</div><div class="phase-sub">Leaves, Recurring Invoice, Invoice Checkout, i18n + Dark Mode</div></div>
+            </div>
+            <div class="mini-phase">
+              <span class="phase-dot" style="background:var(--q2)"></span>
+              <div><div class="phase-label">In progress</div><div class="phase-sub">Announcements create, Student create/edit, Class clone, Exam Papers, Soft Delete API</div></div>
+            </div>
+            <div class="mini-phase">
+              <span class="phase-dot" style="background:#CBD5E1"></span>
+              <div><div class="phase-label">Pending API</div><div class="phase-sub">Rewards, Revenue Reports, Attendance, Exam Paper builder</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ════════════════════════════════════════════════
+       Q3 2026 — AI & ECOSYSTEM
+       ════════════════════════════════════════════════ -->
+  <section id="q3" data-q="q3" class="section">
+    <div class="section-header">
+      <div class="section-q q3-pill">Q3 2026</div>
+      <div>
+        <div class="section-title">AI &amp; Ecosystem</div>
+        <div class="section-subtitle">MCP server, iPad version, Open API webhooks, and SEA localisation groundwork</div>
+      </div>
+      <div class="section-meta">
+        <div class="section-dates">Jul 1 – Sep 30, 2026</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:5%;background:var(--q3)"></div></div>
+        <div class="section-progress-label" style="color:var(--q3);font-weight:600;">Planned</div>
+      </div>
+    </div>
+
+    <div class="callout callout-amber">
+      <span class="callout-icon">🤖</span>
+      <span>Q3 is where EdBuddies becomes AI-native. The MCP server opens our platform to any MCP-compatible AI agent — no DevOps overhead, lean team, maximum leverage.</span>
+    </div>
+
+    <div class="cards-grid">
+
+      <div id="q3-mcp" class="card card-wide">
+        <div class="card-accent"></div>
+        <div class="card-wide-left">
+          <div class="card-top">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div class="card-icon">🤖</div>
+              <div>
+                <div class="card-title">EdBuddies MCP Server</div>
+                <div style="font-size:.72rem;color:#64748B;margin-top:2px;">mcp.edbuddies.com — Phase 3 &amp; 4</div>
+              </div>
+            </div>
+            <span class="status-badge status-plan">Planned</span>
+          </div>
+          <p class="card-desc">Model Context Protocol server exposing EdBuddies capabilities to Claude, GPT-4o, Gemini and any MCP-compatible runtime. Enables AI tutoring assistants, school-deployed LLMs, and enterprise L&amp;D bots to book sessions, check availability, and provision learners.</p>
+          <div class="card-tags">
+            <span class="tag tag-api">API</span>
+            <span class="tag tag-ai">AI</span>
+            <span class="tag tag-backend">Backend</span>
+          </div>
+          <div class="card-metrics">
+            <div class="metric-item"><strong>Transport</strong>HTTP + SSE (primary)</div>
+            <div class="metric-item"><strong>Target</strong>5+ AI apps in beta</div>
+            <div class="metric-item"><strong>Beta</strong>Closed → Q3 end</div>
+          </div>
+        </div>
+        <div class="card-wide-right">
+          <div style="font-size:.75rem;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;">Core MCP Tools</div>
+          <div class="mini-timeline">
+            <div class="mini-phase"><span class="phase-dot" style="background:var(--q3)"></span><div><div class="phase-label">search_tutors</div><div class="phase-sub">Semantic search by subject, availability, price</div></div></div>
+            <div class="mini-phase"><span class="phase-dot" style="background:var(--q3)"></span><div><div class="phase-label">get_tutor_profile</div><div class="phase-sub">Full profile, reviews, availability slots</div></div></div>
+            <div class="mini-phase"><span class="phase-dot" style="background:var(--q3)"></span><div><div class="phase-label">book_session</div><div class="phase-sub">Create booking with cancellation policy</div></div></div>
+            <div class="mini-phase"><span class="phase-dot" style="background:var(--q3)"></span><div><div class="phase-label">get_recommendations</div><div class="phase-sub">AI-personalised tutor suggestions</div></div></div>
+            <div class="mini-phase"><span class="phase-dot" style="background:var(--q3)"></span><div><div class="phase-label">provision_learner</div><div class="phase-sub">Add learner to workspace (company-owner)</div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-accent"></div>
+        <div class="card-top">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div class="card-icon">🔗</div>
+            <div class="card-title">Open API — Webhooks &amp; Workspace Admin UI</div>
+          </div>
+          <span class="status-badge status-plan">Planned</span>
+        </div>
+        <p class="card-desc">Phase 4 of Open API: webhook subscriptions for booking lifecycle events, API usage analytics dashboard, spend reporting, and workspace admin portal for managing API key access.</p>
+        <div class="card-tags">
+          <span class="tag tag-api">API</span>
+          <span class="tag tag-web">Web</span>
+        </div>
+        <div class="card-roles">
+          <span class="role-chip">Super Admin</span><span class="role-chip">B2B Partners</span>
+        </div>
+      </div>
+
+      <div id="q3-ipad" class="card card-wide">
+        <div class="card-accent"></div>
+        <div class="card-wide-left">
+          <div class="card-top">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div class="card-icon">🖥️</div>
+              <div>
+                <div class="card-title">iPad Version</div>
+                <div style="font-size:.72rem;color:#64748B;margin-top:2px;">React Native · iPadOS · Adaptive Layout</div>
+              </div>
+            </div>
+            <span class="status-badge status-plan">Q3–Q4</span>
+          </div>
+          <p class="card-desc">Optimise the React Native app for iPad's larger canvas — adaptive layouts, split-view navigation, and richer data-dense screens (class schedules, invoice tables, student lists) that take full advantage of iPadOS.</p>
+          <div class="card-tags">
+            <span class="tag tag-mobile">Mobile</span>
+          </div>
+          <div class="card-roles">
+            <span class="role-chip">Admin</span><span class="role-chip">Teacher</span><span class="role-chip">Staff</span>
+          </div>
+          <div class="card-metrics">
+            <div class="metric-item"><strong>Platform</strong>iPadOS 16+</div>
+            <div class="metric-item"><strong>Layout</strong>Adaptive + Split-view</div>
+            <div class="metric-item"><strong>Ship via</strong>App Store (shared binary)</div>
+          </div>
+        </div>
+        <div class="card-wide-right">
+          <div style="font-size:.75rem;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;">Delivery Plan</div>
+          <div class="mini-timeline">
+            <div class="mini-phase">
+              <span class="phase-dot" style="background:var(--q3)"></span>
+              <div><div class="phase-label">Q3 — Design &amp; Layout System</div><div class="phase-sub">Adaptive breakpoints, iPad-specific navigation patterns, design tokens for large screen</div></div>
+            </div>
+            <div class="mini-phase">
+              <span class="phase-dot" style="background:var(--q3)"></span>
+              <div><div class="phase-label">Q3 — Core Screens</div><div class="phase-sub">Home, Students, Class schedule, Invoice list — resized and reflowed for iPad</div></div>
+            </div>
+            <div class="mini-phase">
+              <span class="phase-dot" style="background:var(--q4)"></span>
+              <div><div class="phase-label">Q4 — Full Feature Parity</div><div class="phase-sub">All remaining screens adapted; split-view for detail/master flows</div></div>
+            </div>
+            <div class="mini-phase">
+              <span class="phase-dot" style="background:var(--q4)"></span>
+              <div><div class="phase-label">Q4 — App Store Submission</div><div class="phase-sub">iPad screenshots, universal binary review, TestFlight beta</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="q3-admin-dashboard" class="card card-wide">
+        <div class="card-accent" style="background:#6366F1;"></div>
+        <div class="card-wide-left">
+          <div class="card-top">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div class="card-icon" style="background:#EEF2FF;">🛡️</div>
+              <div>
+                <div class="card-title">Super Admin Web Dashboard — Core Build</div>
+                <div style="font-size:.72rem;color:#64748B;margin-top:2px;">Platform-level control centre · Q3 build, Q4 launch</div>
+              </div>
+            </div>
+            <span class="status-badge status-plan">Planned</span>
+          </div>
+          <p class="card-desc">Dedicated web dashboard for Super Admins to manage the entire EdBuddies platform across all schools and regions. Centralises school onboarding, subscription billing, user impersonation, usage analytics, and support tooling — all in one secure interface, separate from the school-level Admin experience.</p>
+          <div class="card-tags">
+            <span class="tag tag-web">Web</span>
+            <span class="tag tag-backend">Backend</span>
+            <span class="tag tag-api">API</span>
+          </div>
+          <div class="card-roles">
+            <span class="role-chip">Super Admin</span>
+          </div>
+          <div class="card-metrics">
+            <div class="metric-item"><strong>Scope</strong>All schools &amp; regions</div>
+            <div class="metric-item"><strong>Auth</strong>Separate SA login</div>
+            <div class="metric-item"><strong>Launch</strong>Q4 2026</div>
+          </div>
+        </div>
+        <div class="card-wide-right">
+          <div style="font-size:.75rem;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;">Core Screens (Q3 Build)</div>
+          <div class="mini-timeline">
+            <div class="mini-phase"><span class="phase-dot" style="background:var(--q3)"></span><div><div class="phase-label">School Management</div><div class="phase-sub">Onboard, suspend, or archive schools; manage subscription tiers</div></div></div>
+            <div class="mini-phase"><span class="phase-dot" style="background:var(--q3)"></span><div><div class="phase-label">User Impersonation</div><div class="phase-sub">Log in as any Admin or Staff for support &amp; debugging</div></div></div>
+            <div class="mini-phase"><span class="phase-dot" style="background:var(--q3)"></span><div><div class="phase-label">Platform Analytics</div><div class="phase-sub">Active schools, MAU, revenue, session volume across all markets</div></div></div>
+            <div class="mini-phase"><span class="phase-dot" style="background:var(--q4)"></span><div><div class="phase-label">Billing &amp; Invoicing (Q4)</div><div class="phase-sub">Per-school subscription management, overdue alerts, usage billing</div></div></div>
+            <div class="mini-phase"><span class="phase-dot" style="background:var(--q4)"></span><div><div class="phase-label">Feature Flag Control (Q4)</div><div class="phase-sub">Toggle beta features per school or region without a deploy</div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="q3-localisation" class="card">
+        <div class="card-accent" style="background:#F59E0B;"></div>
+        <div class="card-top">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div class="card-icon" style="background:#FFFBEB;">🇻🇳🇵🇭</div>
+            <div class="card-title">VN &amp; PH Localisation Groundwork</div>
+          </div>
+          <span class="status-badge status-plan">Planned</span>
+        </div>
+        <p class="card-desc">Backend and i18n prep for Vietnam and Philippines market entry in Q4. Add <code>VND</code> and <code>PHP</code> currency support to the invoicing engine, wire up <code>Asia/Ho_Chi_Minh</code> and <code>Asia/Manila</code> timezone handling, and scaffold Vietnamese + Filipino locale strings in the React Native app. Research local payment gateway options (e.g. VNPay, GCash/PayMongo) and draft integration specs ahead of full rollout.</p>
+        <div class="card-tags">
+          <span class="tag tag-backend">Backend</span>
+          <span class="tag tag-mobile">Mobile</span>
+          <span class="tag tag-api">API</span>
+        </div>
+        <div class="card-metrics">
+          <div class="metric-item"><strong>Currencies</strong>VND, PHP</div>
+          <div class="metric-item"><strong>Timezones</strong>Ho Chi Minh, Manila</div>
+          <div class="metric-item"><strong>Locales</strong>vi-VN, fil-PH</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-accent"></div>
+        <div class="card-top">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div class="card-icon">🔐</div>
+            <div class="card-title">Security Audit &amp; Closed Beta</div>
+          </div>
+          <span class="status-badge status-plan">Planned</span>
+        </div>
+        <p class="card-desc">Third-party penetration test of the Open API surface. Harden key management, rate limiting, and audit trails. Run closed beta with 3–5 trusted partner schools before public launch.</p>
+        <div class="card-tags">
+          <span class="tag tag-infra">Infra</span>
+          <span class="tag tag-api">API</span>
+        </div>
+        <div class="card-metrics">
+          <div class="metric-item"><strong>Target</strong>0 critical incidents</div>
+          <div class="metric-item"><strong>Beta partners</strong>3–5 schools</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ════════════════════════════════════════════════
+       Q4 2026 — SCALE & GROWTH
+       ════════════════════════════════════════════════ -->
+  <section id="q4" data-q="q4" class="section">
+    <div class="section-header">
+      <div class="section-q q4-pill">Q4 2026</div>
+      <div>
+        <div class="section-title">Scale &amp; Growth</div>
+        <div class="section-subtitle">Open API build &amp; public launch, enterprise SSO, regional expansion, and AI-powered insights</div>
+      </div>
+      <div class="section-meta">
+        <div class="section-dates">Oct 1 – Dec 31, 2026</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:0%;background:var(--q4)"></div></div>
+        <div class="section-progress-label" style="color:var(--q4);font-weight:600;">Future</div>
+      </div>
+    </div>
+
+    <div class="cards-grid">
+
+      <div id="q4-openapi" class="card card-wide">
+        <div class="card-accent"></div>
+        <div class="card-wide-left">
+          <div class="card-top">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div class="card-icon">🔑</div>
+              <div>
+                <div class="card-title">Open API — Phase 1 &amp; 2</div>
+                <div style="font-size:.72rem;color:#64748B;margin-top:2px;">Gateway + Key Management + Core Endpoints</div>
+              </div>
+            </div>
+            <span class="status-badge status-back">Backlog</span>
+          </div>
+          <p class="card-desc">Build the API gateway and long-lived workspace API key system that will underpin all B2B integrations. Ship versioned REST endpoints at <code>/v1/</code> with fine-grained permission scopes.</p>
+          <div class="card-tags">
+            <span class="tag tag-backend">Backend</span>
+            <span class="tag tag-api">API</span>
+            <span class="tag tag-infra">Infra</span>
+          </div>
+          <div class="card-metrics">
+            <div class="metric-item"><strong>Scopes</strong>read, book, manage, billing</div>
+            <div class="metric-item"><strong>Rate limits</strong>Per-key quotas</div>
+            <div class="metric-item"><strong>Docs</strong>Developer portal</div>
+          </div>
+        </div>
+        <div class="card-wide-right">
+          <div style="font-size:.75rem;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;">Delivery Phases</div>
+          <div class="mini-timeline">
+            <div class="mini-phase">
+              <span class="phase-dot" style="background:var(--q4)"></span>
+              <div><div class="phase-label">Phase 1 (Wk 1–3)</div><div class="phase-sub">API Gateway &amp; Key Management foundation</div></div>
+            </div>
+            <div class="mini-phase">
+              <span class="phase-dot" style="background:var(--q4)"></span>
+              <div><div class="phase-label">Phase 2 (Wk 4–6)</div><div class="phase-sub">Core REST endpoints + developer docs</div></div>
+            </div>
+            <div class="mini-phase">
+              <span class="phase-dot" style="background:var(--q4)"></span>
+              <div><div class="phase-label">Phase 3–4 (late Q4)</div><div class="phase-sub">MCP Server + Webhooks + Workspace UI</div></div>
+            </div>
+            <div class="mini-phase">
+              <span class="phase-dot" style="background:var(--q4)"></span>
+              <div><div class="phase-label">Phase 5 (Q4 end)</div><div class="phase-sub">Security audit + public launch</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="q4-launch" class="card">
+        <div class="card-accent"></div>
+        <div class="card-top">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div class="card-icon">🚀</div>
+            <div class="card-title">Open API Public Launch</div>
+          </div>
+          <span class="status-badge status-back">Backlog</span>
+        </div>
+        <p class="card-desc">Full public launch of EdBuddies Open API at <code>/v1/</code>. Developer docs portal, onboarding flow, API key self-service, and partner marketplace listing. Target: 10+ partner workspaces in 90 days.</p>
+        <div class="card-tags">
+          <span class="tag tag-api">API</span>
+          <span class="tag tag-web">Web</span>
+        </div>
+        <div class="card-metrics">
+          <div class="metric-item"><strong>10+</strong>Partner workspaces</div>
+          <div class="metric-item"><strong>500+</strong>Sessions via API</div>
+          <div class="metric-item"><strong>&lt;200ms</strong>p95 latency</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-accent"></div>
+        <div class="card-top">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div class="card-icon">🤖</div>
+            <div class="card-title">MCP Server Public Launch</div>
+          </div>
+          <span class="status-badge status-back">Backlog</span>
+        </div>
+        <p class="card-desc">Public launch of <code>mcp.edbuddies.com</code>. Listed in MCP server directories. Marketing to developers building AI tutoring tools. Target: 5+ AI apps integrating within 90 days post-launch.</p>
+        <div class="card-tags">
+          <span class="tag tag-ai">AI</span>
+          <span class="tag tag-api">API</span>
+        </div>
+        <div class="card-metrics">
+          <div class="metric-item"><strong>5+</strong>AI apps integrated</div>
+          <div class="metric-item"><strong>Listed</strong>MCP directories</div>
+        </div>
+      </div>
+
+      <div id="q4-enterprise" class="card">
+        <div class="card-accent"></div>
+        <div class="card-top">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div class="card-icon">🏛️</div>
+            <div class="card-title">Enterprise SSO / SAML</div>
+          </div>
+          <span class="status-badge status-back">Backlog</span>
+        </div>
+        <p class="card-desc">SSO/SAML learner provisioning for enterprise L&amp;D teams and large school networks. Integrates with Azure AD, Google Workspace, Okta. Unlocks corporate and institutional contract sales.</p>
+        <div class="card-tags">
+          <span class="tag tag-backend">Backend</span>
+          <span class="tag tag-infra">Infra</span>
+        </div>
+        <div class="card-roles">
+          <span class="role-chip">Super Admin</span>
+        </div>
+        <div class="card-metrics">
+          <div class="metric-item"><strong>Azure AD</strong>SAML 2.0</div>
+          <div class="metric-item"><strong>Google WS</strong>OIDC</div>
+        </div>
+      </div>
+
+      <div id="q4-admin-dashboard" class="card">
+        <div class="card-accent" style="background:#6366F1;"></div>
+        <div class="card-top">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div class="card-icon" style="background:#EEF2FF;">🛡️</div>
+            <div class="card-title">Super Admin Dashboard — Full Launch</div>
+          </div>
+          <span class="status-badge status-back">Backlog</span>
+        </div>
+        <p class="card-desc">Ship the Super Admin Web Dashboard built in Q3 with all screens complete: billing management, feature-flag control per school or region, audit log viewer, and a real-time support inbox. Hardened access controls — Super Admin sessions are short-lived, MFA-enforced, and fully audit-trailed.</p>
+        <div class="card-tags">
+          <span class="tag tag-web">Web</span>
+          <span class="tag tag-backend">Backend</span>
+          <span class="tag tag-infra">Infra</span>
+        </div>
+        <div class="card-roles">
+          <span class="role-chip">Super Admin</span>
+        </div>
+        <div class="card-metrics">
+          <div class="metric-item"><strong>MFA</strong>Enforced</div>
+          <div class="metric-item"><strong>Audit log</strong>90-day retention</div>
+          <div class="metric-item"><strong>Feature flags</strong>Per school / region</div>
+        </div>
+      </div>
+
+      <div id="q4-expansion" class="card">
+        <div class="card-accent"></div>
+        <div class="card-top">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div class="card-icon">🌏</div>
+            <div class="card-title">Regional Expansion — VN, PH &amp; Multi-currency</div>
+          </div>
+          <span class="status-badge status-back">Backlog</span>
+        </div>
+        <p class="card-desc">Full market launch across Malaysia, Indonesia, the Philippines, and Vietnam — building on the Q3 localisation groundwork. Multi-currency invoicing (MYR, IDR, PHP, VND), localised timezone display, and regional payment gateways: VNPay for Vietnam, PayMongo/GCash for the Philippines, alongside existing HitPay support for SG/MY.</p>
+        <div class="card-tags">
+          <span class="tag tag-backend">Backend</span>
+          <span class="tag tag-mobile">Mobile</span>
+          <span class="tag tag-web">Web</span>
+        </div>
+        <div class="card-metrics">
+          <div class="metric-item"><strong>Markets</strong>SG, MY, ID, PH, VN</div>
+          <div class="metric-item"><strong>Currencies</strong>SGD, MYR, IDR, PHP, VND</div>
+          <div class="metric-item"><strong>Gateways</strong>HitPay, VNPay, PayMongo</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-accent"></div>
+        <div class="card-top">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div class="card-icon">🧠</div>
+            <div class="card-title">AI Smart Scheduling &amp; Insights</div>
+          </div>
+          <span class="status-badge status-back">Backlog</span>
+        </div>
+        <p class="card-desc">Use Supabase pgvector + Claude API to power smart lesson scheduling recommendations, at-risk student detection (attendance drop patterns), and auto-generated monthly centre health reports.</p>
+        <div class="card-tags">
+          <span class="tag tag-ai">AI</span>
+          <span class="tag tag-backend">Backend</span>
+        </div>
+        <div class="card-roles">
+          <span class="role-chip">Admin</span><span class="role-chip">Teacher</span>
+        </div>
+        <div class="card-metrics">
+          <div class="metric-item"><strong>pgvector</strong>Supabase native</div>
+          <div class="metric-item"><strong>LLM</strong>Claude Sonnet 4.x</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-accent"></div>
+        <div class="card-top">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div class="card-icon">📊</div>
+            <div class="card-title">Advanced BI &amp; Data Export</div>
+          </div>
+          <span class="status-badge status-back">Backlog</span>
+        </div>
+        <p class="card-desc">Webhook-driven data push to partner BI tools (Power BI, Tableau). Scheduled CSV/Excel export for centre owners. Looker dashboards upgraded with drill-downs and custom date ranges.</p>
+        <div class="card-tags">
+          <span class="tag tag-api">API</span>
+          <span class="tag tag-web">Web</span>
+        </div>
+        <div class="card-roles">
+          <span class="role-chip">Admin</span><span class="role-chip">Super Admin</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ─── OKRs ─── -->
+  <section id="okrs" class="section">
+    <div class="section-header">
+      <div class="section-q" style="background:#F3E8FF;color:#7E22CE;">🎯 Goals</div>
+      <div>
+        <div class="section-title">2026 OKRs &amp; Success Metrics</div>
+        <div class="section-subtitle">How we measure empowering education centres</div>
+      </div>
+    </div>
+
+    <div style="background:#fff;border:1px solid #E2E8F0;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;margin-bottom:20px;">
+      <table class="okr-table">
+        <thead>
+          <tr>
+            <th style="width:28%;">Objective</th>
+            <th style="width:42%;">Key Results</th>
+            <th style="width:15%;">Owner</th>
+            <th style="width:15%;">Target Q</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="okr-obj">🏗 Rock-solid Operations</div><div class="okr-kr">Zero critical data errors in enrollment, invoicing, and attendance</div></td>
+            <td><div class="okr-kr">• 0 enrollment data corruption incidents<br>• &lt;1% invoice datetime precision errors<br>• Audit trail for every admin action</div></td>
+            <td><span class="tag tag-backend">Backend</span></td>
+            <td><span class="okr-q" style="color:var(--q1)">Q1–Q2</span></td>
+          </tr>
+          <tr>
+            <td><div class="okr-obj">📡 Full Observability</div><div class="okr-kr">Know what every user does, when, and on which device</div></td>
+            <td><div class="okr-kr">• 100% of critical actions logged in /events API<br>• &lt;90 day hot retention, archived beyond<br>• LogSnag fully removed by end of Q2</div></td>
+            <td><span class="tag tag-infra">Infra</span></td>
+            <td><span class="okr-q" style="color:var(--q2)">Q2–Q3</span></td>
+          </tr>
+          <tr>
+            <td><div class="okr-obj">🔑 Open Platform</div><div class="okr-kr">Turn EdBuddies into an ecosystem, not just an app</div></td>
+            <td><div class="okr-kr">• 10+ partner workspaces using API keys<br>• 5+ AI apps integrating MCP Server<br>• 500+ sessions booked via API/MCP<br>• p95 API latency &lt;200ms</div></td>
+            <td><span class="tag tag-api">API</span></td>
+            <td><span class="okr-q" style="color:var(--q4)">Q4</span></td>
+          </tr>
+          <tr>
+            <td><div class="okr-obj">🌏 Regional Growth</div><div class="okr-kr">Serve education centres across SEA — Vietnam &amp; Philippines launch</div></td>
+            <td><div class="okr-kr">• Multi-currency invoicing live (MYR, IDR, PHP, VND)<br>• Vietnam (VNPay) and Philippines (PayMongo) payment gateways operational<br>• 3+ non-SG centres onboarded across MY, ID, PH, VN</div></td>
+            <td><span class="tag tag-web">Web</span></td>
+            <td><span class="okr-q" style="color:var(--q4)">Q4</span></td>
+          </tr>
+          <tr>
+            <td><div class="okr-obj">🤖 AI-native Experience</div><div class="okr-kr">AI surfaces the right information at the right moment</div></td>
+            <td><div class="okr-kr">• Smart scheduling reduces admin time by 30%<br>• At-risk student alerts accuracy &gt;80%<br>• Centre health reports auto-generated monthly</div></td>
+            <td><span class="tag tag-ai">AI</span></td>
+            <td><span class="okr-q" style="color:var(--q4)">Q4</span></td>
+          </tr>
+          <tr>
+            <td><div class="okr-obj">💼 Financial Clarity</div><div class="okr-kr">Accounting is automatic, not a monthly chore</div></td>
+            <td><div class="okr-kr">• Xero sync live with &lt;5 min lag<br>• 100% of invoices reflected in Xero within the day<br>• Admin reconciliation time &lt;30 min/month</div></td>
+            <td><span class="tag tag-backend">Backend</span></td>
+            <td><span class="okr-q" style="color:var(--q2)">Q2</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ─── INFRA & TECH DEBT ─── -->
+  <section id="infra" class="section">
+    <div class="section-header">
+      <div class="section-q" style="background:#F1F5F9;color:#475569;">🛠 Infra</div>
+      <div>
+        <div class="section-title">Infrastructure &amp; Tech Debt</div>
+        <div class="section-subtitle">Non-feature work that keeps the platform healthy and fast</div>
+      </div>
+    </div>
+
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-accent" style="background:#64748B;"></div>
+        <div class="card-top">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div class="card-icon" style="background:#F1F5F9;">⚡</div>
+            <div class="card-title">Redis Connection Hardening</div>
+          </div>
+          <span class="status-badge status-plan">Q2</span>
+        </div>
+        <p class="card-desc">Review Redis Cloud connection pool settings in api-notification. Add retry logic and circuit breaker for queue-backed notification delivery. Monitor latency on GCP asia-southeast2 cluster.</p>
+        <div class="card-tags"><span class="tag tag-infra">Infra</span><span class="tag tag-backend">Backend</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-accent" style="background:#64748B;"></div>
+        <div class="card-top">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div class="card-icon" style="background:#F1F5F9;">🗄️</div>
+            <div class="card-title">Supabase Connection Pool Tuning</div>
+          </div>
+          <span class="status-badge status-plan">Q2</span>
+        </div>
+        <p class="card-desc">Each microservice caps at 3 max DB connections. Review under peak load. Consider PgBouncer at the pooler layer (AWS ap-southeast-1) and per-service connection budgets as we add new services.</p>
+        <div class="card-tags"><span class="tag tag-infra">Infra</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-accent" style="background:#64748B;"></div>
+        <div class="card-top">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div class="card-icon" style="background:#F1F5F9;">📝</div>
+            <div class="card-title">Contract-first API Testing Coverage</div>
+          </div>
+          <span class="status-badge status-plan">Ongoing</span>
+        </div>
+        <p class="card-desc">Extend Postman test scripts to cover all critical endpoints. Workflow: RN screen → API Mock → Schema → Code → Tests. Target 80%+ coverage on invoice, enrollment, and notification routes.</p>
+        <div class="card-tags"><span class="tag tag-backend">Backend</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-accent" style="background:#64748B;"></div>
+        <div class="card-top">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div class="card-icon" style="background:#F1F5F9;">🔒</div>
+            <div class="card-title">Secret Rotation &amp; Env Hygiene</div>
+          </div>
+          <span class="status-badge status-plan">Q2</span>
+        </div>
+        <p class="card-desc">Rotate HitPay keys, Supabase service role tokens, Twilio credentials, and SendGrid API keys. Move all secrets to a secrets manager (AWS SSM or Supabase Vault). Eliminate hardcoded credentials from env files.</p>
+        <div class="card-tags"><span class="tag tag-infra">Infra</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-accent" style="background:#EF4444;"></div>
+        <div class="card-top">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div class="card-icon" style="background:#FEF2F2;">🧹</div>
+            <div class="card-title">LogSnag Sunset</div>
+          </div>
+          <span class="status-badge status-wip">In Progress</span>
+        </div>
+        <p class="card-desc">Fully remove LogSnag once the custom <code>/events</code> API is live. Strip <code>LOGSNAG_TOKEN</code> and all channel config from every microservice. No replacement vendor — keeps the stack lean and eliminates a recurring SaaS cost.</p>
+        <div class="card-tags"><span class="tag tag-backend">Backend</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer">
+    Generated for <strong>EdBuddies</strong> · 2026 Product Roadmap · Empowering Education Centres across Southeast Asia
+    <br><br>
+    Built on: NestJS · Supabase · React Native · Redis · HitPay · OneSignal · Twilio · SendGrid · Voucherify · Xero · Claude MCP
+  </div>
+
+</main>
+
+<script>
+  // Sidebar active state on scroll
+  const sections = document.querySelectorAll('.section[id], section[id]');
+  const navItems = document.querySelectorAll('.nav-item');
+
+  const idToNav = {};
+  navItems.forEach(item => {
+    const href = item.getAttribute('href');
+    if (href) idToNav[href.replace('#','')] = item;
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navItems.forEach(n => n.classList.remove('active'));
+        if (idToNav[id]) idToNav[id].classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+
+  // Smooth scroll for sidebar links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(anchor.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+</body>
+</html>
